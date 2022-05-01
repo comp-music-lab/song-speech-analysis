@@ -40,9 +40,10 @@ function analysis_f0
     %% KDE
     addpath('./lib/KDE/');
     kernelfun = @(u) 1/sqrt(2*pi) .* exp(-0.5.*u.^2);
-    maxwid = 20;
+    maxbwid = 100;
     x = linspace(min(cellfun(@min, D)) - 100, max(cellfun(@max, D)) + 100, 512)';
     f = zeros(numel(x), numel(datatype));
+
     C = zeros(numel(datatype), 1);
 
     for i=1:numel(datatype)
@@ -50,10 +51,13 @@ function analysis_f0
         X = D(idx, 1);
         X = cat(1, X{:});
 
-        h_x = kdebandwidth(x, X, kernelfun, maxwid);
-        fprintf('%s: h_x = %3.3f\n', datatype{i}, h_x);
-        f(:, i) = kde(x, X, kernelfun, h_x);
+        h_x = kdebandwidth_disc(x, X, maxbwid);
+        density = kde(x, X, kernelfun, h_x);
+        
+        f(:, i) = density;
         C(i) = trapz(x, f(:, i));
+
+        fprintf('%s: h_x = %3.3f\n', datatype{i}, h_x);
     end
 
     f = bsxfun(@rdivide, f, C');

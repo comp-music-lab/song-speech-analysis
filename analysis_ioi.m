@@ -51,12 +51,10 @@ function analysis_ioi
         %%
         switch j
             case 1
-                maxwid = 2;
-                minwid = 0.01;
+                maxbwid = 2;
                 x{j} = linspace(0, max(cellfun(@max, D{j})) + 1, 512)';
             case 2
-                maxwid = 0.4;
-                minwid = 0.01;
+                maxbwid = 0.4;
                 x{j} = linspace(0, 1, 512)';
         end
         
@@ -68,10 +66,13 @@ function analysis_ioi
             X = D{j}(idx, 1);
             X = cat(1, X{:});
     
-            h_x = kdebandwidth(x{j}, X, kernelfun, maxwid, minwid);
-            fprintf('%s: h_x = %3.3f\n', datatype{i}, h_x);
-            f{j}(:, i) = kde(x{j}, X, kernelfun, h_x);
+            h_x = kdebandwidth_disc(x{j}, X, maxbwid);
+            density = kde(x{j}, X, kernelfun, h_x);
+
+            f{j}(:, i) = density;
             C{j}(i) = trapz(x{j}, f{j}(:, i));
+
+            fprintf('%s: h_x = %3.3f\n', datatype{i}, h_x);
         end
 
         f{j} = bsxfun(@rdivide, f{j}, C{j}');
