@@ -1,0 +1,50 @@
+Prosodic profile for input file: C:\Users\yuto\Documents\MATLAB\projects\song-speech-analysis\data\Stage 1 RR Audio\(excerpt) Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220224_inst.wav
+Prosogram version: Prosogram v3.01, (c) Piet Mertens
+Date (of analysis): Wed May 25 22:19:05 2022
+
+Segmentation type: asyll
+Nucleus: 25 nuclei in signal
+
+ WARNING: The global measures below are only meaningful for speech samples of at least 100 nuclei (syllables).
+
+
+Pitch range of speaker(s): (based on 2 stylization values per nucleus)
+     Speaker label: Range, Bottom, Mean, Median, Top, MeanOfST, StdevOfST
+     ANON         : 10.0ST, 175Hz (89.4ST), 239Hz (94.8ST), 223Hz (93.6ST), 312Hz (99.4ST), 94.5ST, 3.0ST
+
+Pitch range of speaker(s): (based on 2 raw F0 values per nucleus)
+     Speaker label: P02, Mean, Median, P98
+     ANON         : 175Hz, 239Hz, 223Hz, 312Hz
+
+Pitch variability of speaker(s):
+     Speaker label: TrajIntra, TrajInter, TrajPhon, TrajIntraZ, TrajInterZ, TrajPhonZ, PropLevel, Gliss, Rises, Falls
+     ANON         : 0.7 ST/s, 19.1 ST/s, 4.8 ST/s, 0.2 sd/s, 6.3 sd/s, 1.6 sd/s, 76.0%, 0%, 0%, 0% 
+
+Temporal profile of speaker(s):
+     Speaker label: SpeechRate, TotalDur, %Phonation, %Pauses, PhonTime, NuclDur, InterNuclDur, PauseDur
+     ANON         : 2.41 syll/s, 487.000 s, 100.0%, 0%, 487.000 s, 175.000 s, 312.000 s, 0 s 
+
+Duration variability of speaker(s):
+     Speaker label: NuclDurMean, NuclDurStdev, nPVI_nucldur, nPVI_voweldur, nPVI_sylldur
+     ANON         : 0.324 s, 0.261, 67.43, 0, 0 
+
+
+TotalDur   = total speech time (in s) = internucleus time + intranucleus time + pause time
+PhonTime   = phonation time (in s) = without pauses = internucleus time + intranucleus time
+%Phonation = proportion (%) of estimated phonation time (= internucleus time + intranucleus time) to speech time
+%Pauses    = proportion (%) of estimated pause time (= when internucleus time >= 0.3) to speech time
+SpeechRate = estimated speech rate (in syll/s) = nrof_nuclei/phonation_time
+MeanOfST   = mean of pitch values, where values are min and max pitch in ST for each syllable
+StdevOfST  = stdev of pitch values, where values are min and max pitch in ST for each syllable
+PitchRange = estimated pitch range (in ST) (2%-98% percentiles of data in nuclei without discontinuities)
+Gliss      = proportion (%) of syllables with large pitch movement (abs(distance) >= 4ST)
+Rises      = proportion (%) of syllables with pitch rise (>= 4ST)
+Falls      = proportion (%) of syllables with pitch fall (<= -4ST)
+NuclDur    = sum of durations for nuclei for this speaker
+InterNuclDur = sum of durations between successive nuclei for this speaker
+TrajIntra  = pitch trajectory (sum of absolute intervals) within syllabic nuclei, divided by duration (in ST/s)
+TrajInter  = pitch trajectory (sum of absolute intervals) between syllabic nuclei (except pauses or speaker turns), divided by duration (in ST/s)
+TrajPhon   = sum of TrajIntra and TrajInter, divided by phonation time (in ST/s)
+TrajIntraZ = as TrajIntra, but for pitch trajectory in standard deviation units on ST scale (z-score) (in sd/s)
+TrajInterZ = as TrajInter, but for pitch trajectory in standard deviation units on ST scale (z-score) (in sd/s)
+TrajPhonZ  = as TrajPhon,  but for pitch trajectory in standard deviation units on ST scale (z-score) (in sd/s)

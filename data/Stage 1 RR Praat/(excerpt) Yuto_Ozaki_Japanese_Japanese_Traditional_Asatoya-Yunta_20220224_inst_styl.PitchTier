@@ -1,0 +1,156 @@
+File type = "ooTextFile"
+Object class = "PitchTier"
+
+xmin = 0 
+xmax = 10.43525 
+points: size = 50 
+points [1]:
+    number = 0.2101249999999999 
+    value = 186.22993239794926 
+points [2]:
+    number = 1.3901249999999923 
+    value = 191.37233550823186 
+points [3]:
+    number = 1.6951249999999998 
+    value = 206.39563886453726 
+points [4]:
+    number = 2.0001249999999935 
+    value = 206.39563886453726 
+points [5]:
+    number = 2.100125 
+    value = 234.00405455310906 
+points [6]:
+    number = 2.415124999999993 
+    value = 234.00405455310906 
+points [7]:
+    number = 2.4651249999999996 
+    value = 260.0046750876179 
+points [8]:
+    number = 2.8051249999999923 
+    value = 276.21756242643187 
+points [9]:
+    number = 2.845125 
+    value = 223.00481707601347 
+points [10]:
+    number = 3.020124999999996 
+    value = 214.15959557784495 
+points [11]:
+    number = 3.075125 
+    value = 206.7789130995358 
+points [12]:
+    number = 3.590124999999989 
+    value = 206.7789130995358 
+points [13]:
+    number = 3.700125 
+    value = 206.40445215689886 
+points [14]:
+    number = 3.970124999999994 
+    value = 206.40445215689886 
+points [15]:
+    number = 4.050125 
+    value = 232.43636701673026 
+points [16]:
+    number = 4.115124999999999 
+    value = 232.43636701673026 
+points [17]:
+    number = 4.145125 
+    value = 215.30507300400646 
+points [18]:
+    number = 4.215124999999999 
+    value = 215.30507300400646 
+points [19]:
+    number = 4.290125000000001 
+    value = 206.3320327227944 
+points [20]:
+    number = 4.4851249999999965 
+    value = 206.3320327227944 
+points [21]:
+    number = 4.540125000000001 
+    value = 185.5799973583437 
+points [22]:
+    number = 4.860124999999994 
+    value = 185.5799973583437 
+points [23]:
+    number = 4.910125 
+    value = 185.7015116802449 
+points [24]:
+    number = 5.035124999999997 
+    value = 185.7015116802449 
+points [25]:
+    number = 5.0901250000000005 
+    value = 184.966182178822 
+points [26]:
+    number = 5.225124999999998 
+    value = 184.966182178822 
+points [27]:
+    number = 5.300125 
+    value = 206.2552936138757 
+points [28]:
+    number = 5.565124999999995 
+    value = 206.2552936138757 
+points [29]:
+    number = 5.690125 
+    value = 233.71964836410828 
+points [30]:
+    number = 5.900124999999996 
+    value = 233.71964836410828 
+points [31]:
+    number = 5.925125 
+    value = 217.20469980355898 
+points [32]:
+    number = 6.000124999999999 
+    value = 217.20469980355898 
+points [33]:
+    number = 6.075125 
+    value = 260.7595904332254 
+points [34]:
+    number = 6.7051249999999865 
+    value = 276.299875115999 
+points [35]:
+    number = 6.895125 
+    value = 311.3749664815938 
+points [36]:
+    number = 7.220124999999993 
+    value = 311.3749664815938 
+points [37]:
+    number = 7.270125 
+    value = 233.9158169417178 
+points [38]:
+    number = 7.455124999999996 
+    value = 233.9158169417178 
+points [39]:
+    number = 7.500125000000001 
+    value = 311.4001579746903 
+points [40]:
+    number = 7.670124999999997 
+    value = 311.4001579746903 
+points [41]:
+    number = 7.720125 
+    value = 263.0395721406023 
+points [42]:
+    number = 8.110125000000012 
+    value = 287.9411421425335 
+points [43]:
+    number = 8.170125 
+    value = 255.18927180433386 
+points [44]:
+    number = 8.770125000000094 
+    value = 274.1900694953457 
+points [45]:
+    number = 8.980125000000001 
+    value = 277.2600674265817 
+points [46]:
+    number = 9.10512500000002 
+    value = 277.2600674265817 
+points [47]:
+    number = 9.180125 
+    value = 310.6692913617725 
+points [48]:
+    number = 9.450125000000043 
+    value = 310.6692913617725 
+points [49]:
+    number = 9.535125 
+    value = 311.0063353180959 
+points [50]:
+    number = 10.385125000000134 
+    value = 311.0063353180959 

@@ -1,9 +1,10 @@
-function [ioi, ioiratio, t_st, t_ed] = h_ioi(t_onset, t_break)
+function [ioi, ioiratio, t_st, t_ed, t_ioiratio] = h_ioi(t_onset, t_break)
     %%
     ioi = [];
     t_st = [];
     t_ed = [];
     ioiratio = [];
+    t_ioiratio = [];
 
     %%
     N = numel(t_onset);
@@ -22,7 +23,7 @@ function [ioi, ioiratio, t_st, t_ed] = h_ioi(t_onset, t_break)
         end
     end
 
-    if t_break(end) > t_onset(end)
+    if ~isempty(t_break) && t_break(end) > t_onset(end)
         ioi(end + 1) = t_break(end) - t_onset(end);
         t_st(end + 1) = t_onset(end);
         t_ed(end + 1) = t_break(end);
@@ -37,6 +38,7 @@ function [ioi, ioiratio, t_st, t_ed] = h_ioi(t_onset, t_break)
     for i=2:numel(ioi)
         if t_st(i) == t_ed(i - 1)
             ioiratio(end + 1) = ioi(i)/(ioi(i) + ioi(i - 1));
+            t_ioiratio(end + 1) = ioi(i) + ioi(i - 1);
         end
     end
 end

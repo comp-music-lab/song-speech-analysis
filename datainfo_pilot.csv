@@ -1,0 +1,47 @@
+dataname,performer,type,language,sex
+ACO05A,ACO05,song,Spanish,F
+ACO05B,ACO05,speech,Spanish,F
+ACO05C,ACO05,song,Spanish,F
+ACO05D,ACO05,speech,Spanish,F
+ACO09A,ACO09,song,Spanish,F
+ACO09B,ACO09,speech,Spanish,F
+ACO09C,ACO09,song,Spanish,F
+ACO09D,ACO09,speech,Spanish,F
+BEJ01A,BEJ01,song,Mandarin,F
+BEJ01B,BEJ01,speech,Mandarin,F
+BEJ01C,BEJ01,song,Mandarin,F
+BEJ01D,BEJ01,speech,Mandarin,F
+BEJ16A,BEJ16,song,Mandarin,F
+BEJ16B,BEJ16,speech,Mandarin,F
+BEJ16C,BEJ16,song,Mandarin,F
+BEJ16D,BEJ16,speech,Mandarin,F
+FL_Mandarin_Traditional_Song,Fang Liu,song,Mandarin,F
+FL_Mandarin_Traditional_Speech,Fang Liu,speech,Mandarin,F
+WEL01A,WEL01,song,English,F
+WEL01B,WEL01,speech,English,F
+WEL01C,WEL01,song,English,F
+WEL01D,WEL01,speech,English,F
+WEL21A,WEL21,song,English,F
+WEL21B,WEL21,speech,English,F
+WEL21C,WEL21,song,English,F
+WEL21D,WEL21,speech,English,F
+ACO02A,ACO02,song,Spanish,M
+ACO02B,ACO02,speech,Spanish,M
+ACO02C,ACO02,song,Spanish,M
+ACO02D,ACO02,speech,Spanish,M
+BEJ21A,BEJ21,song,Mandarin,M
+BEJ21B,BEJ21,speech,Mandarin,M
+BEJ21C,BEJ21,song,Mandarin,M
+BEJ21D,BEJ21,speech,Mandarin,M
+Patrick Savage_Nanbu Tawaratsumi Uta_Song,Patrick Savage,song,Japanese,M
+Patrick Savage_Nanbu Tawaratsumi Uta_Speech,Patrick Savage,speech,Japanese,M
+Patrick Savage_Twinkle Twinkle_Song,Patrick Savage,song,English,M
+Patrick Savage_Twinkle Twinkle_Speech,Patrick Savage,speech,English,M
+PES_English_Traditional_Song,Patrick Savage,song,English,M
+PES_English_Traditional_Speech,Patrick Savage,speech,English,M
+read_arirang_leo,Sangbuem Leonard Choo,speech,Korean,M
+sing_arirang_leo,Sangbuem Leonard Choo,song,Korean,M
+WEL51A,WEL51,song,English,M
+WEL51B,WEL51,speech,English,M
+WEL51C,WEL51,song,English,M
+WEL51D,WEL51,speech,English,M
