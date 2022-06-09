@@ -10,18 +10,17 @@ function analysis_interval
     %}
 
     %% Setting for FMA 2022
-    f0dir = './data/Pilot data/';
-    ioidir = './data/Pilot data/';
+    %%{
     typelist = {'song', 'speech'};
     outputdir = './output/FMA2022/';
-    datainfo = readtable('datainfo_pilot.csv');
+    datainfo = readtable('datainfo_pilot+full.csv');
     outputfileid = '';
+    %}
     
     %%
-    dataname = datainfo.dataname;
-    
+    D = helper.h_subsampling(helper.h_ETL_intvl(datainfo.dataname, datainfo.path, datainfo.path), 2048);
+
     %% Density estimation
-    D = helper.h_subsampling(helper.h_ETL_intvl(dataname, f0dir, ioidir), 2048);
     kde_all(D, datainfo.type, typelist, outputfileid, outputdir);
 end
 
@@ -82,6 +81,42 @@ function kde_all(D, datatype, typelist, outputfileid, outputdir)
             f_D{i}(:, k) = kde(x, X, h);
         end
     end
+
+    %%
+    dctcoef = cell(numel(typelist), 1);
+
+    for i=1:numel(typelist)
+        N = size(f_D{i}, 2);
+        dctcoef{i} = zeros(N, 1);
+        
+        for n=1:N
+            A = dct(f_D{i}(:, n));
+            dctcoef{i}(n) = find(cumsum(A.^2)./sum(A.^2) > 0.95, 1, 'first') * (2*pi/numel(A));
+        end
+    end
+    
+    %%
+    figobj = figure;
+    figobj.Position = [100, 400, 700, 550];
+    
+    for i=1:numel(typelist)
+        X = cat(2, dctcoef{i});
+        scatter(normrnd(i, 0.1, [numel(X), 1]), X, 'MarkerEdgeColor', pprm.colorcode{i});
+        hold on
+        scatter(i, mean(X), 'MarkerEdgeColor', 'none', 'MarkerFaceColor', 'k', 'MarkerFaceAlpha', 0.6);
+    end
+    
+    set(gca, 'XTick', 1:numel(typelist));
+    set(gca, 'XTickLabel', typelist);
+    xlim([1 - 0.8, numel(typelist) + 0.8]);
+    hold off;
+    
+    title('95% power of DCT components of the interval distribution', 'FontSize', pprm.titlefontsize);
+    ylabel('DCT frequency (radian)', 'FontSize', pprm.labelfontsize);
+    ax = gca(figobj);
+    ax.FontSize = pprm.tickfontsize;
+
+    saveas(figobj, strcat(outputdir, 'Intervaldist_', outputfileid, '_dctfreq.png'));
 
     %%
     compositecoef = cell(numel(typelist), 1);

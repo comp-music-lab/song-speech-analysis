@@ -6,9 +6,9 @@ function D = h_ETL_intvl(dataname, f0dir, ioidir)
     %%
     for i=1:numel(dataname)
         %%
-        f0info = readtable(strcat(f0dir, dataname{i}, '_f0.csv'));
-        onsetinfo = readtable(strcat(ioidir, 'onset_', dataname{i}, '.csv'), 'ReadVariableNames', false);
-        breakinfo = readtable(strcat(ioidir, 'break_', dataname{i}, '.csv'), 'ReadVariableNames', false);
+        f0info = readtable(strcat(f0dir{i}, dataname{i}, '_f0.csv'));
+        onsetinfo = readtable(strcat(ioidir{i}, 'onset_', dataname{i}, '.csv'), 'ReadVariableNames', false);
+        breakinfo = readtable(strcat(ioidir{i}, 'break_', dataname{i}, '.csv'), 'ReadVariableNames', false);
         
         %%
         f0 = f0info.voice_1;
@@ -18,6 +18,9 @@ function D = h_ETL_intvl(dataname, f0dir, ioidir)
         t_onset = table2array(onsetinfo(:, 1));
         if ~isempty(breakinfo)
             t_break = table2array(breakinfo(:, 1));
+            if iscell(t_break)
+                t_break = str2double(cell2mat(t_break));
+            end
         else
             t_break = [];
         end

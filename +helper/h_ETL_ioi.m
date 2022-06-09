@@ -5,8 +5,8 @@ function D = h_ETL_ioi(dataname, ioidir)
     %%
     for i=1:numel(dataname)
         %%
-        onsetinfo = readtable(strcat(ioidir, 'onset_', dataname{i}, '.csv'), 'ReadVariableNames', false);
-        breakinfo = readtable(strcat(ioidir, 'break_', dataname{i}, '.csv'), 'ReadVariableNames', false);
+        onsetinfo = readtable(strcat(ioidir{i}, 'onset_', dataname{i}, '.csv'), 'ReadVariableNames', false);
+        breakinfo = readtable(strcat(ioidir{i}, 'break_', dataname{i}, '.csv'), 'ReadVariableNames', false);
         
         %%
         t_onset = table2array(onsetinfo(:, 1));

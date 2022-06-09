@@ -7,30 +7,19 @@ function analysis_ioi
     outputdir = './output/S1RR/';
     outputfileid = '';
     %}
-    
-     %% Setting for the pilot analysis
-    %%{
-    onsetdir = './data/Full annotation/';
-    typelist = {'desc', 'recit', 'song', 'inst'};
-    datainfo = readtable('datainfo_full.csv');
-    outputdir = './output/fig/';
-    outputfileid = '';
-    %}
 
     %% Setting for FMA 2022
-    %{
-    onsetdir = './data/Pilot data/';
+    %%{
     typelist = {'song', 'speech'};
     outputdir = './output/FMA2022/';
-    datainfo = readtable('datainfo_pilot.csv');
+    datainfo = readtable('datainfo_pilot+full.csv');
     outputfileid = '';
     %}
     
     %%
-    dataname = datainfo.dataname;
+    D = helper.h_ETL_ioi(datainfo.dataname, datainfo.path);
     
     %% Density estimation
-    D = helper.h_ETL_ioi(dataname, onsetdir);
     kde_all(D, datainfo.type, typelist, outputfileid, outputdir);
 end
 
@@ -110,6 +99,41 @@ function kde_all(D, datatype, typelist, outputfileid, outputdir)
         f{j} = bsxfun(@rdivide, f{j}, C{j}');
     end
     
+    %%
+    dctcoef = cell(numel(typelist), 1);
+    for i=1:numel(typelist)
+        N = size(f_D{i, 2}, 2);
+        dctcoef{i} = zeros(N, 1);
+        
+        for n=1:N
+            A = dct(f_D{i, 2}(:, n));
+            dctcoef{i}(n) = find(cumsum(A.^2)./sum(A.^2) > 0.95, 1, 'first') * (2*pi/numel(A));
+        end
+    end
+    
+    %%
+    figobj = figure;
+    figobj.Position = [100, 400, 700, 550];
+    
+    for i=1:numel(typelist)
+        X = cat(2, dctcoef{i});
+        scatter(normrnd(i, 0.1, [numel(X), 1]), X, 'MarkerEdgeColor', pprm.colorcode{i});
+        hold on
+        scatter(i, mean(X), 'MarkerEdgeColor', 'none', 'MarkerFaceColor', 'k', 'MarkerFaceAlpha', 0.6);
+    end
+    
+    set(gca, 'XTick', 1:numel(typelist));
+    set(gca, 'XTickLabel', typelist);
+    xlim([1 - 0.8, numel(typelist) + 0.8]);
+    hold off;
+    
+    title('95% power of DCT components of the IOI ratio distribution', 'FontSize', pprm.titlefontsize);
+    ylabel('DCT frequency (radian)', 'FontSize', pprm.labelfontsize);
+    ax = gca(figobj);
+    ax.FontSize = pprm.tickfontsize;
+
+    saveas(figobj, strcat(outputdir, 'IOIratiodist_', outputfileid, '_dctfreq.png'));
+
     %%
     addpath('./lib/PH/');
     j = 2;
@@ -289,7 +313,7 @@ function kde_all(D, datatype, typelist, outputfileid, outputdir)
             xticklabels({'1/4', '1/3', '1/2', '2/3', '3/4'});
         end
 
-        legend(typelist, 'FontSize', pprm.legendfontsize);
+        legend(typelist, 'FontSize', pprm.legendfontsize, 'Location', 'northeast');
         hold off
     
         xlabel(xlabelstr, 'FontSize', pprm.labelfontsize);
