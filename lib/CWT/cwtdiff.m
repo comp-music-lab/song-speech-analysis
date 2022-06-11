@@ -1,5 +1,6 @@
 function dx = cwtdiff(x, a, fs, order)
     %%
+    padding = false;
     dt = 1/fs;
 
     if order == 1
@@ -8,14 +9,15 @@ function dx = cwtdiff(x, a, fs, order)
         h = @(x) -1./sqrt(2*pi) .* ((x.^2 - 1).*exp(-x.^2./2));
     end
     
-    t_h = (-(4*a):dt:(4*a))./a;
+    t_h = (-(6*a):dt:(6*a))./a;
 
     kernel = sqrt(dt/a) .* h(t_h);
     L = numel(kernel);
-
+    
     if size(x, 1) < L
-        dx = [];
-        return
+        padding = true;
+        L_pad = round(L/2);
+        x = [zeros(L_pad, 1); x; zeros(L_pad, 1)];
     end
 
     M = ceil(L/2);
@@ -35,4 +37,9 @@ function dx = cwtdiff(x, a, fs, order)
     end
 
     dx = dx./(a^1.5).*sqrt(dt);
+
+    %%
+    if padding
+        dx = dx((L_pad + 1):end - L_pad);
+    end
 end

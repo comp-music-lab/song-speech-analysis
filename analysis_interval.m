@@ -10,15 +10,23 @@ function analysis_interval
     %}
 
     %% Setting for FMA 2022
-    %%{
+    %{
     typelist = {'song', 'speech'};
     outputdir = './output/FMA2022/';
     datainfo = readtable('datainfo_pilot+full.csv');
     outputfileid = '';
     %}
+
+    %% Setting for JCoLE 2022
+    %%{
+    typelist = {'song', 'speech'};
+    outputdir = './output/JCoLE2022/';
+    datainfo = readtable('datainfo_pilot.csv');
+    outputfileid = '';
+    %}
     
     %%
-    D = helper.h_subsampling(helper.h_ETL_intvl(datainfo.dataname, datainfo.path, datainfo.path), 2048);
+    D = helper.h_subsampling(helper.h_ETL_intvl(datainfo.dataname, datainfo.path, datainfo.path), 4096);
 
     %% Density estimation
     kde_all(D, datainfo.type, typelist, outputfileid, outputdir);

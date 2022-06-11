@@ -7,10 +7,17 @@ function analysis_f0
     %}
 
     %% Setting for FMA 2022
-    %%{
+    %{
     typelist = {'song', 'speech'};
     outputdir = './output/FMA2022/';
     datainfo = readtable('datainfo_pilot+full.csv');
+    %}
+
+    %% Setting for JCoLE 2022
+    %%{
+    typelist = {'song', 'speech'};
+    outputdir = './output/JCoLE2022/';
+    datainfo = readtable('datainfo_pilot.csv');
     %}
     
     for i=1:2
@@ -29,6 +36,11 @@ function analysis_f0
         %% Density estimation
         %kde_all(D, datainfo_i.type, typelist, outputfileid, outputdir);
     end
+    
+    %% F0 distribution entropy
+    D = helper.h_subsampling(helper.h_ETL_f0(datainfo.dataname, datainfo.path), 4096);
+    outputfileid = '';
+    f0dist_entropy(D, datainfo.type, datainfo.language, typelist, outputfileid, outputdir);
 
     %% Pitch discreteness
     dataname = datainfo.dataname;
@@ -76,7 +88,6 @@ function deltaF0(datadir, discreteness, dataname, datatype, typelist, outputfile
                 idx_ed = find(isinf(f0_cent(idx_st:end)), 1, 'first') + idx_st - 2;
                 f0_cent_i = f0_cent(idx_st:idx_ed);
                 df0_j = cwtdiff(f0_cent_i, 0.02, 1/dlt, 1);
-                %df0_j = (f0_cent_i(3:end) - f0_cent_i(1:end - 2))./(2*dlt);
                 df0 = [df0; df0_j];
 
                 idx_st = find(~isinf(f0_cent(idx_ed + 1:end)), 1, 'first') + idx_ed;
@@ -250,7 +261,7 @@ function discreteness = pitchdiscreteness(datadir, dataname, datatype, typelist,
     M = 1;
     H_eps = zeros(M, 1);
     discreteness = cell(numel(typelist), 1);
-
+    
     for i=1:numel(typelist)
         idx = find(contains(datatype, typelist{i}));
         discreteness_i = cell(numel(idx), 1);
@@ -356,6 +367,96 @@ function discreteness = pitchdiscreteness(datadir, dataname, datatype, typelist,
     drawnow();
 
     saveas(figobj, strcat(outputdir, 'pitchdiscreteness_', outputfileid, '.png'));
+end
+
+function f0dist_entropy(D, datatype, datalang, typelist, outputfileid, outputdir)
+    %% Entropy - setup
+    pprm = plotprm();
+
+    addpath('./lib/KDE/');
+    K = 8;
+    M = 1;
+    dlt = 10;
+    H = cell(numel(typelist), 1);
+    langinfo = cell(numel(typelist), 1);
+    
+    %% Entropy - computation
+    for i=1:numel(typelist)
+        idx = find(contains(datatype, typelist{i}));
+        H{i} = zeros(numel(idx), 1);
+        langinfo_i = cell(numel(idx), 1);
+
+        for j=1:numel(idx)
+            fprintf('%s\n', datetime);
+
+            X = D{idx(j)};
+            eps = dlt.*(rand(numel(X), M) - 0.5);
+
+            H_eps = 0;
+            for m=1:M
+                H_eps = H_eps + klentropy(X + eps(:, m), K);
+            end
+            H_eps = H_eps./M;
+
+            H{i}(j) = H_eps;
+
+            langinfo_i{j} = datalang{idx(j)};
+        end
+
+        langinfo{i} = langinfo_i;
+    end
+    
+    %% plot
+    figobj = figure;
+    figobj.Position = [100, 400, 700, 550];
+    
+    langlist = unique(datalang);
+    for i=1:numel(typelist)
+        for j=1:numel(langlist)
+            idx = strcmp(langinfo{i}, langlist{j});
+            scatter(i.*ones(numel(H{i}(idx)), 1), H{i}(idx), 'CData', 2,...
+                'MarkerEdgeColor', 'none', 'MarkerFaceColor', pprm.langcolormap(langlist{j}));
+            hold on
+        end
+    end
+    
+    if range(cellfun(@numel, H)) == 0
+        for i=1:numel(H{i})
+            Y = arrayfun(@(idx) H{idx}(i), 1:numel(typelist));
+
+            if mean(diff(Y)) > 0
+                linestyle_i = ':';
+                linecolor_i = 0.2.*[1, 1, 1];
+            else
+                linestyle_i = '-';
+                linecolor_i = 0.5.*[1, 1, 1];
+            end
+
+            plot(1:numel(typelist), Y,...
+                'LineStyle', linestyle_i, 'Color', linecolor_i);
+        end
+    end
+
+    h = zeros(numel(langlist), 1);
+    for i=1:numel(langlist)
+        h(i) = scatter(NaN, NaN, 'MarkerEdgeColor', 'none', 'MarkerFaceColor', pprm.langcolormap(langlist{i}));
+    end
+
+    legend(h, langlist, 'FontSize', pprm.legendfontsize);
+    hold off
+    
+    xticks(1:numel(typelist));
+    xticklabels(typelist);
+    xlim([0, numel(typelist) + 1.0]);
+    
+    ylabel('Entropy (nat)', 'FontSize', pprm.labelfontsize);
+
+    ax = gca(figobj);
+    ax.FontSize = pprm.tickfontsize;
+
+    title('Entropy of F0 distribution', 'FontSize', pprm.titlefontsize);
+
+    saveas(figobj, strcat(outputdir, 'F0dist_', outputfileid, '_entropy.png'));
 end
 
 function kde_all(D, datatype, typelist, outputfileid, outputdir)
