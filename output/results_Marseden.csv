@@ -1,0 +1,51 @@
+feature,lang,diff,method
+Distance from the interval of 0,Yoruba,0.534193575382233,common language effect size
+Distance from the interval of 0,English,0.440996646881104,common language effect size
+Distance from the interval of 0,Marathi,0.643157601356506,common language effect size
+Distance from the interval of 0,Farsi,0.541041433811188,common language effect size
+Distance from the interval of 0,Japanese,0.666715919971466,common language effect size
+Magnitude of F0 modulatioin,Yoruba,0.306625279177208,common language effect size
+Magnitude of F0 modulatioin,English,0.296260481700496,common language effect size
+Magnitude of F0 modulatioin,Marathi,0.31942221232012,common language effect size
+Magnitude of F0 modulatioin,Farsi,0.325585539671034,common language effect size
+Magnitude of F0 modulatioin,Japanese,0.457512527375306,common language effect size
+F0,Yoruba,0.844192058211063,common language effect size
+F0,English,0.782995131758989,common language effect size
+F0,Marathi,0.831145494664381,common language effect size
+F0,Farsi,0.825182388624053,common language effect size
+F0,Japanese,0.790930136117481,common language effect size
+nPVI,Yoruba,3.24468782768054,simple difference
+nPVI,English,25.7278638734033,simple difference
+nPVI,Marathi,8.34117179149973,simple difference
+nPVI,Farsi,-4.80450277200021,simple difference
+nPVI,Japanese,-5.08098220640865,simple difference
+nPC,Yoruba,0.526737967914438,common language effect size
+nPC,English,0.691532258064516,common language effect size
+nPC,Marathi,0.524553571428571,common language effect size
+nPC,Farsi,0.45,common language effect size
+nPC,Japanese,0.475555555555556,common language effect size
+IOI,Yoruba,0.855769230769231,common language effect size
+IOI,English,0.812091503267974,common language effect size
+IOI,Marathi,0.933333333333333,common language effect size
+IOI,Farsi,0.976689976689977,common language effect size
+IOI,Japanese,0.915441176470588,common language effect size
+Distance from the IOI ratio of 0.5,Yoruba,0.526737967914438,common language effect size
+Distance from the IOI ratio of 0.5,English,0.691532258064516,common language effect size
+Distance from the IOI ratio of 0.5,Marathi,0.524553571428571,common language effect size
+Distance from the IOI ratio of 0.5,Farsi,0.45,common language effect size
+Distance from the IOI ratio of 0.5,Japanese,0.475555555555556,common language effect size
+Radian of the 95% power of DCT of the IOI ratio distribution,Yoruba,0.0490873852123406,simple difference
+Radian of the 95% power of DCT of the IOI ratio distribution,English,0.110446616727766,simple difference
+Radian of the 95% power of DCT of the IOI ratio distribution,Marathi,0.098174770424681,simple difference
+Radian of the 95% power of DCT of the IOI ratio distribution,Farsi,-0.196349540849362,simple difference
+Radian of the 95% power of DCT of the IOI ratio distribution,Japanese,-0.0245436926061702,simple difference
+Median onset-break interval,Yoruba,2.666337301,simple difference
+Median onset-break interval,English,1.810430839,simple difference
+Median onset-break interval,Marathi,NaN,simple difference
+Median onset-break interval,Farsi,NaN,simple difference
+Median onset-break interval,Japanese,1.1218333335,simple difference
+Spectral centroid,Yoruba,0.6776361474995,common language effect size
+Spectral centroid,English,0.51602787456446,common language effect size
+Spectral centroid,Marathi,0.362124035914387,common language effect size
+Spectral centroid,Farsi,0.525091797771463,common language effect size
+Spectral centroid,Japanese,0.638434438190536,common language effect size
