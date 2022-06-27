@@ -1,52 +1,257 @@
 function analysis_onsetquality
     %%
-    T = pairing_20220526();
+    pprm = plotprm();
+    outputdir = './output/S1RR/';
     
-    figflag = true;
-    outputdir = './output/20220526/';
+    %% vs. Automated methods
+
+
+    %% Full-length vs. Excerpt
+    pairinfo = readtable('./pairinfo_S1RR_full.csv');
+    datadir = './data';
     
+    result = h_scoring(pairinfo, datadir, 'within-subjects_fs');
+    h_plot_scoring(result, pprm, outputdir, 'within-subjects_fs');
+
+    %% Re-annotation
+    pairinfo = readtable('./pairinfo_S1RR_IRR.csv');
+    datadir = './data';
+    
+    result = h_scoring(pairinfo, datadir, 'within-subjects_ss');
+    h_plot_scoring(result, pprm, outputdir, 'within-subjects_ss');
+
+    %% without segmented texts & with segmented texts
+    pairinfo = readtable('./pairinfo_S1RR_R1R2.csv');
+    thresh = 0.04;
+
+    datadir = './data/Stage 1 RR Round 1';
+    result_R1 = h_scoring(pairinfo, datadir, 'between-subjects', thresh);
+    result_R1.round = ones(size(result_R1, 1), 1).*1;
+
+    datadir = './data/Stage 1 RR Round 2';
+    result_R2 = h_scoring(pairinfo, datadir, 'between-subjects', thresh);
+    result_R2.round = ones(size(result_R2, 1), 1).*2;
+
+    result = [result_R1; result_R2];
+    h_plot_scoring(result, pprm, outputdir, 'between-subjects');
+end
+
+function result = h_scoring(pairinfo, datadir, experiment, thresh)
     %%
-    typelist = {'desc', 'recit', 'song', 'inst'};
-    h_split = @(X) X{end};
-    datatype = unique(cellfun(@(d) h_split(strsplit(d, '_')), T.dataname, 'UniformOutput', false));
-    assert(isempty(setxor(datatype, typelist)));
-    
-    %%
-    posterior_H0 = [];
-    log10bf = [];
-    Rvals = [];
-    dataorder = [];
-    originaldirlist = unique(T.originaldir);
-    annotatordirlist = unique(T.annotatordir);
-
-    for i=1:numel(originaldirlist)
-        for j=1:numel(annotatordirlist)
-            idx = strcmp(originaldirlist{i}, T.originaldir) & strcmp(annotatordirlist{j}, T.annotatordir);
-            
-            if sum(idx) > 0
-                dataname = T.dataname(idx);
-
-                A = unique(T.original(idx));
-                B = unique(T.annotator(idx));
-                C = unique(T.annotround(idx));
-                dataid = [A{:}, '-', B{:}, ' (', C{:}, ')'];
-                
-                originalonsetdir = originaldirlist{i};
-                annotatoronsetdir = annotatordirlist{j};
-
-                [posterior_H0_j, log10bf_j, Rvals_j] = h_analysis(dataid, originalonsetdir, annotatoronsetdir, dataname, outputdir, figflag);
-
-                posterior_H0 = [posterior_H0; posterior_H0_j];
-                log10bf = [log10bf; log10bf_j];
-                Rvals = [Rvals; Rvals_j];
-
-                dataorder = [dataorder; find(idx)];
-            end
-        end
+    if nargin < 4
+        thresh = 0.02;
     end
 
     %%
-    plot_20220526(log10bf, posterior_H0, Rvals, T, dataorder, typelist, outputdir);
+    annotatorlist = unique(pairinfo.annotator);
+    result = [];
+    addpath('./lib/two-sample/');
+    nbpobj = nbpfittest(1, 500, 'robust');
+    priorodds = 1;
+
+    %%
+    for i=1:numel(annotatorlist)
+        idx = find(strcmp(annotatorlist{i}, pairinfo.annotator));
+
+        for j=1:numel(idx)
+            %%
+            onsetfilepath = strcat(datadir, pairinfo.relpath_annot{idx(j)}, 'onset_', pairinfo.dataname_annot{idx(j)}, '.csv');
+            T = readtable(onsetfilepath);
+            t_onset_est = table2array(T(:, 1));
+
+            onsetfilepath = strcat(datadir, pairinfo.relpath_ref{idx(j)}, 'onset_', pairinfo.dataname_ref{idx(j)}, '.csv');
+            T = readtable(onsetfilepath);
+            t_onset_ref = table2array(T(:, 1));
+
+            %%
+            breakfilepath = strcat(datadir, pairinfo.relpath_annot{idx(j)}, 'break_', pairinfo.dataname_annot{idx(j)}, '.csv');
+            T = readtable(breakfilepath);
+            if ~isempty(T)
+                t_break_est = table2array(T(:, 1));
+            else
+                t_break_est = [];
+            end
+
+            breakfilepath = strcat(datadir, pairinfo.relpath_ref{idx(j)}, 'break_', pairinfo.dataname_ref{idx(j)}, '.csv');
+            T = readtable(breakfilepath);
+            if ~isempty(T)
+                t_break_ref = table2array(T(:, 1));
+            else
+                t_break_ref = [];
+            end
+
+            %%
+            [ioi_est, ioiratio_est] = helper.h_ioi(t_onset_est, t_break_est);
+            [ioi_ref, ioiratio_ref] = helper.h_ioi(t_onset_ref, t_break_ref);
+
+            %%
+            lnbf_H0_ioi = nbpobj.test(ioi_est(:), ioi_ref(:));
+            [posterior_H0_ioi, ~] = nbpobj.posterior(priorodds, lnbf_H0_ioi);
+            log10bf_H0_ioi = lnbf_H0_ioi/log(10);
+            
+            lnbf_H0_ioiratio = nbpobj.test(ioiratio_est(:), ioiratio_ref(:));
+            [posterior_H0_ioiratio, ~] = nbpobj.posterior(priorodds, lnbf_H0_ioiratio);
+            log10bf_H0_ioiratio = lnbf_H0_ioiratio/log(10);
+            
+            if strcmp('between-subjects', experiment)
+                [R, F1, PRC, RCL, OS] = ft_rvalue(t_onset_ref, t_onset_est, thresh);
+
+                result = [...
+                    result;...
+                    table(F1, R, PRC, RCL, OS,...
+                    posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
+                    annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)),...
+                    'VariableNames', {'F1', 'Rval', 'PRC', 'RCL', 'OS',...
+                    'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
+                    'annotator', 'lang', 'type'})...
+                    ];
+            elseif strcmp('within-subjects_ss', experiment)
+                [~, ix, iy] = dtw(t_onset_ref, t_onset_est);
+                dist_average = mean(t_onset_ref(ix) - t_onset_est(iy));
+                dist_var = var(t_onset_ref(ix) - t_onset_est(iy), 1);
+
+                result = [...
+                result;...
+                table(dist_average, dist_var, posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
+                annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)),...
+                'VariableNames', {'dtwdist_mean', 'dtwdist_var', 'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
+                'annotator', 'lang', 'type'})...
+                ];
+            elseif strcmp('within-subjects_fs', experiment)
+                result = [...
+                result;...
+                table(posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
+                annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)),...
+                'VariableNames', {'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
+                'annotator', 'lang', 'type'})...
+                ];
+            end
+        end
+    end
+end
+
+function h_plot_scoring(result, pprm, outputdir, experiment)
+    %%
+    annotatorlist = unique(result.annotator);
+    M = numel(annotatorlist);
+    
+    %%
+    if strcmp('between-subjects', experiment)
+        xticklabelstr = {'w/o texts', 'w/ texts'};
+        xtickval = [1, 2];
+        xl = [0.7, 3.2];
+        idx_q = 1:5;
+        fileid_expm = 'between';
+    elseif strcmp('within-subjects_ss', experiment)
+        xticklabelstr = {'re-annotation'};
+        xtickval = 1;
+        xl = [0.7, 1.3];
+        idx_q = 2:7;
+        fileid_expm = 'within-ss';
+    elseif strcmp('within-subjects_fs', experiment)
+        xticklabelstr = {'full vs. excerpt'};
+        xtickval = 1;
+        xl = [0.7, 1.3];
+        idx_q = 2:5;
+        fileid_expm = 'within-fs';
+    end
+
+    %%
+    for m=1:M
+        result_m = result(strcmp(annotatorlist{m}, result.annotator), :);
+        langlist_m = unique(result_m.lang);
+        typelist_m = unique(result_m.type);
+
+        for q=idx_q
+            figobj = figure;
+            figobj.Position = [400, 200, 500, 720];
+            
+            switch q
+                case 1
+                    metric = result_m.F1;
+                    yl = [0, 1];
+                    ylabelstr = 'F-score';
+                    fileid = 'Fscore';
+                case 2
+                    metric = result_m.posterior_H0_ioi;
+                    yl = [0, 1];
+                    ylabelstr = 'Posterior(H_0|D)_{IOI}';
+                    fileid = 'pstr-ioi';
+                case 3
+                    metric = result_m.posterior_H0_ioiratio;
+                    yl = [0, 1];
+                    ylabelstr = 'Posterior(H_0|D)_{IOI ratio}';
+                    fileid = 'pstr-ioiratio';
+                case 4
+                    metric = result_m.log10bf_H0_ioi;
+                    yl = [min(result.log10bf_H0_ioi) - 0.5, max(result.log10bf_H0_ioi) + 0.5];
+                    ylabelstr = 'log_{10} Bayes Factor_{IOI}';
+                    fileid = 'log10BF-ioi';
+                case 5
+                    metric = result_m.log10bf_H0_ioiratio;
+                    yl = [min(result.log10bf_H0_ioiratio) - 0.5, max(result.log10bf_H0_ioiratio) + 0.5];
+                    ylabelstr = 'log_{10} Bayes Factor_{IOI ratio}';
+                    fileid = 'log10BF-ioiratio';
+                 case 6
+                    metric = result_m.dtwdist_mean;
+                    yl = [min(result.dtwdist_mean) - 0.01, max(result.dtwdist_mean) + 0.01];
+                    ylabelstr = 'Mean of the DTW distance of onset';
+                    fileid = 'dtwdist-mean';
+                 case 7
+                    metric = result_m.dtwdist_var;
+                    yl = [0, max(result.dtwdist_var) + 0.001];
+                    ylabelstr = 'Variance of the DTW distance of onset';
+                    fileid = 'dtwdist-var';
+            end
+    
+            for i=1:numel(langlist_m)
+                for j=1:numel(typelist_m)
+                    idx_ij = strcmp(result_m.lang, langlist_m{i}) & strcmp(result_m.type, typelist_m{j});
+
+                    if strcmp('between-subjects', experiment)
+                        xy = [0, 0; 0, 0];
+                        for k=1:2
+                            idx = find(result_m.round == k & idx_ij);
+                            scatter(k, metric(idx), 'SizeData', 45, 'MarkerEdgeColor', pprm.langcolormap(langlist_m{i}), 'Marker', pprm.typemarkermap(typelist_m{j}));
+                            xy(k, :) = [k, metric(idx)];
+                            hold on
+                        end
+                        
+                        if all(~(xy == 0))
+                            plot(xy(:, 1), xy(:, 2), 'Color', [0.4, 0.4, 0.4], 'LineStyle', '-.');
+                        end
+                    elseif strcmp('within-subjects_ss', experiment) || strcmp('within-subjects_fs', experiment)
+                        idx = idx_ij;
+                        scatter(1, metric(idx), 'SizeData', 45, 'MarkerEdgeColor', pprm.langcolormap(langlist_m{i}), 'Marker', pprm.typemarkermap(typelist_m{j}));
+                        hold on
+                    end
+                end
+            end
+            
+            h_lang = zeros(numel(langlist_m), 1);
+            for i=1:numel(langlist_m)
+                h_lang(i) = scatter(NaN, NaN, 'Marker', 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', pprm.langcolormap(langlist_m{i}));
+            end
+    
+            h_type = zeros(numel(typelist_m), 1);
+            for i=1:numel(typelist_m)
+                h_type(i) = scatter(NaN, NaN, 'Marker', pprm.typemarkermap(typelist_m{i}), 'MarkerEdgeColor', 'k');
+            end
+    
+            legend([h_lang; h_type], [langlist_m; typelist_m], 'FontSize', pprm.legendfontsize);
+    
+            xlim(xl);
+            ylim(yl);
+            xticks(xtickval);
+            xticklabels(xticklabelstr);
+            ax = gca(figobj);
+            ax.FontSize = pprm.tickfontsize;
+            ylabel(ylabelstr, 'FontSize', pprm.labelfontsize);
+            title(['Annotator: ', annotatorlist{m}], 'FontSize', pprm.titlefontsize);
+    
+            saveas(figobj, strcat(outputdir, 'S1RR_', fileid_expm, '_', annotatorlist{m}, '_', fileid, '.png'));
+        end
+    end
 end
 
 function [posterior_H0, log10bf, Rvals] = h_analysis(dataid, finalonsetdir, initialonsetdir, dataname, outputdir, figflag)
