@@ -12,7 +12,7 @@ function h_hat = kdebandwidth_lp(X)
     clf; cla;
 
     for j=1:4
-        X = [normrnd(1.5, 1, [51*j, 1]); normrnd(-1, 0.7, [47*j, 1]); normrnd(-4.0, 0.4, [54*j, 1])];
+        X = [normrnd(1.5, 1, [31*j, 1]); normrnd(-1, 0.7, [19*j, 1]); normrnd(-4.0, 0.4, [33*j, 1])];
         
         tic;
         h = kdebandwidth_lp(X);
@@ -26,6 +26,7 @@ function h_hat = kdebandwidth_lp(X)
         plot(x, f);
         hold on
         plot(x, g, '-.m');
+        scatter(X, zeros(numel(X), 1), 'Marker', '|');
         hold off
         title(['bandwidth = ', num2str(h, '%3.3f'), ', elapsed time = ', num2str(t, '%3.3f'), ' seconds, n = ', num2str(numel(X), '%d')]);
     end

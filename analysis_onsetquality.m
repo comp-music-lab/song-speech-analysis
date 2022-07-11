@@ -1,39 +1,158 @@
 function analysis_onsetquality
     %%
     pprm = plotprm();
-    outputdir = './output/S1RR/';
+    outputdir = './output/20220705/';
+    
+    %% Full-length vs. Excerpt
+    pairinfo = readtable('./pairinfo_S1RR_full.csv');
+    datadir = './data';
+
+    result = h_scoring(pairinfo, datadir, 'within-subjects_fs');
+    h_plot_scoring(result, pprm, outputdir, 'within-subjects_fs');
+
+    %% Onset accuracy
+    thresh = [0.020, 0.025, 0.040, 0.050, 0.080, 0.100]';
+    
+    pairinfo = readtable('./pairinfo_S1RR_IRR.csv');
+    datadir = './data';
+    result_ss = h_threshcurve(pairinfo, datadir, thresh);
+    result_ss.trial = repmat({'within-subjects (re-annotation)'}, [size(result_ss, 1), 1]);
+
+    pairinfo = readtable('./pairinfo_S1RR_R1R2.csv');
+    datadir = './data/Stage 1 RR Round 1';
+    result_R1 = h_threshcurve(pairinfo, datadir, thresh);
+    result_R1.trial = repmat({'between-subjects (w/o texts)'}, [size(result_R1, 1), 1]);
+
+    pairinfo = readtable('./pairinfo_S1RR_R1R2.csv');
+    datadir = './data/Stage 1 RR Round 2';
+    result_R2 = h_threshcurve(pairinfo, datadir, thresh);
+    result_R2.trial = repmat({'between-subjects (w texts)'}, [size(result_R2, 1), 1]);
+
+    result = [result_ss; result_R1; result_R2];
+    
+    h_plot_oq(result, pprm, outputdir);
+    
+    
+
+    %%
+    h_plot_scoring(result, pprm, outputdir, 'within-subjects_ss');
     
     %% vs. Automated methods
 
 
     %% Full-length vs. Excerpt
-    pairinfo = readtable('./pairinfo_S1RR_full.csv');
-    datadir = './data';
-    
-    result = h_scoring(pairinfo, datadir, 'within-subjects_fs');
-    h_plot_scoring(result, pprm, outputdir, 'within-subjects_fs');
-
-    %% Re-annotation
-    pairinfo = readtable('./pairinfo_S1RR_IRR.csv');
-    datadir = './data';
-    
-    result = h_scoring(pairinfo, datadir, 'within-subjects_ss');
-    h_plot_scoring(result, pprm, outputdir, 'within-subjects_ss');
-
-    %% without segmented texts & with segmented texts
-    pairinfo = readtable('./pairinfo_S1RR_R1R2.csv');
-    thresh = 0.04;
-
-    datadir = './data/Stage 1 RR Round 1';
-    result_R1 = h_scoring(pairinfo, datadir, 'between-subjects', thresh);
-    result_R1.round = ones(size(result_R1, 1), 1).*1;
-
-    datadir = './data/Stage 1 RR Round 2';
+    result_ss = h_scoring(pairinfo, datadir, 'within-subjects_ss', thresh);
     result_R2 = h_scoring(pairinfo, datadir, 'between-subjects', thresh);
-    result_R2.round = ones(size(result_R2, 1), 1).*2;
+
+    
+    
+    
 
     result = [result_R1; result_R2];
     h_plot_scoring(result, pprm, outputdir, 'between-subjects');
+end
+
+function result = h_threshcurve(pairinfo, datadir, thresh)
+    %%
+    annotatorlist = unique(pairinfo.annotator);
+    result = [];
+    
+    %%
+    for i=1:numel(annotatorlist)
+        idx = find(strcmp(annotatorlist{i}, pairinfo.annotator));
+
+        for j=1:numel(idx)
+            %%
+            onsetfilepath = strcat(datadir, pairinfo.relpath_annot{idx(j)}, 'onset_', pairinfo.dataname_annot{idx(j)}, '.csv');
+            T = readtable(onsetfilepath);
+            t_onset_est = table2array(T(:, 1));
+
+            onsetfilepath = strcat(datadir, pairinfo.relpath_ref{idx(j)}, 'onset_', pairinfo.dataname_ref{idx(j)}, '.csv');
+            T = readtable(onsetfilepath);
+            t_onset_ref = table2array(T(:, 1));
+
+            %%
+            result_j = oq_threshcurve(t_onset_ref, t_onset_est, thresh, annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)));
+            result = [result; result_j];
+        end
+    end
+end
+
+function h_plot_oq(result, pprm, outputdir)
+    %%
+    triallist = unique(result.trial);
+    typelist = unique(result.type);
+    threshlist = unique(result.thresh);
+    
+    annotatorlist = unique(result.annotator);
+    M_annotatorfacecolor = containers.Map(annotatorlist, {'#0072BD', '#D95319', '#EDB120', '#7E2F8E'});
+    h_annotator = zeros(numel(annotatorlist), 1);
+
+    %{
+    langlist = unique(result.language);
+    h_lang = zeros(numel(langlist), 1);
+    h_type = zeros(numel(typelist), 1);
+    %}
+
+    %%
+    for l=1:numel(threshlist)
+        idx_l = result.thresh == threshlist(l);
+
+        figobj = figure();
+        figobj.Position = [30, 650, 1280, 310];
+            
+        for i=1:numel(triallist)
+            idx_i = strcmp(result.trial, triallist{i});
+
+            for k=1:numel(typelist)
+                idx_k = strcmp(result.type, typelist{k});
+
+                for j=1:numel(annotatorlist)
+                    idx_j = strcmp(result.annotator, annotatorlist{j});
+                    idx = idx_i & idx_k & idx_l & idx_j;
+                    
+                    Y = result.F1(idx);
+                    X = i.*ones(numel(Y), 1) - ((numel(typelist) + 1)/2 - k).*0.1;
+                    scatter(X, Y,...
+                        'MarkerFaceColor', M_annotatorfacecolor(annotatorlist{j}), 'Marker', 'o', 'MarkerEdgeColor', 'none');
+                    hold on
+                end
+            end
+        end
+        
+        for i=1:numel(annotatorlist)
+            h_annotator(i) = scatter(NaN, NaN, 'Marker', 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', M_annotatorfacecolor(annotatorlist{i}));
+        end
+        legend(h_annotator, annotatorlist, 'FontSize', pprm.legendfontsize, 'Location', 'northeast');
+
+        %{
+        for i=1:numel(langlist)
+            h_lang(i) = scatter(NaN, NaN, 'Marker', 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', pprm.langcolormap(langlist{i}));
+        end
+
+        for i=1:numel(typelist)
+            h_type(i) = scatter(NaN, NaN, 'Marker', pprm.typemarkermap(typelist{i}), 'MarkerEdgeColor', 'k');
+        end
+
+        legend([h_lang; h_type], [langlist; typelist], 'FontSize', pprm.legendfontsize);
+        %}
+
+        hold off;
+        
+        xlim([0.5, numel(triallist) + 0.65]);
+        ylim([-0.1, 1.1]);
+        xticks(1:numel(triallist));
+        xticklabels(triallist);
+        
+        ax = gca(figobj);
+        ax.FontSize = pprm.tickfontsize;
+        ylabel('F-measure', 'FontSize', pprm.labelfontsize);
+
+        title(['Threshold = ', num2str(threshlist(l), '%3.3f')],...
+            'FontSize', pprm.titlefontsize);
+
+        saveas(figobj, strcat(outputdir, 'onsetquality_', '_thresh', num2str(l), '.png'));
+    end
 end
 
 function result = h_scoring(pairinfo, datadir, experiment, thresh)
@@ -65,17 +184,25 @@ function result = h_scoring(pairinfo, datadir, experiment, thresh)
 
             %%
             breakfilepath = strcat(datadir, pairinfo.relpath_annot{idx(j)}, 'break_', pairinfo.dataname_annot{idx(j)}, '.csv');
-            T = readtable(breakfilepath);
+            T = readtable(breakfilepath, 'ReadVariableNames', false);
             if ~isempty(T)
                 t_break_est = table2array(T(:, 1));
+
+                if iscell(t_break_est)
+                    t_break_est = str2double(cell2mat(t_break_est));
+                end
             else
                 t_break_est = [];
             end
 
             breakfilepath = strcat(datadir, pairinfo.relpath_ref{idx(j)}, 'break_', pairinfo.dataname_ref{idx(j)}, '.csv');
-            T = readtable(breakfilepath);
+            T = readtable(breakfilepath, 'ReadVariableNames', false);
             if ~isempty(T)
                 t_break_ref = table2array(T(:, 1));
+
+                if iscell(t_break_ref)
+                    t_break_ref = str2double(cell2mat(t_break_ref));
+                end
             else
                 t_break_ref = [];
             end
@@ -93,28 +220,20 @@ function result = h_scoring(pairinfo, datadir, experiment, thresh)
             [posterior_H0_ioiratio, ~] = nbpobj.posterior(priorodds, lnbf_H0_ioiratio);
             log10bf_H0_ioiratio = lnbf_H0_ioiratio/log(10);
             
-            if strcmp('between-subjects', experiment)
+            if strcmp('between-subjects', experiment) || strcmp('within-subjects_ss', experiment)
                 [R, F1, PRC, RCL, OS] = ft_rvalue(t_onset_ref, t_onset_est, thresh);
 
-                result = [...
-                    result;...
-                    table(F1, R, PRC, RCL, OS,...
-                    posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
-                    annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)),...
-                    'VariableNames', {'F1', 'Rval', 'PRC', 'RCL', 'OS',...
-                    'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
-                    'annotator', 'lang', 'type'})...
-                    ];
-            elseif strcmp('within-subjects_ss', experiment)
                 [~, ix, iy] = dtw(t_onset_ref, t_onset_est);
                 dist_average = mean(t_onset_ref(ix) - t_onset_est(iy));
                 dist_var = var(t_onset_ref(ix) - t_onset_est(iy), 1);
 
                 result = [...
                 result;...
-                table(dist_average, dist_var, posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
+                table(F1, R, PRC, RCL, OS, dist_average, dist_var,...
+                posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
                 annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)),...
-                'VariableNames', {'dtwdist_mean', 'dtwdist_var', 'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
+                'VariableNames', {'F1', 'Rval', 'PRC', 'RCL', 'OS', 'dtwdist_mean', 'dtwdist_var',...
+                'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
                 'annotator', 'lang', 'type'})...
                 ];
             elseif strcmp('within-subjects_fs', experiment)

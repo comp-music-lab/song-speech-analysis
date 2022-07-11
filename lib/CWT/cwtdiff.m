@@ -1,4 +1,10 @@
 function dx = cwtdiff(x, a, fs, order)
+    %% References
+    % [1] Shao, X. & Ma, C. (2003). A general approach to derivative calculation using wavelet transform. Chemometrics and Intelligent Laboratory Systems, 69(1-2), 157-165. https://doi.org/10.1016/j.chemolab.2003.08.001
+    % [2] Jianwen, L., Jing, B. & Jinhua, S. (2005). Application of the wavelet transforms on axial strain calculation in ultrasound elastography. Progress in Natural Science, 16(9), 942-947. doi/abs/10.1080/10020070612330093.
+    %  
+    % This implementation was derived from [1]. However, [2] can also be useful since it provides Matlab scripts made by the authors.
+
     %%
     padding = false;
     dt = 1/fs;

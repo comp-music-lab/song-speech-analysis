@@ -14,11 +14,13 @@ function I = h_interval(f0_cent, t_f0, t_st, t_ed)
             [~, idx_ed] = min(abs(t_f0 - t_ed(j)));
             f0_cent_f = f0_cent(idx_st:idx_ed);
             f0_cent_f = f0_cent_f(~isinf(f0_cent_f));
-
-            I_j = f0_cent_f - f0_cent_p';
-
-            if ~isempty(I_j)
-                I{end + 1} = I_j(:);
+            
+            if ~isempty(f0_cent_f)
+                I_j = f0_cent_f - f0_cent_p';
+    
+                if ~isempty(I_j)
+                    I{end + 1} = I_j(:);
+                end
             end
         end
     end
