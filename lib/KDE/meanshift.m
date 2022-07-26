@@ -6,9 +6,10 @@ function y = meanshift(X, y, eps, h, kernelfun)
     d = Inf;
 
     while eps < d
-        c = kernelfun((y - X)./h);
+        D = (y - X)./h;
+        c = kernelfun(D);
         m = sum(bsxfun(@times, c, X), 1)./sum(c, 1);
-
+        
         d = norm(y - m, 2);
 
         y = m;

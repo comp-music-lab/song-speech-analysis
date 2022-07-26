@@ -15,6 +15,6 @@ function D = bottleneckdist(PD_A, PD_B)
     else
         PD_A_py = py.numpy.array(PD_A);
         PD_B_py = py.numpy.array(PD_B);
-        D = py.gudhi.bottleneck_distance(PD_A_py, PD_B_py);
+        D = py.gudhi.bottleneck_distance(PD_A_py, PD_B_py, 0.0);
     end
 end

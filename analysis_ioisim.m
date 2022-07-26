@@ -13,26 +13,1115 @@ function analysis_ioisim
     %%
     onsetfilepath = [];
     breakfilepath = [];
+    audiofilepath = [];
     dataname = [];
     for i=1:numel(datainfofile)
         T = readtable(datainfofile{i});
         onsetfilepath = [onsetfilepath; strcat(T.path, 'onset_', T.dataname, '.csv')];
         breakfilepath = [breakfilepath; strcat(T.path, 'break_', T.dataname, '.csv')];
+        audiofilepath = [audiofilepath; strcat(T.audiofilepath, T.dataname, '.wav')];
         dataname = [dataname; T.dataname];
     end
 
     onsetfilepath = unique(onsetfilepath);
     breakfilepath = unique(breakfilepath);
+    audiofilepath = unique(audiofilepath);
     dataname = unique(dataname);
+
+    %%
+    h_tdakmeans(onsetfilepath, breakfilepath, dataname);
+
+    %%
+    %h_period(onsetfilepath, breakfilepath, dataname);
     
     %%
-    h_recurrence(onsetfilepath, breakfilepath, dataname);
+    %h_pulseclarity(audiofilepath, dataname);
+
+    %%
+    %h_recurrence(onsetfilepath, breakfilepath, dataname);
 
     %%
     %h_comparison(onsetfilepath, breakfilepath, dataname);
 
     %%
     %h_sim(onsetfilepath, breakfilepath, L, dataname, outputdir);
+end
+
+function h_tdakmeans(onsetfilepath, breakfilepath, dataname)
+    %%
+    s = cellfun(@(X) strsplit(X, '_'), dataname, 'UniformOutput', false);
+    dataid = cellfun(@(X) strcat(X{1}, X{2}, X{end - 2}), s, 'UniformOutput', false);
+    dataidlist = unique(dataid);
+    
+    %%
+    addpath('./lib/PH/');
+    if count(py.sys.path, '') == 0
+        insert(py.sys.path,int32(0), '');
+    end
+
+    %{
+    addpath(strcat(userpath, '/lib2/Rcall/'));
+    Rlib = 'ks';
+    Rpath = 'C:\Program Files\R\R-4.0.2\bin\R.exe';
+    Rclear();
+    Rinit(Rlib, Rpath);
+    %}
+
+    %%
+    for i=1:numel(dataidlist)
+        idx = find(strcmp(dataidlist{i}, dataid));
+        N = numel(idx);
+        datatype = cell(N, 1);
+
+        statistic = cell(N, 1);
+
+        for n=1:N
+            [t_onset, t_break] = h_onsetbreak(onsetfilepath{idx(n)}, breakfilepath{idx(n)});
+            [~, ioiratio] = helper.h_ioi(unique(t_onset), unique(t_break));
+            
+            X = ioiratio;
+            a = -0.1;
+            b = 1.1;
+            support_x = linspace(a + 1e-12, b - 1e-12, 1024);
+            M = numel(X);
+
+            %%
+            h_min = std(X)*(log(M)/M);
+            h_max = std(X);
+            h = linspace(h_min, h_max, 256);
+
+            %{
+            Rpush('X', X(:));
+            Rrun('h_cv <- hlscv(X, deriv.order=0, bw.ucv=TRUE)');
+            h_lscv = Rpull('h_cv');
+            Rclear();
+            %}
+            
+            %h(:) = kdebandwidth_lp(X)*0.5;
+
+            %{
+            h_ini = kdebandwidth_lp(X);
+            %h_ini = kdebandwidth_lscv(X);
+            density_X = kde(support_x, X, h_ini);
+            B = 1024;
+            Y = zeros(B, numel(X));
+            for k=1:B
+                Y(k, :) = datasample(X, M);
+            end
+            
+            L = zeros(numel(h), 1) + Inf;
+            L_B = zeros(B, 1);
+            for j=1:numel(h)
+                parfor k=1:B
+                    density_Y = kde(support_x, Y(k, :), h(j));
+                    L_B(k) = sum((density_X - density_Y).^2);
+                end
+
+                L(j) = mean(L_B);
+
+                if j > 1 && L(j) > L(j - 1)
+                    break;
+                end
+            end
+
+            [~, idx_min] = min(L);
+            h_bs = h(idx_min);
+
+            h(:) = h_bs;
+            %}
+
+            %%
+            PD = cell(numel(h), 1);
+            BL = cell(numel(h), 1);
+            locs = cell(numel(h), 1);
+            idx_L = cell(numel(h), 1);
+
+            for j=1:numel(h)
+                density = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), X, 'UniformOutput', false);
+                density = mean(cat(1, density{:}), 1);
+                [t_birth, locs{j}, ~, prmn] = findpeaks(density);
+                t_death = t_birth - prmn;
+
+                PD{j} = [t_death; t_birth]';
+                BL{j} = (t_birth - t_death)';
+            end
+            
+            %{
+            %% drop (Tomato)
+            fobj = figure;
+            fobj.Position = [190, 310, 1624, 680];
+
+            subplot(1, 2, 1);
+            for j=1:numel(h)
+                [L, idx_st] = sort(BL{j}, 'asc');
+                dL = diff(L);
+                
+                scatter(L, h(j) + zeros(numel(L), 1), 'MarkerEdgeColor', 'b', 'Marker', '.');
+                hold on
+
+                if numel(BL{j}) == 1 && numel(BL{j - 1}) == 1
+                    break
+                end
+            end
+            hold off
+            title(dataname{idx(n)}, 'Interpreter', 'none');
+
+            subplot(1, 2, 2);
+            for j=1:numel(h)
+                scatter(X, h(j) + zeros(numel(X), 1), 'MarkerEdgeColor', 'Y', 'Marker', '|');
+                scatter(support_x(locs{j}), h(j) + zeros(numel(locs{j}), 1), 'MarkerEdgeColor', 'b', 'Marker', '.');
+                hold on
+
+                if numel(locs{j}) == 1 && numel(locs{j - 1}) == 1
+                    break
+                end
+            end
+            hold off
+            
+            drawnow
+            %}
+
+            %% simple modal clustering
+            %{
+            B = 2000;
+            h_B = zeros(B, 1);
+            parfor j=1:B
+                Y = datasample(X, M);
+                h_B(j) = kdebandwidth_lp(Y);
+            end
+            
+            al = 0.01;
+            h_B = sort(h_B);
+            h_al = h_B(floor((1 - al/2)*B));
+            
+            Y = X(:);
+            y = X(:)';
+            c = meanshift(Y, y, 1e-8, h_al);
+            C = uniquetol(c, 1e-6);
+            
+            %{
+            idx_B = floor(al/2 * B):floor((1 - al/2)*B);
+            C = cell(numel(idx_B), 1);
+            parfor j=1:numel(idx_B)
+                c = meanshift(Y, y, 1e-8, h_B(idx_B(j)));
+                C{j} = uniquetol(c, 1e-6);
+            end
+
+            figure;
+            for j=1:numel(C)
+                scatter(C{j}, h_B(idx_B(j)).*ones(numel(C{j}), 1), 'Marker', '.', 'MarkerEdgeColor', 'b');
+                hold on
+            end
+            hold off
+            %}
+
+            nummodes = zeros(numel(h), 1);
+            dlt_al = zeros(numel(h), 1);
+            nummodes(1) = numel(C);
+            idx_L{1} = zeros(numel(C), 1);
+            for k=1:numel(C)
+                [~, idx_L{1}(k)] = min(abs(support_x - C(k)));
+            end
+            %}
+
+            %% cutoff
+            %{
+            nummodes = zeros(numel(h), 1);
+            dlt_al = zeros(numel(h), 1);
+
+            for j=1:numel(j)
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+                
+                [L, idx_st] = sort(BL{j}, 'desc');
+                S = cumsum(L)./sum(L);
+                idx_cutoff = find(S > 0.6, 1, 'first');
+                idx_L{j} = idx_st(1:idx_cutoff);
+                nummodes(j) = numel(idx_L{j});
+
+                %{
+                L = BL{j}./max(BL{j});
+                idx_L{j} = L > 0.25;
+                nummodes(j) = sum(idx_L{j});
+                dlt_al(j) = (max(abs(PD{j}(~idx_L{j}, 1) - PD{j}(~idx_L{j}, 2))) + min(abs(PD{j}(idx_L{j}, 1) - PD{j}(idx_L{j}, 2))))/2;
+                %}
+
+                dlt_al(j) = (max(abs(PD{j}(setdiff(1:numel(L), idx_L{j}), 1) - PD{j}(setdiff(1:numel(L), idx_L{j}), 2))) + min(abs(PD{j}(idx_L{j}, 1) - PD{j}(idx_L{j}, 2))))/2;
+            end
+            %}
+            
+            %% Total barcode length + 95% cutoff
+            %%{
+            C = cell(numel(h), 1);
+            I = cell(numel(h), 1);
+            C{1} = support_x(locs{1});
+            I{1} = 1:numel(locs{1});
+            totalBL = BL{1}./sum(BL{1});
+
+            for j=2:numel(h)
+                C{j} = support_x(locs{j});
+                
+                if numel(C{j - 1}) == 1 && numel(C{j}) == 1
+                    break;
+                end
+                
+                I{j} = zeros(numel(C{j}), 1);
+                BL_norm = BL{j}./sum(BL{j});
+
+                for k=1:numel(C{j})
+                    [~, idx_I] = min(abs(C{j - 1} - C{j}(k)));
+                    I{j}(k) = I{j - 1}(idx_I);
+
+                    totalBL(I{j}(k)) = totalBL(I{j}(k)) + BL_norm(k);
+                end
+            end
+            
+            totalBL = totalBL./sum(totalBL);
+
+            %idx_L = sort(h_persistentEntropy(totalBL));
+
+            [P, idx_P] = sort(totalBL, 'desc');
+            P_sum = cumsum(P);
+            idx_u = find(P_sum < 0.95, 1, 'last') + 1;
+            idx_L = idx_P(1:idx_u);
+
+            C_E = C{1}(idx_L);
+
+            %% Fasi
+
+            %%
+            figobj = figure;
+            figobj.Position = [660, 660, 1200, 300];
+
+            h_cv = kdebandwidth_lp(X(:)');
+
+            subplot(1, 3, 1);
+            density = arrayfun(@(X_i) normpdf(support_x, X_i, h_cv), X, 'UniformOutput', false);
+            density = mean(cat(1, density{:}), 1);
+            plot(support_x, density);
+            hold on
+            [~, locs_pk] = findpeaks(density);
+            for j=1:numel(C_E)
+                [~, idx_m] = min(abs(support_x(locs_pk) - C_E(j)));
+                stem(support_x(locs_pk(idx_m)), density(locs_pk(idx_m)), 'Color', '#D95319');
+            end
+            hold off
+            title(dataname{idx(n)}, 'Interpreter', 'none');
+            
+            subplot(1, 3, 2);
+            [~, idx_p] = sort(totalBL, 'asc');
+            for j=1:numel(totalBL)
+                plot([0, totalBL(idx_p(j))], j.*[1, 1], 'Color', '#0072BD');
+                scatter(totalBL(idx_p(j)), j, 'Marker', 'x', 'MarkerEdgeColor', '#0072BD');
+                hold on
+            end
+            hold off
+            
+            subplot(1, 3, 3);
+            for j=1:numel(h)
+                scatter(support_x(locs{j}), h(j) + zeros(numel(locs{j}), 1), 'MarkerEdgeColor', 'b', 'Marker', '.');
+                hold on
+                
+                if numel(locs{j}) == 1 && numel(locs{j - 1}) == 1
+                    break
+                end
+            end
+            hold off
+            xlim([-0.2, 1.2]);
+
+            drawnow();
+            
+            %%
+            centroid = C_E;
+            idx_K= kmeans(X(:), numel(centroid), 'Start', centroid(:));
+            
+            statistic{n} = X;
+            for k=1:numel(centroid)
+                idx_X = idx_K == k;
+                statistic{n}(idx_X) = abs(X(idx_X) - centroid(k));
+            end
+            %}
+            
+            %% Outlier (similar to Adler & Agami, 2019)
+            %{
+            nummodes = zeros(numel(h), 1);
+
+            parfor j=1:numel(h)
+                if size(PD{j}, 1) > 2
+                    L = PD{j}(:, 2) - PD{j}(:, 1);
+                    x_q1 = quantile(L, 0.25);
+                    x_q2 = quantile(L, 0.50);
+                    x_q3 = quantile(L, 0.75);
+                    IQR = x_q3 - x_q1;
+    
+                    L_l = L(L <= x_q2);
+                    L_u = L(L >= x_q2);
+                    h_kernel = @(x_i, x_j) ((x_j - x_q2) - (x_q2 - x_i))./(x_j - x_i);
+                    H = arrayfun(@(x_i) h_kernel(x_i, L_u), L_l, 'UniformOutput', false);
+                    H = cat(1, H{:});
+                    mc = median(H);
+    
+                    if mc >= 0
+                        L_lb = x_q1 - 1.5*exp(-4*mc)*IQR;
+                        L_ub = x_q3 + 1.5*exp(3*mc)*IQR;
+                    else
+                        L_lb = x_q1 - 1.5*exp(-3*mc)*IQR;
+                        L_ub = x_q3 + 1.5*exp(4*mc)*IQR;
+                    end
+                    
+                    idx_L{j} = find((L < L_lb) | (L > L_ub));
+                    nummodes(j) = numel(idx_L{j});
+                end
+            end
+            %}
+
+            %% persistence entropy, Atienza et al. (2019)
+            %{
+            nummodes = zeros(numel(h), 1);
+
+            for j=1:1
+                L = PD{j}(:, 2) - PD{j}(:, 1);
+                idx_L{j} = h_persistentEntropy(L);
+                nummodes(j) = numel(idx_L{j});
+            end
+            %}
+
+            %% Sommerfeld et al. (2017)
+            %{
+            nummodes = zeros(numel(h), 1);
+            dlt_al = zeros(numel(h), 1);
+
+            al = 0.05;
+            K = 2000;
+            dlt = zeros(K, 1);
+
+            J = 1;
+            S = floor(M*(1 - exp(-1))) + 1;
+            
+            fw = waitbar(0, 'Wait...');
+            for j=1:numel(h)
+                waitbar(j/numel(h), fw, 'Wait...');
+                
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+
+                density = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), X, 'UniformOutput', false);
+                density = mean(cat(1, density{:}), 1);
+                
+                parfor k=1:K
+                    %%
+                    %Y = datasample(X, M);
+                    Y = datasample(X, S);
+                    while numel(uniquetol(Y, 1e-6)) ~= S
+                        Y = [Y, datasample(X, J)];
+                    end
+
+                    Y = Y + h(j).*normrnd(0, 1, size(Y));
+                    density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Y, 'UniformOutput', false);
+                    density_Y = mean(cat(1, density_Y{:}), 1);
+
+                    dlt(k) = max(abs(density - density_Y));
+                end
+                dlt_al(j) = quantile(dlt, 1 - al);
+
+                idx_al = (PD{j}(:, 2) - PD{j}(:, 1)) > dlt_al(j);
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+            
+            %% Fasy et al. (2014) + subsampling
+            %{
+            nummodes = zeros(numel(h), 1);
+
+            al = 0.05;
+            K = 400;
+            dlt = zeros(K, 1);
+
+            I = 20;
+            y_i = zeros(I, 1);
+            b = round(M.^(linspace(0.5, 0.98, I)'));
+            J = 200;
+            t = repmat(rand(J, 1)*0.5, [1, 2]);
+            t(:, 2) = 1 - t(:, 2);
+            
+            fw = waitbar(0, 'Wait...');
+            for j=1:numel(h)
+                waitbar(j/numel(h), fw, 'Wait...');
+
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+                
+                for idx_b=1:numel(b)
+                    parfor k=1:K
+                        %%
+                        Y = datasample(X, b(idx_b), 'Replace', false);
+                        
+                        density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Y, 'UniformOutput', false);
+                        density_Y = mean(cat(1, density_Y{:}), 1);
+    
+                        [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                        t_death_b = t_birth_b - prmn;
+                        PD_b = [t_death_b; t_birth_b]';
+                        dlt(k) = bottleneckdist(PD_b, PD{j});
+                    end
+
+                    y_ij = log(quantile(dlt, t(:, 2)) - quantile(dlt, t(:, 1)));
+                    y_i(idx_b) = mean(y_ij);
+                end
+
+                y_ = mean(y_i);
+                log_ = mean(log(b));
+                al_IJ = -sum((y_i - y_).*(log(b) - log_))/sum((log(b) - log_).^2);
+                tau = M^al_IJ;
+
+                dlt_al = tau*quantile(dlt, 1 - al);
+
+                %dlt_al = svmsample(X, al, PD{j}, h(j), support_x);
+
+                idx_al = ~((PD{j}(:, 1) + dlt_al) > PD{j}(:, 2) | PD{j}(:, 1) > (PD{j}(:, 2) - dlt_al));
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+
+            %% Comaniciu et al. (2001)
+            %y = adaptivemeanshift(X(:), X(:)', 1e-6, h(1));
+
+            %% Fasy et al. (2014)
+            %{
+            nummodes = zeros(numel(h), 1);
+            dlt_al = zeros(numel(h), 1);
+
+            al = 0.05;
+            K = 2000;
+            dlt = zeros(K, 1);
+            
+            fw = waitbar(0, 'Wait...');
+            for j=1:1
+                waitbar(j/numel(h), fw, 'Wait...');
+
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+                
+                tic;
+                parfor k=1:K
+                    %%
+                    Y = datasample(X, M);
+                    h_Y = kdebandwidth_lp(Y);
+                    
+                    %density_Y = debiasedkde(support_x, Y, h_Y);
+                    density_Y = kde(support_x, Y, h_Y);
+                    %density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h_Y), Y, 'UniformOutput', false);
+                    %density_Y = mean(cat(1, density_Y{:}), 1);
+
+                    [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                    t_death_b = t_birth_b - prmn;
+                    PD_b = [t_death_b; t_birth_b]';
+
+                    dlt(k) = bottleneckdist(PD_b, PD{j});
+                end
+                dlt_al(j) = quantile(dlt, 1 - al);
+
+                idx_al = ~((PD{j}(:, 1) + dlt_al(j)) > PD{j}(:, 2) | PD{j}(:, 1) > (PD{j}(:, 2) - dlt_al(j)));
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+            
+            %% Fasy et al. (2014) - sufficient m/n bootstrap
+            %{
+            nummodes = zeros(numel(h), 1);
+
+            al = 0.05;
+            K = 2000;
+            dlt = zeros(K, 1);
+
+            m_1 = round(M^(1 + log(2/3)/log(M)));
+            eta_m = round(1 + M*(1 - exp(-m_1/M)));
+            
+            fw = waitbar(0, 'Wait...');
+            for j=1:numel(h)
+                waitbar(j/numel(h), fw, 'Wait...');
+
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+                
+                parfor k=1:K
+                    %%
+                    Y = datasample(X, m_1);
+                    Y = uniquetol(Y, 1e-6);
+
+                    if numel(Y) > eta_m
+                        Y = Y(randperm(numel(Y), eta_m));
+                    elseif numel(Y) < eta_m
+                        X_d = setdiff(X, Y);
+                        Y = [Y, X_d(randperm(numel(X_d), eta_m - numel(Y)))];
+                    end
+
+                    Y = Y + h(j).*normrnd(0, 1, size(Y));
+                    
+                    density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Y, 'UniformOutput', false);
+                    density_Y = mean(cat(1, density_Y{:}), 1);
+
+                    [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                    t_death_b = t_birth_b - prmn;
+                    PD_b = [t_death_b; t_birth_b]';
+                    dlt(k) = bottleneckdist(PD_b, PD{j});
+                end
+                dlt_al = quantile(dlt, 1 - al);
+
+                %dlt_al = svmsample(X, al, PD{j}, h(j), support_x);
+
+                idx_al = ~((PD{j}(:, 1) + dlt_al) > PD{j}(:, 2) | PD{j}(:, 1) > (PD{j}(:, 2) - dlt_al));
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+
+            %% Fasy et al. (2014) - sequential bootstrap
+            %{
+            nummodes = zeros(numel(h), 1);
+            dlt_al = zeros(numel(h), 1);
+
+            al = 0.05;
+            K = 3000;
+            dlt = zeros(K, 1);
+
+            J = 1;
+            S = floor(M*(1 - exp(-1))) + 1;
+            
+            fw = waitbar(0, 'Wait...');
+            for j=1:numel(h)
+                waitbar(j/numel(h), fw, 'Wait...');
+
+                if j > 1 && size(PD{j}, 1) == 1
+                    break;
+                end
+
+                support_x = linspace(-h(j)*5, 1 + h(j)*5, 1024);
+
+                parfor k=1:K
+                    %%
+                    Y = datasample(X, S);
+                    while numel(uniquetol(Y, 1e-6)) ~= S
+                        Y = [Y, datasample(X, J)];
+                    end
+
+                    h_Y = h(j);
+                    Y = Y + h_Y.*normrnd(0, 1, size(Y));
+                    
+                    density_Y = kde(support_x, Y, h_Y);
+                    %density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h_Y), Y, 'UniformOutput', false);
+                    %density_Y = mean(cat(1, density_Y{:}), 1);
+                    %density_Y = debiasedkde(support_x, Y, h(j));
+
+                    [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                    t_death_b = t_birth_b - prmn;
+                    PD_b = [t_death_b; t_birth_b]';
+
+                    dlt(k) = bottleneckdist(PD_b, PD{j});
+                end
+                dlt_al(j) = quantile(dlt, 1 - al);
+
+                idx_al = ~((PD{j}(:, 1) + dlt_al(j)) > PD{j}(:, 2) | PD{j}(:, 1) > (PD{j}(:, 2) - dlt_al(j)));
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+
+            %% Fasy et al. (2014) - double bootstrap
+            %{
+            nummodes = zeros(numel(h), 1);
+            dlt_al = zeros(numel(h), 1);
+
+            al = 0.05;
+            K = 500;
+            KK = 50;
+            dlt = zeros(K, 1);
+            dlt_K = zeros(KK, 1);
+
+            I = (1:(KK + 1))./(KK + 1);
+            idx_C = find(I < (1 - al), 1, 'last');
+
+            fw = waitbar(0, 'Wait...');
+            for j=1:numel(h)
+                waitbar(j/numel(h), fw, 'Wait...');
+
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+                
+                for k=1:K
+                    %%
+                    Y = datasample(X, M);
+                    Z = Y + h(j).*normrnd(0, 1, size(Y));
+
+                    density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Z, 'UniformOutput', false);
+                    density_Y = mean(cat(1, density_Y{:}), 1);
+                    
+                    [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                    t_death_b = t_birth_b - prmn;
+                    PD_Y = [t_death_b; t_birth_b]';
+
+                    parfor kk=1:KK
+                        Z = datasample(Y, M);
+                        Z = Z + h(j).*normrnd(0, 1, size(Z));
+
+                        density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Z, 'UniformOutput', false);
+                        density_Y = mean(cat(1, density_Y{:}), 1);
+
+                        [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                        t_death_b = t_birth_b - prmn;
+                        PD_b = [t_death_b; t_birth_b]';
+
+                        dlt_K(kk) = bottleneckdist(PD_b, PD_Y);
+                    end
+                    dlt_K = sort(dlt_K);
+                    
+                    dlt(k) = (idx_C + 1 - (KK + 1)*(1 - al))*dlt_K(idx_C) + ((KK + 1)*(1 - al) - idx_C)*dlt_K(idx_C + 1);
+                end
+                dlt_al(j) = quantile(dlt, 1 - al);
+
+                idx_al = ~((PD{j}(:, 1) + dlt_al(j)) > PD{j}(:, 2) | PD{j}(:, 1) > (PD{j}(:, 2) - dlt_al(j)));
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+
+            %% Fasy et al. (2014) + data split
+            %{
+            nummodes = zeros(numel(h), 1);
+
+            al = 0.05;
+            K = 1000;
+            dlt = zeros(K, 1);
+            
+            fw = waitbar(0, 'Wait...');
+            for j=1:numel(h)
+                waitbar(j/numel(h), fw, 'Wait...');
+
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+                
+                M_half = round(M/2);
+                I = 1:M;
+
+                parfor k=1:K
+                    %%
+                    idx_X = randperm(M, M_half);
+                    idx_Y = setdiff(I, idx_X);
+
+                    Z = X(idx_X);
+                    density_Z = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Z, 'UniformOutput', false);
+                    density_Z = mean(cat(1, density_Z{:}), 1);
+                    
+                    [t_birth_b, ~, ~, prmn] = findpeaks(density_Z);
+                    t_death_b = t_birth_b - prmn;
+                    PD_Z = [t_death_b; t_birth_b]';
+
+                    Y = X(idx_Y);
+                    density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Y, 'UniformOutput', false);
+                    density_Y = mean(cat(1, density_Y{:}), 1);
+
+                    [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                    t_death_b = t_birth_b - prmn;
+                    PD_Y = [t_death_b; t_birth_b]';
+
+                    dlt(k) = bottleneckdist(PD_Y, PD_Z);
+                end
+                dlt_al = quantile(dlt, 1 - al);
+
+                %dlt_al = svmsample(X, al, PD{j}, h(j), support_x);
+
+                idx_al = ~((PD{j}(:, 1) + dlt_al) > PD{j}(:, 2) | PD{j}(:, 1) > (PD{j}(:, 2) - dlt_al));
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+
+            %% Fasy et al. (2014) + Normal-bundle bootstrap
+            %{
+            nummodes = zeros(numel(h), 1);
+            al = 0.20;
+            K = 1000;
+            dlt = zeros(K, 1);
+
+            idx_M = (1:M)';
+            
+            fw = waitbar(0, 'Wait...');
+            for j=1:3
+                waitbar(j/numel(h), fw, 'Wait...');
+
+                if size(PD{j}, 1) == 1
+                    break;
+                end
+
+                r = meanshift(X(:), X(:)', 1e-6, h(j));
+                eta = X - r;
+                K_mat = knnsearch(r', r', 'K', max(3, round(M*0.05)));
+                K_mat = K_mat(:, 2:end);
+                idx_Kmat = randi(size(K_mat, 2), [M, K]);
+    
+                parfor k=1:K
+                    %%
+                    eta_k = eta(arrayfun(@(i, j) K_mat(i, j), idx_M, idx_Kmat(:, k)));
+                    Y = r + eta_k;
+                    
+                    density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h(j)), Y, 'UniformOutput', false);
+                    density_Y = mean(cat(1, density_Y{:}), 1);
+    
+                    [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                    t_death_b = t_birth_b - prmn;
+                    PD_b = [t_death_b; t_birth_b]';
+                    dlt(k) = bottleneckdist(PD_b, PD{j});
+                end
+                
+                dlt_al = quantile(dlt, 1 - al);
+                idx_al = ~((PD{j}(:, 1) + dlt_al) > PD{j}(:, 2) | PD{j}(:, 1) > (PD{j}(:, 2) - dlt_al));
+                nummodes(j) = sum(idx_al);
+                idx_L{j} = idx_al;
+            end
+            close(fw);
+            %}
+
+            %%
+            %{
+            figobj = figure;
+            figobj.Position = [660, 660, 1200, 300];
+
+            idx_h = find(nummodes == max(nummodes), 1, 'last');
+            support_x = linspace(a + 1e-12, b - 1e-12, 1024);
+
+            subplot(1, 4, 1);
+            h_cv = kdebandwidth_lp(X);
+            density = arrayfun(@(X_i) normpdf(support_x, X_i, h_cv), X, 'UniformOutput', false);
+            density = mean(cat(1, density{:}), 1);
+            plot(support_x, density);
+            hold on
+            stem(support_x(locs{idx_h}(idx_L{idx_h})), density(locs{idx_h}(idx_L{idx_h})), 'Marker', 'none');
+            hold off
+            title(dataname{idx(n)}, 'Interpreter', 'none');
+            
+            subplot(1, 4, 2);
+            plot(nummodes);
+            
+            subplot(1, 4, 3);
+            scatter(PD{idx_h}(:, 1), PD{idx_h}(:, 2), 'Marker', '.');
+            lmax = max(max(xlim()), max(ylim()));
+            hold on
+            plot([0, lmax], [0, lmax], '-.m');
+            plot([0, lmax - dlt_al(idx_h)], [dlt_al(idx_h), lmax]);
+            hold off
+            xlim([0, lmax]); ylim([0, lmax]);
+
+            subplot(1, 4, 4);
+            density = arrayfun(@(X_i) normpdf(support_x, X_i, h(idx_h)), X, 'UniformOutput', false);
+            density = mean(cat(1, density{:}), 1);
+            plot(support_x, density);
+            hold on
+            scatter(support_x(locs{idx_h}), density(locs{idx_h}));
+            stem(support_x(locs{idx_h}(idx_L{idx_h})), density(locs{idx_h}(idx_L{idx_h})), 'Marker', 'none');
+            %stem(support_x(idx_L{idx_h}), density(idx_L{idx_h}), 'Marker', 'none');
+            hold off
+
+            drawnow();
+            
+            %%
+            idx_h = find(nummodes == max(nummodes), 1, 'last');
+            centroid = support_x(locs{idx_h}(idx_L{idx_h}));
+            %centroid = support_x(idx_L{idx_h});
+            idx_K= kmeans(X(:), numel(centroid), 'Start', centroid(:));
+            
+            statistic{n} = X;
+            for k=1:numel(centroid)
+                idx_X = idx_K == k;
+                statistic{n}(idx_X) = abs(X(idx_X) - centroid(k));
+            end
+            %}
+
+            %%
+            s = strsplit(dataname{idx(n)}, '_');
+            datatype{n} = s{end};
+        end
+
+        %%
+        [~, idx] = sort(datatype);
+        
+        addpath('./lib/two-sample/');
+        d = zeros(4, 1);
+        d(1) = pb_effectsize(statistic{idx(4)}, statistic{idx(1)});
+        d(2) = pb_effectsize(statistic{idx(4)}, statistic{idx(3)});
+        d(3) = pb_effectsize(statistic{idx(2)}, statistic{idx(1)});
+        d(4) = pb_effectsize(statistic{idx(2)}, statistic{idx(3)});
+        fprintf('%s-%s: %3.3f\n', datatype{idx(4)}, datatype{idx(1)}, d(1));
+        fprintf('%s-%s: %3.3f\n', datatype{idx(4)}, datatype{idx(3)}, d(2));
+        fprintf('%s-%s: %3.3f\n', datatype{idx(2)}, datatype{idx(1)}, d(3));
+        fprintf('%s-%s: %3.3f\n', datatype{idx(2)}, datatype{idx(3)}, d(4));
+    end
+end
+
+function idx = h_persistentEntropy(L)
+    %%
+    if numel(L) == 1
+        idx = 1;
+        return
+    end
+
+    L_orig = L;
+
+    %%
+    T = max(L);
+    r = min(L);
+    L = [sort(setdiff(L, [r; T]), 'desc'); r; T];
+    
+    h_pdent = @(L) -sum(L./sum(L).*log(L./sum(L)));
+    h_QE = @(idx, n, T, r) arrayfun(@(i) h_pdent([repmat(T, [i, 1]); repmat(r, [n - i, 1])]), idx);
+    
+    %%
+    n_dash = numel(L);
+    L_dash = L;
+    L_prev = [];
+
+    while true
+        %%
+        S_Lj = sum(L_dash);
+        m = 0;
+
+        for i=1:(n_dash - 2)
+            R_i = L_dash(i + 1:end);
+            P_i = sum(R_i);
+            l_dash = P_i/exp(h_pdent(R_i));
+            S_Li = P_i + i*l_dash;
+            C = S_Lj/S_Li;
+            m = i;
+
+            if C < 1
+                break;
+            end
+
+            S_Lj = S_Li;
+        end
+        
+        %%
+        E_i = h_QE(0:n_dash, n_dash, T, r);
+        [~, Q] = min(E_i);
+        Q = Q - 1;
+
+        %%
+        if Q < m
+            L_dash = [L_dash(1:m); L_dash(end - 1:end)];
+
+            if numel(L_prev) == numel(L_dash) && all(L_prev == L_dash)
+                L_dash = [L_dash(1:end - 2); L_dash(end)];
+                break;
+            end
+            L_prev = L_dash;
+
+            n_dash = m + 2;
+        else
+            L_dash = [L_dash(1:m); L_dash(end)];
+            break;
+        end
+    end
+
+    %%
+    idx = arrayfun(@(l) find(L_orig == l, 1, 'first'), L_dash);
+end
+
+function dlt = svmsample(X, al, PD, h, support_x)
+    %%
+    n = numel(X);
+    p = repmat(1/n, [n, 1]);
+    N = 100;
+    M = 1000;
+    rho = 1 - al;
+    eta = mean([rho, 1]);
+    k = 0;
+    T = zeros(N, 1);
+    C = zeros(N, n);
+    
+    %%
+    while k >= 0
+        parfor j=1:N
+            Z = datasample(X, n, 'Weights', p, 'Replace', true);
+            C(j, :) = arrayfun(@(X_i) sum(Z == X_i), X)';
+    
+            density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h), Z, 'UniformOutput', false);
+            density_Y = mean(cat(1, density_Y{:}), 1);
+            [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+            t_death_b = t_birth_b - prmn;
+            PD_b = [t_death_b; t_birth_b]';
+            T(j) = bottleneckdist(PD_b, PD);
+        end
+        
+        %%
+        lognp = log(n.*p)';
+        [~, idx] = sort(T, 'ascend');
+        S = zeros(N, 1);
+    
+        for r=1:N
+            for j=1:r
+                S(r) = S(r) + exp(sum(-C(idx(j), :).*lognp));
+            end
+        end
+        S = S./N;
+    
+        %%
+        if S(floor(eta*N)) > rho
+            Aeq = ones(1, numel(p));
+            beq = 1;
+            lb = zeros(numel(p), 1) + 1e-16;
+            ub = zeros(numel(p), 1) + (1 - 1e-16);
+    
+            h_rminf = @(x) x(~isinf(x));
+    
+            gam = T(idx(floor(eta*N)));
+            I = T <= gam;
+    
+            costfun = @(p) sum(h_rminf(...
+                log(I.*1) + log(sum((n.*p').^(-C), 2)) + log(sum((n.*p'.^k).^(-C), 2))...
+            )) - log(N);
+    
+            p_optm = fmincon(costfun, p, [], [], Aeq, beq, lb, ub);
+    
+            p = p_optm;
+            k = k + 1;
+        else
+            T_M = zeros(M - (k + 1)*N, 1);
+            parfor j=1:numel(T_M)
+                Z = datasample(X, n, 'Weights', p, 'Replace', true);
+        
+                density_Y = arrayfun(@(X_i) normpdf(support_x, X_i, h), Z, 'UniformOutput', false);
+                density_Y = mean(cat(1, density_Y{:}), 1);
+                [t_birth_b, ~, ~, prmn] = findpeaks(density_Y);
+                t_death_b = t_birth_b - prmn;
+                PD_b = [t_death_b; t_birth_b]';
+                T_M(j) = bottleneckdist(PD_b, PD);
+            end
+
+            T_all = [T; T_M];
+            dlt = quantile(T_all, rho);
+
+            k = -1;
+        end
+    end
+end
+
+function h_pulseclarity(audiofilepath, dataname)
+    %%
+    s = cellfun(@(X) strsplit(X, '_'), dataname, 'UniformOutput', false);
+    dataid = cellfun(@(X) strcat(X{1}), s, 'UniformOutput', false);
+    dataidlist = unique(dataid);
+    
+    datatype = cellfun(@(X) strcat(X{end}), s, 'UniformOutput', false);
+    typelist = unique(datatype);
+
+    %%
+    folder = strcat(userpath, '/lib2/MIRToolbox1.8.1');
+    addpath(genpath(folder));
+    
+    C = zeros(numel(dataidlist), 1);
+
+    for i=1:numel(dataidlist)
+        idx = find(strcmp(dataidlist{i}, dataid));
+        N = numel(idx);
+        
+        for n=1:N
+            p = mirpulseclarity(audiofilepath{idx(n)});
+            C(idx(n)) = mirgetdata(p);
+        end
+    end
+
+    %%
+    figobj = figure;
+    colorcode = {'#0072BD', '#D95319', '#EDB120', '#7E2F8E'};
+
+    for i=1:numel(typelist)
+        idx_i = strcmp(datatype, typelist{i});
+
+        for j=1:numel(dataidlist)
+            idx_j = strcmp(dataid, dataidlist{j});
+            idx = idx_i & idx_j;
+
+            scatter(i, C(idx), 'MarkerEdgeColor', 'none', 'MarkerFaceColor', colorcode{j});
+            hold on
+        end
+    end
+    legend(dataidlist, 'FontSize', 10);
+    hold off
+    xticks(1:numel(typelist));
+    xticklabels(typelist);
+    xlim([0.5, numel(typelist) + 0.5]);
+    ylim([0, max(C)*1.3]);
+    ylabel('Pulse clarity', 'FontSize', 12);
+    ax = gca(figobj);
+    ax.FontSize = 10;
+end
+
+function h_period(onsetfilepath, breakfilepath, dataname)
+    %%
+    s = cellfun(@(X) strsplit(X, '_'), dataname, 'UniformOutput', false);
+    dataid = cellfun(@(X) strcat(X{1}), s, 'UniformOutput', false);
+    dataidlist = unique(dataid);
+    
+    datatype = cellfun(@(X) strcat(X{end}), s, 'UniformOutput', false);
+    typelist = unique(datatype);
+
+    %%
+    for i=1:numel(dataidlist)
+        idx = find(strcmp(dataidlist{i}, dataid));
+        N = numel(idx);
+        
+        for n=1:N
+            fprintf('%s\n', dataname{idx(n)});
+            [t_onset, t_break] = h_onsetbreak(onsetfilepath{idx(n)}, breakfilepath{idx(n)});
+            
+            t_obi = cell(numel(t_break) + 1, 1);
+            t_lb = 0;
+            for j=1:numel(t_break)
+                t_rb = t_break(j);
+                idx_j = t_onset > t_lb & t_onset < t_rb;
+                t_obi{j} = t_onset(idx_j);
+                t_obi{j} = t_obi{j} - t_obi{j}(1);
+
+                t_lb = t_rb;
+            end
+
+            if t_lb < max(t_onset)
+                j = j + 1;
+
+                t_rb = max(t_onset) + 0.1;
+                idx_j = t_onset > t_lb & t_onset < t_rb;
+                t_obi{j} = t_onset(idx_j);
+                t_obi{j} = t_obi{j} - t_obi{j}(1);
+            else
+                t_obi(end) = [];
+            end
+
+            figure;
+            for j=1:numel(t_obi)
+                scatter(t_obi{j}, zeros(numel(t_obi{j}), 1) + j, 'Marker', '.');
+                hold on
+            end
+            hold off
+            title(dataname{idx(n)}, 'Interpreter', 'none');
+            ylim([0, numel(t_obi) + 1]);
+        end
+    end
 end
 
 function h_recurrence(onsetfilepath, breakfilepath, dataname)
@@ -61,7 +1150,7 @@ function h_recurrence(onsetfilepath, breakfilepath, dataname)
             while H_max < H_m
                 H_max = H_m;
                 M = M + 1;
-                H_m = recmaxent(ioi, M, 40000);
+                [H_m, ~] = recmaxent(ioi, M, 40000);
             end
             
             H(idx(n)) = H_max;
@@ -94,7 +1183,7 @@ function h_recurrence(onsetfilepath, breakfilepath, dataname)
     ax.FontSize = 10;
 end
 
-function H_max = recmaxent(X, N, M)
+function [H_max, B] = recmaxent(X, N, M)
     %%
     L = numel(X) - N + 1;
     I = arrayfun(@(x) [1:(x - 1); repmat(x, [1, x - 1])], 2:L, 'UniformOutput', false);
@@ -121,13 +1210,18 @@ function H_max = recmaxent(X, N, M)
     R = abs(R);
     H = zeros(512, 2);
     eps_max = max(R(:));
+    eps = rand(size(H, 1), 1).*eps_max;
 
     parfor i=1:size(H, 1)
-        eps = rand*eps_max;
-        H(i, :) = [h_REnt(R, eps), eps];
+        H(i, :) = [h_REnt(R, eps(i)), eps(i)];
     end
 
-    H_max = max(H(:, 1));
+    [~, idx_max] = max(H(:, 1));
+    H_max = H(idx_max, 1);
+    eps_opt = H(idx_max, 2);
+    B = R';
+    B(R <= eps_opt) = 1;
+    B(R > eps_opt) = 0;
 end
 
 function H = h_REnt(R, eps)
