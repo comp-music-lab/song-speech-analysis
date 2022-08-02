@@ -1,0 +1,16 @@
+feature,lang,diff,method
+F0,English,0.817113138416438,common language effect size
+Magnitude of F0 modulatioin,English,0.886787410253073,common language effect size
+Spectral centroid,English,0.888312660648144,common language effect size
+F0,Marathi,0.898460713579244,common language effect size
+Magnitude of F0 modulatioin,Marathi,0.812512093283772,common language effect size
+Spectral centroid,Marathi,0.949038366143685,common language effect size
+F0,Farsi,0.864861751405269,common language effect size
+Magnitude of F0 modulatioin,Farsi,0.920858968693701,common language effect size
+Spectral centroid,Farsi,0.903818078613452,common language effect size
+F0,Japanese,0.752868964840512,common language effect size
+Magnitude of F0 modulatioin,Japanese,0.884701086872831,common language effect size
+Spectral centroid,Japanese,0.507805978508493,common language effect size
+F0,Yoruba,0.817780952877395,common language effect size
+Magnitude of F0 modulatioin,Yoruba,0.928895609256499,common language effect size
+Spectral centroid,Yoruba,0.871992879944687,common language effect size

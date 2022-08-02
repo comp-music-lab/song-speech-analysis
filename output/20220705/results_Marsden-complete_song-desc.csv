@@ -1,0 +1,21 @@
+feature,lang,diff,method
+IOI,English,0.835691169671752,common language effect size
+Onset-break interval,English,0.858585858585859,common language effect size
+IOI ratio deviation,English,0.802770146520147,common language effect size
+Interval deviation,English,0.749825651133689,common language effect size
+IOI,Marathi,0.930619559651818,common language effect size
+Onset-break interval,Marathi,0.75,common language effect size
+IOI ratio deviation,Marathi,0.32280701754386,common language effect size
+Interval deviation,Marathi,0.611953320717123,common language effect size
+IOI,Farsi,0.931587561374795,common language effect size
+Onset-break interval,Farsi,0.516666666666667,common language effect size
+IOI ratio deviation,Farsi,0.659634623749456,common language effect size
+Interval deviation,Farsi,0.782081623557197,common language effect size
+IOI,Japanese,0.939435261249875,common language effect size
+Onset-break interval,Japanese,0.659090909090909,common language effect size
+IOI ratio deviation,Japanese,0.792610062893082,common language effect size
+Interval deviation,Japanese,0.541298864409441,common language effect size
+IOI,Yoruba,0.830662393162393,common language effect size
+Onset-break interval,Yoruba,1,common language effect size
+IOI ratio deviation,Yoruba,0.830492424242424,common language effect size
+Interval deviation,Yoruba,0.75290123650467,common language effect size

@@ -1,7 +1,7 @@
 function analysis_Marsden_all
     %% configuration
-    typelist = {'inst', 'desc'};
-    datainfo = readtable('datainfo_Marsden-all_inst-desc.csv');
+    typelist = {'song', 'recit'};
+    datainfo = readtable('datainfo_Marsden-all_song-recit.csv');
     outputdir = './output/20220705/';
     
     addpath('./lib/two-sample/');
@@ -13,7 +13,7 @@ function analysis_Marsden_all
     
     reffreq = 440;
     
-    %% ELT
+    %% ETL
     N = size(datainfo, 1);
     f0 = cell(N, 1);
     t_f0 = cell(N, 1);
@@ -52,5 +52,5 @@ function analysis_Marsden_all
     end
     
     %%
-    writetable(results, strcat(outputdir, 'results_Marsden-all.csv'));
+    writetable(results, strcat(outputdir, 'results_Marsden-all_', typelist{1}, '-', typelist{2}, '.csv'));
 end

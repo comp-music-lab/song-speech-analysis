@@ -1,5 +1,442 @@
 function analysis_ioisim
     %%
+    datadir = './data/Stage 1 RR Full/';
+    subdir = {...
+        'Patrick/', 'Patrick/', 'Patrick/', 'Patrick/',...
+        'Florence/', 'Florence/', 'Florence/', 'Florence/',...
+        'Dhwani/', 'Dhwani/', 'Dhwani/', 'Dhwani/',...
+        'Shafagh/', 'Shafagh/', 'Shafagh/', 'Shafagh/',...
+        'Yuto/', 'Yuto/', 'Yuto/', 'Yuto/'...
+    };
+    material = {...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_desc',...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_recit',...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song',...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_inst',...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc',...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_recit',...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song',...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_inst',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220430_desc',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_recit',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_song',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_inst',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_recit',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220507_inst',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_desc',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_recit',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_song',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220224_inst',...
+    };
+    
+    %%
+    ioiratio = cell(numel(material), 1);
+
+    for i=1:numel(material)
+        onsetfilepath = strcat(datadir, subdir{i}, 'onset_', material{i}, '.csv');
+        breakfilepath = strcat(datadir, subdir{i}, 'break_', material{i}, '.csv');
+
+        [t_onset, t_break] = h_onsetbreak(onsetfilepath, breakfilepath);
+        [~, ioiratio{i}] = helper.h_ioi(unique(t_onset), unique(t_break));
+    end
+    
+    %% lpdensity
+    %{
+    addpath(strcat(userpath, '/lib2/Rcall/'));
+    Rlib = 'C:\Users\yuto\AppData\Local\R\win-library\4.2\lpdensity';
+    Rpath = 'C:\Program Files\R\R-4.2.1\bin\R.exe';
+    Rclear();
+    Rinit(Rlib, Rpath);
+
+    for i=1:numel(ioiratio)
+        X = ioiratio{i}(:);
+        writetable(array2table(X), 'C:\Users\yuto\Documents\R\ToyProjects\kde\tmp.csv');
+        %Rpush('X', X);
+        %Rrun('f_X <- lpdensity(X, kernel="epanechnikov", bwselect="mse-dpi")');
+        %result = Rpull('f_X');
+
+        %fprintf('%3.3f, %s\n', pval(i), material{i});
+    end
+    %}
+
+    %% Unimodal test
+    %{
+    addpath(strcat(userpath, '/lib2/Rcall/'));
+    Rlib = 'multimode';
+    Rpath = 'C:\Program Files\R\R-4.2.1\bin\R.exe';
+    Rclear();
+    Rinit(Rlib, Rpath);
+    pval = zeros(numel(ioiratio), 1);
+
+    for i=1:numel(ioiratio)
+        X = ioiratio{i}(:);
+        Rpush('X', X);
+        Rrun('result <- modetest(X, mod0=1, method="ACR", B=1000)');
+        result = Rpull('result');
+        pval(i) = result.p_value;
+
+        fprintf('%3.3f, %s\n', pval(i), material{i});
+    end
+    %}
+
+    %% Evidence accumulation with mean-shift
+    %%{
+    addpath('./lib/KDE/');
+    T = cell(numel(ioiratio), 1);
+
+    support = linspace(1e-8, 1 - 1e-8, 512);
+    
+    %{
+    support_Y = linspace(-5, 5, 512);
+    a = 0; b = 1;
+    support = normcdf(support_Y).*(b - a);
+    scaling = 1./normpdf(norminv((support(:) - a)./(b - a), 0, 1), 0, 1) .* (1/(b - a));
+    %}
+
+    for i=1:numel(ioiratio)
+        X = ioiratio{i}(:);
+        %{
+        Y = ioiratio{i}(:);
+        X = norminv((Y - a)./(b - a), 0, 1);
+        %}
+
+        X = sort(X);
+        n = numel(X);
+        h = linspace(std(X)*(log(n)/n), 1.06*min(std(X), (quantile(X, 0.75) - quantile(X, 0.25))/1.34)*n^(-0.2), 128);
+        A = zeros(n, n);
+        C_tol = cell(numel(h), 1);
+        I = 1:n;
+
+        for j=1:numel(h)
+            f_X = arrayfun(@(X_i) normpdf(X, X_i, h(j)), X, 'UniformOutput', false);
+            f_X = mean(cat(2, f_X{:}), 2);
+            thresh = normpdf(0, 0, h(j))/n * 2;
+            idx = find(f_X > thresh);
+
+            C = meanshift(X(idx), X(idx)', 1e-8, h(j));
+            %C = normcdf(C.*(b - a), 0, 1) + a;
+            [C_tol{j}, ~, IC] = uniquetol(C, 1e-6);
+            I_X = I(idx);
+
+            for k=1:numel(C_tol{j})
+                idx = find(IC == k);
+
+                if numel(idx) > 2
+                    for l=1:numel(idx)
+                        A(I_X(idx(l)), I_X(idx)) = A(I_X(idx(l)), I_X(idx)) + 1;
+                    end
+                end
+            end
+        end
+
+        A = A./numel(h);
+
+        %%
+        Z = linkage(A, 'average');
+        
+        %%
+        K = cellfun(@(C) numel(C), C_tol);
+        K_unq = unique(K);
+        L = zeros(numel(K_unq), 1);
+        for k=1:numel(L)
+            idx_b = find(K == K_unq(k), 1, 'first');
+            idx_d = find(K < K_unq(k), 1, 'first');
+
+            if isempty(idx_d)
+                idx_d = numel(h);
+            end
+            L(k) = h(idx_d) - h(idx_b);
+        end
+
+        [~, idx] = max(L);
+        idx_h = find(K == K_unq(idx), 1, 'first');
+        
+        %%
+        f_X = arrayfun(@(X_i) normpdf(X, X_i, h(idx_h)), X, 'UniformOutput', false);
+        f_X = mean(cat(2, f_X{:}), 2);
+        thresh = normpdf(0, 0, h(idx_h))/n * 2;
+        idx = find(f_X > thresh);
+
+        C = meanshift(X(idx), X(idx)', 1e-8, h(idx_h));
+        [C_h, ~, IC] = uniquetol(C, 1e-6);
+        
+        T_i = [];
+        for k=1:numel(C_h)
+            T_i = [T_i; abs(C_h(k) - X(idx(IC == k)))];
+        end
+
+        %{
+        if numel(idx) ~= numel(X)
+            idx_d = setdiff(1:numel(X), idx);
+
+            for j=1:numel(idx_d)
+                T_i = [T_i; min(abs(X(idx_d(j)) - C_h))];
+            end
+        end
+        %}
+
+        T{i} = T_i;
+
+        %%
+        f_X = kde(support, X, h(idx_h));
+
+        %{
+        f_X = arrayfun(@(X_i) normpdf(support_Y(:), X_i, h(idx_h)), X, 'UniformOutput', false);
+        f_X = mean(cat(2, f_X{:}), 2);
+        f_X = f_X.*scaling;
+        X = Y;
+        %}
+
+        C_opt = C_tol{idx_h};
+
+        fobj = figure;
+        fobj.Position = [30, 190, 375, 800];
+
+        subplot(5, 1, 1);
+        imagesc(A);
+        title(material{i}, 'Interpreter', 'none');
+        subplot(5, 1, 2);
+        dendrogram(Z);
+        subplot(5, 1, 3);
+        for j=1:numel(h)
+            scatter(C_tol{j}, h(j).*ones(numel(C_tol{j}), 1), 'MarkerEdgeColor', 'b', 'Marker', '.');
+            hold on
+        end
+        scatter(X, zeros(numel(X), 1), 'Marker', '|');
+        plot([0, 1], h(idx_h).*[1, 1], '-.m');
+        hold off
+        xlim([0, 1]);
+        subplot(5, 1, 4);
+        plot(support, f_X);
+        area = trapz(support, f_X);
+        title(['Area = ', num2str(area, '%3.3f')]);
+        hold on
+        for j=1:numel(C_opt)
+            [~, idx] = min(abs(support - C_opt(j)));
+            stem(support(idx), f_X(idx));
+        end
+        scatter(X, zeros(numel(X), 1), 'Marker', '|');
+        hold off
+        subplot(5, 1, 5);
+        histogram(T{i});
+        xlim([0.0, 0.6]);
+
+        drawnow
+    end
+    %}
+
+    %% Total barcode length + 95% cutoff
+    %{
+    support = linspace(-0.2, 1.2, 512);
+    addpath('./lib/rkde/');
+    IC = zeros(numel(ioiratio), 1);
+
+    for i=1:numel(ioiratio)
+        X = ioiratio{i}(:);
+        h = linspace(std(X)*(log(numel(X))/numel(X)), std(X), 512);
+
+        C = cell(numel(h), 1);
+        I = cell(numel(h), 1);
+        
+        for j=1:numel(h)
+            f_X = wrapper_rkde(X, support, h(j));
+
+            thresh = normpdf(0, 0, h(j))./numel(X) * 2;
+            [~, locs, ~, L] = findpeaks(f_X, 'MinPeakHeight', thresh);
+
+            C{j} = support(locs);
+            
+            if j > 1 && numel(C{j - 1}) == 1 && numel(C{j}) == 1
+                break;
+            end
+            
+            I{j} = zeros(numel(C{j}), 1);
+            BL_norm = L./sum(L);
+            
+            if j == 1
+                totalBL = BL_norm;
+                I{j} = 1:numel(C{j});
+            else
+                for k=1:numel(C{j})
+                    [~, idx_I] = min(abs(C{j - 1} - C{j}(k)));
+                    I{j}(k) = I{j - 1}(idx_I);
+    
+                    totalBL(I{j}(k)) = totalBL(I{j}(k)) + BL_norm(k);
+                end
+            end
+        end
+        
+        totalBL = totalBL./sum(totalBL);
+        [P, idx_P] = sort(totalBL, 'ascend');
+        P_sum = cumsum(P);
+        idx_u = find(P_sum > 0.05, 1, 'first');
+        idx_L = idx_P(idx_u:end);
+
+        C_E = C{1}(idx_L);
+        
+        %%
+        %IC(i) = mean(-log(totalBL(idx_L)));
+        %[idx_K, C_opt]= kmeans(X(:), numel(C_E), 'Start', C_E(:));
+
+        %%
+        figobj = figure;
+        figobj.Position = [660, 660, 800, 300];
+        
+        h_cv = [];
+        offset = 0;
+        while isempty(h_cv)
+            idx = find(cellfun(@(I_i) numel(I_i), I) == (numel(idx_L) + offset), 1, 'first');
+            h_cv = h(idx);
+            offset = offset + 1;
+        end
+
+        subplot(1, 2, 1);
+
+        f_X = wrapper_rkde(X, support, h_cv);
+
+        plot(support, f_X);
+        hold on
+        [~, locs_pk] = findpeaks(f_X);
+        for j=1:numel(C_E)
+            [~, idx_m] = min(abs(support(locs_pk) - C_E(j)));
+            stem(support(locs_pk(idx_m)), f_X(locs_pk(idx_m)), 'Color', '#D95319');
+        end
+        scatter(X, zeros(numel(X), 1), 'Marker', '|');
+        hold off
+        title(material{i}, 'Interpreter', 'none');
+        
+        subplot(1, 2, 2);
+        [~, idx_p] = sort(totalBL, 'asc');
+        for j=1:numel(totalBL)
+            plot([0, totalBL(idx_p(j))], j.*[1, 1], 'Color', '#0072BD');
+            scatter(totalBL(idx_p(j)), j, 'Marker', 'x', 'MarkerEdgeColor', '#0072BD');
+            hold on
+        end
+        hold off
+
+        drawnow();
+    end
+    %}
+
+    %% Bottleneck Bootstrap
+    %{
+    addpath('./lib/KDE/', './lib/rkde/', './lib/PH/');
+    if count(py.sys.path, '') == 0
+        insert(py.sys.path, int32(0), '');
+    end
+    
+    support = linspace(-5, 5, 512);
+    a = 0; b = 1;
+    support_Y = normcdf(support).*(b - a);
+    scaling = 1./normpdf(norminv((support_Y - a)./(b - a), 0, 1), 0, 1) .* (1/(b - a));
+
+    for i=1:numel(ioiratio)
+        Z = ioiratio{i}(:);
+
+        X = norminv((Z - a)./(b - a), 0, 1);
+        
+        %{
+        n = [60, 40, 50];
+        a = gamrnd(2, 2);
+        b = gamrnd(1, 2);
+        mu = normrnd(0, 3);
+        sgm = gamrnd(2, 1);
+        mu2 = normrnd(0, 4);
+        sgm2 = gamrnd(2, 1);
+        X = [gamrnd(a, b, [n(1), 1]); normrnd(mu, sgm, [n(2), 1]); normrnd(mu2, sgm2, [n(3), 1])];
+        support = linspace(min(X) - 10, max(X) + 10, 512);
+        f = n(1)/sum(n).*gampdf(support, a, b) + n(2)/sum(n).*normpdf(support, mu, sgm) + n(3)/sum(n).*normpdf(support, mu2, sgm2);
+        fffob = figure; fffob.Position = [117, 741, 557, 212]; plot(support, f);
+        %}
+
+        h = unique([linspace(1e-4, 1e-3, 20), linspace(1e-3, 1e-2, 20), linspace(1e-2, 1e-1, 20), linspace(1e-1, 1e-0, 10)]);
+
+        N = zeros(numel(h), 1);
+        S = zeros(numel(h), 1);
+        c_dg = zeros(numel(h), 1);
+    
+        al = 0.10;
+        B = 1000;
+        
+        T_dg = zeros(B, 1);
+    
+        %%
+        fw = waitbar(0, 'Wait...');
+        for j=1:numel(h)
+            waitbar(j/numel(h), fw, 'Wait...');
+
+            %f_X = wrapper_rkde(X, support, h(j));
+            f_X = kde(support, X, h(j));
+            f_X = f_X .* scaling;
+
+            [t_b, ~, ~, L_X] = findpeaks(f_X(:));
+            PD = [t_b - L_X, t_b];
+            
+            parfor b=1:B
+                Y = datasample(X, numel(X));
+                %f_Y = wrapper_rkde(Y, support, h(j));
+                f_Y = kde(support, Y, h(j));
+                f_Y = f_Y.*scaling;
+
+                [t_b, ~, ~, L_Y] = findpeaks(f_Y(:));
+                PD_b = [t_b - L_Y, t_b];
+                T_dg(b) = bottleneckdist(PD_b, PD);
+            end
+            c_dg(j) = quantile(T_dg, 1 - al);
+            
+            %%
+            N(j) = sum(L_X > c_dg(j));
+            S(j) = sum((L_X - c_dg(j)).*(L_X > c_dg(j)));
+        end
+        close(fw);
+        
+        idx_N = N == max(N);
+        S_max = max(S(idx_N));
+        idx_h = S == S_max;
+
+        %f_X = wrapper_rkde(X, support, h(idx_h));
+        f_X = kde(support, X, h(idx_h));
+        f_X = f_X.*scaling;
+        X = Z;
+
+        [~, locs, ~, L_X] = findpeaks(f_X);
+        idx_C = locs(L_X > c_dg(idx_h));
+
+        fobj = figure;
+        fobj.Position = [25, 240, 385, 490];
+        subplot(3, 1 ,1);
+        scatter(h, N);
+        subplot(3, 1 ,2);
+        scatter(h, S);
+        subplot(3, 1, 3);
+        plot(support_Y, f_X);
+        hold on
+        stem(support_Y(idx_C), f_X(idx_C));
+        scatter(X, zeros(numel(X), 1), 'Marker', '|');
+        hold off
+        title(material{i}, 'Interpreter', 'none');
+
+        drawnow;
+    end
+    %}
+
+    %%
+    addpath('./lib/two-sample/');
+    for i=1:5
+        d = pb_effectsize(T{1 + (i - 1)*4}, T{3 + (i - 1)*4});
+        fprintf('%3.3f, %s, %s\n', d, material{1 + (i - 1)*4}, material{3 + (i - 1)*4});
+    end
+
+    for i=1:5
+        d = pb_effectsize(T{1 + (i - 1)*4}, T{4 + (i - 1)*4});
+        fprintf('%3.3f, %s, %s\n', d, material{1 + (i - 1)*4}, material{3 + (i - 1)*4});
+    end
+end
+
+function analysis_ioisim_old
+    %%
     outputdir = './output/20220705/';
     datainfofile = {...
         'datainfo_Marsden-complete_song-desc.csv',...
@@ -248,98 +685,6 @@ function h_tdakmeans(onsetfilepath, breakfilepath, dataname)
                 %}
 
                 dlt_al(j) = (max(abs(PD{j}(setdiff(1:numel(L), idx_L{j}), 1) - PD{j}(setdiff(1:numel(L), idx_L{j}), 2))) + min(abs(PD{j}(idx_L{j}, 1) - PD{j}(idx_L{j}, 2))))/2;
-            end
-            %}
-            
-            %% Total barcode length + 95% cutoff
-            %%{
-            C = cell(numel(h), 1);
-            I = cell(numel(h), 1);
-            C{1} = support_x(locs{1});
-            I{1} = 1:numel(locs{1});
-            totalBL = BL{1}./sum(BL{1});
-
-            for j=2:numel(h)
-                C{j} = support_x(locs{j});
-                
-                if numel(C{j - 1}) == 1 && numel(C{j}) == 1
-                    break;
-                end
-                
-                I{j} = zeros(numel(C{j}), 1);
-                BL_norm = BL{j}./sum(BL{j});
-
-                for k=1:numel(C{j})
-                    [~, idx_I] = min(abs(C{j - 1} - C{j}(k)));
-                    I{j}(k) = I{j - 1}(idx_I);
-
-                    totalBL(I{j}(k)) = totalBL(I{j}(k)) + BL_norm(k);
-                end
-            end
-            
-            totalBL = totalBL./sum(totalBL);
-
-            %idx_L = sort(h_persistentEntropy(totalBL));
-
-            [P, idx_P] = sort(totalBL, 'desc');
-            P_sum = cumsum(P);
-            idx_u = find(P_sum < 0.95, 1, 'last') + 1;
-            idx_L = idx_P(1:idx_u);
-
-            C_E = C{1}(idx_L);
-
-            %% Fasi
-
-            %%
-            figobj = figure;
-            figobj.Position = [660, 660, 1200, 300];
-
-            h_cv = kdebandwidth_lp(X(:)');
-
-            subplot(1, 3, 1);
-            density = arrayfun(@(X_i) normpdf(support_x, X_i, h_cv), X, 'UniformOutput', false);
-            density = mean(cat(1, density{:}), 1);
-            plot(support_x, density);
-            hold on
-            [~, locs_pk] = findpeaks(density);
-            for j=1:numel(C_E)
-                [~, idx_m] = min(abs(support_x(locs_pk) - C_E(j)));
-                stem(support_x(locs_pk(idx_m)), density(locs_pk(idx_m)), 'Color', '#D95319');
-            end
-            hold off
-            title(dataname{idx(n)}, 'Interpreter', 'none');
-            
-            subplot(1, 3, 2);
-            [~, idx_p] = sort(totalBL, 'asc');
-            for j=1:numel(totalBL)
-                plot([0, totalBL(idx_p(j))], j.*[1, 1], 'Color', '#0072BD');
-                scatter(totalBL(idx_p(j)), j, 'Marker', 'x', 'MarkerEdgeColor', '#0072BD');
-                hold on
-            end
-            hold off
-            
-            subplot(1, 3, 3);
-            for j=1:numel(h)
-                scatter(support_x(locs{j}), h(j) + zeros(numel(locs{j}), 1), 'MarkerEdgeColor', 'b', 'Marker', '.');
-                hold on
-                
-                if numel(locs{j}) == 1 && numel(locs{j - 1}) == 1
-                    break
-                end
-            end
-            hold off
-            xlim([-0.2, 1.2]);
-
-            drawnow();
-            
-            %%
-            centroid = C_E;
-            idx_K= kmeans(X(:), numel(centroid), 'Start', centroid(:));
-            
-            statistic{n} = X;
-            for k=1:numel(centroid)
-                idx_X = idx_K == k;
-                statistic{n}(idx_X) = abs(X(idx_X) - centroid(k));
             end
             %}
             

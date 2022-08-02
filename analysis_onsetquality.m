@@ -1,570 +1,302 @@
 function analysis_onsetquality
+    %% Limitations
+    % Correlation/two-sample tests as point processes or functional data
+    % Synthesis of Bayes factos
+    % CHRONSET, SPPAS
+
     %%
     pprm = plotprm();
-    outputdir = './output/20220705/';
+    outputdir = './output/20220729/';
+    thresh = [0.025, 0.050, 0.075, 0.100]';
     
-    %% Full-length vs. Excerpt
-    pairinfo = readtable('./pairinfo_S1RR_full.csv');
-    datadir = './data';
-
-    result = h_scoring(pairinfo, datadir, 'within-subjects_fs');
-    h_plot_scoring(result, pprm, outputdir, 'within-subjects_fs');
-
-    %% Onset accuracy
-    thresh = [0.020, 0.025, 0.040, 0.050, 0.080, 0.100]';
+    %% Comparison among IOI and IOI ratio distributions
+    % Praat scripts
+    combination = {...
+        {'Yuto', {'Jong_Wempe_2008'}},...
+        {'Patrick', {'Jong_Wempe_2008'}},...
+        {'Dhwani', {'Jong_Wempe_2008'}},...
+        {'Florence', {'Jong_Wempe_2008'}},...
+        {'Shafagh', {'Jong_Wempe_2008'}},...
+    };
+    datadir = {'./data/Stage 1 RR Round 2/', './data/Stage 1 RR Praat/'};
+    result_A2 = h_BF_h(datadir, combination, thresh);
+    result_A2.trial = repmat({'vs. Jong & Wempe (2008)'}, [size(result_A2, 1), 1]);
     
-    pairinfo = readtable('./pairinfo_S1RR_IRR.csv');
-    datadir = './data';
-    result_ss = h_threshcurve(pairinfo, datadir, thresh);
-    result_ss.trial = repmat({'within-subjects (re-annotation)'}, [size(result_ss, 1), 1]);
-
-    pairinfo = readtable('./pairinfo_S1RR_R1R2.csv');
-    datadir = './data/Stage 1 RR Round 1';
-    result_R1 = h_threshcurve(pairinfo, datadir, thresh);
+    combination = {...
+        {'Yuto', {'Prosogram'}},...
+        {'Patrick', {'Prosogram'}},...
+        {'Dhwani', {'Prosogram'}},...
+        {'Florence', {'Prosogram'}},...
+        {'Shafagh', {'Prosogram'}},...
+    };
+    datadir = {'./data/Stage 1 RR Round 2/', './data/Stage 1 RR Praat/'};
+    result_A1 = h_BF_h(datadir, combination, thresh);
+    result_A1.trial = repmat({'vs. Prosogram'}, [size(result_A1, 1), 1]);
+    
+    % 1st and 2nd round
+    combination = {...
+        {'Yuto', {'Patrick', 'Shafagh', 'Dhwani'}},...
+        {'Patrick', {'Yuto', 'Shafagh', 'Dhwani'}},...
+        {'Shafagh', {'Patrick', 'Yuto', 'Dhwani'}},...
+        {'Dhwani', {'Patrick', 'Shafagh', 'Yuto'}},...
+        {'Florence', {'Patrick', 'Shafagh', 'Dhwani', 'Yuto'}},...
+    };
+    datadir = {'./data/Stage 1 RR Round 1/', './data/Stage 1 RR Round 1/'};
+    result_R1 = h_BF_h(datadir, combination, thresh);
     result_R1.trial = repmat({'between-subjects (w/o texts)'}, [size(result_R1, 1), 1]);
 
-    pairinfo = readtable('./pairinfo_S1RR_R1R2.csv');
-    datadir = './data/Stage 1 RR Round 2';
-    result_R2 = h_threshcurve(pairinfo, datadir, thresh);
-    result_R2.trial = repmat({'between-subjects (w texts)'}, [size(result_R2, 1), 1]);
+    datadir = {'./data/Stage 1 RR Round 2/', './data/Stage 1 RR Round 2/'};
+    result_R2 = h_BF_h(datadir, combination, thresh);
+    result_R2.trial = repmat({'between-subjects (w/ texts)'}, [size(result_R2, 1), 1]);
+    
+    % Re-annotation
+    combination = {...
+        {'Yuto', {'Yuto'}},...
+        {'Patrick', {'Patrick'}},...
+        {'Shafagh', {'Shafagh'}},...
+        {'Dhwani', {'Dhwani'}}...
+    };
+    datadir = {'./data/Stage 1 RR IRR/', './data/Stage 1 RR Round 2/'};
+    result_IRR = h_BF_h(datadir, combination, thresh);
+    result_IRR.trial = repmat({'within-subjects'}, [size(result_IRR, 1), 1]);
 
-    result = [result_ss; result_R1; result_R2];
-    
-    h_plot_oq(result, pprm, outputdir);
-    
-    
+    % Full-length vs. excerpt
+    combination = {...
+        {'Yuto', {'Yuto'}},...
+        {'Patrick', {'Patrick'}},...
+        {'Shafagh', {'Shafagh'}},...
+        {'Dhwani', {'Dhwani'}},...
+        {'Florence', {'Florence'}}...
+    };
+    datadir = {'./data/Stage 1 RR Full/', './data/Stage 1 RR Round 2/'};
+    result_Full = h_BF_h(datadir, combination, thresh);
+    result_Full.trial = repmat({'Full vs. excerpts'}, [size(result_Full, 1), 1]);
 
+    result = [result_R1; result_R2; result_IRR; result_Full; result_A1; result_A2];
+    
     %%
-    h_plot_scoring(result, pprm, outputdir, 'within-subjects_ss');
-    
-    %% vs. Automated methods
-
-
-    %% Full-length vs. Excerpt
-    result_ss = h_scoring(pairinfo, datadir, 'within-subjects_ss', thresh);
-    result_R2 = h_scoring(pairinfo, datadir, 'between-subjects', thresh);
-
-    
-    
-    
-
-    result = [result_R1; result_R2];
-    h_plot_scoring(result, pprm, outputdir, 'between-subjects');
+    h_plot(result, pprm, thresh, outputdir);
 end
 
-function result = h_threshcurve(pairinfo, datadir, thresh)
+function h_plot(result, pprm, thresh, outputdir)
     %%
-    annotatorlist = unique(pairinfo.annotator);
-    result = [];
-    
+    list_type = unique(result.type);
+    list_lang = unique(result.lang);
+
     %%
-    for i=1:numel(annotatorlist)
-        idx = find(strcmp(annotatorlist{i}, pairinfo.annotator));
-
-        for j=1:numel(idx)
-            %%
-            onsetfilepath = strcat(datadir, pairinfo.relpath_annot{idx(j)}, 'onset_', pairinfo.dataname_annot{idx(j)}, '.csv');
-            T = readtable(onsetfilepath);
-            t_onset_est = table2array(T(:, 1));
-
-            onsetfilepath = strcat(datadir, pairinfo.relpath_ref{idx(j)}, 'onset_', pairinfo.dataname_ref{idx(j)}, '.csv');
-            T = readtable(onsetfilepath);
-            t_onset_ref = table2array(T(:, 1));
-
-            %%
-            result_j = oq_threshcurve(t_onset_ref, t_onset_est, thresh, annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)));
-            result = [result; result_j];
+    for l=1:(2 + numel(thresh))
+        if l == 1
+            Y_l = result.log10bf_H0_ioi;
+            titlestr = 'IOI';
+            ylabelstr = 'Bayes Factor (log_{10})';
+            list_trial = unique(result.trial);
+            fileid = 'ioi-BF.png';
+        elseif l == 2
+            Y_l = result.log10bf_H0_ioiratio;
+            titlestr = 'IOI ratio';
+            ylabelstr = 'Bayes Factor (log_{10})';
+            list_trial = unique(result.trial);
+            fileid = 'ioiratio-BF.png';
+        else
+            Y_l = cellfun(@(y) y(l - 2),result.F1);
+            titlestr = ['Accuracy (threshold = ±', num2str(thresh(l - 2), '%3.3f'), 'sec.)'];
+            ylabelstr = 'F1';
+            list_trial = setdiff(unique(result.trial), 'Full vs. excerpts');
+            fileid = strcat('F1-', erase(num2str(thresh(l - 2), '%3.3f'), '.'), '.png');
         end
-    end
-end
 
-function h_plot_oq(result, pprm, outputdir)
-    %%
-    triallist = unique(result.trial);
-    typelist = unique(result.type);
-    threshlist = unique(result.thresh);
+        yl = [min(Y_l) - 0.2, max(Y_l) + 0.2];
+
+        %%
+        fobj = figure();
+        fobj.Position = [40, 690, 640, 280];
     
-    annotatorlist = unique(result.annotator);
-    M_annotatorfacecolor = containers.Map(annotatorlist, {'#0072BD', '#D95319', '#EDB120', '#7E2F8E'});
-    h_annotator = zeros(numel(annotatorlist), 1);
+        for j=1:numel(list_trial)
+            idx_j = strcmp(result.trial, list_trial{j});
 
-    %{
-    langlist = unique(result.language);
-    h_lang = zeros(numel(langlist), 1);
-    h_type = zeros(numel(typelist), 1);
-    %}
+            for k=1:numel(list_lang)
+                idx_k = strcmp(result.lang, list_lang{k});
 
-    %%
-    for l=1:numel(threshlist)
-        idx_l = result.thresh == threshlist(l);
-
-        figobj = figure();
-        figobj.Position = [30, 650, 1280, 310];
-            
-        for i=1:numel(triallist)
-            idx_i = strcmp(result.trial, triallist{i});
-
-            for k=1:numel(typelist)
-                idx_k = strcmp(result.type, typelist{k});
-
-                for j=1:numel(annotatorlist)
-                    idx_j = strcmp(result.annotator, annotatorlist{j});
-                    idx = idx_i & idx_k & idx_l & idx_j;
-                    
-                    Y = result.F1(idx);
-                    X = i.*ones(numel(Y), 1) - ((numel(typelist) + 1)/2 - k).*0.1;
+                for i=1:numel(list_type)
+                    idx_i = strcmp(result.type, list_type{i});
+    
+                    idx = idx_i & idx_j & idx_k;
+                    Y = Y_l(idx);
+                    X = j.*ones(numel(Y), 1) + 0.15.*i - 0.35;
+    
                     scatter(X, Y,...
-                        'MarkerFaceColor', M_annotatorfacecolor(annotatorlist{j}), 'Marker', 'o', 'MarkerEdgeColor', 'none');
+                        'MarkerEdgeColor', 'None', 'MarkerFaceColor', pprm.langcolormap(list_lang{k}),...
+                        'MarkerFaceAlpha', 0.5, 'Marker', pprm.typemarkermap(list_type{i})...
+                    );
                     hold on
                 end
             end
         end
         
-        for i=1:numel(annotatorlist)
-            h_annotator(i) = scatter(NaN, NaN, 'Marker', 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', M_annotatorfacecolor(annotatorlist{i}));
-        end
-        legend(h_annotator, annotatorlist, 'FontSize', pprm.legendfontsize, 'Location', 'northeast');
-
-        %{
-        for i=1:numel(langlist)
-            h_lang(i) = scatter(NaN, NaN, 'Marker', 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', pprm.langcolormap(langlist{i}));
+        %%
+        if l == 1 || l == 2
+            plot([0, numel(list_trial) + 1], 0.5.*[1, 1], ':', 'Color', 'k');
+            plot([0, numel(list_trial) + 1], 1.0.*[1, 1], '-.', 'Color', 'k');
         end
 
-        for i=1:numel(typelist)
-            h_type(i) = scatter(NaN, NaN, 'Marker', pprm.typemarkermap(typelist{i}), 'MarkerEdgeColor', 'k');
+        %%
+        h_lang = zeros(numel(list_lang), 1);
+        for k=1:numel(h_lang)
+            h_lang(k) = scatter(NaN, NaN,...
+                    'MarkerEdgeColor', 'None', 'MarkerFaceColor', pprm.langcolormap(list_lang{k}), 'MarkerFaceAlpha', 0.5, 'Marker', 'o');
         end
-
-        legend([h_lang; h_type], [langlist; typelist], 'FontSize', pprm.legendfontsize);
-        %}
-
-        hold off;
+        h_type = zeros(numel(list_type), 1);
+        for i=1:numel(h_type)
+            h_type(i) = scatter(NaN, NaN,...
+                    'MarkerEdgeColor', 'None', 'MarkerFaceColor', 'k', 'MarkerFaceAlpha', 0.5, 'Marker', pprm.typemarkermap(list_type{i}));
+        end
+        legend([h_lang; h_type], [list_lang; list_type], 'Position', [0.84, 0.39, 0.15, 0.41]);
         
-        xlim([0.5, numel(triallist) + 0.65]);
-        ylim([-0.1, 1.1]);
-        xticks(1:numel(triallist));
-        xticklabels(triallist);
+        hold off
         
-        ax = gca(figobj);
-        ax.FontSize = pprm.tickfontsize;
-        ylabel('F-measure', 'FontSize', pprm.labelfontsize);
+        xticks(1:numel(list_trial));
+        xticklabels(list_trial);
+        xlim([0.5, numel(list_trial) + 1]);
 
-        title(['Threshold = ', num2str(threshlist(l), '%3.3f')],...
-            'FontSize', pprm.titlefontsize);
+        ylabel(ylabelstr);
+        ylim(yl);
 
-        saveas(figobj, strcat(outputdir, 'onsetquality_', '_thresh', num2str(l), '.png'));
+        title(titlestr);
+
+        saveas(fobj, strcat(outputdir, fileid));
     end
 end
 
-function result = h_scoring(pairinfo, datadir, experiment, thresh)
+function result = h_BF_h(datadir, combination, thresh)
     %%
-    if nargin < 4
-        thresh = 0.02;
-    end
+    addpath('./lib/two-sample/');
+    nbpobj = nbpfittest(1, 500, 'robust');
+    priorodds = 1;
+    
+    R = zeros(numel(thresh), 1);
+    F1 = zeros(numel(thresh), 1);
+    PRC = zeros(numel(thresh), 1);
+    RCL = zeros(numel(thresh), 1);
+    OS = zeros(numel(thresh), 1);
 
     %%
-    annotatorlist = unique(pairinfo.annotator);
+    am_map = containers.Map(...
+        {'Yuto', 'Patrick', 'Shafagh', 'Dhwani', 'Florence'},...
+        {'Yuto_Ozaki', 'John_McBride', 'Shafagh_Hadavi', 'Parimal_Sadaphal', 'Florence_Nweke'}...
+    );
+
+    ml_map = containers.Map(...
+        {'Yuto_Ozaki', 'John_McBride', 'Shafagh_Hadavi', 'Parimal_Sadaphal', 'Florence_Nweke'},...
+        {'Japanese', 'English', 'Farsi', 'Marathi', 'Yoruba'}...
+    );
+
+    material = {...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc',...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song',...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_recit',...
+        'Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_inst',...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_desc',...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_inst',...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song',...
+        'John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_recit',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_inst',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_recit',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_song',...
+        'Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220430_desc',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_recit',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc',...
+        'Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220507_inst',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_desc',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_recit',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_song',...
+        'Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220224_inst',...
+    };
+
+    %%
     result = [];
-    addpath('./lib/two-sample/');
-    nbpobj = nbpfittest(1, 500, 'robust');
-    priorodds = 1;
+    col_result = {'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
+        'R', 'F1', 'PRC', 'RCL', 'OS', 'lang', 'type', 'material'};
 
-    %%
-    for i=1:numel(annotatorlist)
-        idx = find(strcmp(annotatorlist{i}, pairinfo.annotator));
-
-        for j=1:numel(idx)
+    for i=1:numel(combination)
+        %%
+        mid_i = am_map(combination{i}{1});
+        lang_i = ml_map(mid_i);
+        material_i = material(contains(material, mid_i));
+        
+        for j=1:numel(material_i)
             %%
-            onsetfilepath = strcat(datadir, pairinfo.relpath_annot{idx(j)}, 'onset_', pairinfo.dataname_annot{idx(j)}, '.csv');
-            T = readtable(onsetfilepath);
-            t_onset_est = table2array(T(:, 1));
+            dirpath = strcat(datadir{1}, combination{i}{1});
+            listing = dir(dirpath);
+            filelist = arrayfun(@(l) l.name, listing, 'UniformOutput', false);
 
-            onsetfilepath = strcat(datadir, pairinfo.relpath_ref{idx(j)}, 'onset_', pairinfo.dataname_ref{idx(j)}, '.csv');
-            T = readtable(onsetfilepath);
-            t_onset_ref = table2array(T(:, 1));
-
-            %%
-            breakfilepath = strcat(datadir, pairinfo.relpath_annot{idx(j)}, 'break_', pairinfo.dataname_annot{idx(j)}, '.csv');
-            T = readtable(breakfilepath, 'ReadVariableNames', false);
-            if ~isempty(T)
-                t_break_est = table2array(T(:, 1));
-
-                if iscell(t_break_est)
-                    t_break_est = str2double(cell2mat(t_break_est));
-                end
-            else
-                t_break_est = [];
-            end
-
-            breakfilepath = strcat(datadir, pairinfo.relpath_ref{idx(j)}, 'break_', pairinfo.dataname_ref{idx(j)}, '.csv');
-            T = readtable(breakfilepath, 'ReadVariableNames', false);
-            if ~isempty(T)
-                t_break_ref = table2array(T(:, 1));
-
-                if iscell(t_break_ref)
-                    t_break_ref = str2double(cell2mat(t_break_ref));
-                end
-            else
-                t_break_ref = [];
-            end
-
-            %%
-            [ioi_est, ioiratio_est] = helper.h_ioi(t_onset_est, t_break_est);
-            [ioi_ref, ioiratio_ref] = helper.h_ioi(t_onset_ref, t_break_ref);
-
-            %%
-            lnbf_H0_ioi = nbpobj.test(ioi_est(:), ioi_ref(:));
-            [posterior_H0_ioi, ~] = nbpobj.posterior(priorodds, lnbf_H0_ioi);
-            log10bf_H0_ioi = lnbf_H0_ioi/log(10);
+            onsetfile = filelist(contains(lower(filelist), 'onset') & contains(filelist, material_i{j}));
+            onsetfilepath_ref = strcat(dirpath, '/', onsetfile{1});
             
-            lnbf_H0_ioiratio = nbpobj.test(ioiratio_est(:), ioiratio_ref(:));
-            [posterior_H0_ioiratio, ~] = nbpobj.posterior(priorodds, lnbf_H0_ioiratio);
-            log10bf_H0_ioiratio = lnbf_H0_ioiratio/log(10);
-            
-            if strcmp('between-subjects', experiment) || strcmp('within-subjects_ss', experiment)
-                [R, F1, PRC, RCL, OS] = ft_rvalue(t_onset_ref, t_onset_est, thresh);
+            breakfile = filelist(contains(lower(filelist), 'break') & contains(filelist, material_i{j}));
+            breakfilepath_ref = strcat(dirpath, '/', breakfile{1});
 
-                [~, ix, iy] = dtw(t_onset_ref, t_onset_est);
-                dist_average = mean(t_onset_ref(ix) - t_onset_est(iy));
-                dist_var = var(t_onset_ref(ix) - t_onset_est(iy), 1);
+            [ioi_ref, ioiratio_ref, t_onset_ref] = h_ETL(onsetfilepath_ref, breakfilepath_ref);
 
-                result = [...
-                result;...
-                table(F1, R, PRC, RCL, OS, dist_average, dist_var,...
-                posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
-                annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)),...
-                'VariableNames', {'F1', 'Rval', 'PRC', 'RCL', 'OS', 'dtwdist_mean', 'dtwdist_var',...
-                'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
-                'annotator', 'lang', 'type'})...
-                ];
-            elseif strcmp('within-subjects_fs', experiment)
-                result = [...
-                result;...
-                table(posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
-                annotatorlist(i), pairinfo.language(idx(j)), pairinfo.type(idx(j)),...
-                'VariableNames', {'posterior_H0_ioi', 'log10bf_H0_ioi', 'posterior_H0_ioiratio', 'log10bf_H0_ioiratio',...
-                'annotator', 'lang', 'type'})...
-                ];
+            s = strsplit(material_i{j}, '_');
+            type_ij = s{end};
+
+            for k=1:numel(combination{i}{2})
+                %%
+                dirpath = strcat(datadir{2}, combination{i}{2}{k});
+                listing = dir(dirpath);
+                filelist = arrayfun(@(l) l.name, listing, 'UniformOutput', false);
+
+                onsetfile = filelist(contains(lower(filelist), 'onset') & contains(filelist, material_i{j}));
+                onsetfilepath_var = strcat(dirpath, '/', onsetfile{1});
+
+                breakfile = filelist(contains(lower(filelist), 'break') & contains(filelist, material_i{j}));
+                breakfilepath_var = strcat(dirpath, '/', breakfile{1});
+
+                [ioi_var, ioiratio_var, t_onset_var] = h_ETL(onsetfilepath_var, breakfilepath_var);
+
+                %%
+                lnbf_H0_ioi = nbpobj.test(ioi_ref(:), ioi_var(:));
+                [posterior_H0_ioi, ~] = nbpobj.posterior(priorodds, lnbf_H0_ioi);
+                log10bf_H0_ioi = lnbf_H0_ioi/log(10);
+                
+                lnbf_H0_ioiratio = nbpobj.test(ioiratio_ref(:), ioiratio_var(:));
+                [posterior_H0_ioiratio, ~] = nbpobj.posterior(priorodds, lnbf_H0_ioiratio);
+                log10bf_H0_ioiratio = lnbf_H0_ioiratio/log(10);
+                
+                for l=1:numel(thresh)
+                    [R(l), F1(l), PRC(l), RCL(l), OS(l)] = ft_rvalue(t_onset_ref, t_onset_var, thresh(l));
+                end
+
+                result_ijk = table(...
+                    posterior_H0_ioi, log10bf_H0_ioi, posterior_H0_ioiratio, log10bf_H0_ioiratio,...
+                    {R}, {F1}, {PRC}, {RCL}, {OS}, {lang_i}, {type_ij}, material_i(j),...
+                    'VariableNames', col_result...
+                );
+
+                result = [result; result_ijk];
             end
         end
     end
 end
 
-function h_plot_scoring(result, pprm, outputdir, experiment)
+function [ioi, ioiratio, t_onset, t_break] = h_ETL(onsetfilepath, breakfilepath)
     %%
-    annotatorlist = unique(result.annotator);
-    M = numel(annotatorlist);
-    
+    T = readtable(onsetfilepath);
+    t_onset = table2array(T(:, 1));
+
     %%
-    if strcmp('between-subjects', experiment)
-        xticklabelstr = {'w/o texts', 'w/ texts'};
-        xtickval = [1, 2];
-        xl = [0.7, 3.2];
-        idx_q = 1:5;
-        fileid_expm = 'between';
-    elseif strcmp('within-subjects_ss', experiment)
-        xticklabelstr = {'re-annotation'};
-        xtickval = 1;
-        xl = [0.7, 1.3];
-        idx_q = 2:7;
-        fileid_expm = 'within-ss';
-    elseif strcmp('within-subjects_fs', experiment)
-        xticklabelstr = {'full vs. excerpt'};
-        xtickval = 1;
-        xl = [0.7, 1.3];
-        idx_q = 2:5;
-        fileid_expm = 'within-fs';
+    T = readtable(breakfilepath, 'ReadVariableNames', false);
+    if ~isempty(T)
+        t_break = table2array(T(:, 1));
+
+        if iscell(t_break)
+            t_break = str2double(cell2mat(t_break));
+        end
+    else
+        t_break = [];
     end
 
     %%
-    for m=1:M
-        result_m = result(strcmp(annotatorlist{m}, result.annotator), :);
-        langlist_m = unique(result_m.lang);
-        typelist_m = unique(result_m.type);
-
-        for q=idx_q
-            figobj = figure;
-            figobj.Position = [400, 200, 500, 720];
-            
-            switch q
-                case 1
-                    metric = result_m.F1;
-                    yl = [0, 1];
-                    ylabelstr = 'F-score';
-                    fileid = 'Fscore';
-                case 2
-                    metric = result_m.posterior_H0_ioi;
-                    yl = [0, 1];
-                    ylabelstr = 'Posterior(H_0|D)_{IOI}';
-                    fileid = 'pstr-ioi';
-                case 3
-                    metric = result_m.posterior_H0_ioiratio;
-                    yl = [0, 1];
-                    ylabelstr = 'Posterior(H_0|D)_{IOI ratio}';
-                    fileid = 'pstr-ioiratio';
-                case 4
-                    metric = result_m.log10bf_H0_ioi;
-                    yl = [min(result.log10bf_H0_ioi) - 0.5, max(result.log10bf_H0_ioi) + 0.5];
-                    ylabelstr = 'log_{10} Bayes Factor_{IOI}';
-                    fileid = 'log10BF-ioi';
-                case 5
-                    metric = result_m.log10bf_H0_ioiratio;
-                    yl = [min(result.log10bf_H0_ioiratio) - 0.5, max(result.log10bf_H0_ioiratio) + 0.5];
-                    ylabelstr = 'log_{10} Bayes Factor_{IOI ratio}';
-                    fileid = 'log10BF-ioiratio';
-                 case 6
-                    metric = result_m.dtwdist_mean;
-                    yl = [min(result.dtwdist_mean) - 0.01, max(result.dtwdist_mean) + 0.01];
-                    ylabelstr = 'Mean of the DTW distance of onset';
-                    fileid = 'dtwdist-mean';
-                 case 7
-                    metric = result_m.dtwdist_var;
-                    yl = [0, max(result.dtwdist_var) + 0.001];
-                    ylabelstr = 'Variance of the DTW distance of onset';
-                    fileid = 'dtwdist-var';
-            end
-    
-            for i=1:numel(langlist_m)
-                for j=1:numel(typelist_m)
-                    idx_ij = strcmp(result_m.lang, langlist_m{i}) & strcmp(result_m.type, typelist_m{j});
-
-                    if strcmp('between-subjects', experiment)
-                        xy = [0, 0; 0, 0];
-                        for k=1:2
-                            idx = find(result_m.round == k & idx_ij);
-                            scatter(k, metric(idx), 'SizeData', 45, 'MarkerEdgeColor', pprm.langcolormap(langlist_m{i}), 'Marker', pprm.typemarkermap(typelist_m{j}));
-                            xy(k, :) = [k, metric(idx)];
-                            hold on
-                        end
-                        
-                        if all(~(xy == 0))
-                            plot(xy(:, 1), xy(:, 2), 'Color', [0.4, 0.4, 0.4], 'LineStyle', '-.');
-                        end
-                    elseif strcmp('within-subjects_ss', experiment) || strcmp('within-subjects_fs', experiment)
-                        idx = idx_ij;
-                        scatter(1, metric(idx), 'SizeData', 45, 'MarkerEdgeColor', pprm.langcolormap(langlist_m{i}), 'Marker', pprm.typemarkermap(typelist_m{j}));
-                        hold on
-                    end
-                end
-            end
-            
-            h_lang = zeros(numel(langlist_m), 1);
-            for i=1:numel(langlist_m)
-                h_lang(i) = scatter(NaN, NaN, 'Marker', 'o', 'MarkerEdgeColor', 'none', 'MarkerFaceColor', pprm.langcolormap(langlist_m{i}));
-            end
-    
-            h_type = zeros(numel(typelist_m), 1);
-            for i=1:numel(typelist_m)
-                h_type(i) = scatter(NaN, NaN, 'Marker', pprm.typemarkermap(typelist_m{i}), 'MarkerEdgeColor', 'k');
-            end
-    
-            legend([h_lang; h_type], [langlist_m; typelist_m], 'FontSize', pprm.legendfontsize);
-    
-            xlim(xl);
-            ylim(yl);
-            xticks(xtickval);
-            xticklabels(xticklabelstr);
-            ax = gca(figobj);
-            ax.FontSize = pprm.tickfontsize;
-            ylabel(ylabelstr, 'FontSize', pprm.labelfontsize);
-            title(['Annotator: ', annotatorlist{m}], 'FontSize', pprm.titlefontsize);
-    
-            saveas(figobj, strcat(outputdir, 'S1RR_', fileid_expm, '_', annotatorlist{m}, '_', fileid, '.png'));
-        end
-    end
-end
-
-function [posterior_H0, log10bf, Rvals] = h_analysis(dataid, finalonsetdir, initialonsetdir, dataname, outputdir, figflag)
-    %% ETL
-    filedir = {initialonsetdir, finalonsetdir};
-    t_onset = cell(numel(dataname), numel(filedir));
-    t_break = cell(numel(dataname), numel(filedir));
-    ioi = cell(numel(dataname), numel(filedir));
-    ioiratio = cell(numel(dataname), numel(filedir));
-    
-    for j=1:numel(filedir)
-        for i=1:numel(dataname)
-            onsetfilepath = strcat(filedir{j}, 'onset_', dataname{i}, '.csv');
-            T = readtable(onsetfilepath);
-            t_onset{i, j} = unique(T.Var1);
-
-            breakfilepath = strcat(filedir{j}, 'break_', dataname{i}, '.csv');
-            T = readtable(breakfilepath, 'ReadVariableNames', false);
-            if isempty(T)
-                t_break{i, j} = [];
-            else
-                if iscell(T.Var1)
-                    t_break{i, j} = str2num(T.Var1{:});
-                else
-                    t_break{i, j} = unique(T.Var1);
-                end
-            end
-            
-            [ioi{i, j}, ioiratio{i, j}] = helper.h_ioi(t_onset{i, j}, t_break{i, j});
-            ioi{i, j} = ioi{i, j}(:);
-            ioiratio{i, j} = ioiratio{i, j}(:);
-        end
-    end
-    
-    %% R-value
-    Rvals = zeros(numel(dataname), 6);
-    thresh = 0.02;
-
-    for i=1:numel(dataname)
-        hit = 0;
-
-        for j=1:numel(t_onset{i, 2})
-            boundary_l = t_onset{i, 2}(j) - thresh;
-            if j > 1
-                preboundary_r = t_onset{i, 2}(j - 1) + thresh;
-                
-                if boundary_l < preboundary_r
-                    boundary_l = boundary_l - (preboundary_r - boundary_l)/2;
-                end
-            end
-
-            boundary_r = t_onset{i, 2}(j) + thresh;
-            if j < numel(t_onset{i, 2})
-                postboundary_l = t_onset{i, 2}(j + 1) - thresh;
-                
-                if postboundary_l < boundary_r
-                    boundary_r = boundary_r - (boundary_r - postboundary_l)/2;
-                end
-            end
-
-            flag = boundary_l <= t_onset{i, 1} & t_onset{i, 1} < boundary_r;
-            if sum(flag) > 0
-                hit = hit + 1;
-            end
-        end
-        
-        HR = hit/numel(t_onset{i, 2}) * 100;
-        OS = (numel(t_onset{i, 1})/numel(t_onset{i, 2}) - 1) * 100;
-        r1 = sqrt((100 - HR)^2 + OS^2);
-        r2 = (-OS + HR - 100)/sqrt(2);
-        R = 1 - (abs(r1) + abs(r2))/200;
-        PRC = hit/numel(t_onset{i, 1});
-        RCL = hit/numel(t_onset{i, 2});
-        F = (2*PRC*RCL)/(PRC + RCL);
-        Rvals(i, :) = [R, HR, OS, PRC, RCL, F];
-    end
-    
-    Rvals = array2table(Rvals, 'VariableNames', {'R', 'HR', 'OS', 'PRC', 'RCL', 'F'});
-
-    %% Metrical difference
-    if figflag
-        dist = zeros(numel(dataname), 1);
-        reldist = zeros(numel(dataname), 1);
-        
-        f = figure(1);
-        f.Position = [5, 5, 1250, 950];
-        clf; cla;
-        for i=1:numel(dataname)
-            [dist_i, ix, iy] = dtw(t_onset{i, 1}, t_onset{i, 2});
-            dist(i) = dist_i/numel(ix);
-            reldist(i) = dist(i)/mean(ioi{i, 2});
-    
-            subplot(numel(dataname), 1, i);
-            scatter(t_onset{i, 1}, ones(numel(t_onset{i, 1}), 1), 'MarkerEdgeColor', '#0072BD');
-            hold on
-            scatter(t_onset{i, 2}, zeros(numel(t_onset{i, 2}), 1), 'MarkerEdgeColor', '#D95319');
-            scatter(t_break{i, 1}, ones(numel(t_break{i, 1}), 1), 'MarkerEdgeColor', 'none', 'MarkerFaceColor', '#0072BD', 'Marker', 'v');
-            scatter(t_break{i, 2}, zeros(numel(t_break{i, 2}), 1), 'MarkerEdgeColor', 'none', 'MarkerFaceColor', '#D95319', 'Marker', 'v');
-    
-            for j=1:numel(ix)
-                plot([t_onset{i, 1}(ix(j)), t_onset{i, 2}(iy(j))], [1, 0], ':m');
-            end
-            hold off
-            
-            xlim([0, 10.4]);
-            ylim([-0.5, 1.8]);
-            
-            if i == 1
-                titlestr = {['[', dataid, ']'], '', dataname{i},...
-                    ['Average diff = ', num2str(dist(i), '%3.3f'), ', Average diff/Average IOI = ', num2str(reldist(i), '%3.3f')]};
-            else
-                titlestr = {dataname{i},...
-                    ['Average diff = ', num2str(dist(i), '%3.3f'), ', Average diff/Average IOI = ', num2str(reldist(i), '%3.3f')]};
-            end
-    
-            title(titlestr, 'Interpreter', 'none', 'FontSize', 12);
-            set(gca,'YTickLabel',[])
-    
-            if i == 1
-                legend({'Variation', 'Original'}, 'FontSize', 9,...
-                    'Location', 'none', 'Position', [0.82, 0.92, 0.077, 0.032]);
-            end
-        end
-        xlabel('Time (second)');
-    
-        saveas(f, strcat(outputdir, dataid, '_dtw.png'));
-    end
-    
-    %% Statistical difference
-    addpath('./lib/KDE/');
-    addpath('./lib/two-sample/');
-    nbpobj = nbpfittest(1, 500, 'robust');
-    priorodds = 1;
-    log10bf = zeros(numel(dataname), 2);
-    posterior_H0 = zeros(numel(dataname), 2);
-    y = linspace(-5, 5, 1024);
-    
-    for k=1:2
-        switch k
-            case 1
-                D = ioi;
-                a = 0;
-                b = 2.5;
-                suffix = 'ioi';
-            case 2
-                D = ioiratio;
-                a = 0;
-                b = 1;
-                suffix = 'ioiratio';
-        end
-
-        for i=1:numel(dataname)
-            lnbf = nbpobj.test(D{i, 1}, D{i, 2});
-            [posterior_H0(i, k), ~] = nbpobj.posterior(priorodds, lnbf);
-            log10bf(i, k) = lnbf/log(10);
-        end
-        
-        if figflag
-            f = figure(1 + k);
-            f.Position = [50, 75, 650, 900];
-            clf; cla;
-    
-            x = normcdf(y).*(b - a);
-            density = zeros(numel(y), 2);
-            for i=1:numel(dataname)
-                for j=1:2
-                    X = D{i, j};
-                    Y = norminv((X - a)./(b - a), 0, 1);
-                    h = kdebandwidth_lp(Y);
-                    density(:, j) = kde(y, Y, h);
-                end
-        
-                subplot(numel(dataname), 1, i);
-                plot(x, density);
-        
-                if i == 1
-                    titlestr = {['[', dataid, ']'], '', dataname{i}};
-                else
-                    titlestr = dataname(i);
-                end
-                
-                titlestr = [titlestr, ['Posterior prob. = ', num2str(posterior_H0(i, k), '%3.3f'),...
-                        ', log10 Bayes factor = ', num2str(log10bf(i, k), '%3.3f'), ...
-                        ', n = (', num2str(numel(ioi{i, 1})), ', ', num2str(numel(ioi{i, 2})), ')']];
-    
-                title(titlestr, 'Interpreter', 'none', 'FontSize', 12);
-                set(gca,'YTickLabel',[])
-        
-                if i == 1
-                    legend({'Variation', 'Original'}, 'FontSize', 9, 'Location', 'northeast');
-                end
-            end
-        
-            saveas(f, strcat(outputdir, dataid, '_', suffix, '_nbp-two-sample.png'));
-        end
-    end
+    [ioi, ioiratio] = helper.h_ioi(t_onset, t_break);
 end

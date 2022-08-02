@@ -1,0 +1,143 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 10.2024375 
+tiers? <exists> 
+size = 1 
+item []: 
+    item [1]:
+        class = "TextTier" 
+        name = "syllables" 
+        xmin = 0 
+        xmax = 10.2024375 
+        points: size = 43 
+        points [1]:
+            number = 0.20888126094309176 
+            mark = "1" 
+        points [2]:
+            number = 0.8095398207094825 
+            mark = "2" 
+        points [3]:
+            number = 1.2773123848856687 
+            mark = "3" 
+        points [4]:
+            number = 1.5717884388539547 
+            mark = "4" 
+        points [5]:
+            number = 1.9823259185616102 
+            mark = "5" 
+        points [6]:
+            number = 2.3112763486729007 
+            mark = "6" 
+        points [7]:
+            number = 2.4700599351638397 
+            mark = "7" 
+        points [8]:
+            number = 2.64308800018666 
+            mark = "8" 
+        points [9]:
+            number = 2.7907370421574704 
+            mark = "9" 
+        points [10]:
+            number = 2.967609394773097 
+            mark = "10" 
+        points [11]:
+            number = 3.1403105783925684 
+            mark = "11" 
+        points [12]:
+            number = 3.291548694058553 
+            mark = "12" 
+        points [13]:
+            number = 3.6654423599435866 
+            mark = "13" 
+        points [14]:
+            number = 3.8040956813542866 
+            mark = "14" 
+        points [15]:
+            number = 3.9696800443239284 
+            mark = "15" 
+        points [16]:
+            number = 4.108413065009825 
+            mark = "16" 
+        points [17]:
+            number = 4.20833496071482 
+            mark = "17" 
+        points [18]:
+            number = 4.796958580996361 
+            mark = "18" 
+        points [19]:
+            number = 5.044999764875661 
+            mark = "19" 
+        points [20]:
+            number = 5.1963076883257395 
+            mark = "20" 
+        points [21]:
+            number = 5.618147038061356 
+            mark = "21" 
+        points [22]:
+            number = 5.860365036102666 
+            mark = "22" 
+        points [23]:
+            number = 6.023170981845029 
+            mark = "23" 
+        points [24]:
+            number = 6.106846450827145 
+            mark = "24" 
+        points [25]:
+            number = 6.1998366924508685 
+            mark = "25" 
+        points [26]:
+            number = 6.443619014670814 
+            mark = "26" 
+        points [27]:
+            number = 6.748486791393405 
+            mark = "27" 
+        points [28]:
+            number = 6.934503414173043 
+            mark = "28" 
+        points [29]:
+            number = 7.11933667447103 
+            mark = "29" 
+        points [30]:
+            number = 7.349293932165308 
+            mark = "30" 
+        points [31]:
+            number = 7.5003107792558925 
+            mark = "31" 
+        points [32]:
+            number = 7.627335146821228 
+            mark = "32" 
+        points [33]:
+            number = 7.792515182730062 
+            mark = "33" 
+        points [34]:
+            number = 8.12508564706076 
+            mark = "34" 
+        points [35]:
+            number = 8.25556261011392 
+            mark = "35" 
+        points [36]:
+            number = 8.617131598493351 
+            mark = "36" 
+        points [37]:
+            number = 8.776318073618175 
+            mark = "37" 
+        points [38]:
+            number = 9.01892521809825 
+            mark = "38" 
+        points [39]:
+            number = 9.175409189386034 
+            mark = "39" 
+        points [40]:
+            number = 9.37111923399313 
+            mark = "40" 
+        points [41]:
+            number = 9.672299027955685 
+            mark = "41" 
+        points [42]:
+            number = 9.838919465353793 
+            mark = "42" 
+        points [43]:
+            number = 9.926297666661466 
+            mark = "43" 

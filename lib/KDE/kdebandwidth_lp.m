@@ -37,7 +37,7 @@ function h_hat = kdebandwidth_lp(X)
     lmd = linspace(-10*pi, 10*pi, J);
     
     phi = arrayfun(@(lmd_i) sum(exp(1i.*lmd_i.*X)), lmd);    
-    n = size(X, 1);
+    n = numel(X);
     phi = phi./n;
 
     %% Step 2 - Cut-off frequency selection

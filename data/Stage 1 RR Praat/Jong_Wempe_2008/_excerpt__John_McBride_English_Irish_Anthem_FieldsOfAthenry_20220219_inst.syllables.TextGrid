@@ -1,0 +1,86 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 10.096077097505669 
+tiers? <exists> 
+size = 1 
+item []: 
+    item [1]:
+        class = "TextTier" 
+        name = "syllables" 
+        xmin = 0 
+        xmax = 10.096077097505669 
+        points: size = 24 
+        points [1]:
+            number = 0.882656822562384 
+            mark = "1" 
+        points [2]:
+            number = 1.0178895929132066 
+            mark = "2" 
+        points [3]:
+            number = 1.9568683930127557 
+            mark = "3" 
+        points [4]:
+            number = 2.105133823115905 
+            mark = "4" 
+        points [5]:
+            number = 2.5373787159283974 
+            mark = "5" 
+        points [6]:
+            number = 2.9161324104066946 
+            mark = "6" 
+        points [7]:
+            number = 3.515702334136951 
+            mark = "7" 
+        points [8]:
+            number = 3.7145867488132245 
+            mark = "8" 
+        points [9]:
+            number = 3.900164842039337 
+            mark = "9" 
+        points [10]:
+            number = 4.061868218592171 
+            mark = "10" 
+        points [11]:
+            number = 4.223171032071303 
+            mark = "11" 
+        points [12]:
+            number = 4.3937968945062735 
+            mark = "12" 
+        points [13]:
+            number = 5.2312016899489375 
+            mark = "13" 
+        points [14]:
+            number = 5.331708285039841 
+            mark = "14" 
+        points [15]:
+            number = 5.689960506619736 
+            mark = "15" 
+        points [16]:
+            number = 5.969482569178411 
+            mark = "16" 
+        points [17]:
+            number = 6.240749767122696 
+            mark = "17" 
+        points [18]:
+            number = 6.335844473643936 
+            mark = "18" 
+        points [19]:
+            number = 6.465312788211781 
+            mark = "19" 
+        points [20]:
+            number = 6.617972829335834 
+            mark = "20" 
+        points [21]:
+            number = 6.841010294866789 
+            mark = "21" 
+        points [22]:
+            number = 7.132396403012258 
+            mark = "22" 
+        points [23]:
+            number = 8.4647861519103 
+            mark = "23" 
+        points [24]:
+            number = 9.229838717788944 
+            mark = "24" 

@@ -1,7 +1,7 @@
 function analysis_Marsden_complete
     %% configuration
-    typelist = {'inst', 'desc'};
-    datainfo = readtable('datainfo_Marsden-complete_inst-desc.csv');
+    typelist = {'song', 'recit'};
+    datainfo = readtable('datainfo_Marsden-complete_song-recit.csv');
     outputdir = './output/20220705/';
     
     addpath('./lib/two-sample/');
@@ -14,7 +14,7 @@ function analysis_Marsden_complete
     
     reffreq = 440;
     
-    %% ELT
+    %% ETL
     N = size(datainfo, 1);
     t_onset = cell(N, 1);
     t_break = cell(N, 1);
@@ -50,29 +50,21 @@ function analysis_Marsden_complete
         I = cat(1, I{:});
         tmp = cell(1, 1);
         tmp{1} = I;
-        interval{i} = helper.h_subsampling(tmp, 4096);
+        interval{i} = helper.h_subsampling(tmp, 2048);
         interval{i} = interval{i}{1};
     end
     
     %% Comparison
     IOI = cell(N, 1); % Speed (IOI)
     OBI = cell(N, 1); % Phrase length (first onset-final break interval)
-    IOIrationndist = cell(N, 1); % IOI regularity
-    intervalnndist = cell(N, 1); % interval regularity
+    IOIratiodev = cell(N, 1); % IOI regularity
+    intervaldev = cell(N, 1); % interval regularity
     
     for i=1:N
         IOI{i} = ft_ioi(t_onset{i}, t_break{i});
         OBI{i} = ft_obi(t_onset{i}, t_break{i});
-        IOIrationndist{i} = ft_ioirationndist(t_onset{i}, t_break{i});
-
-        inteval_i = interval{i} + 10.*(rand(numel(interval{i}), 1) - 0.5);
-        X = sort(inteval_i);
-        intervalnndist{i} = conv(diff(X), [0.5; 0.5]);
-        %{
-        NS = createns(inteval_i, 'NSMethod', 'exhaustive');
-        [~, D] = knnsearch(NS, inteval_i, 'K', 13);
-        intervalnndist{i} = D(:, end);
-        %}
+        IOIratiodev{i} = ft_ioiratiodev(t_onset{i}, t_break{i});
+        intervaldev{i} = ft_intervaldev(interval{i});
     end
 
     for i=1:numel(idx_pair)
@@ -85,58 +77,13 @@ function analysis_Marsden_complete
         d = pb_effectsize(OBI{idx_song}, OBI{idx_desc});
         results(end + 1, :) = table({'Onset-break interval'}, datainfo.language(idx_song), d, {'common language effect size'});
 
-        d = pb_effectsize(IOIrationndist{idx_song}, IOIrationndist{idx_desc});
-        results(end + 1, :) = table({'NN distance among IOI ratios'}, datainfo.language(idx_song), d, {'common language effect size'});
+        d = pb_effectsize(IOIratiodev{idx_song}, IOIratiodev{idx_desc});
+        results(end + 1, :) = table({'IOI ratio deviation'}, datainfo.language(idx_song), 1 - d, {'common language effect size'});
 
-        d = pb_effectsize(intervalnndist{idx_song}, intervalnndist{idx_desc});
-        results(end + 1, :) = table({'NN distance among intervals'}, datainfo.language(idx_song), d, {'common language effect size'});
+        d = pb_effectsize(intervaldev{idx_song}, intervaldev{idx_desc});
+        results(end + 1, :) = table({'Interval deviation'}, datainfo.language(idx_song), 1 - d, {'common language effect size'});
     end
-    
-    %% nPVI (Duratonal variability)
-    %{
-    nPVI = zeros(N, 1);
-    for i=1:N
-        nPVI(i) = ft_npvi(t_onset{i}, t_break{i});
-    end
-    
-    for i=1:numel(idx_pair)
-        idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, 'song');
-        idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, 'desc');
-        d = nPVI(idx_song) - nPVI(idx_desc);
-        results(end + 1, :) = table({'nPVI'}, datainfo.language(idx_song), d, {'simple difference'});
-    end
-    %}
-    
-    %% nPC (Duratonal variability)
-    %{
-    nPC = cell(N, 1);
-    for i=1:N
-        nPC{i} = ft_npc(t_onset{i}, t_break{i});
-    end
-    
-    for i=1:numel(idx_pair)
-        idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, 'song');
-        idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, 'desc');
-        d = pb_effectsize(nPC{idx_song}, nPC{idx_desc});
-        results(end + 1, :) = table({'nPC'}, datainfo.language(idx_song), d, {'common language effect size'});
-    end
-    %}
-    
-    %% Isochrony (1)
-    %{
-    rad_al_IOIratio = cell(N, 1);
-    for i=1:N
-        rad_al_IOIratio{i} = ft_dctioiratio(t_onset{i}, t_break{i});
-    end
-    
-    for i=1:numel(idx_pair)
-        idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, 'song');
-        idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, 'desc');
-        d = rad_al_IOIratio{idx_song} - rad_al_IOIratio{idx_desc};
-        results(end + 1, :) = table({'Radian of the 95% power of DCT of the IOI ratio distribution'}, datainfo.language(idx_song), d, {'simple difference'});
-    end
-    %}
     
     %%
-    writetable(results, strcat(outputdir, 'results_Marsden-complete.csv'));
+    writetable(results, strcat(outputdir, 'results_Marsden-complete_', typelist{1}, '-', typelist{2}, '.csv'));
 end
