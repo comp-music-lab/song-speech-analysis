@@ -59,13 +59,14 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 
 ##
 gobj<- ggplot(data = world) +
-  geom_sf(color = "black", fill = "blue") +
+  geom_sf(fill= "darkolivegreen1") +
   geom_point(data = langlabel, aes(x=Longitude, y=Latitude),
              size = 3.6, shape = 21, fill = "white") +
   geom_text(data = langlabel, aes(x=Longitude, y=Latitude, label=ID),
             size = 2.2, color = "darkblue", check_overlap = FALSE) + 
   xlab("") + ylab("") + ylim(c(-60.5, 75)) + 
-  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank())
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank()) +
+  theme(panel.background = element_rect(fill = "aliceblue"))
 
 ##
 FamilyList <- unique(langlabel$Family)
