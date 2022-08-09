@@ -21,10 +21,10 @@ data$diff[data$diff == 1 & !is.nan(data$diff)] <- 1 - 1e-8
 data$d <- sqrt(2)*qnorm(data$diff, 0, 1) #convert common language effect size to Cohen's d
 data <- subset(data, method=="common language effect size") #restrict to only effect size data
 
-T <- aggregate(data[, 3], list(data$feature), mean)
+T <- aggregate(data[, 3], list(data$feature), median)
 ORDER_YAXIS <- T[(sort(T$x, decreasing = TRUE, index=TRUE)$ix), 1]
 
-#Load pilot data for Fig. 3 and Fig. S1
+# ggplot
 g <- ggplot(data, aes(x = d, y = feature, fill = lang)) + 
   geom_dotplot(binaxis = 'y', stackdir = 'center', position = "dodge", alpha = 0.9) +
   geom_vline(xintercept = 0, linetype = 2) +

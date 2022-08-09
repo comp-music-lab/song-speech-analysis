@@ -30,3 +30,13 @@ function SC_vad = ft_spectralcentroid(audiofilepath, f0, t_f0)
 
     SC_vad = SC(voice_active == 1);
 end
+
+%{
+t = linspace(0, numel(s)/fs, size(centroid, 1));
+
+figure(1);
+plot(t, SC);
+hold on
+plot(t, voice_active);
+hold off
+%}
