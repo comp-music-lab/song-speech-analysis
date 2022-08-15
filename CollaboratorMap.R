@@ -60,12 +60,12 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 ##
 gobj<- ggplot(data = world) +
   geom_sf(fill= "darkolivegreen1") +
-  geom_point(data = langlabel, aes(x=Longitude, y=Latitude),
-             size = 3.6, shape = 21, fill = "white") +
+  geom_point(data = langlabel, aes(x = Longitude, y = Latitude, fill = Family),
+             size = 3.6, shape = 21) +
   geom_text(data = langlabel, aes(x=Longitude, y=Latitude, label=ID),
             size = 2.2, color = "darkblue", check_overlap = FALSE) + 
-  xlab("") + ylab("") + ylim(c(-60.5, 75)) + 
-  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank()) +
+  xlab("") + ylab("") + ylim(c(-50.5, 75)) + 
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), legend.title = element_blank()) +
   theme(panel.background = element_rect(fill = "aliceblue"))
 
 ##
@@ -81,3 +81,13 @@ g <- grid.arrange(grobs = langtable, nrow = 3, ncol = 6)
 
 ##
 ggsave(file = "./output/CollabMap.png", plot = gobj, width = 8, height = 7)
+
+##
+ggColorHue <- function(n, l=65) {
+  hues <- seq(15, 375, length=n+1)
+  hcl(h=hues, l=l, c=100)[1:n]
+}
+
+cols <- ggColorHue(n = length(unique(langlabel$Family)))
+col2rgb(cols)
+scales::show_col(cols)

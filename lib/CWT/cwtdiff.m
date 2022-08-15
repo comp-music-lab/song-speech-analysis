@@ -23,7 +23,7 @@ function dx = cwtdiff(x, a, fs, order)
     if size(x, 1) < L
         padding = true;
         L_pad = round(L/2);
-        x = [zeros(L_pad, 1); x; zeros(L_pad, 1)];
+        x = [zeros(L_pad, 1) + x(1); x; zeros(L_pad, 1) + x(end)];
     end
 
     M = ceil(L/2);

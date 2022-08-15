@@ -31,14 +31,14 @@ for (i in 1:length(DATATYPE)) {
 
 data <- rbind(data_all, data_complete)
 
-# ETL
+# ELT
 data$diff[data$diff == 1 & !is.nan(data$diff)] <- 1 - 3e-3
 data$d <- sqrt(2)*qnorm(data$diff, 0, 1) #convert common language effect size to Cohen's d
 data <- subset(data, method=="common language effect size") #restrict to only effect size data
 
 data$feature[data$feature == "Magnitude of F0 modulatioin"] <- "F0 modulation"
-#LIST_FEATURE <- unique(data$feature)
 LIST_FEATURE <- c('IOI', 'F0', 'Interval deviation', 'Onset-break interval', 'F0 modulation', 'IOI ratio deviation', 'Spectral centroid')
+CONCEPT_NAME <- c('Tempo', 'Pitch', 'Interval regularity', 'Phrase length', 'Pitch discreteness', 'Rhythmic regularity', 'Brightness')
 
 ## ggplot
 g_list <- vector(mode = "list", length = length(LIST_FEATURE))
@@ -51,7 +51,7 @@ for (i in 1:length(g_list)) {
     geom_vline(xintercept = 0.8, linetype = 3) + 
     theme(axis.title.x = element_blank(), axis.title.y = element_blank()) +
     scale_y_discrete(limits = ORDER_Y_AXIS) +
-    ggtitle(LIST_FEATURE[i]) +
+    ggtitle(paste(CONCEPT_NAME[i], "\n(", LIST_FEATURE[i], ')', sep = '')) +
     theme(plot.title = element_text(hjust = 0.5)) + 
     xlim(c(-1.5, 4.0)) + 
     theme(axis.text.y = element_blank()) +

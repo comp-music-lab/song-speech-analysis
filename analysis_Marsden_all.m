@@ -28,7 +28,8 @@ function analysis_Marsden_all
     %% Comparison
     modulationmagnitude = cell(N, 1); % pitch discreteness (modulation-based)
     for i=1:N
-        modulationmagnitude{i} = abs(ft_deltaf0(f0{i}, 0.005, reffreq));
+        tmp = abs(ft_deltaf0(f0{i}, 0.005, reffreq));
+        modulationmagnitude{i} = tmp(~isnan(tmp));
     end
 
     SC = cell(N, 1); % Brightness (spectral centroid)
