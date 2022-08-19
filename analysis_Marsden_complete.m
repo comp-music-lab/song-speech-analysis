@@ -1,16 +1,16 @@
 function analysis_Marsden_complete
     %% configuration
-    typelist = {'song', 'recit'};
-    datainfo = readtable('datainfo_Marsden-complete_song-recit.csv');
-    outputdir = './output/20220705/';
+    typelist = {'inst', 'desc'};
+    datainfo = readtable('datainfo_Marsden-complete_inst-desc.csv');
+    outputdir = './output/20220819/';
     
     addpath('./lib/two-sample/');
     addpath('./lib/KDE/');
     addpath('./lib/CWT/');
     
-    varNames = {'feature', 'lang', 'diff', 'method'};
+    varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
     idx_pair = unique(datainfo.pair);
-    results = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'double', 'string'}, 'VariableNames', varNames);
+    results = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'double', 'double', 'string'}, 'VariableNames', varNames);
     
     reffreq = 440;
     
@@ -71,17 +71,17 @@ function analysis_Marsden_complete
         idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
         idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
-        d = pb_effectsize(IOI{idx_song}, IOI{idx_desc});
-        results(end + 1, :) = table({'IOI'}, datainfo.language(idx_song), d, {'common language effect size'});
+        [d, tau] = pb_effectsize(IOI{idx_song}, IOI{idx_desc});
+        results(end + 1, :) = table({'IOI'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
         
-        d = pb_effectsize(OBI{idx_song}, OBI{idx_desc});
-        results(end + 1, :) = table({'Onset-break interval'}, datainfo.language(idx_song), d, {'common language effect size'});
+        [d, tau] = pb_effectsize(OBI{idx_song}, OBI{idx_desc});
+        results(end + 1, :) = table({'Onset-break interval'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
-        d = pb_effectsize(IOIratiodev{idx_song}, IOIratiodev{idx_desc});
-        results(end + 1, :) = table({'IOI ratio deviation'}, datainfo.language(idx_song), 1 - d, {'common language effect size'});
+        [d, tau] = pb_effectsize(IOIratiodev{idx_song}, IOIratiodev{idx_desc});
+        results(end + 1, :) = table({'IOI ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
 
-        d = pb_effectsize(intervaldev{idx_song}, intervaldev{idx_desc});
-        results(end + 1, :) = table({'Interval deviation'}, datainfo.language(idx_song), 1 - d, {'common language effect size'});
+        [d, tau] = pb_effectsize(intervaldev{idx_song}, intervaldev{idx_desc});
+        results(end + 1, :) = table({'Interval deviation'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
     end
     
     %%

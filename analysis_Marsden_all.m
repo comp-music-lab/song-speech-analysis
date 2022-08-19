@@ -1,15 +1,15 @@
 function analysis_Marsden_all
     %% configuration
-    typelist = {'song', 'recit'};
-    datainfo = readtable('datainfo_Marsden-all_song-recit.csv');
-    outputdir = './output/20220705/';
+    typelist = {'inst', 'desc'};
+    datainfo = readtable('datainfo_Marsden-all_inst-desc.csv');
+    outputdir = './output/20220819/';
     
     addpath('./lib/two-sample/');
     addpath('./lib/CWT/');
     
-    varNames = {'feature', 'lang', 'diff', 'method'};
+    varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
     idx_pair = unique(datainfo.pair);
-    results = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'double', 'string'}, 'VariableNames', varNames);
+    results = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'double', 'double', 'string'}, 'VariableNames', varNames);
     
     reffreq = 440;
     
@@ -42,14 +42,14 @@ function analysis_Marsden_all
         idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
         idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
-        d = pb_effectsize(f0{idx_song}, f0{idx_desc});
-        results(end + 1, :) = table({'F0'}, datainfo.language(idx_song), d, {'common language effect size'});
+        [d, tau] = pb_effectsize(f0{idx_song}, f0{idx_desc});
+        results(end + 1, :) = table({'F0'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
-        d = pb_effectsize(modulationmagnitude{idx_song}, modulationmagnitude{idx_desc});
-        results(end + 1, :) = table({'Magnitude of F0 modulatioin'}, datainfo.language(idx_song), 1 - d, {'common language effect size'});
+        [d, tau] = pb_effectsize(modulationmagnitude{idx_song}, modulationmagnitude{idx_desc});
+        results(end + 1, :) = table({'Magnitude of F0 modulatioin'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
 
-        d = pb_effectsize(SC{idx_song}, SC{idx_desc});
-        results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, {'common language effect size'});
+        [d, tau] = pb_effectsize(SC{idx_song}, SC{idx_desc});
+        results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
     end
     
     %%

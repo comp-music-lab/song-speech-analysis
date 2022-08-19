@@ -1,0 +1,21 @@
+feature,lang,diff,stderr,method
+IOI,English,0.803492063492063,0.027751074620275,common language effect size
+Onset-break interval,English,0.933333333333333,0.0447790599008056,common language effect size
+IOI ratio deviation,English,0.600109649122807,0.0346702202247422,common language effect size
+Interval deviation,English,0.921208534903112,0.00463691027835011,common language effect size
+IOI,Marathi,0.893241167434716,0.0318344930069587,common language effect size
+Onset-break interval,Marathi,0.25,0.182574185835055,common language effect size
+IOI ratio deviation,Marathi,0.538011695906433,0.0715952426317333,common language effect size
+Interval deviation,Marathi,0.904879110676695,0.00515128672122955,common language effect size
+IOI,Farsi,0.915548281505728,0.0214342293931466,common language effect size
+Onset-break interval,Farsi,0.722222222222222,0.194047213295255,common language effect size
+IOI ratio deviation,Farsi,0.680104817577101,0.0450741678799371,common language effect size
+Interval deviation,Farsi,0.916282990786048,0.00487105827778578,common language effect size
+IOI,Japanese,0.929441554886395,0.0161704265977696,common language effect size
+Onset-break interval,Japanese,0.729166666666667,0.27290871489688,common language effect size
+IOI ratio deviation,Japanese,0.800240867121638,0.0282190054309688,common language effect size
+Interval deviation,Japanese,0.795428336951342,0.0070493696257472,common language effect size
+IOI,Yoruba,0.987179487179487,0.0109726842321522,common language effect size
+Onset-break interval,Yoruba,1,0,common language effect size
+IOI ratio deviation,Yoruba,0.360537190082645,0.0624827733767462,common language effect size
+Interval deviation,Yoruba,0.906868062091943,0.00487053580582142,common language effect size

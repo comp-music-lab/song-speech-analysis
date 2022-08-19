@@ -1,4 +1,5 @@
-function A = pb_effectsize(x, y)
+function [A, tau, dof] = pb_effectsize(x, y)
+    %%
     n_x = length(x);
     n_y = length(y);
     
@@ -11,7 +12,32 @@ function A = pb_effectsize(x, y)
     end
     
     A = (c_1 + c_2)/(n_x * n_y);
+
+    %%
+    x = x(:);
+    y = y(:);
+    
+    R_ik = tiedrank([x; y]);
+    R_ikx = tiedrank(x);
+    R_iky = tiedrank(y);
+    R_ix = mean(R_ik(1:n_x));
+    R_iy = mean(R_ik((n_x + 1):end));
+    S_xsq = 1/(n_x - 1) * sum((R_ik(1:n_x) - R_ikx - R_ix + (n_x + 1)/2).^2);
+    S_ysq = 1/(n_y - 1) * sum((R_ik((n_x + 1):end) - R_iky - R_iy + (n_y + 1)/2).^2);
+    
+    if n_x == 1
+        S_xsq = 0;
+    end
+    if n_y == 1
+        S_ysq = 0;
+    end
+
+    tau = 1/(n_x*n_y)*sqrt(n_x*S_xsq + n_y*S_ysq);
+
+    dof = (S_xsq/n_y + S_ysq/n_x)^2/((S_xsq/n_y)^2/(n_x - 1) + (S_ysq/n_x)^2/(n_y - 1));
 end
+
+% p = 1/n_x*(R_iy - (n_y + 1)/2);
 
 %{
 mu_x = 42.14;

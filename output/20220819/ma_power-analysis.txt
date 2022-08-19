@@ -1,0 +1,21 @@
+(inst-desc) F0 - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(inst-desc) IOI - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(inst-desc) IOI ratio deviation - 44 studies for beta = 0.9500 (est. 0.9527) and alpha = 0.0071
+(inst-desc) Interval deviation - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(inst-desc) Magnitude of F0 modulatioin - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(inst-desc) Onset-break interval - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(inst-desc) Spectral centroid - 5 studies for beta = 0.9500 (est. 0.9941) and alpha = 0.0071
+(song-desc) F0 - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(song-desc) IOI - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(song-desc) IOI ratio deviation - 10 studies for beta = 0.9500 (est. 0.9579) and alpha = 0.0071
+(song-desc) Interval deviation - 6 studies for beta = 0.9500 (est. 0.9657) and alpha = 0.0071
+(song-desc) Magnitude of F0 modulatioin - 7 studies for beta = 0.9500 (est. 0.9504) and alpha = 0.0071
+(song-desc) Onset-break interval - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(song-desc) Spectral centroid - 61 studies for beta = 0.9500 (est. 0.9509) and alpha = 0.0071
+(song-recit) F0 - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(song-recit) IOI - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(song-recit) IOI ratio deviation - 52 studies for beta = 0.9500 (est. 0.9515) and alpha = 0.0071
+(song-recit) Interval deviation - 7 studies for beta = 0.9500 (est. 0.9767) and alpha = 0.0071
+(song-recit) Magnitude of F0 modulatioin - 5 studies for beta = 0.9500 (est. 0.9656) and alpha = 0.0071
+(song-recit) Onset-break interval - 5 studies for beta = 0.9500 (est. 1.0000) and alpha = 0.0071
+(song-recit) Spectral centroid - 77 studies for beta = 0.9500 (est. 0.9500) and alpha = 0.0071
