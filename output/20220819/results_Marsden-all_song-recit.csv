@@ -2,15 +2,20 @@ feature,lang,diff,stderr,method
 F0,English,0.732445634705804,0.00348283972596767,common language effect size
 Magnitude of F0 modulatioin,English,0.651782343963065,0.00529282691069476,common language effect size
 Spectral centroid,English,0.574016942772545,0.00803878481020446,common language effect size
+Pulse clarity,English,0.564770170363227,0.0480976352534283,common language effect size
 F0,Marathi,0.764658140925554,0.00562217966118835,common language effect size
 Magnitude of F0 modulatioin,Marathi,0.657270318021201,0.00899232464950138,common language effect size
 Spectral centroid,Marathi,0.469555618603032,0.0165162821125561,common language effect size
+Pulse clarity,Marathi,0.5,0.100114561069753,common language effect size
 F0,Farsi,0.762293308104594,0.00438881373516917,common language effect size
 Magnitude of F0 modulatioin,Farsi,0.619529094390213,0.00754953572344576,common language effect size
 Spectral centroid,Farsi,0.502369947171027,0.013897248049435,common language effect size
+Pulse clarity,Farsi,0.58,0.072761050224503,common language effect size
 F0,Japanese,0.801519038080389,0.00323425990995177,common language effect size
 Magnitude of F0 modulatioin,Japanese,0.530381350357543,0.00611328182622749,common language effect size
 Spectral centroid,Japanese,0.485884914435425,0.0102961995984989,common language effect size
+Pulse clarity,Japanese,0.70172875578281,0.0461080307415842,common language effect size
 F0,Yoruba,0.745558077889477,0.00553056875352631,common language effect size
 Magnitude of F0 modulatioin,Yoruba,0.598369507673403,0.00756461690043147,common language effect size
 Spectral centroid,Yoruba,0.744070545856977,0.0102430282687181,common language effect size
+Pulse clarity,Yoruba,0.396584440227704,0.071510366499442,common language effect size

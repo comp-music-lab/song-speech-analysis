@@ -19,6 +19,7 @@ function analysis_Marsden_complete
     t_onset = cell(N, 1);
     t_break = cell(N, 1);
     f0 = cell(N, 1);
+    t_f0 = cell(N, 1);
     interval = cell(N, 1);
     
     for i=1:N
@@ -42,11 +43,11 @@ function analysis_Marsden_complete
         f0filepath = strcat(datainfo.path{i}, datainfo.dataname{i}, '_f0.csv');
         T = readtable(f0filepath);
         f0{i} = table2array(T(:, 2));
-        t_f0 = table2array(T(:, 1));
+        t_f0{i} = table2array(T(:, 1));
         
         f0_cent = 1200.*log2(f0{i}./reffreq);
         [~, ~, t_st, t_ed] = helper.h_ioi(t_onset{i}, t_break{i});
-        I = helper.h_interval(f0_cent, t_f0, t_st, t_ed);
+        I = helper.h_interval(f0_cent, t_f0{i}, t_st, t_ed);
         I = cat(1, I{:});
         tmp = cell(1, 1);
         tmp{1} = I;
@@ -59,12 +60,20 @@ function analysis_Marsden_complete
     OBI = cell(N, 1); % Phrase length (first onset-final break interval)
     IOIratiodev = cell(N, 1); % IOI regularity
     intervaldev = cell(N, 1); % interval regularity
+    intervalsize = cell(N, 1); % interval range
+    pitchrange = cell(N, 1); % melodic range
+    E = cell(N, 1);
     
     for i=1:N
+        audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
+        E{i} = ft_energy(audiofilepath, t_onset{i}, t_break{i});
+
         IOI{i} = ft_ioi(t_onset{i}, t_break{i});
         OBI{i} = ft_obi(t_onset{i}, t_break{i});
         IOIratiodev{i} = ft_ioiratiodev(t_onset{i}, t_break{i});
         intervaldev{i} = ft_intervaldev(interval{i});
+        intervalsize{i} = abs(interval{i});
+        pitchrange{i} = ft_pitchrange(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
     end
 
     for i=1:numel(idx_pair)
@@ -82,6 +91,15 @@ function analysis_Marsden_complete
 
         [d, tau] = pb_effectsize(intervaldev{idx_song}, intervaldev{idx_desc});
         results(end + 1, :) = table({'Interval deviation'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
+
+        [d, tau] = pb_effectsize(intervalsize{idx_song}, intervalsize{idx_desc});
+        results(end + 1, :) = table({'Interval range'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+
+        [d, tau] = pb_effectsize(pitchrange{idx_song}, pitchrange{idx_desc});
+        results(end + 1, :) = table({'Pitch range'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+
+        [d, tau] = pb_effectsize(E{idx_song}, E{idx_desc});
+        results(end + 1, :) = table({'Energy'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
     end
     
     %%

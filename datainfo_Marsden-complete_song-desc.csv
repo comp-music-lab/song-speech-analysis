@@ -1,11 +1,11 @@
 dataname,performer,type,language,sex,path,audiofilepath,pair
-John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song,John McBride,song,English,M,./data/Stage 1 RR Full/Patrick/,./data/Stage 1 RR Audio/,1
-John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_desc,John McBride,desc,English,M,./data/Stage 1 RR Full/Patrick/,./data/Stage 1 RR Audio/,1
-Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_song,Parimal Sadaphal,song,Marathi,M,./data/Stage 1 RR Full/Dhwani/,./data/Stage 1 RR Audio/,2
-Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220430_desc,Parimal Sadaphal,desc,Marathi,M,./data/Stage 1 RR Full/Dhwani/,./data/Stage 1 RR Audio/,2
-Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song,Shafagh Hadavi,song,Farsi,F,./data/Stage 1 RR Full/Shafagh/,./data/Stage 1 RR Audio/,3
-Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc,Shafagh Hadavi,desc,Farsi,F,./data/Stage 1 RR Full/Shafagh/,./data/Stage 1 RR Audio/,3
-Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_song,Yuto Ozaki,song,Japanese,M,./data/Stage 1 RR Full/Yuto/,./data/Stage 1 RR Audio/,4
-Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_desc,Yuto Ozaki,desc,Japanese,M,./data/Stage 1 RR Full/Yuto/,./data/Stage 1 RR Audio/,4
-Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song,Florence Nweke,song,Yoruba,F,./data/Stage 1 RR Full/Florence/,./data/Stage 1 RR Audio/,5
-Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc,Florence Nweke,desc,Yoruba,F,./data/Stage 1 RR Full/Florence/,./data/Stage 1 RR Audio/,5
+John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song,John McBride,song,English,M,./data/Stage 1 RR Full/Patrick/,./data/Stage 1 RR Audio/full-length/,1
+John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_desc,John McBride,desc,English,M,./data/Stage 1 RR Full/Patrick/,./data/Stage 1 RR Audio/full-length/,1
+Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_song,Parimal Sadaphal,song,Marathi,M,./data/Stage 1 RR Full/Dhwani/,./data/Stage 1 RR Audio/full-length/,2
+Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220430_desc,Parimal Sadaphal,desc,Marathi,M,./data/Stage 1 RR Full/Dhwani/,./data/Stage 1 RR Audio/full-length/,2
+Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song,Shafagh Hadavi,song,Farsi,F,./data/Stage 1 RR Full/Shafagh/,./data/Stage 1 RR Audio/full-length/,3
+Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc,Shafagh Hadavi,desc,Farsi,F,./data/Stage 1 RR Full/Shafagh/,./data/Stage 1 RR Audio/full-length/,3
+Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_song,Yuto Ozaki,song,Japanese,M,./data/Stage 1 RR Full/Yuto/,./data/Stage 1 RR Audio/full-length/,4
+Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_desc,Yuto Ozaki,desc,Japanese,M,./data/Stage 1 RR Full/Yuto/,./data/Stage 1 RR Audio/full-length/,4
+Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song,Florence Nweke,song,Yoruba,F,./data/Stage 1 RR Full/Florence/,./data/Stage 1 RR Audio/full-length/,5
+Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc,Florence Nweke,desc,Yoruba,F,./data/Stage 1 RR Full/Florence/,./data/Stage 1 RR Audio/full-length/,5

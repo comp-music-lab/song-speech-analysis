@@ -128,3 +128,50 @@ B = lib.pb_effectsize(x, y);
 
 disp([A B]);
 %}
+
+%{
+al = 0.05;
+mu_1 = 1.2;
+mu_2 = 0.7;
+sgm = 1.8;
+d = (mu_1 - mu_2)/sgm;
+rho = normcdf(d/sqrt(2));
+
+n_1 = 128;
+n_2 = 128;
+
+M = 4096;
+CI = zeros(M, 2);
+
+d_0 = 0;
+dlt = 0.4;
+rho_ul = normcdf([d_0 - dlt, d_0 + dlt]./sqrt(2));
+C = (0.5 - rho_ul(1) + rho_ul(2) - 0.5);
+equivalencehit = zeros(M, 1);
+
+for m=1:M
+    X = normrnd(mu_1, sgm, [n_1, 1]);
+    Y = normrnd(mu_2, sgm, [n_2, 1]);
+    [rho_m, tau, dof] = pb_effectsize(X, Y);
+    u = tinv(1 - al, dof);
+    CI(m, :) = [rho_m - tau*u, rho_m + tau*u];
+
+    C_mw = sqrt(ncx2inv(al, 1, C^2/(2*tau)^2));
+    equivalencehit(m) = abs(rho_m - 0.5 - (rho_ul(2) - rho_ul(1))/2)/tau < C_mw;
+end
+
+falsepositive = sum(rho < CI(:, 1) | CI(:, 2) < rho)/M;
+disp(falsepositive);
+
+disp(sum(equivalencehit)/M);
+
+figure(1);
+for m=1:M
+    plot([m, m], CI(m, :), 'Color', 'k');
+    hold on
+end
+plot([1, M], rho_ul(1).*[1, 1], '-.m');
+plot([1, M], rho_ul(2).*[1, 1], '-.m');
+plot([1, M], [rho, rho], 'Color', 'g');
+hold off
+%}
