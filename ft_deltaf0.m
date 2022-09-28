@@ -14,6 +14,10 @@ function df0 = ft_deltaf0(f0, dt, reffreq)
 
     while ~isempty(idx_st)
         idx_ed = find(isinf(f0_cent(idx_st:end)), 1, 'first') + idx_st - 2;
+        if isempty(idx_ed)
+            idx_ed = numel(f0_cent);
+        end
+
         f0_cent_i = f0_cent(idx_st:idx_ed);
         df0_j = cwtdiff(f0_cent_i, 0.02, 1/dt, 1);
         df0(idx_st:idx_ed) = df0_j;

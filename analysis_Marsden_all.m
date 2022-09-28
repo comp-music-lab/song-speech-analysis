@@ -1,8 +1,10 @@
-function analysis_Marsden_all
+function analysis_Marsden_all(duration)
     %% configuration
-    typelist = {'song', 'recit'};
-    datainfo = readtable('datainfo_Marsden-all_song-recit.csv');
-    outputdir = './output/20220819/';
+    fileid = strcat(num2str(duration, '%d'), 'sec');
+
+    typelist = {'inst', 'desc'};
+    datainfo = readtable(strcat('datainfo_Marsden-all_', typelist{1}, '-', typelist{2}, '.csv'));
+    outputdir = './output/20220918/';
     
     addpath('./lib/two-sample/');
     addpath('./lib/CWT/');
@@ -24,6 +26,10 @@ function analysis_Marsden_all
         T = readtable(f0filepath);
         f0{i} = table2array(T(:, 2));
         t_f0{i} = table2array(T(:, 1));
+
+        idx = find(t_f0{i} <= duration, 1, 'last');
+        f0{i} = f0{i}(1:idx);
+        t_f0{i} = t_f0{i}(1:idx);
     end
     
     %% Comparison
@@ -35,9 +41,9 @@ function analysis_Marsden_all
         modulationmagnitude{i} = tmp(~isnan(tmp));
 
         audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
-        SC{i} = ft_spectralcentroid(audiofilepath, f0{i}, t_f0{i});
+        SC{i} = ft_spectralcentroid(audiofilepath, f0{i}, t_f0{i}, duration, false);
 
-        tmp =  mirpulseclarity(audiofilepath, 'Frame');
+        tmp =  mirpulseclarity(miraudio(audiofilepath, 'Extract', 0, duration), 'Frame');
         PC{i} = mirgetdata(tmp);
     end
 
@@ -45,7 +51,7 @@ function analysis_Marsden_all
         idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
         idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
-        [d, tau] = pb_effectsize(f0{idx_song}, f0{idx_desc});
+        [d, tau] = pb_effectsize(f0{idx_song}(f0{idx_song} ~= 0), f0{idx_desc}(f0{idx_desc} ~= 0));
         results(end + 1, :) = table({'F0'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
         [d, tau] = pb_effectsize(modulationmagnitude{idx_song}, modulationmagnitude{idx_desc});
@@ -59,5 +65,5 @@ function analysis_Marsden_all
     end
     
     %%
-    writetable(results, strcat(outputdir, 'results_Marsden-all_', typelist{1}, '-', typelist{2}, '.csv'));
+    writetable(results, strcat(outputdir, 'results_Marsden-all_', typelist{1}, '-', typelist{2}, '_', fileid, '.csv'));
 end

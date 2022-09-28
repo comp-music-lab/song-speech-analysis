@@ -1,10 +1,14 @@
-function E_voiced = ft_energy(audiofilepath, t_onset, t_break)
+function E_voiced = ft_energy(audiofilepath, t_onset, t_break, duration)
     %%
     [x, fs] = audioread(audiofilepath);
 
     if size(x, 2) == 2
         x = mean(x, 2);
     end
+    
+    t = (0:(numel(x) - 1))./fs;
+    idx = find(t <= duration, 1, 'last');
+    x = x(1:idx);
 
     %%
     N_t = 0.025;
@@ -22,9 +26,14 @@ function E_voiced = ft_energy(audiofilepath, t_onset, t_break)
     end
 
     %%
+    if isempty(t_onset)
+        E_voiced = NaN;
+        return
+    end
+
     if isempty(t_break)
         [~, idx_st] = min(abs(t_E - t_onset(1)));
-        [~, idx_ed] = numel(x);
+        idx_ed = numel(E);
         E_i = E(idx_st:idx_ed);
         E_voiced = E_i(E_i ~= 0);
     else

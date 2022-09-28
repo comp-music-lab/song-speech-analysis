@@ -3,6 +3,11 @@ function intervaldev = ft_intervaldev(interval)
     X = interval(:);
     X = X + 10.*(rand(numel(X), 1) - 0.5);
     
+    if isempty(X)
+        intervaldev = NaN;
+        return
+    end
+
     %%
     X = sort(X);
     n = numel(X);
@@ -37,16 +42,20 @@ function intervaldev = ft_intervaldev(interval)
         end
     end
     
-    [~, idx] = max(K_unq(:, 3));
-    idx_h = K_unq(idx, 2);
+    [~, idx_K] = max(K_unq(:, 3));
+    idx_h = K_unq(idx_K, 2);
     
     %%
+    h_lb = h(idx_h);
+    h_ub = h(idx_h + K_unq(idx_K, 3) - 1);
+    h_top = h_lb + (h_ub - h_lb)/2*n^(-1/5);
+
     %f_X = arrayfun(@(X_i) mean(normpdf(X, X_i, h(idx_h))), X);
-    f_X = mean(normpdf(X - X', 0, h(idx_h)), 2);
-    thresh = normpdf(0, 0, h(idx_h))/n * (0.01*n);
+    f_X = mean(normpdf(X - X', 0, h_top), 2);
+    thresh = normpdf(0, 0, h_top)/n * (0.01*n);
     idx = find(f_X > thresh);
 
-    C = meanshift(X(idx), X(idx)', 0.1, h(idx_h));
+    C = meanshift(X(idx), X(idx)', 0.1, h_top);
     [C_h, ~, IC] = uniquetol(C, 1e-2);
     
     intervaldev = [];
@@ -70,15 +79,17 @@ function intervaldev = ft_intervaldev(interval)
 
     X = gather(X);
     support = linspace(min(X) - 10, max(X) + 10, 512);
-    h_opt = gather(h(idx_h));
+    h_opt = gather(h_top);
     f_X = arrayfun(@(x_i) mean(normpdf(x_i, X, h_opt)), support);
 
     subplot(3, 1, 1);
     plot(h, K);
     yl = ylim();
     hold on
-    stem(h(idx_h), yl(2), 'Marker', 'none');
+    stem(h(idx_h), yl(2), 'Marker', 'none', 'Linestyle', '-.', 'Color', 'm');
+    stem(h(idx_h + K_unq(idx_K, 3) - 1), yl(2), 'Marker', 'none', 'Linestyle', '-.', 'Color', 'm');
     hold off
+    title('Change in the number of modes according to bandwidth', 'Fontsize', 10);
     
     subplot(3, 1, 2);
     scatter(support, f_X, 'Marker', '.');
@@ -87,9 +98,11 @@ function intervaldev = ft_intervaldev(interval)
     stem(C_h, yl(2).*ones(numel(C_h), 1), 'Marker', 'none');
     scatter(X, zeros(numel(X), 1), 'Marker', '|');
     hold off
+    title('KDE that bandwidth is based on the stable modes', 'Fontsize', 10);
     
     subplot(3, 1, 3);
     histogram(intervaldev);
     xlim([0, 800]);
+    title('Pitch ratio deviation', 'Fontsize', 10);
     %}
 end

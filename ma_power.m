@@ -1,12 +1,14 @@
 function ma_power
     %%
     addpath('./lib/meta-analysis/');
-    datadir = './output/20220819/';
+    datadir = './output/20220918/';
     %type = {{'inst', 'desc'}, {'song', 'desc'}, {'song', 'recit'}};
     type = {{'song', 'desc'}};
     
-    testdiff = {'Energy', 'F0', 'IOI', 'Pitch range', 'Onset-break interval', 'Interval deviation'};
-    testsim = {'IOI ratio deviation', 'Interval range', 'Spectral centroid', 'Magnitude of F0 modulatioin', 'Pulse clarity'};
+    %testdiff = {'Energy', 'F0', 'IOI', 'Pitch range', 'Onset-break interval', 'Interval deviation'};
+    %testsim = {'IOI ratio deviation', 'Interval range', 'Spectral centroid', 'Magnitude of F0 modulatioin', 'Pulse clarity'};
+    testdiff = {'F0', 'IOI'};
+    testsim = {'Interval range', 'Spectral centroid', 'Pitch declination'};
 
     be = 0.95;
     mu_null = 0.5;
@@ -16,8 +18,8 @@ function ma_power
     %%
     for j=1:numel(type)
         result = [...
-            readtable(strcat(datadir, 'results_Marsden-all_', type{j}{1}, '-', type{j}{2}, '.csv'));...
-            readtable(strcat(datadir, 'results_Marsden-complete_', type{j}{1}, '-', type{j}{2}, '.csv'))...
+            readtable(strcat(datadir, 'results_Marsden-all_', type{j}{1}, '-', type{j}{2}, '_Infsec.csv'));...
+            readtable(strcat(datadir, 'results_Marsden-complete_', type{j}{1}, '-', type{j}{2}, '_Infsec.csv'))...
             ];
     
         featurelist = unique(result.feature);
@@ -49,14 +51,14 @@ function ma_power
                     power = analyticalpow(sgm_L, al, mu_0, mu_null, tausq_hat);
                 end
         
-                fprintf('(%s-%s) diff: %s - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, K + L, be, power, al);
+                fprintf('(%s-%s) diff: %s (%3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
+                    type{j}{1}, type{j}{2}, featurelist{i}, mu_0, K + L, be, power, al);
             elseif sum(strcmp(featurelist{i}, testsim)) == 1
                 sgm_K = sqrt(mean(sgm.^2 + tausq_hat));
                 n = simequivpow(mu_0 - 0.5, sgm_K, al, be, Dlt);
 
-                fprintf('(%s-%s) equi: %s - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, n, be, power, al);
+                fprintf('(%s-%s) equi: %s (%3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
+                    type{j}{1}, type{j}{2}, featurelist{i}, mu_0, n, be, power, al);
             end
         end
     end

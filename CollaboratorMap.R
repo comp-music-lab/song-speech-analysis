@@ -1,23 +1,36 @@
 ##
-library("ggplot2")
-library("sf")
-library("rnaturalearth")
-library("rnaturalearthdata")
-library("grid")
-library("gridExtra")
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(gridExtra)
+library(grid)
 
 ##
-INTERVAL <- 5
+INTERVAL <- 6
 
 ##
-collabT_full <- read.csv('./data/CollaboratorsTable.csv')
-collabT <- collabT_full[collabT_full$Confirmed == 'Y', ]
+collabT <- read.csv('./data/CollaboratorsPlotData.csv')
 
-langlabel <- unique(data.frame(Lang = collabT$Native.fluent.language.name.by.collaborator,
-                               Family = collabT$Language.family.according.to.Glottolog,
-                        Longitude = collabT$Longitude, Latitude = collabT$Latitude, ID = 0))
-idx <- sort(langlabel$Family, decreasing = FALSE, index=T)$ix
-langlabel <- langlabel[idx, ]
+langlabel <- data.frame(Lang = collabT$ProvidedLanguageName,
+                        LangAdditional = collabT$GlottologL1Name,
+                        Family = collabT$LanguageFamily,
+                        Longitude = collabT$Longitude,
+                        Latitude = collabT$Latitude,
+                        Place = collabT$PlaceName,
+                        Flag = collabT$Choice,
+                        ID = 0)
+
+langlabel$Lang[langlabel$Lang == "Hebrew"] <- langlabel$LangAdditional[langlabel$Lang == "Hebrew"]
+langlabel$Lang[langlabel$Lang == "Amami dialect"] <- langlabel$LangAdditional[langlabel$Lang == "Amami dialect"]
+langlabel$Lang[langlabel$Lang == "Arabic"] <- langlabel$LangAdditional[langlabel$Lang == "Arabic"]
+langlabel$Lang[langlabel$Lang == "Persian"] <- langlabel$LangAdditional[langlabel$Lang == "Persian"]
+langlabel$Lang[langlabel$Lang == "Farsi"] <- langlabel$LangAdditional[langlabel$Lang == "Farsi"]
+langlabel$Lang[langlabel$Lang == "Euskera (Basque)"] <- langlabel$LangAdditional[langlabel$Lang == "Euskera (Basque)"]
+langlabel$Lang[langlabel$Lang == "Brazilian Portuguese"] <- langlabel$LangAdditional[langlabel$Lang == "Portuguese"]
+
+langlabel <- langlabel[order(langlabel$Family, langlabel$Lang, langlabel$Place), ]
+langlabel <- langlabel[langlabel$Flag == 1, ]
 langlabel$ID <- 1:nrow(langlabel)
 
 dodge <- TRUE
@@ -25,8 +38,8 @@ while (dodge) {
   dodge <- FALSE
   
   for (i in 1:nrow(langlabel)) {
-    fun_i <- function(x) sqrt(sum((as.numeric(x) - as.numeric(langlabel[i, 3:4]))^2))
-    d <- apply(langlabel[, 3:4], MARGIN = 1, FUN = fun_i)
+    fun_i <- function(x) sqrt(sum((as.numeric(x) - as.numeric(langlabel[i, 4:5]))^2))
+    d <- apply(langlabel[, 4:5], MARGIN = 1, FUN = fun_i)
     
     st <- sort(d, decreasing = FALSE, index = TRUE)
     d_st <- st$x
@@ -75,9 +88,6 @@ for (i in 1:length(FamilyList)) {
   idx <- langlabel$Family == FamilyList[i]
   langtable[[i]] <- tableGrob(cbind(langlabel[idx, 5], langlabel[idx, 1]))
 }
-
-##
-g <- grid.arrange(grobs = langtable, nrow = 3, ncol = 6)
 
 ##
 ggsave(file = "./output/CollabMap.png", plot = gobj, width = 8, height = 7)
