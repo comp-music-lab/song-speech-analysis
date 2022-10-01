@@ -9,11 +9,14 @@ library(grid)
 ##
 INTERVAL <- 6
 
+SUBGROUPING <- TRUE
+
 ##
 collabT <- read.csv('./data/CollaboratorsPlotData.csv')
 
 langlabel <- data.frame(Lang = collabT$ProvidedLanguageName,
                         LangAdditional = collabT$GlottologL1Name,
+                        Genus = collabT$WalsGenusName,
                         Family = collabT$LanguageFamily,
                         Longitude = collabT$Longitude,
                         Latitude = collabT$Latitude,
@@ -21,25 +24,36 @@ langlabel <- data.frame(Lang = collabT$ProvidedLanguageName,
                         Flag = collabT$Choice,
                         ID = 0)
 
+langlabel <- langlabel[langlabel$Flag == 1, ]
+
 langlabel$Lang[langlabel$Lang == "Hebrew"] <- langlabel$LangAdditional[langlabel$Lang == "Hebrew"]
 langlabel$Lang[langlabel$Lang == "Amami dialect"] <- langlabel$LangAdditional[langlabel$Lang == "Amami dialect"]
 langlabel$Lang[langlabel$Lang == "Arabic"] <- langlabel$LangAdditional[langlabel$Lang == "Arabic"]
 langlabel$Lang[langlabel$Lang == "Persian"] <- langlabel$LangAdditional[langlabel$Lang == "Persian"]
 langlabel$Lang[langlabel$Lang == "Farsi"] <- langlabel$LangAdditional[langlabel$Lang == "Farsi"]
-langlabel$Lang[langlabel$Lang == "Euskera (Basque)"] <- langlabel$LangAdditional[langlabel$Lang == "Euskera (Basque)"]
-langlabel$Lang[langlabel$Lang == "Brazilian Portuguese"] <- langlabel$LangAdditional[langlabel$Lang == "Portuguese"]
+
+if (SUBGROUPING) {
+  langlabel$FamilyTmp <- langlabel$Family
+  idx <- langlabel$Family == "Indo-European"
+  langlabel$Family[idx] <- paste(langlabel$Family[idx], ": ", langlabel$Genus[idx], sep = "")
+}
 
 langlabel <- langlabel[order(langlabel$Family, langlabel$Lang, langlabel$Place), ]
-langlabel <- langlabel[langlabel$Flag == 1, ]
 langlabel$ID <- 1:nrow(langlabel)
+
+if (SUBGROUPING) {
+  tmp <- langlabel$Family
+  langlabel$Family <- langlabel$FamilyTmp
+  langlabel$FamilyTmp <- tmp
+}
 
 dodge <- TRUE
 while (dodge) {
   dodge <- FALSE
   
   for (i in 1:nrow(langlabel)) {
-    fun_i <- function(x) sqrt(sum((as.numeric(x) - as.numeric(langlabel[i, 4:5]))^2))
-    d <- apply(langlabel[, 4:5], MARGIN = 1, FUN = fun_i)
+    fun_i <- function(x) sqrt(sum((as.numeric(x) - as.numeric(langlabel[i, 5:6]))^2))
+    d <- apply(langlabel[, 5:6], MARGIN = 1, FUN = fun_i)
     
     st <- sort(d, decreasing = FALSE, index = TRUE)
     d_st <- st$x

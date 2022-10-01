@@ -6,22 +6,25 @@ library(ggpubr)
 featurestatfilepath = './output/20220918/featurestat.csv'  
 outputdir = './output/20220918/'
 featurelist_diff = c("f0", "IOI rate")
-featurelist_sim = c("Pitch ratio", "Spectral centroid", "Sign of f0 slope")
+featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
 
 SONG <- "Song"
 DESC <- "Desc."
 INST <- "Inst."
 RECIT <- "Recit."
 
-#TYPEFILTER <- c(INST, RECIT)
-#XTICKORDER <- c(SONG, DESC, INST, RECIT)
+TYPEFILTER <- c(INST, RECIT)
+XTICKORDER <- c(SONG, DESC, INST, RECIT)
 
-TYPEFILTER <- c()
-XTICKORDER <- c(INST, SONG, RECIT, DESC)
+#TYPEFILTER <- c()
+#XTICKORDER <- c(INST, SONG, RECIT, DESC)
+
 XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
 
 ## ETL
 T = read.csv(featurestatfilepath)
+
+T$feature[T$feature == "Pitch ratio"] <- "f0 ratio"
 
 T$xticklabel <- ""
 T$xticklabel[T$type == "inst"] <- INST
@@ -32,7 +35,7 @@ T$xticklabel[T$type == "recit"] <- RECIT
 T$unit <- ""
 T$unit[T$feature == "f0"] <- "Cent"
 T$unit[T$feature == "IOI rate"] <- "Hz"
-T$unit[T$feature == "Pitch ratio"] <- "Cent"
+T$unit[T$feature == "f0 ratio"] <- "Cent"
 T$unit[T$feature == "Spectral centroid"] <- "Hz"
 T$unit[T$feature == "Sign of f0 slope"] <- "-"
 

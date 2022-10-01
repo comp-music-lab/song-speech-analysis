@@ -5,12 +5,11 @@ function analysis_durationeffect
     fileid = {'results_Marsden-all_song-desc', 'results_Marsden-complete_song-desc'};
     T_ref = [readtable(strcat(datadir, fileid{1}, '_Infsec.csv')); readtable(strcat(datadir, fileid{2}, '_Infsec.csv'))];
 
-    featurelist = unique(T_ref.feature);
-    featurename = {{'Loudness', '(Short-term energy)'}, {'Pitch', '(f0)'}, {'Vocal production speed', '(IOI)'},...
-        {'Rhythmic regularity', '(IOI ratio deviation)'}, {'Interval regularity', '(Pitch ratio deviation)'},...
-        {'Interval size', '(Pitch ratio)'}, {'Pitch discreteness', '(Rate of change of f0)'},...
-        {'Phrase length', '(Onset-break interval)'}, {'Pitch range', '(90% f0 quantile length)'},...
-        {'Pulse clarity', '(Pulse clarity)'}, {'Brightness', '(Spectral centroid)'}};
+    featurelist = {'f0', 'IOI rate', 'Pitch ratio', 'Spectral centroid', 'Sign of f0 slope'};
+    featurename = {{'Pitch height', '(f0)'}, {'Note/syllable rate', '(IOI rate)'}, {'Pitch interval size', '(f0 ratio)'},...
+        {'Timbre brightness', '(Spectral centroid)'}, {'Pitch declination', '(Sign of f0 slope)'}...
+    };
+    subplotnum = [1, 2, 4, 5, 6];
     langlist = unique(T_ref.lang);
     
     %%
@@ -37,13 +36,17 @@ function analysis_durationeffect
 
     %%
     pprm = plotprm();
-    h = zeros(numel(langlist), 1);
+    h = zeros(numel(langlist) + 2, 1);
     es_d = zeros(numel(duration), 1);
     M = 10:10:max(duration);
+    
+    figobj = figure;
+    figobj.Position = [90, 150, 1200, 720];
+    %ax = axes;
 
     for i=1:numel(featurelist)
-        figobj = figure(i);
-
+        subplot(2, 3, subplotnum(i));
+        
         for j=1:numel(langlist)
             idx = strcmp(T_ref.feature, featurelist{i}) & strcmp(T_ref.lang, langlist{j});
             es_ref = T_ref.diff(idx);
@@ -58,28 +61,50 @@ function analysis_durationeffect
                 idx_st = 1;
             end
 
-            scatter(duration(idx_st:idx_ed(j)), es_d(idx_st:idx_ed(j)), 'MarkerEdgeColor', pprm.langcolormap(langlist{j}));
+            scatter(duration(idx_st:idx_ed(j)), es_d(idx_st:idx_ed(j)),...
+                'MarkerEdgeColor', pprm.langcolormap(langlist{j}), 'Marker', '.', 'CData', 2);
             hold on
-            plot(duration(idx_st:idx_ed(j)), es_d(idx_st:idx_ed(j)), 'Color', pprm.langcolormap(langlist{j}));
-            plot([duration(idx_st), duration(idx_ed(j))], es_ref.*[1, 1], 'linestyle', '--', 'Color', pprm.langcolormap(langlist{j}));
+            plot(duration(idx_st:idx_ed(j)), es_d(idx_st:idx_ed(j)), 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
+            plot([duration(idx_st), duration(idx_ed(j))], es_ref.*[1, 1], 'linestyle', '--', 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
         end
         
         for j=1:numel(M)
             plot(M(j).*[1, 1], [0, 1], ':k', 'linewidth', 1);
         end
 
-        for j=1:numel(langlist)
-            h(j) = plot(NaN, NaN, 'Color', pprm.langcolormap(langlist{j}));
-        end
-        legend(h, langlist, 'Location', 'southeast');
-        
-        xlabel('Excerpt length (sec.)', 'FontSize', 13);
-        ylabel('Effect size (relative effect)', 'FontSize', 13);
+        plot(30.*[1, 1], [0, 1], '--r', 'linewidth', 1);
 
-        hold off
-        ylim([0, 1]);
+        %%
+        if subplotnum(i) == 6
+            ax = gca(figobj);
+
+            for j=1:numel(langlist)
+                h(j) = plot(NaN, NaN, 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
+            end
+            h(end - 1) = plot(NaN, NaN, '-k', 'LineWidth', 1.2);
+            h(end) = plot(NaN, NaN, '--k', 'LineWidth', 1.2);
+
+            legend(ax, h(1:end - 2), langlist, 'Location', 'southeast', 'FontSize', 17, 'Position', [0.682, 0.665, 0.117, 0.175]);
+            ax = copyobj(ax, gcf);
+            legend(ax, h(end - 1:end), {'Excerpt', 'Full-length'}, 'Location', 'southeast', 'FontSize', 17, 'Position', [0.823, 0.701, 0.127, 0.119]);
+        end
+        
+        if subplotnum(i) > 3
+            xlabel('Excerpt length (sec.)', 'FontSize', 13);
+        end
+
+        if mod(subplotnum(i), 3) == 1
+            ylabel('Effect size (relative effect)', 'FontSize', 13);
+        end
+
         title(featurename{i}, 'FontSize', 18);
 
-        saveas(figobj, strcat(outputdir, featurelist{i}, '.png'));
+        hold off
+
+        ax = gca(figobj);
+        ax.FontSize = 12;
+        ylim([0, 1]);
     end
+
+    saveas(figobj, strcat(outputdir, 'durationeffect.png'));
 end
