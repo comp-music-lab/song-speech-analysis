@@ -16,7 +16,7 @@ function analysis_annotatoreffect
 
     langlist = {'Marathi', 'Farsi', 'Yoruba', 'English', 'Japanese', 'n/a', 'n/a'};
 
-    sex = {'f', 'f', 'f', 'm', 'm'};
+    sex = {'m', 'f', 'f', 'm', 'm'};
 
     h_getlast = @(X) X{end};
     typelist = cellfun(@(f) cellfun(@(g) h_getlast(strsplit(g, '_')), f, 'UniformOutput', false), fileidlist, 'UniformOutput', false);
@@ -40,9 +40,12 @@ function analysis_annotatoreffect
     varTypes = {'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'double', 'double'};
     onsetqualitytable = table('Size', [0, numel(varNames)], 'VariableTypes', varTypes, 'VariableNames', varNames);
 
-    dirlist = strcat('./data/', {'Stage 1 RR Round 1/', 'Stage 1 RR Round 2/', 'Stage 1 RR IRR/', 'Stage 1 RR Full/', 'Stage 1 RR Praat/'});
-    experiment = {'Without texts', 'With texts', 'Reannotation', 'Full-length', 'Automated'};
-    excerptid = {'(excerpt) ', '(excerpt) ', '(excerpt) ', '', '(excerpt) '};
+    %dirlist = strcat('./data/', {'Stage 1 RR Round 1/', 'Stage 1 RR Round 2/', 'Stage 1 RR IRR/', 'Stage 1 RR Full/', 'Stage 1 RR Praat/'});
+    %experiment = {'Without texts', 'With texts', 'Reannotation', 'Full-length', 'Automated'};
+    %excerptid = {'(excerpt) ', '(excerpt) ', '(excerpt) ', '', '(excerpt) '};
+    dirlist = strcat('./data/', {'Stage 1 RR Round 2/', 'Stage 1 RR IRR/', 'Stage 1 RR Praat/'});
+    experiment = {'With texts', 'Reannotation', 'Automated'};
+    excerptid = {'(excerpt) ', '(excerpt) ', '(excerpt) '};
 
     for l=1:numel(dirlist)
         fprintf('l: %d/%d %s\n', l, numel(dirlist), datetime);
@@ -73,8 +76,8 @@ function analysis_annotatoreffect
                     if isfile(onsetfilepath_m)
                         [X, t_st_X, t_ed_X, t_onset_X, t_break_X] = h_ioirate(onsetfilepath_m, breakfilepath_m);
                         [Y, t_st_Y, t_ed_Y, t_onset_Y, t_break_Y] = h_ioirate(onsetfilepath_l, breakfilepath_l);
-                        [p, tau] = pb_effectsize(Y, X);
-                        onsetqualitytable(end + 1, :) = table({'IOI rate'}, experiment(l), langlist(i), sex(i), comparison{j}(1), comparison{j}(2), annotatorlist(k), langlist(k), p, tau);
+                        [p, tau] = pb_effectsize(X, Y);
+                        onsetqualitytable(end + 1, :) = table({'IOI'}, experiment(l), langlist(i), sex(i), comparison{j}(1), comparison{j}(2), annotatorlist(k), langlist(k), p, tau);
                         
                         idx_cutoff = find(t_f0_m > t_ed_X(end), 1, 'first');
                         f0_mk = f0_m(1:idx_cutoff);
@@ -85,9 +88,11 @@ function analysis_annotatoreffect
                         t_f0_lk = t_f0_l(1:idx_cutoff);
 
                         X = helper.h_interval(1200.*log2(f0_mk./440), t_f0_mk, t_st_X, t_ed_X);
-                        X = abs(cat(1, X{:}));
+                        %X = abs(cat(1, X{:}));
+                        X = cat(1, X{:});
                         Y = helper.h_interval(1200.*log2(f0_lk./440), t_f0_lk, t_st_Y, t_ed_Y);
-                        Y = abs(cat(1, Y{:}));
+                        %Y = abs(cat(1, Y{:}));
+                        Y = cat(1, Y{:});
                         [p, tau] = pb_effectsize(X, Y);
                         onsetqualitytable(end + 1, :) = table({'f0 ratio'}, experiment(l), langlist(i), sex(i), comparison{j}(1), comparison{j}(2), annotatorlist(k), langlist(k), p, tau);
 
@@ -126,5 +131,5 @@ function [X, t_st, t_ed, t_onset, t_break] = h_ioirate(onsetfilepath, breakfilep
 
     %%
     [X, ~, t_st, t_ed] = helper.h_ioi(t_onset, t_break);
-    X = 1./X;
+    %X = 1./X;
 end

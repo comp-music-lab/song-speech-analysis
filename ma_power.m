@@ -7,8 +7,8 @@ function ma_power
     
     %testdiff = {'Energy', 'F0', 'IOI', 'Pitch range', 'Onset-break interval', 'Interval deviation'};
     %testsim = {'IOI ratio deviation', 'Interval range', 'Spectral centroid', 'Magnitude of F0 modulatioin', 'Pulse clarity'};
-    testdiff = {'F0', 'IOI'};
-    testsim = {'Interval range', 'Spectral centroid', 'Pitch declination'};
+    testdiff = {'f0', 'IOI rate'};
+    testsim = {'Pitch ratio', 'Spectral centroid', 'Sign of f0 slope'};
 
     be = 0.95;
     mu_null = 0.5;
@@ -57,8 +57,8 @@ function ma_power
                 sgm_K = sqrt(mean(sgm.^2 + tausq_hat));
                 n = simequivpow(mu_0 - 0.5, sgm_K, al, be, Dlt);
 
-                fprintf('(%s-%s) equi: %s (%3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, mu_0, n, be, power, al);
+                fprintf('(%s-%s) equi: %s (%3.4f) - %d studies for beta = %3.4f and alpha = %3.4f\n', ...
+                    type{j}{1}, type{j}{2}, featurelist{i}, mu_0, n, be, al);
             end
         end
     end

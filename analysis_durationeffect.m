@@ -5,8 +5,8 @@ function analysis_durationeffect
     fileid = {'results_Marsden-all_song-desc', 'results_Marsden-complete_song-desc'};
     T_ref = [readtable(strcat(datadir, fileid{1}, '_Infsec.csv')); readtable(strcat(datadir, fileid{2}, '_Infsec.csv'))];
 
-    featurelist = {'f0', 'IOI rate', 'Pitch ratio', 'Spectral centroid', 'Sign of f0 slope'};
-    featurename = {{'Pitch height', '(f0)'}, {'Note/syllable rate', '(IOI rate)'}, {'Pitch interval size', '(f0 ratio)'},...
+    featurelist = {'f0', 'IOI', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
+    featurename = {{'Pitch height', '(f0)'}, {'Speed', '(IOI)'}, {'Pitch interval size', '(f0 ratio)'},...
         {'Timbre brightness', '(Spectral centroid)'}, {'Pitch declination', '(Sign of f0 slope)'}...
     };
     subplotnum = [1, 2, 4, 5, 6];
@@ -48,8 +48,8 @@ function analysis_durationeffect
         subplot(2, 3, subplotnum(i));
         
         for j=1:numel(langlist)
-            idx = strcmp(T_ref.feature, featurelist{i}) & strcmp(T_ref.lang, langlist{j});
-            es_ref = T_ref.diff(idx);
+            %idx = strcmp(T_ref.feature, featurelist{i}) & strcmp(T_ref.lang, langlist{j});
+            %es_ref = T_ref.diff(idx);
 
             for k=1:numel(duration)
                 idx = strcmp(T{k}.feature, featurelist{i}) & strcmp(T{k}.lang, langlist{j});
@@ -65,7 +65,7 @@ function analysis_durationeffect
                 'MarkerEdgeColor', pprm.langcolormap(langlist{j}), 'Marker', '.', 'CData', 2);
             hold on
             plot(duration(idx_st:idx_ed(j)), es_d(idx_st:idx_ed(j)), 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
-            plot([duration(idx_st), duration(idx_ed(j))], es_ref.*[1, 1], 'linestyle', '--', 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
+            %plot([duration(idx_st), duration(idx_ed(j))], es_ref.*[1, 1], 'linestyle', '--', 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
         end
         
         for j=1:numel(M)
@@ -75,6 +75,7 @@ function analysis_durationeffect
         plot(30.*[1, 1], [0, 1], '--r', 'linewidth', 1);
 
         %%
+        %{
         if subplotnum(i) == 6
             ax = gca(figobj);
 
@@ -88,6 +89,7 @@ function analysis_durationeffect
             ax = copyobj(ax, gcf);
             legend(ax, h(end - 1:end), {'Excerpt', 'Full-length'}, 'Location', 'southeast', 'FontSize', 17, 'Position', [0.823, 0.701, 0.127, 0.119]);
         end
+        %}
         
         if subplotnum(i) > 3
             xlabel('Excerpt length (sec.)', 'FontSize', 13);

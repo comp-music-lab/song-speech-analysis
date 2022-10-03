@@ -9,7 +9,7 @@ library(grid)
 ##
 INTERVAL <- 6
 
-SUBGROUPING <- TRUE
+SUBGROUPING <- FALSE
 
 ##
 collabT <- read.csv('./data/CollaboratorsPlotData.csv')
@@ -88,9 +88,9 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 gobj<- ggplot(data = world) +
   geom_sf(fill= "darkolivegreen1") +
   geom_point(data = langlabel, aes(x = Longitude, y = Latitude, fill = Family),
-             size = 3.6, shape = 21) +
+             size = 3.0, shape = 21) +
   geom_text(data = langlabel, aes(x=Longitude, y=Latitude, label=ID),
-            size = 2.2, color = "darkblue", check_overlap = FALSE) + 
+            size = 1.7, color = "darkblue", check_overlap = FALSE) + 
   xlab("") + ylab("") + ylim(c(-50.5, 75)) + 
   theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), legend.title = element_blank()) +
   theme(panel.background = element_rect(fill = "aliceblue"))

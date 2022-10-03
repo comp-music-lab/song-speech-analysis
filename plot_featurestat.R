@@ -5,7 +5,7 @@ library(ggpubr)
 ## Config
 featurestatfilepath = './output/20220918/featurestat.csv'  
 outputdir = './output/20220918/'
-featurelist_diff = c("f0", "IOI rate")
+featurelist_diff = c("f0", "IOI")
 featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
 
 SONG <- "Song"
@@ -24,8 +24,6 @@ XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
 ## ETL
 T = read.csv(featurestatfilepath)
 
-T$feature[T$feature == "Pitch ratio"] <- "f0 ratio"
-
 T$xticklabel <- ""
 T$xticklabel[T$type == "inst"] <- INST
 T$xticklabel[T$type == "desc"] <- DESC
@@ -33,8 +31,8 @@ T$xticklabel[T$type == "song"] <- SONG
 T$xticklabel[T$type == "recit"] <- RECIT
 
 T$unit <- ""
-T$unit[T$feature == "f0"] <- "Cent"
-T$unit[T$feature == "IOI rate"] <- "Hz"
+T$unit[T$feature == "f0"] <- "Cent (440 Hz = 0)"
+T$unit[T$feature == "IOI"] <- "Sec."
 T$unit[T$feature == "f0 ratio"] <- "Cent"
 T$unit[T$feature == "Spectral centroid"] <- "Hz"
 T$unit[T$feature == "Sign of f0 slope"] <- "-"
@@ -43,8 +41,8 @@ T$sex[T$sex == "f"] <- "Female"
 T$sex[T$sex == "m"] <- "Male"
 
 ## Plot
-tmp <- unique(T[c("feature", "unit")])
-ylabelstr <- sub("ioi", "IOI", paste("Mean ", tolower(tmp$feature), " [", tmp$unit, "]", sep = ""))
+tmp <- unique(T[c("feature", "name", "unit")])
+ylabelstr <- sub("ioi", "IOI", paste(tmp$name, "\n(Mean ", tolower(tmp$feature), " [", tmp$unit, "])", sep = ""))
 
 g_list_sim <- vector(mode = "list", length = length(featurelist_sim))
 ylabelstr_sim <- ylabelstr[tmp$feature %in% featurelist_sim]

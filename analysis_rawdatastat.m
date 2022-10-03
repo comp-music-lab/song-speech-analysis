@@ -21,7 +21,7 @@ function analysis_rawdatastat
     };
     
     langlist = {'Marathi', 'Farsi', 'Yoruba', 'English', 'Japanese'};
-    sex = {'f', 'f', 'f', 'm', 'm'};
+    sex = {'m', 'f', 'f', 'm', 'm'};
 
     %% flatten
     f0filepath = cellfun(@(d, f) strcat(d, f, '_f0.csv'), dirlist, fileidlist, 'UniformOutput', false);
@@ -68,22 +68,24 @@ function analysis_rawdatastat
     end
 
     %%
-    featurelist = {'f0', 'IOI rate', 'Pitch ratio', 'Spectral centroid', 'Sign of f0 slope'};
-    varNames = {'feature', 'lang', 'sex', 'type', 'mean', 'std'};
-    featurestat = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'string', 'string', 'double', 'double'}, 'VariableNames', varNames);
+    featurelist = {'f0', 'IOI', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
+    featurename = {'Pitch height', 'Speed', 'Pitch interval size', 'Timbre brightness', 'Pitch declination'};
+    varNames = {'feature', 'name', 'lang', 'sex', 'type', 'mean', 'std'};
+    featurestat = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'string', 'string', 'string', 'double', 'double'}, 'VariableNames', varNames);
     
     for k=1:numel(featurelist)
         for i=1:numel(f0)
             if strcmp(featurelist{k}, 'f0')
                 X = f0{i};
                 X = 1200.*log2(X(X ~= 0)./440);
-            elseif strcmp(featurelist{k}, 'IOI rate')
+            elseif strcmp(featurelist{k}, 'IOI')
                 X = ft_ioi(t_onset{i}, t_break{i});
-                X = 1./X;
-            elseif strcmp(featurelist{k}, 'Pitch ratio')
+                %X = 1./X;
+            elseif strcmp(featurelist{k}, 'f0 ratio')
                 [~, ~, t_st, t_ed] = helper.h_ioi(t_onset{i}, t_break{i});
                 X = helper.h_interval(1200.*log2(f0{i}./440), t_f0{i}, t_st, t_ed);
-                X = abs(cat(1, X{:}));
+                %X = abs(cat(1, X{:}));
+                X = cat(1, X{:});
             elseif strcmp(featurelist{k}, 'Spectral centroid')
                 X = ft_spectralcentroid(audiofilepath{i}, f0{i}, t_f0{i}, Inf, false);
             elseif strcmp(featurelist{k}, 'Sign of f0 slope')
@@ -95,7 +97,7 @@ function analysis_rawdatastat
             mu = mean(X);
             sgm = std(X);
 
-            featurestat(end + 1, :) = table(featurelist(k), langlist(i), sex(i), typelist(i), mu, sgm);
+            featurestat(end + 1, :) = table(featurelist(k), featurename(k), langlist(i), sex(i), typelist(i), mu, sgm);
         end
     end
 

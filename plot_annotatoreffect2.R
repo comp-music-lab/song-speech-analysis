@@ -9,6 +9,8 @@ REFVALUENAME <- "Reference"
 
 ## ETL
 T = read.csv(inputfilepath)
+T <- T[T$experiment == "With texts" | T$experiment == "Reannotation" | T$experiment == "Automated", ]
+
 T$comparison <- paste(T$type_m, "-", T$type_l, sep = "")
 T$annotatorlang[T$annotatorlang == "n/a"] <- "n/a (automated method)"
 
@@ -31,9 +33,9 @@ plottitle[plottitle == "song-desc"] <- "Song vs. Spoken description"
 plottitle[plottitle == "song-recit"] <- "Song vs. Lyrics recitation"
 
 ##
+featurename <- c("Speed", "Pitch interval size", "Pitch declination")
 featurelist <- unique(T$feature)
 experimentlist <- unique(T$experiment)
-experimentlist <- c(experimentlist[1:2], "DUMMY", experimentlist[3:5])
 g_list <- vector(mode = "list", length = length(experimentlist))
 
 for (k in 1:length(featurelist)) {
@@ -55,14 +57,14 @@ for (k in 1:length(featurelist)) {
         if (i == 1 || i == 4) {
           g_list[[i]] <- g_list[[i]] + ylab("Relative effect")
         }
-        if (i == 4 || i == 5 || i == 6) {
+        if (i == 1 || i == 2 || i == 3) {
           g_list[[i]] <- g_list[[i]] + xlab("Recording data")
         }
       }
     }
     
-    g <- ggarrange(plotlist = g_list, ncol = 3, nrow = 2, common.legend = TRUE, legend = "right")
-    g <- annotate_figure(g, top = text_grob(paste(plottitle[j], " (", featurelist[k], ")", sep = ""), face = "bold", size = 14))
+    g <- ggarrange(plotlist = g_list, ncol = 3, nrow = 1, common.legend = TRUE, legend = "right")
+    g <- annotate_figure(g, top = text_grob(paste(plottitle[j], " (", featurename[k], " - ", featurelist[k], ")", sep = ""), face = "bold", size = 14))
     ggsave(file = paste(outputdir, "onsetquality_", comparisonlist[j], "_", featurelist[k], ".png", sep = ""), plot = g, width = 10, height = 6)
   }
 }
