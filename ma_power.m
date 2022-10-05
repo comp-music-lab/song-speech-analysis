@@ -7,8 +7,8 @@ function ma_power
     
     %testdiff = {'Energy', 'F0', 'IOI', 'Pitch range', 'Onset-break interval', 'Interval deviation'};
     %testsim = {'IOI ratio deviation', 'Interval range', 'Spectral centroid', 'Magnitude of F0 modulatioin', 'Pulse clarity'};
-    testdiff = {'f0', 'IOI rate'};
-    testsim = {'Pitch ratio', 'Spectral centroid', 'Sign of f0 slope'};
+    testdiff = {'f0', 'IOI'};
+    testsim = {'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
 
     be = 0.95;
     mu_null = 0.5;

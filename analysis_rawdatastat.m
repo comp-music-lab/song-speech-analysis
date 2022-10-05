@@ -80,12 +80,10 @@ function analysis_rawdatastat
                 X = 1200.*log2(X(X ~= 0)./440);
             elseif strcmp(featurelist{k}, 'IOI')
                 X = ft_ioi(t_onset{i}, t_break{i});
-                %X = 1./X;
             elseif strcmp(featurelist{k}, 'f0 ratio')
                 [~, ~, t_st, t_ed] = helper.h_ioi(t_onset{i}, t_break{i});
                 X = helper.h_interval(1200.*log2(f0{i}./440), t_f0{i}, t_st, t_ed);
-                %X = abs(cat(1, X{:}));
-                X = cat(1, X{:});
+                X = abs(cat(1, X{:}));
             elseif strcmp(featurelist{k}, 'Spectral centroid')
                 X = ft_spectralcentroid(audiofilepath{i}, f0{i}, t_f0{i}, Inf, false);
             elseif strcmp(featurelist{k}, 'Sign of f0 slope')

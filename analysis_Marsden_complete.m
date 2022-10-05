@@ -2,7 +2,7 @@ function analysis_Marsden_complete(duration)
     %% configuration
     fileid = strcat(num2str(duration, '%d'), 'sec');
 
-    typelist = {'song', 'desc'};
+    typelist = {'song', 'recit'};
     datainfo = readtable(strcat('datainfo_Marsden-complete_', typelist{1}, '-', typelist{2}, '.csv'));
     outputdir = './output/20220918/';
     
@@ -84,8 +84,7 @@ function analysis_Marsden_complete(duration)
         %OBI{i} = ft_obi(t_onset{i}, t_break{i});
         %IOIratiodev{i} = ft_ioiratiodev(t_onset{i}, t_break{i});
         %intervaldev{i} = ft_intervaldev(interval{i});
-        %intervalsize{i} = abs(interval{i});
-        intervalsize{i} = interval{i};
+        intervalsize{i} = abs(interval{i});
         %pitchrange{i} = ft_pitchrange(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
         try
             pitchdeclination{i} = ft_f0declination(t_onset{i}, t_break{i}, f0{i}, t_f0{i});

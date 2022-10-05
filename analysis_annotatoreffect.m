@@ -88,11 +88,9 @@ function analysis_annotatoreffect
                         t_f0_lk = t_f0_l(1:idx_cutoff);
 
                         X = helper.h_interval(1200.*log2(f0_mk./440), t_f0_mk, t_st_X, t_ed_X);
-                        %X = abs(cat(1, X{:}));
-                        X = cat(1, X{:});
+                        X = abs(cat(1, X{:}));
                         Y = helper.h_interval(1200.*log2(f0_lk./440), t_f0_lk, t_st_Y, t_ed_Y);
-                        %Y = abs(cat(1, Y{:}));
-                        Y = cat(1, Y{:});
+                        Y = abs(cat(1, Y{:}));
                         [p, tau] = pb_effectsize(X, Y);
                         onsetqualitytable(end + 1, :) = table({'f0 ratio'}, experiment(l), langlist(i), sex(i), comparison{j}(1), comparison{j}(2), annotatorlist(k), langlist(k), p, tau);
 

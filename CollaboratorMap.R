@@ -9,7 +9,7 @@ library(grid)
 ##
 INTERVAL <- 6
 
-SUBGROUPING <- FALSE
+SUBGROUPING <- TRUE
 
 ##
 collabT <- read.csv('./data/CollaboratorsPlotData.csv')

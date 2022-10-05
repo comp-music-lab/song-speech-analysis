@@ -3,6 +3,14 @@ function fig_script
     addpath('./lib/two-sample/');
     
     %%
+    audio_song = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Song.wav';
+    f0_song = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Song_f0.csv';
+    onset_song = './data/Pilot data/onset_Patrick Savage_Twinkle Twinkle_Song.csv';
+    break_song = './data/Pilot data/break_Patrick Savage_Twinkle Twinkle_Song.csv';
+    
+    h_spectrogramplot(audio_song, f0_song, onset_song, break_song);
+
+    %%
     audio_song = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.wav';
     audio_speech = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc.wav';
     f0_song = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song_f0.csv';
@@ -11,7 +19,7 @@ function fig_script
     onset_speech = './data/Stage 1 RR Full/Florence/onset_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc.csv';
     break_song = './data/Stage 1 RR Full/Florence/break_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.csv';
     break_speech = './data/Stage 1 RR Full/Florence/break_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc.csv';
-    h_spectrogramplot(audio_song, audio_speech, f0_song, f0_speech, onset_song, onset_speech, break_song, break_speech);
+    h_spectrogramplot_2(audio_song, audio_speech, f0_song, f0_speech, onset_song, onset_speech, break_song, break_speech);
 
     %%
     audio_song = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.wav';
@@ -34,7 +42,126 @@ function fig_script
     h_plotf0(f0_song, f0_speech);
 end
 
-function h_spectrogramplot(audio_song, audio_speech, f0_song, f0_speech, onset_song, onset_speech, break_song, break_speech)
+
+function h_spectrogramplot(audio_song, f0_song, onset_song, break_song)
+    %%
+    T = readtable(f0_song);
+    t_f0_song = T.time;
+    f0_song = T.voice_1;
+    
+    %%
+    T = readtable(onset_song);
+    t_onset_song = table2array(T(:, 1));
+
+    T = readtable(break_song);
+    t_break_song = table2array(T(:, 1));
+
+    %%
+    [s_song, fs_song] = audioread(audio_song);
+    s_song = mean(s_song, 2);
+
+    [S, F_song, T_song] = spectrogram(s_song, hann(2048), 2048*3/4, 2048, fs_song);
+    P_song = 10.*log10(abs(S).^2) - 100;
+    
+    %%
+    N = round(fs_song*0.032);
+    M = round(fs_song*0.010);
+    w = hann(N, 'periodic');
+
+    SC_song = spectralCentroid(s_song, fs_song, 'Window', w, 'OverlapLength', N - M + 1, 'SpectrumType', 'power');
+    t_SC_song = ((1:(M - 1):(numel(s_song) - N)) + N/2)./fs_song;
+
+    %%
+    fobj = figure;
+    fobj.Position = [50, 540, 770, 450];
+    xl = [0.2, 8.6];
+    yl = 1200.*log2([60, 8000]./440);
+    axFontSize = 12;
+
+    % Spectrogram
+    C = 1200.*log2(F_song./440);
+
+    surf(T_song, C, P_song, 'EdgeColor', 'none');
+    view(0, 90);
+    axis tight;
+    hold on
+
+    % F0 contour
+    f0_C_song = 1200.*log2(f0_song./440);
+    scatter(t_f0_song, f0_C_song, 'MarkerEdgeColor', 'r', 'Marker', '.');
+
+    % Spectral centroid
+    SC_C_song = 1200.*log2(SC_song./440);
+    plot(t_SC_song, SC_C_song, 'Color', 'g', 'LineWidth', 1.3, 'LineStyle', '--');
+    
+    % Onset and break annotations
+    for i=1:numel(t_onset_song)
+        plot(t_onset_song(i).*[1, 1], yl, 'Color', '#FF00FF', 'LineWidth', 1.2);
+    end
+    for i=1:numel(t_break_song)
+        plot(t_break_song(i).*[1, 1], yl, 'Color', '#0000CD', 'LineWidth', 1.2, 'LineStyle', '-.');
+    end
+
+    % F0 slope
+    [~, idx_st] = min(abs(t_f0_song - t_onset_song(1)));
+    [~, idx_ed] = min(abs(t_f0_song - t_break_song(1)));
+    f0_i = 1200.*log2(f0_song(idx_st:idx_ed)./440);
+    t_f0_i = t_f0_song(idx_st:idx_ed);
+
+    idx = ~isinf(f0_i);
+    f0_idx = f0_i(idx);
+    t_f0_idx = t_f0_i(idx);
+
+    mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
+    R = mdl.Coefficients.Estimate;
+    %plot(t_f0_i, 440.*(2.^((R(1) + R(2).*t_f0_i)./1200)), '-k', 'LineWidth', 1.2);
+    plot(t_f0_i, R(1) + R(2).*t_f0_i, '-k', 'LineWidth', 1.2);
+    
+    for i=2:numel(t_break_song)
+        idx = find(t_onset_song > t_break_song(i - 1), 1, 'first');
+
+        [~, idx_st] = min(abs(t_f0_song - t_onset_song(idx)));
+        [~, idx_ed] = min(abs(t_f0_song - t_break_song(i)));
+        f0_i = 1200.*log2(f0_song(idx_st:idx_ed)./440);
+        t_f0_i = t_f0_song(idx_st:idx_ed);
+
+        idx = ~isinf(f0_i);
+        f0_idx = f0_i(idx);
+        t_f0_idx = t_f0_i(idx);
+
+        mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
+        R = mdl.Coefficients.Estimate;
+        plot(t_f0_i, R(1) + R(2).*t_f0_i, '-k', 'LineWidth', 1.2);
+    end
+    
+    %%{
+    h = zeros(5, 1);
+    h(1) = plot(NaN, NaN, 'Color', '#FF0000', 'LineWidth', 1.2);
+    h(2) = plot(NaN, NaN, 'Color', '#FF00FF', 'LineWidth', 1.2);
+    h(3) = plot(NaN, NaN, 'Color', '#0000CD', 'LineStyle', '-.', 'LineWidth', 1.2);
+    h(4) = plot(NaN, NaN, 'Color', '#00FF00', 'LineStyle', '--', 'LineWidth', 1.2);
+    h(5) = plot(NaN, NaN, 'Color', '#000000', 'LineWidth', 1.2);
+    legend(h, {'f_0', 'Onset', 'Break', 'Spectral centroid', 'f_0 slope'}, 'FontName', 'Times New Roman', 'FontSize', 12,...
+        'Position', [0.652, 0.642, 0.208, 0.258]);
+    %}
+
+    hold off
+    xlim(xl);
+    ylim(yl);
+
+    xlabel('Time (sec.)', 'FontSize', 13);
+    ax = gca(fobj);
+    ax.FontSize = axFontSize;
+
+    %{
+    ylabel('Frequency (Hz)', 'FontSize', 13);
+    set(gca, 'YScale', 'log');
+    %}
+
+    ylabel('Cent [440 Hz = 0]', 'FontSize', 13);
+end
+
+function h_spectrogramplot_2(audio_song, audio_speech, f0_song, f0_speech, onset_song, onset_speech, break_song, break_speech)
     %%
     T = readtable(f0_song);
     t_f0_song = T.time;

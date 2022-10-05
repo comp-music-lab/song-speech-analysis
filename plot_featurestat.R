@@ -52,6 +52,14 @@ for (i in 1:length(featurelist_sim)) {
     geom_line(linetype = 2) +
     xlab("") + ylab(ylabelstr_sim[i]) + labs(color = "Language", shape = "Sex") +
     scale_x_discrete(limits = XTICKORDER)
+  
+  if (featurelist_sim[i] == "f0 ratio") {
+    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 300))
+  } else if(featurelist_sim[i] == "Spectral centroid") {
+    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 1200))
+  } else if(featurelist_sim[i] == "Sign of f0 slope") {
+    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(-1, 1))
+  }
 }
 
 g_list_diff <- vector(mode = "list", length = length(featurelist_diff))
@@ -62,6 +70,10 @@ for (i in 1:length(featurelist_diff)) {
     geom_line(linetype = 2) +
     xlab("") + ylab(ylabelstr_diff[i]) + labs(color = "Language", shape = "Sex") +
     scale_x_discrete(limits = XTICKORDER)
+  
+  if (featurelist_diff[i] == "IOI") {
+    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 0.8))
+  }
 }
 
 ## Merge plots
