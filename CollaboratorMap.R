@@ -14,7 +14,8 @@ SUBGROUPING <- TRUE
 ##
 collabT <- read.csv('./data/CollaboratorsPlotData.csv')
 
-langlabel <- data.frame(Lang = collabT$ProvidedLanguageName,
+langlabel <- data.frame(Name = collabT$Name,
+                        Lang = collabT$ProvidedLanguageName,
                         LangAdditional = collabT$GlottologL1Name,
                         Genus = collabT$WalsGenusName,
                         Family = collabT$LanguageFamily,
@@ -34,7 +35,7 @@ langlabel$Lang[langlabel$Lang == "Farsi"] <- langlabel$LangAdditional[langlabel$
 
 if (SUBGROUPING) {
   langlabel$FamilyTmp <- langlabel$Family
-  idx <- langlabel$Family == "Indo-European"
+  idx <- langlabel$Family == "Indo-European" | langlabel$Family == "Atlantic-Congo" | langlabel$Family == "Sino-Tibetan"
   langlabel$Family[idx] <- paste(langlabel$Family[idx], ": ", langlabel$Genus[idx], sep = "")
 }
 
@@ -52,8 +53,8 @@ while (dodge) {
   dodge <- FALSE
   
   for (i in 1:nrow(langlabel)) {
-    fun_i <- function(x) sqrt(sum((as.numeric(x) - as.numeric(langlabel[i, 5:6]))^2))
-    d <- apply(langlabel[, 5:6], MARGIN = 1, FUN = fun_i)
+    fun_i <- function(x) sqrt(sum((as.numeric(x) - as.numeric(langlabel[i, 6:7]))^2))
+    d <- apply(langlabel[, 6:7], MARGIN = 1, FUN = fun_i)
     
     st <- sort(d, decreasing = FALSE, index = TRUE)
     d_st <- st$x
