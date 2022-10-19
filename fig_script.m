@@ -11,6 +11,14 @@ function fig_script
     h_spectrogramplot(audio_song, f0_song, onset_song, break_song);
 
     %%
+    f0_song = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song_f0.csv';
+    onset_song = './data/Stage 1 RR Full/Florence/onset_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.csv';
+    break_song = './data/Stage 1 RR Full/Florence/break_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.csv';
+
+    h_plotinterval(f0_song, onset_song, break_song);
+
+    %%
+    %{
     audio_song = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.wav';
     audio_speech = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc.wav';
     f0_song = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song_f0.csv';
@@ -20,6 +28,7 @@ function fig_script
     break_song = './data/Stage 1 RR Full/Florence/break_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.csv';
     break_speech = './data/Stage 1 RR Full/Florence/break_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc.csv';
     h_spectrogramplot_2(audio_song, audio_speech, f0_song, f0_speech, onset_song, onset_speech, break_song, break_speech);
+    %}
 
     %%
     audio_song = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.wav';
@@ -42,6 +51,86 @@ function fig_script
     h_plotf0(f0_song, f0_speech);
 end
 
+function h_plotinterval(f0_song, onset_song, break_song)
+    %%
+    T = readtable(f0_song);
+    t_f0_song = T.time;
+    f0_song = T.voice_1;
+    
+    %%
+    T = readtable(onset_song);
+    t_onset_song = table2array(T(:, 1));
+
+    T = readtable(break_song);
+    t_break_song = table2array(T(:, 1));
+
+    %%
+    fobj1 = figure(1);
+    fobj1.Position = [30, 560, 340, 400];
+
+    % f0 contour
+    f0_cent = 1200.*log2(f0_song./440);
+    scatter(t_f0_song, f0_cent, 'Marker', '.');
+    hold on
+    
+    % Onset and break annotations
+    yl = ylim();
+    for i=1:numel(t_onset_song)
+        plot(t_onset_song(i).*[1, 1], yl, 'Color', '#FF00FF', 'LineWidth', 1.2);
+    end
+    for i=1:numel(t_break_song)
+        plot(t_break_song(i).*[1, 1], yl, 'Color', '#0000CD', 'LineWidth', 1.2, 'LineStyle', '-.');
+    end
+    
+    % Example
+    [~, idx_st] = min(abs(t_f0_song - t_onset_song(19)));
+    [~, idx_ed] = min(abs(t_f0_song - t_onset_song(20)));
+    scatter(t_f0_song(idx_st:idx_ed), f0_cent(idx_st:idx_ed), 'Marker', '.', 'MarkerEdgeColor', '#D95319');
+    f0vec_i = f0_cent(idx_st:idx_ed);
+
+    idx_st = idx_ed;
+    [~, idx_ed] = min(abs(t_f0_song - t_onset_song(21)));
+    scatter(t_f0_song(idx_st:idx_ed), f0_cent(idx_st:idx_ed), 'Marker', '.', 'MarkerEdgeColor', '#7E2F8E');
+    f0vec_j = f0_cent(idx_st:idx_ed);
+    
+    hold off
+
+    xlim([9.4, 10.31]);
+    ylim([-1200, -200]);
+    xlabel('Time (sec.)', 'FontSize', 12);
+    ylabel('Frequency (cent; 440 Hz = 0)', 'FontSize', 12);
+    ax = gca(fobj1);
+    ax.FontSize = 10;
+
+    intvl = f0vec_j' - f0vec_i;
+    intvl = intvl(:);
+
+    fobj2 = figure(2);
+    fobj2.Position = [750, 560, 380, 400];
+    histogram(intvl);
+    ax = gca(fobj2);
+    ax.FontSize = 10;
+    xlabel('F0 ratio (cent)', 'FontSize', 12);
+    ylabel('Count', 'FontSize', 12);
+
+    fobj3 = figure(3);
+    fobj3.Position = [380, 560, 220, 400];
+    scatter(1:numel(f0vec_i), f0vec_i, 'Marker', '.', 'MarkerEdgeColor', '#D95319');
+    ylim([-1200, -200]);
+    ax = gca(fobj3);
+    ax.FontSize = 10;
+    xlabel('Sample', 'FontSize', 12);
+    ylabel('Frequency (cent; 440 Hz = 0)', 'FontSize', 12);
+
+    fobj4 = figure(4);
+    fobj4.Position = [610, 560, 220*(t_onset_song(21) - t_onset_song(20))/(t_onset_song(20) - t_onset_song(19)), 400];
+    scatter(1:numel(f0vec_j), f0vec_j, 'Marker', '.', 'MarkerEdgeColor', '#7E2F8E');
+    ylim([-1200, -200]);
+    ax = gca(fobj4);
+    ax.FontSize = 10;
+    xlabel('Sample', 'FontSize', 12);
+    ylabel('Frequency (cent; 440 Hz = 0)', 'FontSize', 12);
+end
 
 function h_spectrogramplot(audio_song, f0_song, onset_song, break_song)
     %%
@@ -75,7 +164,7 @@ function h_spectrogramplot(audio_song, f0_song, onset_song, break_song)
     fobj = figure;
     fobj.Position = [50, 540, 770, 450];
     xl = [0.2, 8.6];
-    yl = 1200.*log2([60, 8000]./440);
+    yl = 1200.*log2([60, 1000]./440);
     axFontSize = 12;
 
     % Spectrogram

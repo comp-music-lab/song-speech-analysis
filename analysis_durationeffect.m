@@ -6,11 +6,13 @@ function analysis_durationeffect
     T_ref = [readtable(strcat(datadir, fileid{1}, '_Infsec.csv')); readtable(strcat(datadir, fileid{2}, '_Infsec.csv'))];
 
     featurelist = {'f0', 'IOI', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
-    featurename = {{'Pitch height', '(f0)'}, {'Speed', '(IOI)'}, {'Pitch interval size', '(f0 ratio)'},...
+    featurename = {{'Pitch height', '(f0)'}, {'Temporal rate', '(IOI)'}, {'Pitch interval size', '(f0 ratio)'},...
         {'Timbre brightness', '(Spectral centroid)'}, {'Pitch declination', '(Sign of f0 slope)'}...
     };
     subplotnum = [1, 2, 4, 5, 6];
     langlist = unique(T_ref.lang);
+
+    cutoffduration = 20;
     
     %%
     duration = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70];
@@ -72,7 +74,7 @@ function analysis_durationeffect
             plot(M(j).*[1, 1], [0, 1], ':k', 'linewidth', 1);
         end
 
-        plot(30.*[1, 1], [0, 1], '--r', 'linewidth', 1);
+        plot(cutoffduration.*[1, 1], [0, 1], '--r', 'linewidth', 1);
 
         %%
         %{

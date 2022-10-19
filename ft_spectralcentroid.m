@@ -6,6 +6,8 @@ function SC_vad = ft_spectralcentroid(audiofilepath, f0, t_f0, duration, vad)
         s = mean(s, 2);
     end
     
+    %s = s + normrnd(0, 0.05.*sqrt(mean(s.^2)), [numel(s), 1]);
+
     t = (0:(numel(s) - 1))./fs;
     idx = find(t <= duration, 1, 'last');
     s = s(1:idx);

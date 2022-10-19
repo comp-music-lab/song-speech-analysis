@@ -12,7 +12,7 @@ function ioiratiodev = ft_ioiratiodev(t_onset, t_break)
     for j=1:numel(h)
         f_X = arrayfun(@(X_i) normpdf(X, X_i, h(j)), X, 'UniformOutput', false);
         f_X = mean(cat(2, f_X{:}), 2);
-        thresh = normpdf(0, 0, h(j))/n * 2;
+        thresh = normpdf(0, 0, h(j))/n * max(2, 0.01*n);
         idx = find(f_X > thresh);
 
         C = meanshift(X(idx), X(idx)', 1e-8, h(j));

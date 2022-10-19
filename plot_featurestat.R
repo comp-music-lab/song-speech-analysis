@@ -9,15 +9,16 @@ featurelist_diff = c("f0", "IOI")
 featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
 
 SONG <- "Song"
-DESC <- "Desc."
 INST <- "Inst."
 RECIT <- "Recit."
 
-TYPEFILTER <- c(INST, RECIT)
-XTICKORDER <- c(SONG, DESC, INST, RECIT)
+#DESC <- "Speech"
+#TYPEFILTER <- c(INST, RECIT)
+#XTICKORDER <- c(SONG, DESC, INST, RECIT)
 
-#TYPEFILTER <- c()
-#XTICKORDER <- c(INST, SONG, RECIT, DESC)
+DESC <- "Desc."
+TYPEFILTER <- c()
+XTICKORDER <- c(INST, SONG, RECIT, DESC)
 
 XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
 
@@ -39,6 +40,8 @@ T$unit[T$feature == "Sign of f0 slope"] <- "-"
 
 T$sex[T$sex == "f"] <- "Female"
 T$sex[T$sex == "m"] <- "Male"
+
+T$name[T$name == "Speed"] <- "Temporal rate"
 
 ## Plot
 tmp <- unique(T[c("feature", "name", "unit")])

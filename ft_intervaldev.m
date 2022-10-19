@@ -23,7 +23,7 @@ function intervaldev = ft_intervaldev(interval)
 
         %f_X = arrayfun(@(X_i) mean(normpdf(X, X_i, h(j))), X);
         f_X = mean(normpdf(X - X', 0, h(j)), 2);
-        thresh = normpdf(0, 0, h(j))/n * (0.01*n);
+        thresh = normpdf(0, 0, h(j))/n * max(2, 0.01*n);
         idx = find(f_X > thresh);
 
         C = meanshift(X(idx), X(idx)', 0.1, h(j));

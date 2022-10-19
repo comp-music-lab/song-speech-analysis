@@ -28,7 +28,7 @@ plottitle[plottitle == "song-desc"] <- "Song vs. Spoken description"
 plottitle[plottitle == "song-recit"] <- "Song vs. Lyrics recitation"
 
 ##
-featurename <- c("Speed", "Pitch interval size")
+featurename <- c("Temporal rate", "Pitch interval size")
 featurelist <- unique(T$feature)
 g_list <- vector(mode = "list", length = length(featurename))
 
@@ -45,7 +45,7 @@ for(j in 1:length(comparisonlist)) {
     Q <- rbind(T_ij, G_ij)
     
     g_list[[i]] <- ggplot(data = Q, aes(x = datalang, y = p, color = experiment, shape = shape), alpha = 0.8) + geom_point(aes(size = size)) +
-      labs(x = "Recording data", y = "Relative effect", title = paste(plottitle[j], " (", featurename[i], " - ", featurelist[i], ")", sep = ""), colour = "Pattern", shape = "Pattern") +
+      labs(x = "Recording data", y = "Relative effect", title = paste(plottitle[j], "\n(", featurename[i], " - ", featurelist[i], ")", sep = ""), colour = "Pattern", shape = "Pattern") +
       guides(color = guide_legend(), shape = "none", size = "none") +
       theme(plot.title = element_text(hjust = 0.5), axis.text.x = element_text(angle = 0, size = 10), axis.text.y = element_text(size = 10)) +
       ylim(c(0, 1)) + 
