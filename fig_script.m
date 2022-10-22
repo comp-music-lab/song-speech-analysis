@@ -3,6 +3,18 @@ function fig_script
     addpath('./lib/two-sample/');
     
     %%
+    audio_desc = './data/Pilot data/PES_English_Twinkle_Desc.wav';
+    audio_song = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Song.wav';
+    audio_recit = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Speech.wav';
+    audio_inst = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Piano.wav';
+    f0_desc = './data/Pilot data/PES_English_Twinkle_Desc_f0.csv';
+    f0_song = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Song_f0.csv';
+    f0_recit = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Speech_f0.csv';
+    f0_inst = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Piano_f0.csv';
+    
+    h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_song, f0_recit, f0_inst);
+
+    %%
     audio_song = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Song.wav';
     f0_song = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Song_f0.csv';
     onset_song = './data/Pilot data/onset_Patrick Savage_Twinkle Twinkle_Song.csv';
@@ -49,6 +61,48 @@ function fig_script
     f0_song = './data/Stage 1 RR Full/Shafagh/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song_f0.csv';
     f0_speech = './data/Stage 1 RR Full/Shafagh/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc_f0.csv';
     h_plotf0(f0_song, f0_speech);
+end
+
+function h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_song, f0_recit, f0_inst)
+    fobj = figure(1);
+    fobj.Position = [1150, 630, 750, 350];
+    
+    audiofiles = {audio_desc, audio_song, audio_recit, audio_inst};
+    f0files = {f0_desc, f0_song, f0_recit, f0_inst};
+
+    xl = {[0.5, 2.67], [0.7, 4.5], [0.8, 2.4], [0.6, 4.55]};
+    yl = {[0.03, 1], [0.03, 1], [0.03, 1], [0.1, 1.6]};
+    outputfilename = {'fig1_desc.png', 'fig1_song.png', 'fig1_recit.png', 'fig1_inst.png'};
+
+    for i=1:numel(audiofiles)
+        [s, fs] = audioread(audiofiles{i});
+        if size(s, 2) == 2
+            s = mean(s, 2);
+        end
+        
+        T = readtable(f0files{i});
+        f0 = T.voice_1;
+        t_f0 = T.time;
+
+        [S, F, T] = spectrogram(s, hann(4096), 4096 - 128, 4096, fs);
+
+        surf(T, F, 10.*log10(abs(S).^2) - 1000, 'EdgeColor', 'none');
+        view(0, 90);
+        hold on
+        scatter(t_f0, f0, 'Marker', '.', 'MarkerEdgeColor', '#FF2222');
+        hold off
+        set(gca, 'YScale', 'log');
+        xlim(xl{i});
+        ylim(yl{i}.*1000);
+        colorbar off
+        xlabel('');
+        ylabel('');
+        ax = gca(fobj);
+        ax.FontSize = 18;
+        yticks([0.05, 0.1, 0.2, 0.4, 0.8].*1000);
+        yticklabels({'50', '100', '200', '400', '800'});
+        saveas(fobj, outputfilename{i});
+    end
 end
 
 function h_plotinterval(f0_song, onset_song, break_song)

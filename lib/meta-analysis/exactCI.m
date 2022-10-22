@@ -34,6 +34,7 @@ function CI = exactCI(Y, sgm, mu, q)
     end
 end
 
+%% two-sided
 %{
 %%
 al = 7;
@@ -73,5 +74,41 @@ end
 plot([1, M], mu_0.*[1, 1], '-.m');
 hold off
 hit = hit/M * 100;
+title([num2str(hit, '%3.4f'), '%']);
+%}
+
+%% one-sided
+%{
+%%
+al = 7;
+be = 0.2;
+K = 13;
+
+mu_0 = normrnd(0, 2);
+tau = gamrnd(al, be);
+sgm = gamrnd(al, be, [K, 1]);
+
+%%
+al = 0.05;
+q = al;
+mu = linspace(-10, 10, 1024);
+p = zeros(numel(mu), 1);
+M = 512;
+CI = zeros(M, 1);
+
+wf = waitbar(0, 'Waiting...');
+for m=1:M
+    waitbar(m/M, wf, 'Waiting...');
+    Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
+    CI(m, :) = exactCI(Y, sgm, mu, q)';
+end
+close(wf);
+
+figure(1);
+plot(1:M, CI, 'Color', 'k');
+hold on
+plot([1, M], mu_0.*[1, 1], '-.m');
+hold off
+hit = mean(CI > mu_0) * 100;
 title([num2str(hit, '%3.4f'), '%']);
 %}

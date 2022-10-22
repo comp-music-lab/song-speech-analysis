@@ -6,7 +6,7 @@ function [A, tau, dof] = pb_effectsize(x, y)
     c_1 = 0;
     c_2 = 0;
     
-    for i=1:n_x
+    parfor i=1:n_x
         c_1 = c_1 + numel(find(x(i) > y));
         c_2 = c_2 + 0.5 * numel(find(x(i) == y));
     end
