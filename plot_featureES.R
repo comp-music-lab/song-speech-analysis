@@ -3,10 +3,10 @@ library(ggplot2)
 library(ggpubr)
 
 ## Constants
-LIST_FEATURE <- c('Spectral flatness', 'IOI', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
+LIST_FEATURE <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
 CONCEPT_NAME <- c('Timbre noisiness', 'Temporal rate', 'Pitch range', 'Loudness', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Phrase length', 'Interval regularity', 'Pitch discreteness', 'Pitch interval size', 'Timbre brightness', 'Pulse clarity')
 
-#CORE_FEATURE <- c('IOI', 'f0', 'Sign of f0 slope', 'Spectral centroid', 'f0 ratio')
+#CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', 'f0 ratio')
 CORE_FEATURE <- LIST_FEATURE
 
 TITLESTR <- c('Instrumental vs. Spoken description', 'Song vs. Spoken description', 'Song vs. Lyrics recitation')

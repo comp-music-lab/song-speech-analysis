@@ -9,7 +9,7 @@ REFVALUENAME <- "Reference"
 
 ## ETL
 T <- read.csv(inputfilepath)
-idx <- (T$experiment == "With texts" | T$experiment == "Reannotation" | T$experiment == "Automated") & (T$feature == "IOI" | T$feature == "f0 ratio")
+idx <- (T$experiment == "With texts" | T$experiment == "Reannotation" | T$experiment == "Automated") & (T$feature == "IOI rate" | T$feature == "f0 ratio")
 T <- T[idx, ]
 
 T$comparison <- paste(T$type_m, "-", T$type_l, sep = "")

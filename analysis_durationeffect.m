@@ -5,8 +5,8 @@ function analysis_durationeffect
     fileid = {'results_Marsden-all_song-desc', 'results_Marsden-complete_song-desc'};
     T_ref = [readtable(strcat(datadir, fileid{1}, '_Infsec.csv')); readtable(strcat(datadir, fileid{2}, '_Infsec.csv'))];
 
-    featurelist = {'f0', 'IOI', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
-    featurename = {{'Pitch height', '(f0)'}, {'Temporal rate', '(IOI)'}, {'Pitch interval size', '(f0 ratio)'},...
+    featurelist = {'f0', 'IOI rate', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
+    featurename = {{'Pitch height', '(f0)'}, {'Temporal rate', '(IOI rate)'}, {'Pitch interval size', '(f0 ratio)'},...
         {'Timbre brightness', '(Spectral centroid)'}, {'Pitch declination', '(Sign of f0 slope)'}...
     };
     subplotnum = [1, 2, 4, 5, 6];

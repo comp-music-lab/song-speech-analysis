@@ -67,11 +67,11 @@ function analysis_featureES_2(duration)
     end
     
     %% Comparison
-    IOI = cell(N, 1); % Speed (IOI)
+    IOIrate = cell(N, 1); % Speed (IOI)
     pitchdeclination = cell(N, 1); % pitch declination
     intervalsize = cell(N, 1); % interval range
     
-    %%{
+    %{
     SF = cell(N, 1);
     OBI = cell(N, 1); % Phrase length (first onset-final break interval)
     IOIratiodev = cell(N, 1); % IOI regularity
@@ -81,7 +81,7 @@ function analysis_featureES_2(duration)
     %}
     
     for i=1:N
-        IOI{i} = ft_ioi(t_onset{i}, t_break{i});
+        IOIrate{i} = 1./ft_ioi(t_onset{i}, t_break{i});
         intervalsize{i} = abs(interval{i});
         try
             pitchdeclination{i} = ft_f0declination(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
@@ -89,7 +89,7 @@ function analysis_featureES_2(duration)
             pitchdeclination{i} = NaN;
         end
 
-        %%{
+        %{
         audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
 
         SF{i} = ft_spectralflatness(audiofilepath, t_onset{i}, t_break{i}, duration);
@@ -105,8 +105,8 @@ function analysis_featureES_2(duration)
         idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
         idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
-        [d, tau] = pb_effectsize(IOI{idx_song}, IOI{idx_desc});
-        results(end + 1, :) = table({'IOI'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+        [d, tau] = pb_effectsize(IOIrate{idx_song}, IOIrate{idx_desc});
+        results(end + 1, :) = table({'IOI rate'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
         
         [d, tau] = pb_effectsize(intervalsize{idx_song}, intervalsize{idx_desc});
         results(end + 1, :) = table({'f0 ratio'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
@@ -114,7 +114,7 @@ function analysis_featureES_2(duration)
         [d, tau] = pb_effectsize(pitchdeclination{idx_song}, pitchdeclination{idx_desc});
         results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
-        %%{
+        %{
         [d, tau] = pb_effectsize(SF{idx_song}, SF{idx_desc});
         results(end + 1, :) = table({'Spectral flatness'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
 

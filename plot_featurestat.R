@@ -5,20 +5,20 @@ library(ggpubr)
 ## Config
 featurestatfilepath = './output/20220918/featurestat.csv'  
 outputdir = './output/20220918/'
-featurelist_diff = c("f0", "IOI")
+featurelist_diff = c("f0", "IOI rate")
 featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
 
 SONG <- "Song"
 INST <- "Inst."
 RECIT <- "Recit."
 
-#DESC <- "Speech"
-#TYPEFILTER <- c(INST, RECIT)
-#XTICKORDER <- c(SONG, DESC, INST, RECIT)
+DESC <- "Speech"
+TYPEFILTER <- c(INST, RECIT)
+XTICKORDER <- c(SONG, DESC, INST, RECIT)
 
-DESC <- "Desc."
-TYPEFILTER <- c()
-XTICKORDER <- c(INST, SONG, RECIT, DESC)
+#DESC <- "Desc."
+#TYPEFILTER <- c()
+#XTICKORDER <- c(INST, SONG, RECIT, DESC)
 
 XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
 
@@ -33,7 +33,7 @@ T$xticklabel[T$type == "recit"] <- RECIT
 
 T$unit <- ""
 T$unit[T$feature == "f0"] <- "Cent (440 Hz = 0)"
-T$unit[T$feature == "IOI"] <- "Sec."
+T$unit[T$feature == "IOI rate"] <- "Hz"
 T$unit[T$feature == "f0 ratio"] <- "Cent"
 T$unit[T$feature == "Spectral centroid"] <- "Hz"
 T$unit[T$feature == "Sign of f0 slope"] <- "-"
@@ -74,8 +74,8 @@ for (i in 1:length(featurelist_diff)) {
     xlab("") + ylab(ylabelstr_diff[i]) + labs(color = "Language", shape = "Sex") +
     scale_x_discrete(limits = XTICKORDER)
   
-  if (featurelist_diff[i] == "IOI") {
-    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 0.8))
+  if (featurelist_diff[i] == "IOI rate") {
+    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 7))
   }
 }
 

@@ -77,7 +77,7 @@ function analysis_annotatoreffect
                         [X, t_st_X, t_ed_X, t_onset_X, t_break_X] = h_ioirate(onsetfilepath_m, breakfilepath_m);
                         [Y, t_st_Y, t_ed_Y, t_onset_Y, t_break_Y] = h_ioirate(onsetfilepath_l, breakfilepath_l);
                         [p, tau] = pb_effectsize(X, Y);
-                        onsetqualitytable(end + 1, :) = table({'IOI'}, experiment(l), langlist(i), sex(i), comparison{j}(1), comparison{j}(2), annotatorlist(k), langlist(k), p, tau);
+                        onsetqualitytable(end + 1, :) = table({'IOI rate'}, experiment(l), langlist(i), sex(i), comparison{j}(1), comparison{j}(2), annotatorlist(k), langlist(k), 1 - p, tau);
                         
                         idx_cutoff = find(t_f0_m > t_ed_X(end), 1, 'first');
                         f0_mk = f0_m(1:idx_cutoff);
@@ -129,5 +129,5 @@ function [X, t_st, t_ed, t_onset, t_break] = h_ioirate(onsetfilepath, breakfilep
 
     %%
     [X, ~, t_st, t_ed] = helper.h_ioi(t_onset, t_break);
-    %X = 1./X;
+    X = 1./X;
 end
