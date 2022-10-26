@@ -8,7 +8,6 @@ function analysis_featureES_2(duration)
     
     addpath('./lib/two-sample/');
     addpath('./lib/KDE/');
-    addpath('./lib/CWT/');
     
     varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
     idx_pair = unique(datainfo.pair);
@@ -71,7 +70,7 @@ function analysis_featureES_2(duration)
     pitchdeclination = cell(N, 1); % pitch declination
     intervalsize = cell(N, 1); % interval range
     
-    %{
+    %%{
     SF = cell(N, 1);
     OBI = cell(N, 1); % Phrase length (first onset-final break interval)
     IOIratiodev = cell(N, 1); % IOI regularity
@@ -89,7 +88,7 @@ function analysis_featureES_2(duration)
             pitchdeclination{i} = NaN;
         end
 
-        %{
+        %%{
         audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
 
         SF{i} = ft_spectralflatness(audiofilepath, t_onset{i}, t_break{i}, duration);
@@ -114,7 +113,7 @@ function analysis_featureES_2(duration)
         [d, tau] = pb_effectsize(pitchdeclination{idx_song}, pitchdeclination{idx_desc});
         results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
-        %{
+        %%{
         [d, tau] = pb_effectsize(SF{idx_song}, SF{idx_desc});
         results(end + 1, :) = table({'Spectral flatness'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
 

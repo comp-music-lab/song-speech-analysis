@@ -2,7 +2,7 @@ function analysis_featureES_1(duration)
     %% configuration
     fileid = strcat(num2str(duration, '%d'), 'sec');
 
-    typelist = {'song', 'desc'};
+    typelist = {'song', 'recit'};
     datainfo = readtable(strcat('datainfo_Marsden-all_', typelist{1}, '-', typelist{2}, '.csv'));
     outputdir = './output/20220918/';
     

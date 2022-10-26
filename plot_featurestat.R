@@ -5,7 +5,7 @@ library(ggpubr)
 ## Config
 featurestatfilepath = './output/20220918/featurestat.csv'  
 outputdir = './output/20220918/'
-featurelist_diff = c("f0", "IOI rate")
+featurelist_diff = c("f0", "IOI rate", "Rate of change of f0")
 featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
 
 SONG <- "Song"
@@ -34,14 +34,13 @@ T$xticklabel[T$type == "recit"] <- RECIT
 T$unit <- ""
 T$unit[T$feature == "f0"] <- "Cent (440 Hz = 0)"
 T$unit[T$feature == "IOI rate"] <- "Hz"
+T$unit[T$feature == "Rate of change of f0"] <- "Cent/sec."
 T$unit[T$feature == "f0 ratio"] <- "Cent"
 T$unit[T$feature == "Spectral centroid"] <- "Hz"
 T$unit[T$feature == "Sign of f0 slope"] <- "-"
 
 T$sex[T$sex == "f"] <- "Female"
 T$sex[T$sex == "m"] <- "Male"
-
-T$name[T$name == "Speed"] <- "Temporal rate"
 
 ## Plot
 tmp <- unique(T[c("feature", "name", "unit")])
@@ -53,13 +52,13 @@ for (i in 1:length(featurelist_sim)) {
   g_list_sim[[i]] <- ggplot(data = T[T$feature == featurelist_sim[i] & !(T$xticklabel %in% TYPEFILTER), ], aes(x = xticklabel, y = mean, group = lang, color = lang, shape = sex)) + 
     geom_point(alpha = 0.8, size = 4) + 
     geom_line(linetype = 2) +
-    xlab("") + ylab(ylabelstr_sim[i]) + labs(color = "Language", shape = "Sex") +
+    xlab("") + ylab(ylabelstr_sim[i]) + labs(color = "Language", shape = "Sex") + theme(axis.title.y = element_text(size = 10)) +
     scale_x_discrete(limits = XTICKORDER)
   
   if (featurelist_sim[i] == "f0 ratio") {
-    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 300))
+    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 400))
   } else if(featurelist_sim[i] == "Spectral centroid") {
-    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 1200))
+    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 1900))
   } else if(featurelist_sim[i] == "Sign of f0 slope") {
     g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(-1, 1))
   }
@@ -71,11 +70,13 @@ for (i in 1:length(featurelist_diff)) {
   g_list_diff[[i]] <- ggplot(data = T[T$feature == featurelist_diff[i] & !(T$xticklabel %in% TYPEFILTER), ], aes(x = xticklabel, y = mean, group = lang, color = lang, shape = sex)) + 
     geom_point(alpha = 0.8, size = 4) + 
     geom_line(linetype = 2) +
-    xlab("") + ylab(ylabelstr_diff[i]) + labs(color = "Language", shape = "Sex") +
+    xlab("") + ylab(ylabelstr_diff[i]) + labs(color = "Language", shape = "Sex") + theme(axis.title.y = element_text(size = 10)) +
     scale_x_discrete(limits = XTICKORDER)
   
   if (featurelist_diff[i] == "IOI rate") {
-    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 7))
+    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 9))
+  } else if(featurelist_diff[i] == "Rate of change of f0") {
+    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 2000))
   }
 }
 

@@ -103,6 +103,6 @@ function intervaldev = ft_intervaldev(interval)
     subplot(3, 1, 3);
     histogram(intervaldev);
     xlim([0, 800]);
-    title('Pitch ratio deviation', 'Fontsize', 10);
+    title('f0 ratio deviation', 'Fontsize', 10);
     %}
 end
