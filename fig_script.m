@@ -57,8 +57,9 @@ function h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_
     audiofiles = {audio_desc, audio_song, audio_recit, audio_inst};
     f0files = {f0_desc, f0_song, f0_recit, f0_inst};
 
-    xl = {[0.5, 2.67], [0.7, 4.5], [0.8, 2.4], [0.6, 4.55]};
+    xl = {[0.5, 1.7], [0.7, 4.5], [0.8, 2.4], [0.6, 4.55]};
     yl = {[0.03, 1], [0.03, 1], [0.03, 1], [0.1, 1.6]};
+    outputdir = './output/20221025/';
     outputfilename = {'fig1_desc.png', 'fig1_song.png', 'fig1_recit.png', 'fig1_inst.png'};
 
     for i=1:numel(audiofiles)
@@ -88,7 +89,7 @@ function h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_
         ax.FontSize = 18;
         yticks([0.05, 0.1, 0.2, 0.4, 0.8].*1000);
         yticklabels({'50', '100', '200', '400', '800'});
-        saveas(fobj, outputfilename{i});
+        saveas(fobj, strcat(outputdir, outputfilename{i}));
     end
 end
 
@@ -275,7 +276,7 @@ function h_figure4(audio_song, f0_song, onset_song, break_song)
     h(3) = plot(NaN, NaN, 'Color', '#0000CD', 'LineStyle', '-.', 'LineWidth', 1.2);
     h(4) = plot(NaN, NaN, 'Color', '#00FF00', 'LineStyle', '--', 'LineWidth', 1.2);
     h(5) = plot(NaN, NaN, 'Color', '#000000', 'LineWidth', 1.2);
-    legend(h, {'f_0', 'Onset', 'Break', 'Spectral centroid', 'f_0 slope'}, 'FontName', 'Times New Roman', 'FontSize', 12,...
+    legend(h, {'f_0', 'Onset', 'Breath', 'Spectral centroid', 'f_0 slope'}, 'FontName', 'Times New Roman', 'FontSize', 12,...
         'Position', [0.652, 0.642, 0.208, 0.258]);
     %}
 
@@ -297,6 +298,7 @@ function h_figure4(audio_song, f0_song, onset_song, break_song)
     subplot(5, 1, 5);
 
     % Delta f0
+    addpath('./lib/CWT/');
     df0 = ft_deltaf0(f0_song, 0.005, 440);
     plot(t_f0_song, df0);
     xlim(xl);

@@ -106,6 +106,7 @@ for (i in 1:length(FamilyList)) {
 
 ##
 ggsave(file = "./output/CollabMap.png", plot = gobj, width = 8, height = 7)
+write.csv(file = "./output/langlabel.csv", langlabel)
 
 ##
 ggColorHue <- function(n, l=65) {
