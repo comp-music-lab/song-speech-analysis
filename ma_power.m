@@ -32,7 +32,11 @@ function ma_power
             Y = result.diff(idx);
             sgm = result.stderr(idx);
             K = numel(Y);
-            mu_0 = exactCI(Y, sgm, mu, 0.5);
+            mu_q = exactCI(Y, sgm, mu, [0.025, 0.5, 0.975]);
+            mu_CI_L = mu_q(1);
+            mu_0 = mu_q(2);
+            mu_CI_U = mu_q(3);
+
             mu_F = sum(sgm.^-2 .* Y)/sum(sgm.^-2);
             tausq_hat = max((sum(sgm.^-2 .* (Y - mu_F).^2) - (K - 1))/(sum(sgm.^-2) - sum(sgm.^-4)/sum(sgm.^-2)), 0);
 
@@ -51,14 +55,14 @@ function ma_power
                     power = analyticalpow(sgm_L, al, mu_0, mu_null, tausq_hat);
                 end
         
-                fprintf('(%s-%s) diff: %s (%3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, mu_0, K + L, be, power, al);
+                fprintf('(%s-%s) diff: %s (%3.4f-%3.4f-%3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
+                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_0, mu_CI_U, K + L, be, power, al);
             elseif sum(strcmp(featurelist{i}, testsim)) == 1
                 sgm_K = sqrt(mean(sgm.^2 + tausq_hat));
                 n = simequivpow(mu_0 - 0.5, sgm_K, al, be, Dlt);
 
-                fprintf('(%s-%s) equi: %s (%3.4f) - %d studies for beta = %3.4f and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, mu_0, n, be, al);
+                fprintf('(%s-%s) equi: %s (%3.4f-%3.4f-%3.4f) - %d studies for beta = %3.4f and alpha = %3.4f\n', ...
+                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_0, mu_CI_U, n, be, al);
             end
         end
     end

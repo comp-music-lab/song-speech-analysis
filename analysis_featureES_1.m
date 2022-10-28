@@ -37,7 +37,7 @@ function analysis_featureES_1(duration)
     SC = cell(N, 1); % Brightness (spectral centroid)
     PC = cell(N, 1); % Pulse clarity
     for i=1:N
-        tmp = abs(ft_deltaf0(f0{i}, 0.005, reffreq));
+        tmp = -abs(ft_deltaf0(f0{i}, 0.005, reffreq));
         modulationmagnitude{i} = tmp(~isnan(tmp));
 
         audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
@@ -55,7 +55,7 @@ function analysis_featureES_1(duration)
         results(end + 1, :) = table({'f0'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
         [d, tau] = pb_effectsize(modulationmagnitude{idx_song}, modulationmagnitude{idx_desc});
-        results(end + 1, :) = table({'Rate of change of f0'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
+        results(end + 1, :) = table({'Rate of change of f0'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
         [d, tau] = pb_effectsize(SC{idx_song}, SC{idx_desc});
         results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, {'common language effect size'});

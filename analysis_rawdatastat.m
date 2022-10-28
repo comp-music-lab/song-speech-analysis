@@ -72,7 +72,7 @@ function analysis_rawdatastat
     reffreq = 440;
 
     featurelist = {'f0', 'IOI rate', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
-    featurename = {'Pitch height', 'Temporal rate', 'Pitch stability', 'Pitch interval size', 'Timbre brightness', 'Pitch declination'};
+    featurename = {'Pitch height', 'Temporal rate', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pitch declination'};
     varNames = {'feature', 'name', 'lang', 'sex', 'type', 'mean', 'std'};
     featurestat = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'string', 'string', 'string', 'double', 'double'}, 'VariableNames', varNames);
     
@@ -84,7 +84,7 @@ function analysis_rawdatastat
             elseif strcmp(featurelist{k}, 'IOI rate')
                 X = 1./ft_ioi(t_onset{i}, t_break{i});
             elseif strcmp(featurelist{k}, 'Rate of change of f0')
-                tmp = abs(ft_deltaf0(f0{i}, 0.005, reffreq));
+                tmp = -abs(ft_deltaf0(f0{i}, 0.005, reffreq));
                 X = tmp(~isnan(tmp));
             elseif strcmp(featurelist{k}, 'f0 ratio')
                 [~, ~, t_st, t_ed] = helper.h_ioi(t_onset{i}, t_break{i});

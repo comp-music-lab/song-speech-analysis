@@ -12,13 +12,13 @@ SONG <- "Song"
 INST <- "Inst."
 RECIT <- "Recit."
 
-DESC <- "Speech"
-TYPEFILTER <- c(INST, RECIT)
-XTICKORDER <- c(SONG, DESC, INST, RECIT)
+#DESC <- "Speech"
+#TYPEFILTER <- c(INST, RECIT)
+#XTICKORDER <- c(SONG, DESC, INST, RECIT)
 
-#DESC <- "Desc."
-#TYPEFILTER <- c()
-#XTICKORDER <- c(INST, SONG, RECIT, DESC)
+DESC <- "Desc."
+TYPEFILTER <- c()
+XTICKORDER <- c(INST, SONG, RECIT, DESC)
 
 XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
 
@@ -76,7 +76,7 @@ for (i in 1:length(featurelist_diff)) {
   if (featurelist_diff[i] == "IOI rate") {
     g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 9))
   } else if(featurelist_diff[i] == "Rate of change of f0") {
-    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 2000))
+    g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(-2000, 0))
   }
 }
 
