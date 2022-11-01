@@ -1,0 +1,121 @@
+feature,name,lang,sex,type,mean,std
+f0,Pitch height,Marathi,m,inst,-368.216463414634,351.083656056729
+f0,Pitch height,Marathi,m,recit,-2455.54032258065,308.816687626813
+f0,Pitch height,Marathi,m,song,-1571.27208480565,364.726358440235
+f0,Pitch height,Marathi,m,desc,-2460.33402922756,191.853929179644
+f0,Pitch height,Farsi,f,recit,-1570.10384850336,79.8963354398704
+f0,Pitch height,Farsi,f,song,-1054.92233940556,150.297712196225
+f0,Pitch height,Farsi,f,desc,-1512.47459125055,134.213390393369
+f0,Pitch height,Farsi,f,inst,115.024681201152,144.350190089176
+f0,Pitch height,Yoruba,f,desc,-1745.02798105898,323.775685834848
+f0,Pitch height,Yoruba,f,inst,-645.99333737129,198.528657126791
+f0,Pitch height,Yoruba,f,recit,-1110.8012394865,440.664733479305
+f0,Pitch height,Yoruba,f,song,-718.35612615127,227.108408836684
+f0,Pitch height,English,m,desc,-2494.7061641648,276.314534514632
+f0,Pitch height,English,m,inst,101.858637622093,316.990299438669
+f0,Pitch height,English,m,recit,-2266.71309938387,327.265199258364
+f0,Pitch height,English,m,song,-1786.91042969538,322.992893117629
+f0,Pitch height,Japanese,m,desc,-2635.1304462985,244.664616101793
+f0,Pitch height,Japanese,m,recit,-2450.20684467845,179.927861804416
+f0,Pitch height,Japanese,m,song,-1201.83303886926,410.897278325984
+f0,Pitch height,Japanese,m,inst,-1148.73815676141,376.65719850549
+IOI rate,Temporal rate,Marathi,m,inst,2.9813842172125,0.864493245429753
+IOI rate,Temporal rate,Marathi,m,recit,5.44720796595649,1.68718363021957
+IOI rate,Temporal rate,Marathi,m,song,2.57748993758504,0.874648054752256
+IOI rate,Temporal rate,Marathi,m,desc,5.82674865926173,2.62072411875655
+IOI rate,Temporal rate,Farsi,f,recit,4.33872741161684,1.62800055544262
+IOI rate,Temporal rate,Farsi,f,song,1.7497557583004,0.633707289514333
+IOI rate,Temporal rate,Farsi,f,desc,5.94754254415512,3.53021009160241
+IOI rate,Temporal rate,Farsi,f,inst,2.04160191562884,0.65989815899982
+IOI rate,Temporal rate,Yoruba,f,desc,4.35716600068174,1.31537833581377
+IOI rate,Temporal rate,Yoruba,f,inst,1.40725650113187,0.698842964267828
+IOI rate,Temporal rate,Yoruba,f,recit,3.25018329702085,1.48818339680321
+IOI rate,Temporal rate,Yoruba,f,song,2.59940982697675,1.8541005745024
+IOI rate,Temporal rate,English,m,desc,6.68433709344155,3.64973676375949
+IOI rate,Temporal rate,English,m,inst,4.28988609434677,8.04848888893903
+IOI rate,Temporal rate,English,m,recit,6.36228667993319,6.28815022523971
+IOI rate,Temporal rate,English,m,song,2.91376767544552,1.94719750095204
+IOI rate,Temporal rate,Japanese,m,desc,8.93215304080853,5.6797112585295
+IOI rate,Temporal rate,Japanese,m,recit,7.40047985383884,3.1066211006091
+IOI rate,Temporal rate,Japanese,m,song,2.70465765528212,1.24220361486578
+IOI rate,Temporal rate,Japanese,m,inst,2.68075321002938,1.53118871871035
+Rate of change of f0,Pitch stability,Marathi,m,inst,-731.419054668937,1400.73296550569
+Rate of change of f0,Pitch stability,Marathi,m,recit,-1905.89142938113,1812.4309616562
+Rate of change of f0,Pitch stability,Marathi,m,song,-1210.72648594378,1515.79036282953
+Rate of change of f0,Pitch stability,Marathi,m,desc,-1724.30024302813,1580.60926835997
+Rate of change of f0,Pitch stability,Farsi,f,recit,-608.300703215694,586.783927788039
+Rate of change of f0,Pitch stability,Farsi,f,song,-521.688827477015,820.315237545091
+Rate of change of f0,Pitch stability,Farsi,f,desc,-680.37359740717,702.222532736629
+Rate of change of f0,Pitch stability,Farsi,f,inst,-73.8504821620921,111.247451993482
+Rate of change of f0,Pitch stability,Yoruba,f,desc,-1476.56365154756,1642.82643564484
+Rate of change of f0,Pitch stability,Yoruba,f,inst,-115.590240154274,191.154447801924
+Rate of change of f0,Pitch stability,Yoruba,f,recit,-1505.26473928131,1796.27946419216
+Rate of change of f0,Pitch stability,Yoruba,f,song,-1057.33512003775,1489.75169166991
+Rate of change of f0,Pitch stability,English,m,desc,-993.510434130254,1171.91045341608
+Rate of change of f0,Pitch stability,English,m,inst,-118.352520350329,182.342037297914
+Rate of change of f0,Pitch stability,English,m,recit,-1318.85278862201,1445.46616357589
+Rate of change of f0,Pitch stability,English,m,song,-825.461336019618,1332.38073245245
+Rate of change of f0,Pitch stability,Japanese,m,desc,-1021.15282311091,1233.42970041512
+Rate of change of f0,Pitch stability,Japanese,m,recit,-1036.89637458348,1157.2939587203
+Rate of change of f0,Pitch stability,Japanese,m,song,-1087.79970951009,1467.17906195947
+Rate of change of f0,Pitch stability,Japanese,m,inst,-82.3635182488122,261.080417009744
+f0 ratio,Pitch interval size,Marathi,m,inst,211.772826494765,164.481584165772
+f0 ratio,Pitch interval size,Marathi,m,recit,228.055440729483,175.241492302293
+f0 ratio,Pitch interval size,Marathi,m,song,249.642630261208,185.533936920968
+f0 ratio,Pitch interval size,Marathi,m,desc,200.313759047313,165.349511585604
+f0 ratio,Pitch interval size,Farsi,f,recit,65.8493240744545,51.9478099465908
+f0 ratio,Pitch interval size,Farsi,f,song,114.425684726642,108.682618187374
+f0 ratio,Pitch interval size,Farsi,f,desc,97.807077101875,85.418160320698
+f0 ratio,Pitch interval size,Farsi,f,inst,135.187622458841,65.5622381672694
+f0 ratio,Pitch interval size,Yoruba,f,desc,246.123020426899,222.187927142363
+f0 ratio,Pitch interval size,Yoruba,f,inst,213.412591129377,150.696526839727
+f0 ratio,Pitch interval size,Yoruba,f,recit,393.665534721197,374.132479556755
+f0 ratio,Pitch interval size,Yoruba,f,song,247.619082341993,186.505968960803
+f0 ratio,Pitch interval size,English,m,desc,154.67694168447,146.62435375058
+f0 ratio,Pitch interval size,English,m,inst,208.768050904191,170.504073869289
+f0 ratio,Pitch interval size,English,m,recit,200.477244306963,153.557587982572
+f0 ratio,Pitch interval size,English,m,song,195.668873975972,163.655432231741
+f0 ratio,Pitch interval size,Japanese,m,desc,132.919330026451,149.93941745677
+f0 ratio,Pitch interval size,Japanese,m,recit,125.297900794903,118.210636449879
+f0 ratio,Pitch interval size,Japanese,m,song,198.000238729315,151.92270255689
+f0 ratio,Pitch interval size,Japanese,m,inst,144.295311941421,145.523828029614
+Spectral centroid,Timbral brightness,Marathi,m,inst,964.525124522624,752.759245890994
+Spectral centroid,Timbral brightness,Marathi,m,recit,179.939342821528,179.554601769062
+Spectral centroid,Timbral brightness,Marathi,m,song,206.625937103491,127.520536379549
+Spectral centroid,Timbral brightness,Marathi,m,desc,213.965552460058,181.845302363232
+Spectral centroid,Timbral brightness,Farsi,f,recit,869.596184473582,1146.48827439614
+Spectral centroid,Timbral brightness,Farsi,f,song,824.334683326757,1163.18382288238
+Spectral centroid,Timbral brightness,Farsi,f,desc,621.124416824305,856.904193749096
+Spectral centroid,Timbral brightness,Farsi,f,inst,606.056255471975,255.910566733978
+Spectral centroid,Timbral brightness,Yoruba,f,desc,1122.47666289854,1191.40169575186
+Spectral centroid,Timbral brightness,Yoruba,f,inst,1029.856517539,1446.78520177302
+Spectral centroid,Timbral brightness,Yoruba,f,recit,1870.6713495942,3285.91089423419
+Spectral centroid,Timbral brightness,Yoruba,f,song,1000.79326777171,1554.27505139544
+Spectral centroid,Timbral brightness,English,m,desc,631.54706360092,1010.1604036381
+Spectral centroid,Timbral brightness,English,m,inst,759.032180130654,326.427419162112
+Spectral centroid,Timbral brightness,English,m,recit,562.571644115831,974.775529349878
+Spectral centroid,Timbral brightness,English,m,song,546.777841637851,802.374617264753
+Spectral centroid,Timbral brightness,Japanese,m,desc,763.677250098099,1300.63997304008
+Spectral centroid,Timbral brightness,Japanese,m,recit,1073.74108229358,1709.20567427819
+Spectral centroid,Timbral brightness,Japanese,m,song,619.757348087994,1143.81355129847
+Spectral centroid,Timbral brightness,Japanese,m,inst,312.35917768734,251.179147790467
+Sign of f0 slope,Pitch declination,Marathi,m,inst,-0.333333333333333,1.03279555898864
+Sign of f0 slope,Pitch declination,Marathi,m,recit,-1,0
+Sign of f0 slope,Pitch declination,Marathi,m,song,-1,0
+Sign of f0 slope,Pitch declination,Marathi,m,desc,0,1.15470053837925
+Sign of f0 slope,Pitch declination,Farsi,f,recit,-1,0
+Sign of f0 slope,Pitch declination,Farsi,f,song,-0.2,1.09544511501033
+Sign of f0 slope,Pitch declination,Farsi,f,desc,0,1.09544511501033
+Sign of f0 slope,Pitch declination,Farsi,f,inst,-1,0
+Sign of f0 slope,Pitch declination,Yoruba,f,desc,-1,0
+Sign of f0 slope,Pitch declination,Yoruba,f,inst,-1,0
+Sign of f0 slope,Pitch declination,Yoruba,f,recit,0.25,1.03509833901353
+Sign of f0 slope,Pitch declination,Yoruba,f,song,-1,0
+Sign of f0 slope,Pitch declination,English,m,desc,-0.222222222222222,1.0032626514091
+Sign of f0 slope,Pitch declination,English,m,inst,-0.2,1.03279555898864
+Sign of f0 slope,Pitch declination,English,m,recit,-0.8,0.632455532033676
+Sign of f0 slope,Pitch declination,English,m,song,-0.636363636363636,0.80903983495589
+Sign of f0 slope,Pitch declination,Japanese,m,desc,-0.375,0.957427107756338
+Sign of f0 slope,Pitch declination,Japanese,m,recit,-0.75,0.707106781186548
+Sign of f0 slope,Pitch declination,Japanese,m,song,0.636363636363636,0.80903983495589
+Sign of f0 slope,Pitch declination,Japanese,m,inst,0.333333333333333,1.15470053837925

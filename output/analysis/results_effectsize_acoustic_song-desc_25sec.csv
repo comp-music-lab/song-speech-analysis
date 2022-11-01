@@ -1,0 +1,16 @@
+feature,lang,diff,stderr,method
+f0,English,0.903438471168968,0.0037557894307522,common language effect size
+Rate of change of f0,English,0.580059800981787,0.00687233569078492,common language effect size
+Spectral centroid,English,0.513718495855313,0.008187633879495,common language effect size
+f0,Marathi,0.992005945838282,0.00102045023396625,common language effect size
+Rate of change of f0,Marathi,0.643261321805587,0.00806820477251361,common language effect size
+Spectral centroid,Marathi,0.501618007419369,0.009263954833981,common language effect size
+f0,Farsi,0.977083446950133,0.00164936897873528,common language effect size
+Rate of change of f0,Farsi,0.641445608474548,0.00672469550849707,common language effect size
+Spectral centroid,Farsi,0.525469013027791,0.0082026725374636,common language effect size
+f0,Japanese,0.995436413641473,0.000440736865891417,common language effect size
+Rate of change of f0,Japanese,0.530230023504386,0.00691547427303193,common language effect size
+Spectral centroid,Japanese,0.614599421201053,0.0081114320163491,common language effect size
+f0,Yoruba,0.99464239523007,0.000837447752917357,common language effect size
+Rate of change of f0,Yoruba,0.602418220926317,0.00748001469936874,common language effect size
+Spectral centroid,Yoruba,0.484722687702954,0.00950527803235751,common language effect size
