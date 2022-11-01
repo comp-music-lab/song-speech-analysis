@@ -105,8 +105,8 @@ for (i in 1:length(FamilyList)) {
 }
 
 ##
-ggsave(file = "./output/CollabMap.png", plot = gobj, width = 8, height = 7)
-write.csv(file = "./output/langlabel.csv", langlabel)
+ggsave(file = "./output/figure/CollabMap.png", plot = gobj, width = 8, height = 7)
+write.csv(file = "./output/figure/langlabel.csv", langlabel)
 
 ##
 ggColorHue <- function(n, l=65) {
@@ -115,5 +115,8 @@ ggColorHue <- function(n, l=65) {
 }
 
 cols <- ggColorHue(n = length(unique(langlabel$Family)))
+
+png("./output/figure/langfamily-colorcode.png", width = 500, height = 500)
 col2rgb(cols)
 scales::show_col(cols)
+dev.off()

@@ -3,8 +3,8 @@ library(ggplot2)
 library(ggpubr)
 
 ## Config
-featurestatfilepath = './output/20220918/featurestat.csv'  
-outputdir = './output/20220918/'
+featurestatfilepath = './output/analysis/featurestat.csv'  
+outputdir = './output/figure/'
 featurelist_diff = c("f0", "IOI rate", "Rate of change of f0")
 featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
 
@@ -12,13 +12,17 @@ SONG <- "Song"
 INST <- "Inst."
 RECIT <- "Recit."
 
-#DESC <- "Speech"
-#TYPEFILTER <- c(INST, RECIT)
-#XTICKORDER <- c(SONG, DESC, INST, RECIT)
-
-DESC <- "Desc."
-TYPEFILTER <- c()
-XTICKORDER <- c(INST, SONG, RECIT, DESC)
+if (exploratory) {
+  DESC <- "Desc."
+  TYPEFILTER <- c()
+  XTICKORDER <- c(INST, SONG, RECIT, DESC)
+  FILEID <- "_exp"
+} else {
+  DESC <- "Speech"
+  TYPEFILTER <- c(INST, RECIT)
+  XTICKORDER <- c(SONG, DESC, INST, RECIT)
+  FILEID <- "_cnf"
+}
 
 XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
 
@@ -83,5 +87,5 @@ for (i in 1:length(featurelist_diff)) {
 ## Merge plots
 numsubplot <- max(length(g_list_sim), length(g_list_diff))
 g <- ggarrange(ggarrange(plotlist = g_list_diff, ncol = numsubplot, common.legend = TRUE, legend = "right"), ggarrange(plotlist = g_list_sim, ncol = numsubplot, common.legend = TRUE, legend = "right"), nrow = 2)
-ggsave(file = paste(outputdir, "featurestat.png", sep = ""), plot = g, width = 8, height = 6)
+ggsave(file = paste(outputdir, "featurestat", FILEID, ".png", sep = ""), plot = g, width = 8, height = 6)
 plot(g)

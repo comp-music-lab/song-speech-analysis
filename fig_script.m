@@ -1,4 +1,4 @@
-function fig_script
+function fig_script(outputdir)
     %%
     addpath('./lib/two-sample/');
     
@@ -8,7 +8,7 @@ function fig_script
     onset_song = './data/Pilot data/onset_Patrick Savage_Twinkle Twinkle_Song.csv';
     break_song = './data/Pilot data/break_Patrick Savage_Twinkle Twinkle_Song.csv';
     
-    h_figure4(audio_song, f0_song, onset_song, break_song);
+    h_figure4(audio_song, f0_song, onset_song, break_song, outputdir);
 
     %%
     audio_desc = './data/Pilot data/PES_English_Twinkle_Desc.wav';
@@ -20,7 +20,7 @@ function fig_script
     f0_recit = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Speech_f0.csv';
     f0_inst = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Piano_f0.csv';
     
-    h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_song, f0_recit, f0_inst);
+    h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_song, f0_recit, f0_inst, outputdir);
 
     %%
     f0_song = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song_f0.csv';
@@ -50,8 +50,9 @@ function fig_script
     h_plotf0(f0_song, f0_speech);
 end
 
-function h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_song, f0_recit, f0_inst)
+function h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_song, f0_recit, f0_inst, outputdir)
     fobj = figure(1);
+    clf; cla;
     fobj.Position = [1150, 630, 750, 350];
     
     audiofiles = {audio_desc, audio_song, audio_recit, audio_inst};
@@ -59,7 +60,6 @@ function h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_
 
     xl = {[0.5, 1.7], [0.7, 4.5], [0.8, 2.4], [0.6, 4.55]};
     yl = {[0.03, 1], [0.03, 1], [0.03, 1], [0.1, 1.6]};
-    outputdir = './output/20221025/';
     outputfilename = {'fig1_desc.png', 'fig1_song.png', 'fig1_recit.png', 'fig1_inst.png'};
 
     for i=1:numel(audiofiles)
@@ -108,6 +108,7 @@ function h_plotinterval(f0_song, onset_song, break_song)
 
     %%
     fobj1 = figure(1);
+    clf; cla;
     fobj1.Position = [30, 560, 340, 400];
 
     % f0 contour
@@ -148,6 +149,7 @@ function h_plotinterval(f0_song, onset_song, break_song)
     intvl = intvl(:);
 
     fobj2 = figure(2);
+    clf; cla;
     fobj2.Position = [750, 560, 380, 400];
     histogram(intvl);
     ax = gca(fobj2);
@@ -156,6 +158,7 @@ function h_plotinterval(f0_song, onset_song, break_song)
     ylabel('Count', 'FontSize', 12);
 
     fobj3 = figure(3);
+    clf; cla;
     fobj3.Position = [380, 560, 220, 400];
     scatter(1:numel(f0vec_i), f0vec_i, 'Marker', '.', 'MarkerEdgeColor', '#D95319');
     ylim([-1200, -200]);
@@ -165,6 +168,7 @@ function h_plotinterval(f0_song, onset_song, break_song)
     ylabel('Frequency (cent; 440 Hz = 0)', 'FontSize', 12);
 
     fobj4 = figure(4);
+    clf; cla;
     fobj4.Position = [610, 560, 220*(t_onset_song(21) - t_onset_song(20))/(t_onset_song(20) - t_onset_song(19)), 400];
     scatter(1:numel(f0vec_j), f0vec_j, 'Marker', '.', 'MarkerEdgeColor', '#7E2F8E');
     ylim([-1200, -200]);
@@ -174,7 +178,7 @@ function h_plotinterval(f0_song, onset_song, break_song)
     ylabel('Frequency (cent; 440 Hz = 0)', 'FontSize', 12);
 end
 
-function h_figure4(audio_song, f0_song, onset_song, break_song)
+function h_figure4(audio_song, f0_song, onset_song, break_song, outputdir_fig)
     %%
     T = readtable(f0_song);
     t_f0_song = T.time;
@@ -204,6 +208,7 @@ function h_figure4(audio_song, f0_song, onset_song, break_song)
 
     %%
     fobj = figure;
+    clf; cla;
     fobj.Position = [50, 540, 770, 450];
 
     %% First window
@@ -312,6 +317,9 @@ function h_figure4(audio_song, f0_song, onset_song, break_song)
 
     legend({'\Delta f_0'}, 'FontName', 'Times New Roman', 'FontSize', 12,...
         'Position', [0.66, 0.16, 0.11, 0.067]);
+
+    %%
+    saveas(fobj, strcat(outputdir_fig, '/figure4.png'))
 end
 
 function h_plotsoundwave(audio_song, audio_speech)
@@ -322,6 +330,7 @@ function h_plotsoundwave(audio_song, audio_speech)
     t_s_speech = (0:(numel(s_speech) - 1))./fs_speech;
     
     fobj = figure;
+    clf; cla;
 
     subplot(2, 1, 1);
     plot(t_s_song, s_song, 'Color', '#0072BD');
@@ -344,6 +353,7 @@ function h_plotf0(f0_song, f0_speech)
     f0_speech = T.voice_1;
     
     fobj = figure;
+    clf; cla;
 
     subplot(2, 1, 1);
     scatter(t_f0_song, f0_song, 'Marker', '.', 'MarkerEdgeColor', '#0072BD');
@@ -366,6 +376,7 @@ function h_histogram(X, Y)
     d_Cohen = sqrt(2)*norminv(d, 0, 1);
 
     fobj = figure;
+    clf; cla;
 
     histogram(X, 40, 'EdgeColor', 'none', 'FaceColor', '#0072BD', 'Normalization', 'pdf');
     hold on

@@ -6,20 +6,24 @@ library(ggpubr)
 LIST_FEATURE <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
 CONCEPT_NAME <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Loudness', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Phrase length', 'Interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
 
-CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', 'Rate of change of f0', 'f0 ratio')
-#CORE_FEATURE <- LIST_FEATURE
-#CORE_FEATURE <- c('f0')
+if (exploratory) {
+  CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', 'Rate of change of f0', 'f0 ratio')
+  FILEID <- "_cnf"
+} else {
+  CORE_FEATURE <- LIST_FEATURE
+  FILEID <- "_exp"
+}
 
 TITLESTR <- c('Instrumental vs. Spoken description', 'Song vs. Spoken description', 'Song vs. Lyrics recitation')
 DATATYPE <- c('inst-desc', 'song-desc', 'song-recit')
-OUTPUTDIR <- './output/20220918/'
+OUTPUTDIR <- './output/figure/'
 G_WID <- 7.5
 G_HEI <- 6
 XL <- c(-1.8, 5.0);
 XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5)
 
 ##Specify data download location
-file.data <- paste('./output/20220918/results_Marsden-all_', DATATYPE, '_Infsec.csv', sep = '')
+file.data <- paste('./output/analysis/results_effectsize_acoustic_', DATATYPE, '_Infsec.csv', sep = '')
 
 data_all <- c()
 for (i in 1:length(DATATYPE)) {
@@ -28,7 +32,7 @@ for (i in 1:length(DATATYPE)) {
   data_all <- rbind(data_all, data_i)
 }
 
-file.data <- paste('./output/20220918/results_Marsden-complete_', DATATYPE, '_Infsec.csv', sep = '')
+file.data <- paste('./output/analysis/results_effectsize_seg_', DATATYPE, '_Infsec.csv', sep = '')
 
 data_complete <- c()
 for (i in 1:length(DATATYPE)) {
@@ -82,5 +86,5 @@ for (i in 1:length(g_list)) {
     scale_x_continuous(breaks = XBREAK) + 
     theme(legend.title = element_blank())
   
-  ggsave(file = paste(OUTPUTDIR, "MarsdenData_", LIST_COMPARISON[i], ".png", sep = ""), plot = g_list[[i]], width = G_WID, height = G_HEI)
+  ggsave(file = paste(OUTPUTDIR, "effectsize_", LIST_COMPARISON[i], FILEID, ".png", sep = ""), plot = g_list[[i]], width = G_WID, height = G_HEI)
 }

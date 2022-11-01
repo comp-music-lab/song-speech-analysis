@@ -3,8 +3,8 @@ library(ggplot2)
 library(ggpubr)
 
 ## Config
-inputfilepath <- './output/20220918/onsetqualitytable.csv'  
-outputdir <- './output/20220918/'
+inputfilepath <- './output/analysis/onsetqualitytable.csv'  
+outputdir <- './output/figure/'
 REFVALUENAME <- "Reference"
 
 ## ETL

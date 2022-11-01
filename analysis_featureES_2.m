@@ -1,13 +1,18 @@
-function analysis_featureES_2(duration)
+function analysis_featureES_2(duration, typeflag, exploratory, outputdir)
+    switch typeflag
+        case 1
+            typelist = {'song', 'desc'};
+        case 2
+            typelist = {'inst', 'desc'};
+        case 3
+            typelist = {'song', 'recit'};
+    end
+
     %% configuration
     fileid = strcat(num2str(duration, '%d'), 'sec');
-
-    typelist = {'song', 'desc'};
     datainfo = readtable(strcat('datainfo_Marsden-complete_', typelist{1}, '-', typelist{2}, '.csv'));
-    outputdir = './output/20220918/';
     
     addpath('./lib/two-sample/');
-    addpath('./lib/KDE/');
     
     varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
     idx_pair = unique(datainfo.pair);
@@ -68,16 +73,7 @@ function analysis_featureES_2(duration)
     %% Comparison
     IOIrate = cell(N, 1); % Speed (IOI)
     pitchdeclination = cell(N, 1); % pitch declination
-    intervalsize = cell(N, 1); % interval range
-    
-    %%{
-    SF = cell(N, 1);
-    OBI = cell(N, 1); % Phrase length (first onset-final break interval)
-    IOIratiodev = cell(N, 1); % IOI regularity
-    intervaldev = cell(N, 1); % interval regularity
-    pitchrange = cell(N, 1); % melodic range
-    E = cell(N, 1);
-    %}
+    intervalsize = cell(N, 1); % pitch interval size
     
     for i=1:N
         IOIrate{i} = 1./ft_ioi(t_onset{i}, t_break{i});
@@ -87,17 +83,6 @@ function analysis_featureES_2(duration)
         catch
             pitchdeclination{i} = NaN;
         end
-
-        %%{
-        audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
-
-        SF{i} = ft_spectralflatness(audiofilepath, t_onset{i}, t_break{i}, duration);
-        E{i} = ft_energy(audiofilepath, t_onset{i}, t_break{i}, duration);
-        OBI{i} = ft_obi(t_onset{i}, t_break{i});
-        IOIratiodev{i} = ft_ioiratiodev(t_onset{i}, t_break{i});
-        intervaldev{i} = ft_intervaldev(interval{i});
-        pitchrange{i} = ft_pitchrange(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
-        %}
     end
 
     for i=1:numel(idx_pair)
@@ -112,28 +97,54 @@ function analysis_featureES_2(duration)
 
         [d, tau] = pb_effectsize(pitchdeclination{idx_song}, pitchdeclination{idx_desc});
         results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
-
-        %%{
-        [d, tau] = pb_effectsize(SF{idx_song}, SF{idx_desc});
-        results(end + 1, :) = table({'Spectral flatness'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
-
-        [d, tau] = pb_effectsize(OBI{idx_song}, OBI{idx_desc});
-        results(end + 1, :) = table({'Onset-break interval'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
-
-        [d, tau] = pb_effectsize(IOIratiodev{idx_song}, IOIratiodev{idx_desc});
-        results(end + 1, :) = table({'IOI ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
-
-        [d, tau] = pb_effectsize(intervaldev{idx_song}, intervaldev{idx_desc});
-        results(end + 1, :) = table({'f0 ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
-
-        [d, tau] = pb_effectsize(pitchrange{idx_song}, pitchrange{idx_desc});
-        results(end + 1, :) = table({'90% f0 quantile length'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
-        
-        [d, tau] = pb_effectsize(E{idx_song}, E{idx_desc});
-        results(end + 1, :) = table({'Short-term energy'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
-        %}
     end
     
+    %% Exploratory feature
+    if exploratory
+        addpath('./lib/KDE/');
+        
+        SF = cell(N, 1); % Spectral flatness
+        OBI = cell(N, 1); % Phrase length (first onset-final break interval)
+        IOIratiodev = cell(N, 1); % IOI regularity
+        intervaldev = cell(N, 1); % interval regularity
+        pitchrange = cell(N, 1); % melodic range
+        E = cell(N, 1);
+
+        for i=1:N
+            audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
+    
+            SF{i} = ft_spectralflatness(audiofilepath, t_onset{i}, t_break{i}, duration);
+            E{i} = ft_energy(audiofilepath, t_onset{i}, t_break{i}, duration);
+            OBI{i} = ft_obi(t_onset{i}, t_break{i});
+            IOIratiodev{i} = ft_ioiratiodev(t_onset{i}, t_break{i});
+            intervaldev{i} = ft_intervaldev(interval{i});
+            pitchrange{i} = ft_pitchrange(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
+        end
+
+        for i=1:numel(idx_pair)
+            idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
+            idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
+            
+            [d, tau] = pb_effectsize(SF{idx_song}, SF{idx_desc});
+            results(end + 1, :) = table({'Spectral flatness'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
+    
+            [d, tau] = pb_effectsize(OBI{idx_song}, OBI{idx_desc});
+            results(end + 1, :) = table({'Onset-break interval'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+    
+            [d, tau] = pb_effectsize(IOIratiodev{idx_song}, IOIratiodev{idx_desc});
+            results(end + 1, :) = table({'IOI ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
+    
+            [d, tau] = pb_effectsize(intervaldev{idx_song}, intervaldev{idx_desc});
+            results(end + 1, :) = table({'f0 ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
+    
+            [d, tau] = pb_effectsize(pitchrange{idx_song}, pitchrange{idx_desc});
+            results(end + 1, :) = table({'90% f0 quantile length'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+            
+            [d, tau] = pb_effectsize(E{idx_song}, E{idx_desc});
+            results(end + 1, :) = table({'Short-term energy'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+        end
+    end
+
     %%
-    writetable(results, strcat(outputdir, 'results_Marsden-complete_', typelist{1}, '-', typelist{2}, '_', fileid, '.csv'));
+    writetable(results, strcat(outputdir, 'results_effectsize_seg_', typelist{1}, '-', typelist{2}, '_', fileid, '.csv'));
 end

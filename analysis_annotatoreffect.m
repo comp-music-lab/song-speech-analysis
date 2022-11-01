@@ -1,7 +1,5 @@
-function analysis_annotatoreffect
+function analysis_annotatoreffect(outputdir)
     %%
-    outputdir = './output/20220918/';
-
     comparison = {{'song', 'desc'}, {'song', 'recit'}, {'inst', 'desc'}};
 
     fileidlist = {...

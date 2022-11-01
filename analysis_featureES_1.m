@@ -1,14 +1,19 @@
-function analysis_featureES_1(duration)
+function analysis_featureES_1(duration, typeflag, exploratory, outputdir)
+    switch typeflag
+        case 1
+            typelist = {'song', 'desc'};
+        case 2
+            typelist = {'inst', 'desc'};
+        case 3
+            typelist = {'song', 'recit'};
+    end
+
     %% configuration
     fileid = strcat(num2str(duration, '%d'), 'sec');
-
-    typelist = {'song', 'recit'};
     datainfo = readtable(strcat('datainfo_Marsden-all_', typelist{1}, '-', typelist{2}, '.csv'));
-    outputdir = './output/20220918/';
     
     addpath('./lib/two-sample/');
     addpath('./lib/CWT/');
-    addpath(strcat(userpath, '/lib2/MIRtoolbox1.8.1/MIRToolbox/'));
     
     varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
     idx_pair = unique(datainfo.pair);
@@ -32,19 +37,16 @@ function analysis_featureES_1(duration)
         t_f0{i} = t_f0{i}(1:idx);
     end
     
-    %% Comparison
+    %% Comparison - main 
     modulationmagnitude = cell(N, 1); % pitch discreteness (modulation-based)
     SC = cell(N, 1); % Brightness (spectral centroid)
-    PC = cell(N, 1); % Pulse clarity
+    
     for i=1:N
         tmp = -abs(ft_deltaf0(f0{i}, 0.005, reffreq));
         modulationmagnitude{i} = tmp(~isnan(tmp));
 
         audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
         SC{i} = ft_spectralcentroid(audiofilepath, f0{i}, t_f0{i}, duration, false);
-
-        tmp =  mirpulseclarity(miraudio(audiofilepath, 'Extract', 0, duration), 'Frame');
-        PC{i} = mirgetdata(tmp);
     end
 
     for i=1:numel(idx_pair)
@@ -59,11 +61,28 @@ function analysis_featureES_1(duration)
 
         [d, tau] = pb_effectsize(SC{idx_song}, SC{idx_desc});
         results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+    end
 
-        [d, tau] = pb_effectsize(PC{idx_song}, PC{idx_desc});
-        results(end + 1, :) = table({'Pulse clarity'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+    %% Exploratory feature
+    if exploratory
+        addpath(strcat(userpath, '/lib2/MIRtoolbox1.8.1/MIRToolbox/'));
+        PC = cell(N, 1); % Pulse clarity
+        
+        for i=1:N
+            audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
+            tmp =  mirpulseclarity(miraudio(audiofilepath, 'Extract', 0, duration), 'Frame');
+            PC{i} = mirgetdata(tmp);
+        end
+
+        for i=1:numel(idx_pair)
+            idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
+            idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
+
+            [d, tau] = pb_effectsize(PC{idx_song}, PC{idx_desc});
+            results(end + 1, :) = table({'Pulse clarity'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+        end
     end
     
     %%
-    writetable(results, strcat(outputdir, 'results_Marsden-all_', typelist{1}, '-', typelist{2}, '_', fileid, '.csv'));
+    writetable(results, strcat(outputdir, 'results_effectsize_acoustic_', typelist{1}, '-', typelist{2}, '_', fileid, '.csv'));
 end

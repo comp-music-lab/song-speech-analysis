@@ -1,8 +1,6 @@
-function analysis_durationeffect
+function analysis_durationeffect(datadir, outputdir)
     %%
-    outputdir = './output/20220918/';
-    datadir = './output/20220918/';
-    fileid = {'results_Marsden-all_song-desc', 'results_Marsden-complete_song-desc'};
+    fileid = {'results_effectsize_acoustic_song-desc', 'results_effectsize_seg_song-desc'};
     T_ref = [readtable(strcat(datadir, fileid{1}, '_Infsec.csv')); readtable(strcat(datadir, fileid{2}, '_Infsec.csv'))];
 
     featurelist = {'f0', 'IOI rate', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
@@ -38,21 +36,16 @@ function analysis_durationeffect
 
     %%
     pprm = plotprm();
-    h = zeros(numel(langlist) + 2, 1);
     es_d = zeros(numel(duration), 1);
     M = 10:10:max(duration);
     
     figobj = figure;
     figobj.Position = [90, 150, 1200, 720];
-    %ax = axes;
 
     for i=1:numel(featurelist)
         subplot(2, 3, subplotnum(i));
         
         for j=1:numel(langlist)
-            %idx = strcmp(T_ref.feature, featurelist{i}) & strcmp(T_ref.lang, langlist{j});
-            %es_ref = T_ref.diff(idx);
-
             for k=1:numel(duration)
                 idx = strcmp(T{k}.feature, featurelist{i}) & strcmp(T{k}.lang, langlist{j});
                 es_d(k) = T{k}.diff(idx);
@@ -67,7 +60,6 @@ function analysis_durationeffect
                 'MarkerEdgeColor', pprm.langcolormap(langlist{j}), 'Marker', '.', 'CData', 2);
             hold on
             plot(duration(idx_st:idx_ed(j)), es_d(idx_st:idx_ed(j)), 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
-            %plot([duration(idx_st), duration(idx_ed(j))], es_ref.*[1, 1], 'linestyle', '--', 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
         end
         
         for j=1:numel(M)
@@ -76,23 +68,7 @@ function analysis_durationeffect
 
         plot(cutoffduration.*[1, 1], [0, 1], '--r', 'linewidth', 1);
 
-        %%
-        %{
-        if subplotnum(i) == 6
-            ax = gca(figobj);
-
-            for j=1:numel(langlist)
-                h(j) = plot(NaN, NaN, 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
-            end
-            h(end - 1) = plot(NaN, NaN, '-k', 'LineWidth', 1.2);
-            h(end) = plot(NaN, NaN, '--k', 'LineWidth', 1.2);
-
-            legend(ax, h(1:end - 2), langlist, 'Location', 'southeast', 'FontSize', 17, 'Position', [0.682, 0.665, 0.117, 0.175]);
-            ax = copyobj(ax, gcf);
-            legend(ax, h(end - 1:end), {'Excerpt', 'Full-length'}, 'Location', 'southeast', 'FontSize', 17, 'Position', [0.823, 0.701, 0.127, 0.119]);
-        end
-        %}
-        
+        %%        
         if subplotnum(i) > 3
             xlabel('Excerpt length (sec.)', 'FontSize', 13);
         end
@@ -111,4 +87,20 @@ function analysis_durationeffect
     end
 
     saveas(figobj, strcat(outputdir, 'durationeffect.png'));
+
+    %%
+    h = zeros(numel(langlist), 1);
+    figobj_l = figure;
+    figobj_l.Position = [90, 150, 1200, 720];
+    scatter(0, 0);
+
+    hold on
+    for j=1:numel(langlist)
+        h(j) = plot(NaN, NaN, 'Color', pprm.langcolormap(langlist{j}), 'LineWidth', 1.2);
+    end
+
+    legend(h, langlist, 'FontSize', 17);
+    hold off
+
+    saveas(figobj_l, strcat(outputdir, 'durationeffect_legend.png'));
 end

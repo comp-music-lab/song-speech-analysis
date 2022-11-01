@@ -1,7 +1,5 @@
-function analysis_rawdatastat
+function analysis_rawdatastat(outputdir)
     %%
-    outputdir = './output/20220918/';
-    
     audiodir = './data/Stage 1 RR Audio/full-length/';
 
     dirlist = {...
