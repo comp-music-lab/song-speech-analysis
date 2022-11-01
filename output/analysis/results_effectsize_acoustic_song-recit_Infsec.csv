@@ -14,8 +14,8 @@ Spectral centroid,Japanese,0.395553200642994,0.00722015792730109,common language
 f0,Yoruba,0.753579844420501,0.00741653180921327,common language effect size
 Rate of change of f0,Yoruba,0.598369507673403,0.00756461690043147,common language effect size
 Spectral centroid,Yoruba,0.530387598356389,0.00940182776074059,common language effect size
-Pulse clarity,Yoruba,0.5,0.0744968089276937,common language effect size
-Pulse clarity,Yoruba,0.5,0.0744968089276937,common language effect size
-Pulse clarity,Yoruba,0.5,0.0744968089276937,common language effect size
-Pulse clarity,Yoruba,0.5,0.0744968089276937,common language effect size
-Pulse clarity,Yoruba,0.5,0.0744968089276937,common language effect size
+Pulse clarity,English,0.566055930568949,0.0483211112916926,common language effect size
+Pulse clarity,Marathi,0.5,0.101339985941419,common language effect size
+Pulse clarity,Farsi,0.6,0.0738009492840634,common language effect size
+Pulse clarity,Japanese,0.727781835889944,0.0434751600120521,common language effect size
+Pulse clarity,Yoruba,0.391840607210626,0.0715758312301899,common language effect size

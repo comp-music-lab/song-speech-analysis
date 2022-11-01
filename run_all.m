@@ -1,4 +1,7 @@
 %%
+helper.h_addpath_MIRtoolbox();
+
+%%
 outputdir_analysis = './output/analysis/';
 outputdir_fig = './output/figure/';
 

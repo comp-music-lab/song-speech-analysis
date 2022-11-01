@@ -65,7 +65,6 @@ function analysis_featureES_1(duration, typeflag, exploratory, outputdir)
 
     %% Exploratory feature
     if exploratory
-        addpath(strcat(userpath, '/lib2/MIRtoolbox1.8.1/MIRToolbox/'));
         PC = cell(N, 1); % Pulse clarity
         
         for i=1:N
