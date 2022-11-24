@@ -1,4 +1,4 @@
-function analysis_featureES_1(duration, typeflag, exploratory, outputdir)
+function analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outputdir)
     switch typeflag
         case 1
             typelist = {'song', 'desc'};
@@ -10,7 +10,7 @@ function analysis_featureES_1(duration, typeflag, exploratory, outputdir)
 
     %% configuration
     fileid = strcat(num2str(duration, '%d'), 'sec');
-    datainfo = readtable(strcat('datainfo_Marsden-all_', typelist{1}, '-', typelist{2}, '.csv'));
+    datainfo = readtable(strcat(datainfoid, '_', typelist{1}, '-', typelist{2}, '.csv'));
     
     addpath('./lib/two-sample/');
     addpath('./lib/CWT/');

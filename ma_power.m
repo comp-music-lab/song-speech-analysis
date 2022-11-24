@@ -14,6 +14,8 @@ function ma_power
     mu_null = 0.5;
     mu = linspace(0, 1, 512);
     Dlt = 0.5 - normcdf(-0.4/sqrt(2));
+    mu_sesoi_diff = normcdf(0.4/sqrt(2));
+    mu_sesoi_equi = 0.5;
     
     %%
     for j=1:numel(type)
@@ -42,6 +44,7 @@ function ma_power
 
             %%
             if sum(strcmp(featurelist{i}, testdiff)) == 1
+                mu_0 = mu_sesoi_diff; % Use SESOI instead of the estimate from the pilot data
                 power_org = analyticalpow(sgm, al, mu_0, mu_null, tausq_hat);
     
                 %%
@@ -58,6 +61,7 @@ function ma_power
                 fprintf('(%s-%s) diff: %s (%3.4f-%3.4f-%3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
                     type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_0, mu_CI_U, K + L, be, power, al);
             elseif sum(strcmp(featurelist{i}, testsim)) == 1
+                mu_0 = mu_sesoi_equi;
                 sgm_K = sqrt(mean(sgm.^2 + tausq_hat));
                 n = simequivpow(mu_0 - 0.5, sgm_K, al, be, Dlt);
 

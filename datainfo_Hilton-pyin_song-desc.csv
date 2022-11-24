@@ -1,0 +1,19 @@
+dataname,performer,type,language,sex,path,audiofilepath,pair
+ACO02C,ACO02,song,Spanish,M,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,1
+ACO02D,ACO02,desc,Spanish,M,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,1
+ACO05C,ACO05,song,Spanish,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,2
+ACO05D,ACO05,desc,Spanish,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,2
+ACO09C,ACO09,song,Spanish,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,3
+ACO09D,ACO09,desc,Spanish,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,3
+BEJ01C,BEJ01,song,Mandarin,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,4
+BEJ01D,BEJ01,desc,Mandarin,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,4
+BEJ16C,BEJ16,song,Mandarin,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,5
+BEJ16D,BEJ16,desc,Mandarin,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,5
+BEJ21C,BEJ21,song,Mandarin,M,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,6
+BEJ21D,BEJ21,desc,Mandarin,M,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,6
+WEL01C,WEL01,song,English,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,7
+WEL01D,WEL01,desc,English,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,7
+WEL21C,WEL21,song,English,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,8
+WEL21D,WEL21,desc,English,F,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,8
+WEL51C,WEL51,song,English,M,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,9
+WEL51D,WEL51,desc,English,M,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,9

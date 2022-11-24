@@ -14,14 +14,15 @@ if not(isfolder(outputdir_fig))
 end
 
 %%
+datainfoid = {'datainfo_Marsden-all', 'datainfo_Marsden-complete'};
 duration = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70];
 typeflag_songdesc = 1;
 exploratory = false;
 
 for i=1:numel(duration)
     fprintf('%s: %d/%d\n', datetime, i, numel(duration));
-    analysis_featureES_1(duration(i), typeflag_songdesc, exploratory, outputdir_analysis);
-    analysis_featureES_2(duration(i), typeflag_songdesc, exploratory, outputdir_analysis);
+    analysis_featureES_1(datainfoid{1}, duration(i), typeflag_songdesc, exploratory, outputdir_analysis);
+    analysis_featureES_2(datainfoid{2}, duration(i), typeflag_songdesc, exploratory, outputdir_analysis);
     close all
 end
 
@@ -29,16 +30,16 @@ end
 duration = Inf;
 exploratory = true;
 
-analysis_featureES_1(duration, typeflag_songdesc, exploratory, outputdir_analysis);
-analysis_featureES_2(duration, typeflag_songdesc, exploratory, outputdir_analysis);
+analysis_featureES_1(datainfoid{1}, duration, typeflag_songdesc, exploratory, outputdir_analysis);
+analysis_featureES_2(datainfoid{2}, duration, typeflag_songdesc, exploratory, outputdir_analysis);
 
 typeflag_instdesc = 2;
-analysis_featureES_1(duration, typeflag_instdesc, exploratory, outputdir_analysis);
-analysis_featureES_2(duration, typeflag_instdesc, exploratory, outputdir_analysis);
+analysis_featureES_1(datainfoid{1}, duration, typeflag_instdesc, exploratory, outputdir_analysis);
+analysis_featureES_2(datainfoid{2}, duration, typeflag_instdesc, exploratory, outputdir_analysis);
 
 typeflag_songrecit = 3;
-analysis_featureES_1(duration, typeflag_songrecit, exploratory, outputdir_analysis);
-analysis_featureES_2(duration, typeflag_songrecit, exploratory, outputdir_analysis);
+analysis_featureES_1(datainfoid{1}, duration, typeflag_songrecit, exploratory, outputdir_analysis);
+analysis_featureES_2(datainfoid{2}, duration, typeflag_songrecit, exploratory, outputdir_analysis);
 
 %%
 analysis_durationeffect(outputdir_analysis, outputdir_fig);
