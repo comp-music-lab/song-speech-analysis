@@ -5,6 +5,9 @@ library(ggpubr)
 ## Constants
 LIST_FEATURE <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
 CONCEPT_NAME <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Loudness', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Phrase length', 'Interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
+FEATURE_DIFF <- c('f0', 'IOI rate', 'Rate of change of f0')
+FEATURE_SIM <- c('Spectral centroid', 'Sign of f0 slope', 'f0 ratio')
+FEATURE_OTHER <- c('Spectral flatness', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'Onset-break interval', 'f0 ratio deviation', 'Pulse clarity')
 
 if (exploratory) {
   CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', 'Rate of change of f0', 'f0 ratio')
@@ -21,45 +24,72 @@ G_HEI <- 6
 XL <- c(-1.8, 5.0)
 XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5)
 
-##Specify data download location
-file.data <- paste(INPUTDIR, 'results_effectsize_acoustic_', DATATYPE, '_Infsec.csv', sep = '')
+## Load effect size information
+file.data <- c(
+  paste(INPUTDIR, 'results_effectsize_acoustic_', DATATYPE, '_Infsec.csv', sep = ''),
+  paste(INPUTDIR, 'results_effectsize_seg_', DATATYPE, '_Infsec.csv', sep = '')
+)
 
-data_all <- c()
-for (i in 1:length(DATATYPE)) {
+data <- c()
+for (i in 1:length(file.data)) {
   if (file.exists(file.data[i])) {
     data_i <- read.csv(file = file.data[i])
-    data_i$Comparison <- TITLESTR[i]
-    data_all <- rbind(data_all, data_i)
+    
+    idx <- sapply(DATATYPE, function (x) grepl(x, file.data[i], fixed = TRUE))
+    data_i$Comparison <- TITLESTR[idx]
+    
+    data <- rbind(data, data_i)
   } else {
     print(paste(file.data[i], " does not exist.", sep = ""))
   }
 }
 
-file.data <- paste(INPUTDIR, 'results_effectsize_seg_', DATATYPE, '_Infsec.csv', sep = '')
+## Load meta-analysis results
+file.data <- c(
+  paste(INPUTDIR, 'ma_acoustic_', DATATYPE, '_Infsec.csv', sep = ''),
+  paste(INPUTDIR, 'ma_seg_', DATATYPE, '_Infsec.csv', sep = '')
+)
 
-data_complete <- c()
-for (i in 1:length(DATATYPE)) {
+data_ma <- c()
+for (i in 1:length(file.data)) {
   if (file.exists(file.data[i])) {
     data_i <- read.csv(file = file.data[i])
-    data_i$Comparison <- TITLESTR[i]
-    data_complete <- rbind(data_complete, data_i)
+    
+    idx <- sapply(DATATYPE, function (x) grepl(x, file.data[i], fixed = TRUE))
+    data_i$Comparison <- TITLESTR[idx]
+    
+    data_ma <- rbind(data_ma, data_i)
   } else {
     print(paste(file.data[i], " does not exist.", sep = ""))
   }
 }
 
-data <- rbind(data_all, data_complete)
+## Change name
+CORE_FEATURE[CORE_FEATURE == "Sign of f0 slope"] <- "Coefficient of f0 slope"
+FEATURE_SIM[FEATURE_SIM == "Sign of f0 slope"] <- "Coefficient of f0 slope"
+LIST_FEATURE[LIST_FEATURE == "Sign of f0 slope"] <- "Coefficient of f0 slope"
+data$feature[data$feature == "Sign of f0 slope"] <- "Coefficient of f0 slope"
+data_ma$feature[data_ma$feature == "Sign of f0 slope"] <- "Coefficient of f0 slope"
 
-# ELT
+## ELT
 data$diff[data$diff == 1 & !is.nan(data$diff)] <- 1 - 3e-3
 data$diff[data$diff == 0 & !is.nan(data$diff)] <- 3e-3
 
 data$d <- sqrt(2)*qnorm(data$diff, 0, 1) #convert common language effect size to Cohen's d
 
 data$featureplotname <- ""
+data_ma$featureplotname <- ""
 for (i in 1:length(LIST_FEATURE)) {
-  data$featureplotname[data$feature == LIST_FEATURE[i]] <- paste(CONCEPT_NAME[i], "\n(", LIST_FEATURE[i], ")", sep = "")  
+  plotname <- paste(CONCEPT_NAME[i], "\n(", LIST_FEATURE[i], ")", sep = "") 
+  
+  data$featureplotname[data$feature == LIST_FEATURE[i]] <- plotname 
+  data_ma$featureplotname[data_ma$feature == LIST_FEATURE[i]] <- plotname
 }
+
+data$dummyID <- 1:dim(data)[1]
+data_ma$dummyID <- 0
+
+data_ma$lang <- ""
 
 ## Extract core features
 idx = 0
@@ -77,10 +107,11 @@ magnitude <- aggregate(d ~ featureplotname, data = data[data$Comparison == "Song
 idx <- sort(magnitude$d, decreasing = FALSE, index=T)$ix
 ORDER_Y_AXIS <- as.factor(magnitude[idx, 1])
 
-data$dummyID <- 1:dim(data)[1]
-
 for (i in 1:length(g_list)) {
-  g_list[[i]] <- ggplot(data[data$Comparison == LIST_COMPARISON[i], ], aes(x = d, y = featureplotname, fill = lang, group = dummyID)) + 
+  data_i <- data[data$Comparison == LIST_COMPARISON[i], ]
+  
+  g_list[[i]] <- ggplot(data_i, aes(x = d, y = featureplotname, fill = lang, group = dummyID)) + 
+    geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(featureplotname)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
     geom_dotplot(binaxis = 'y', position = "dodge", stackdir = 'center', alpha = 0.8) +
     geom_vline(xintercept = 0, linetype = 2) +
     geom_vline(xintercept = 0.4, linetype = 3) +
@@ -94,6 +125,59 @@ for (i in 1:length(g_list)) {
     xlim(XL) + 
     scale_x_continuous(breaks = XBREAK) + 
     theme(legend.title = element_blank())
+  
+  ## difference
+  data_ma$lang <- data_i$lang[1]
+  
+  idx <- data_ma$feature %in% FEATURE_DIFF & data_ma$Comparison == LIST_COMPARISON[i]
+  
+  if (sum(idx) > 0) {
+    data_i <- data_ma[idx, ]
+    data_i$grp <- 1:sum(idx)
+    data_i$x <- sqrt(2)*qnorm(data_i$mean, 0, 1)
+    data_j <- data_ma[idx, ]
+    data_j$grp <- 1:sum(idx)
+    data_j$x <- sqrt(2)*qnorm(data_j$CI_diff, 0, 1)
+    
+    g_list[[i]] <- g_list[[i]] + 
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) + 
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_diff, 0, 1), y = featureplotname), shape = "|", size = 5, show.legend = FALSE) +
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23, size = 3, fill = "#d7003a", show.legend = FALSE)
+  }
+  
+  ## similarity
+  idx <- data_ma$feature %in% FEATURE_SIM & data_ma$Comparison == LIST_COMPARISON[i]
+  
+  if (sum(idx) > 0) {
+    data_i <- data_ma[idx, ]
+    data_i$grp <- 1:sum(idx)
+    data_i$x <- sqrt(2)*qnorm(data_i$CI_sim_l, 0, 1)
+    data_j <- data_ma[idx, ]
+    data_j$grp <- 1:sum(idx)
+    data_j$x <- sqrt(2)*qnorm(data_j$CI_sim_u, 0, 1)
+    
+    g_list[[i]] <- g_list[[i]] + 
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) + 
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#d7003a", show.legend = FALSE) +
+      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, show.legend = FALSE)
+  }
+  
+  ## Others
+  idx <- data_ma$feature %in% FEATURE_OTHER & data_ma$Comparison == LIST_COMPARISON[i]
+  
+  if (sum(idx) > 0) {
+    data_i <- data_ma[idx, ]
+    data_i$grp <- 1:sum(idx)
+    data_i$x <- sqrt(2)*qnorm(data_i$CI_sim_l, 0, 1)
+    data_j <- data_ma[idx, ]
+    data_j$grp <- 1:sum(idx)
+    data_j$x <- sqrt(2)*qnorm(data_j$CI_sim_u, 0, 1)
+    
+    g_list[[i]] <- g_list[[i]] + 
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) +
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#008080", show.legend = FALSE) +
+      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, show.legend = FALSE)
+  }
   
   ggsave(file = paste(OUTPUTDIR, "effectsize_", LIST_COMPARISON[i], FILEID, ".png", sep = ""), plot = g_list[[i]], width = G_WID, height = G_HEI)
 }

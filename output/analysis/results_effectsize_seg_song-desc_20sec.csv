@@ -1,16 +1,16 @@
 feature,lang,diff,stderr,method
 IOI rate,English,0.810606060606061,0.04423786030709,common language effect size
 f0 ratio,English,0.479726314544678,0.00912857247206774,common language effect size
-Sign of f0 slope,English,0.5,0.197202659436654,common language effect size
+Sign of f0 slope,English,0.722222222222222,0.198761597999981,common language effect size
 IOI rate,Marathi,0.930619559651818,0.024988267021091,common language effect size
 f0 ratio,Marathi,0.578017830848694,0.00901830736298951,common language effect size
-Sign of f0 slope,Marathi,0.25,0.144337567297406,common language effect size
+Sign of f0 slope,Marathi,0.166666666666667,0.192450089729875,common language effect size
 IOI rate,Farsi,0.9575,0.0192182769325247,common language effect size
 f0 ratio,Farsi,0.510728478431702,0.00915792926205979,common language effect size
-Sign of f0 slope,Farsi,0.666666666666667,0.166666666666667,common language effect size
+Sign of f0 slope,Farsi,0.444444444444444,0.314269680527354,common language effect size
 IOI rate,Japanese,0.927186009538951,0.0219629991128415,common language effect size
 f0 ratio,Japanese,0.628954768180847,0.00875241331421122,common language effect size
-Sign of f0 slope,Japanese,0.875,0.125,common language effect size
+Sign of f0 slope,Japanese,0.75,0.25,common language effect size
 IOI rate,Yoruba,0.820701357466063,0.0509088868746793,common language effect size
 f0 ratio,Yoruba,0.4920334815979,0.00904880142972096,common language effect size
-Sign of f0 slope,Yoruba,0.5,0,common language effect size
+Sign of f0 slope,Yoruba,0.904761904761905,0.113356006802267,common language effect size

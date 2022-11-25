@@ -12,7 +12,7 @@ end
 %%
 al = 7;
 be = 0.2;
-K = 12;
+K = 24;
 
 mu_0 = normrnd(0, 2);
 tau = gamrnd(al, be);
@@ -29,7 +29,7 @@ T_H0 = zeros(M, 1);
 T_H1 = zeros(M, 1);
 tausq_hat_sim = zeros(M, 1);
 
-for m=1:M
+parfor m=1:M
     Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
     
     mu_F = sum(sgm.^-2 .* Y)/sum(sgm.^-2);
@@ -54,7 +54,7 @@ histogram(T_H0, 'Normalization', 'pdf');
 hold on
 histogram(T_H1, 'Normalization', 'pdf');
 hold off
-title(['Power: ', num2str(power, '%3.4f'), ', ', num2str(power_sim, '%3.4f')]);
+title(['Power: ', num2str(power, '%3.4f'), ' (theoretical), ', num2str(power_sim, '%3.4f'), ' (simulation)']);
 
 subplot(1, 2, 2);
 histogram(tausq_hat_sim, 'Normalization', 'pdf');
@@ -63,6 +63,6 @@ yl = ylim();
 plot(tau^2.*[1, 1], yl, '-.m');
 tausq_hat_sim = sort(tausq_hat_sim);
 idx = find(tau^2 > tausq_hat_sim, 1, 'last');
-title([num2str(idx/numel(tausq_hat_sim)*100, '%3.4f'), '%']);
+title(['Quantile of the true \tau^2: ', num2str(idx/numel(tausq_hat_sim)*100, '%3.4f'), '%']);
 hold off
 %}

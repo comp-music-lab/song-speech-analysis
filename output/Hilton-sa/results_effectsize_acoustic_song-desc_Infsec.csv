@@ -1,0 +1,10 @@
+feature,lang,diff,stderr,method
+f0,Spanish,0.944677186998063,0.00434181175510267,common language effect size
+f0,Spanish,0.72014687854374,0.00535945538990517,common language effect size
+f0,Spanish,0.763097290308679,0.00816334395081087,common language effect size
+f0,Mandarin,0.84097709264375,0.00506464118322333,common language effect size
+f0,Mandarin,0.754614538049068,0.00439959921912723,common language effect size
+f0,Mandarin,0.956650045075501,0.00288662491417739,common language effect size
+f0,English,0.728668414236764,0.00636195487256523,common language effect size
+f0,English,0.900110610678496,0.00421817794955825,common language effect size
+f0,English,0.575189527803057,0.0079492644953593,common language effect size

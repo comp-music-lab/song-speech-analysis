@@ -76,9 +76,14 @@ function analysis_durationeffect(datadir, outputdir)
         if mod(subplotnum(i), 3) == 1
             ylabel('Effect size (relative effect)', 'FontSize', 13);
         end
-
-        title(featurename{i}, 'FontSize', 18);
-
+        
+        % Change name
+        if strcmp(featurelist{i}, 'Sign of f0 slope')
+            title({'Pitch declination', '(Coefficient of f0 slope)'}, 'FontSize', 18);
+        else
+            title(featurename{i}, 'FontSize', 18);
+        end
+        
         hold off
 
         ax = gca(figobj);

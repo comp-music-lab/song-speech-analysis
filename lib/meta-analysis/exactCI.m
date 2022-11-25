@@ -39,7 +39,7 @@ end
 %%
 al = 7;
 be = 0.2;
-K = 13;
+K = 5;
 
 mu_0 = normrnd(0, 2);
 tau = gamrnd(al, be);
@@ -105,6 +105,7 @@ end
 close(wf);
 
 figure(1);
+clf; cla;
 plot(1:M, CI, 'Color', 'k');
 hold on
 plot([1, M], mu_0.*[1, 1], '-.m');

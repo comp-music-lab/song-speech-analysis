@@ -46,6 +46,10 @@ T$unit[T$feature == "Sign of f0 slope"] <- "-"
 T$sex[T$sex == "f"] <- "Female"
 T$sex[T$sex == "m"] <- "Male"
 
+## Change name
+T$feature[T$feature == "Sign of f0 slope"] <- "Coefficient of f0 slope"
+featurelist_sim[featurelist_sim == "Sign of f0 slope"] <- "Coefficient of f0 slope"
+
 ## Plot
 tmp <- unique(T[c("feature", "name", "unit")])
 ylabelstr <- sub("ioi", "IOI", paste(tmp$name, "\n(Mean ", tolower(tmp$feature), " [", tmp$unit, "])", sep = ""))
@@ -63,8 +67,8 @@ for (i in 1:length(featurelist_sim)) {
     g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 400))
   } else if(featurelist_sim[i] == "Spectral centroid") {
     g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 1900))
-  } else if(featurelist_sim[i] == "Sign of f0 slope") {
-    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(-1, 1))
+  } else if(featurelist_sim[i] == "Coefficient of f0 slope") {
+    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(-320, 320))
   }
 }
 

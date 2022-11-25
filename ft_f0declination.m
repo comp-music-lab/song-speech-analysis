@@ -21,8 +21,8 @@ function coef = ft_f0declination(t_onset, t_break, f0, t_f0)
             %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
             mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
             R = mdl.Coefficients.Estimate;
-            coef = sign(R(2));
-            %coef = R(2);
+            %coef = sign(R(2));
+            coef = R(2);
         else
             coef = [];
         end
@@ -40,8 +40,8 @@ function coef = ft_f0declination(t_onset, t_break, f0, t_f0)
             %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
             mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
             R = mdl.Coefficients.Estimate;
-            coef = sign(R(2));
-            %coef = R(2);
+            %coef = sign(R(2));
+            coef = R(2);
         else
             coef = [];
         end
@@ -70,8 +70,8 @@ function coef = ft_f0declination(t_onset, t_break, f0, t_f0)
                 %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
                 mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
                 R = mdl.Coefficients.Estimate;
-                coef(end + 1) = sign(R(2));
-                %coef(end + 1) = R(2);
+                %coef(end + 1) = sign(R(2));
+                coef(end + 1) = R(2);
             end
 
             %{

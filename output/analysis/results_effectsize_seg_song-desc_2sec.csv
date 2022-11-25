@@ -7,10 +7,10 @@ f0 ratio,Marathi,NaN,NaN,common language effect size
 Sign of f0 slope,Marathi,0,0,common language effect size
 IOI rate,Farsi,NaN,NaN,common language effect size
 f0 ratio,Farsi,NaN,NaN,common language effect size
-Sign of f0 slope,Farsi,0.5,0,common language effect size
+Sign of f0 slope,Farsi,0,0,common language effect size
 IOI rate,Japanese,NaN,NaN,common language effect size
 f0 ratio,Japanese,NaN,NaN,common language effect size
 Sign of f0 slope,Japanese,0,0,common language effect size
 IOI rate,Yoruba,0.666666666666667,0.333333333333333,common language effect size
 f0 ratio,Yoruba,0.501761143898241,0.00676950678030308,common language effect size
-Sign of f0 slope,Yoruba,0.5,0,common language effect size
+Sign of f0 slope,Yoruba,1,0,common language effect size
