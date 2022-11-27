@@ -42,21 +42,17 @@ analysis_featureES_1(datainfoid{1}, duration, typeflag_songrecit, exploratory, o
 analysis_featureES_2(datainfoid{2}, duration, typeflag_songrecit, exploratory, outputdir_analysis);
 
 %%
-q = [0.5, 0.9688, 0.0312, 0.9688];
-%{
 al = 0.05/6;
-q = [0.5, 1 - al, 1 - al/2, al/2];
-%}
 typeid = {'song-desc', 'song-recit', 'inst-desc'};
 
 for i=1:numel(typeid)
     esinfofile = strcat(outputdir_analysis, 'results_effectsize_acoustic_', typeid{i}, '_Infsec.csv');
     outputfile = strcat(outputdir_analysis, 'ma_acoustic_', typeid{i}, '_Infsec.csv');
-    analysis_metaCI(esinfofile, outputfile, q);
+    analysis_metaCI(esinfofile, outputfile, al);
 
     esinfofile = strcat(outputdir_analysis, 'results_effectsize_seg_', typeid{i}, '_Infsec.csv');
     outputfile = strcat(outputdir_analysis, 'ma_seg_', typeid{i}, '_Infsec.csv');
-    analysis_metaCI(esinfofile, outputfile, q);
+    analysis_metaCI(esinfofile, outputfile, al);
 end
 
 %%

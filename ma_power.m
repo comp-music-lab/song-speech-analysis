@@ -12,7 +12,6 @@ function ma_power
 
     be = 0.95;
     mu_null = 0.5;
-    mu = linspace(0, 1, 512);
     Dlt = 0.5 - normcdf(-0.4/sqrt(2));
     mu_sesoi_diff = normcdf(0.4/sqrt(2));
     mu_sesoi_equi = 0.5;
@@ -27,25 +26,31 @@ function ma_power
         featurelist = unique(result.feature);
     
         %%
-        al = 0.05/numel(featurelist);
-        
         for i=1:numel(featurelist)
+            if sum(strcmp(featurelist{i}, testdiff)) == 1
+                al = 0.05/6 * 2;
+            elseif sum(strcmp(featurelist{i}, testsim)) == 1
+                al = 0.05/6;
+            else
+                al = 0.05/6;
+            end
+
             idx = strcmp(result.feature, featurelist{i});
             Y = result.diff(idx);
             sgm = result.stderr(idx);
             K = numel(Y);
-            mu_q = exactCI(Y, sgm, mu, [0.025, 0.5, 0.975]);
-            mu_CI_L = mu_q(1);
-            mu_0 = mu_q(2);
-            mu_CI_U = mu_q(3);
+            mu = linspace(min(Y), max(Y), 1024);
+            [CI, ~, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
+            mu_CI_L = CI(1);
+            mu_CI_U = CI(2);
 
             mu_F = sum(sgm.^-2 .* Y)/sum(sgm.^-2);
             tausq_hat = max((sum(sgm.^-2 .* (Y - mu_F).^2) - (K - 1))/(sum(sgm.^-2) - sum(sgm.^-4)/sum(sgm.^-2)), 0);
 
             %%
             if sum(strcmp(featurelist{i}, testdiff)) == 1
-                mu_0 = mu_sesoi_diff; % Use SESOI instead of the estimate from the pilot data
-                power_org = analyticalpow(sgm, al, mu_0, mu_null, tausq_hat);
+                mu_hat = mu_sesoi_diff; % Use SESOI instead of the estimate from the pilot data
+                power_org = analyticalpow(sgm, al, mu_hat, mu_null, tausq_hat);
     
                 %%
                 power = power_org;
@@ -55,18 +60,18 @@ function ma_power
                     L = L + 1;
                     sgm_L = [sgm; repmat(sqrt(sgmsq_hat), [L, 1])];
                     
-                    power = analyticalpow(sgm_L, al, mu_0, mu_null, tausq_hat);
+                    power = analyticalpow(sgm_L, al, mu_hat, mu_null, tausq_hat);
                 end
         
-                fprintf('(%s-%s) diff: %s (%3.4f-%3.4f-%3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_0, mu_CI_U, K + L, be, power, al);
+                fprintf('(%s-%s) diff: %s (%3.4f-%3.4f-Inf) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
+                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_hat, K + L, be, power, al);
             elseif sum(strcmp(featurelist{i}, testsim)) == 1
-                mu_0 = mu_sesoi_equi;
+                mu_hat = mu_sesoi_equi;
                 sgm_K = sqrt(mean(sgm.^2 + tausq_hat));
-                n = simequivpow(mu_0 - 0.5, sgm_K, al, be, Dlt);
+                n = simequivpow(mu_hat - 0.5, sgm_K, al, be, Dlt);
 
                 fprintf('(%s-%s) equi: %s (%3.4f-%3.4f-%3.4f) - %d studies for beta = %3.4f and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_0, mu_CI_U, n, be, al);
+                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_hat, mu_CI_U, n, be, al);
             end
         end
     end

@@ -137,11 +137,11 @@ for (i in 1:length(g_list)) {
     data_i$x <- sqrt(2)*qnorm(data_i$mean, 0, 1)
     data_j <- data_ma[idx, ]
     data_j$grp <- 1:sum(idx)
-    data_j$x <- sqrt(2)*qnorm(data_j$CI_diff, 0, 1)
+    data_j$x <- sqrt(2)*qnorm(data_j$CI_l, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
       geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) + 
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_diff, 0, 1), y = featureplotname), shape = "|", size = 5, show.legend = FALSE) +
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_l, 0, 1), y = featureplotname), shape = "|", size = 5, show.legend = FALSE) +
       geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23, size = 3, fill = "#d7003a", show.legend = FALSE)
   }
   
@@ -151,10 +151,10 @@ for (i in 1:length(g_list)) {
   if (sum(idx) > 0) {
     data_i <- data_ma[idx, ]
     data_i$grp <- 1:sum(idx)
-    data_i$x <- sqrt(2)*qnorm(data_i$CI_sim_l, 0, 1)
+    data_i$x <- sqrt(2)*qnorm(data_i$CI_l, 0, 1)
     data_j <- data_ma[idx, ]
     data_j$grp <- 1:sum(idx)
-    data_j$x <- sqrt(2)*qnorm(data_j$CI_sim_u, 0, 1)
+    data_j$x <- sqrt(2)*qnorm(data_j$CI_u, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
       geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) + 
@@ -168,10 +168,10 @@ for (i in 1:length(g_list)) {
   if (sum(idx) > 0) {
     data_i <- data_ma[idx, ]
     data_i$grp <- 1:sum(idx)
-    data_i$x <- sqrt(2)*qnorm(data_i$CI_sim_l, 0, 1)
+    data_i$x <- sqrt(2)*qnorm(data_i$CI_l, 0, 1)
     data_j <- data_ma[idx, ]
     data_j$grp <- 1:sum(idx)
-    data_j$x <- sqrt(2)*qnorm(data_j$CI_sim_u, 0, 1)
+    data_j$x <- sqrt(2)*qnorm(data_j$CI_u, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
       geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) +

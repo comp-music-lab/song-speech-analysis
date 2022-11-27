@@ -1,115 +1,152 @@
-function CI = exactCI(Y, sgm, mu, q)
+function [CI, pval, mu_hat] = exactCI(mu, Y, sgm, al, mu_null)
     %%
-    K = numel(Y);
-    
-    %%
-    L = 2^K;
-    V = zeros(L, K);
-    parfor l=1:L
-        b = dec2bin(l - 1);
-        V(l, :) = [zeros(1, K - length(b)), arrayfun(@(x) str2double(x), b)];
-    end
-    V = 2.*V - 1;
+    mu = mu(:)';
+    Y = Y(:);
+    sgm = sgm(:);
 
-    %%
+    %% CI
+    V = h_V(numel(Y));
+
+    sgmsqhat = h_sgmhat(mu, Y, sgm);
+    T = h_T(mu, Y, sgmsqhat);
+    T_null = h_T_nul(V, sgmsqhat);
+    c = h_c(T_null, al);
+    CI = h_CI(T, c, mu);
+    
+    %% mu
+    p = zeros(numel(mu), 1);
     parfor i=1:numel(mu)
-        tausq_hat = max((sum((Y - mu(i)).^2) - sum(sgm.^2))/K, 0);
-        T_null = V * (abs(Y - mu(i))./(sgm.^2 + tausq_hat));
-        T_i = sum((Y - mu(i))./(sgm.^2 + tausq_hat));
-        
-        T_null = sort(T_null);
-        idx = find(T_i < T_null, 1, 'first') - 1;
-        if isempty(idx)
-            idx = L;
+        p(i) = find(T(i) > sort(T_null(:, i)), 1, 'last')/size(T_null, 1);
+    end
+    [~, idx] = min(abs(p - 0.5));
+    mu_hat = mu(idx);
+
+    %% p-value
+    sgmsqhat = h_sgmhat(mu_null, Y, sgm);
+    T = h_T(mu_null, Y, sgmsqhat);
+    T_null = h_T_nul(V, sgmsqhat);
+    pval = find(T > sort(T_null), 1, 'last')/numel(T_null);
+    if isempty(pval)
+        pval = 0;
+    end
+end
+
+function sgmsqhat = h_sgmhat(mu, Y, sgm)
+    K = numel(Y);
+    sgmsqhat = sum((Y - mu).^2 - sgm.^2, 1)./K;
+    sgmsqhat(sgmsqhat < 0) = 0;
+    sgmsqhat = sgm.^2 + sgmsqhat;
+end
+
+function V = h_V(K)
+    if K <= 13
+        L = 2^K;
+        V = zeros(L, K);
+
+        b = dec2bin(0:(L - 1));
+
+        parfor l=1:L
+            V(l, :) = arrayfun(@str2double, b(l, :));
         end
-
-        p(i) = idx/L;
+    else
+        L = 12000;
+        V = binornd(1, 0.5, [L, K]);
     end
+
+    V(V == 0) = -1;
+end
+
+function T_null = h_T_nul(V, sgmsqhat)
+    U = 1./sqrt(sgmsqhat);
+    T_null = V*U;
+end
+
+function c = h_c(T, al)
+    c = zeros(2, size(T, 2));
+
+    parfor i=1:size(T, 2)
+        c(:, i) = [quantile(T(:, i), al/2), quantile(T(:, i), 1 - al/2)];
+    end
+end
+
+function T = h_T(mu, Y, sgmhat)
+    T = sum(sign(Y - mu)./sqrt(sgmhat), 1);
+end
+
+function CI = h_CI(T, c, mu)
+    idx = find(T < c(2, :), 1, 'first');
+    CI_l = mu(idx);
+
+    idx = find(T > c(1, :), 1, 'last');
+    CI_u = mu(idx);
     
-    %%
-    CI = zeros(numel(q), 1);
-    for i=1:numel(q)
-        [~, idx] = min(abs(p - q(i)));
-        CI(i) = mu(idx);
-    end
+    CI = [CI_l, CI_u];
 end
 
-%% two-sided
+%% Test code
 %{
-%%
-al = 7;
-be = 0.2;
-K = 5;
+K = 11;
+mu_0 = normrnd(0, 4);
+sgm = gamrnd(0.9, 1.5, [K, 1]);
+tau = gamrnd(0.9, 1.5);
 
-mu_0 = normrnd(0, 2);
-tau = gamrnd(al, be);
-sgm = gamrnd(al, be, [K, 1]);
-
-%%
-al = 0.05;
-q = [al/2, 1 - al/2];
-mu = linspace(-10, 10, 1024);
-p = zeros(numel(mu), 1);
-M = 512;
-CI = zeros(M, 2);
-
-wf = waitbar(0, 'Waiting...');
+M = 2048;
+Y = zeros(K, M);
 for m=1:M
-    waitbar(m/M, wf, 'Waiting...');
-    Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
-    CI(m, :) = exactCI(Y, sgm, mu, q)';
+    Y(:, m) = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
+end
+writetable(table(Y, sgm, mu_0.*ones(K, 1)), './testdata.csv');
+
+CI = zeros(2, M);
+pval = zeros(1, M);
+mu_hat = zeros(1, M);
+al = 0.05;
+mu_null = 0;
+
+wf = waitbar(0, 'Simulating...');
+for m=1:M
+    waitbar(m/M, wf, 'Simulating...');
+    mu = linspace(min(Y(:, m)), max(Y(:, m)), 512);
+    [CI(:, m), pval(m), mu_hat(m)] = exactCI(mu, Y(:, m), sgm, al, mu_null);
 end
 close(wf);
 
-figure(1);
-hit = 0;
-for m=1:M
-    plot([m, m], [CI(m, 1), CI(m, 2)], 'Color', 'k');
-    hold on
-
-    if CI(m, 2) < mu_0 && mu_0 < CI(m, 1)
-        hit= hit + 1;
-    end
-end
-plot([1, M], mu_0.*[1, 1], '-.m');
-hold off
-hit = hit/M * 100;
-title([num2str(hit, '%3.4f'), '%']);
-%}
-
-%% one-sided
-%{
-%%
-al = 7;
-be = 0.2;
-K = 13;
-
-mu_0 = normrnd(0, 2);
-tau = gamrnd(al, be);
-sgm = gamrnd(al, be, [K, 1]);
-
-%%
-al = 0.05;
-q = al;
-mu = linspace(-10, 10, 1024);
-p = zeros(numel(mu), 1);
-M = 512;
-CI = zeros(M, 1);
-
-wf = waitbar(0, 'Waiting...');
-for m=1:M
-    waitbar(m/M, wf, 'Waiting...');
-    Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
-    CI(m, :) = exactCI(Y, sgm, mu, q)';
-end
-close(wf);
+hitrate = 100*mean(CI(1, :) <= mu_0 & mu_0 <= CI(2, :));
+hitrate_onesided = 100*mean(pval < al);
+hitrate_twosided = 100*mean(pval < al/2 | (1 - al/2) < pval);
 
 figure(1);
-clf; cla;
-plot(1:M, CI, 'Color', 'k');
+clf ;cla;
+
+subplot(2, 2, 1);
+plot(CI(1, :));
 hold on
-plot([1, M], mu_0.*[1, 1], '-.m');
+plot(CI(2, :));
+plot([1, M], [mu_0, mu_0], '-.m');
 hold off
-hit = mean(CI > mu_0) * 100;
-title([num2str(hit, '%3.4f'), '%']);
+title(num2str(hitrate, '%3.4f'));
+axis tight
+
+CIlength = CI(2, :) - CI(1, :);
+subplot(2, 2, 2);
+plot(CIlength);
+hold on
+plot([1, M], mean(CIlength).*[1, 1], '-.m');
+hold off
+axis tight
+
+subplot(2, 2, 3);
+plot(sort(pval));
+hold on
+plot([1, M], [0, 1], '-.m');
+hold off
+title(['one-sided: ', num2str(hitrate_onesided, '%3.4f'), ', two-sided: ', num2str(hitrate_twosided, '%3.4f')]);
+axis tight
+
+subplot(2, 2, 4);
+histogram(mu_hat, 32, 'Normalization', 'pdf');
+hold on
+yl = ylim();
+plot(mu_0.*[1, 1], yl, '-.m');
+hold off
 %}

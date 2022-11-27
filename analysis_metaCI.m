@@ -1,23 +1,32 @@
-function analysis_metaCI(esinfofile, outputfile, q)
+function analysis_metaCI(esinfofile, outputfile, al)
     %%
     T = readtable(esinfofile);
     featurelist = unique(T.feature);
     
-    mu = linspace(0, 1, 4096);
-    
+    testdiff = {'f0', 'IOI rate', 'Rate of change of f0'};
+    testsim = {'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
+
     %%
     addpath('./lib/meta-analysis/');
-    varNames = {'feature', 'mean', 'CI_diff', 'CI_sim_l', 'CI_sim_u'};
-    varTypes = {'string', 'double', 'double', 'double', 'double'};
+    varNames = {'feature', 'mean', 'CI_l', 'CI_u'};
+    varTypes = {'string', 'double', 'double', 'double'};
     results = table('Size', [0, numel(varNames)], 'VariableTypes', varTypes, 'VariableNames', varNames);
+    mu_null = 0.5;
     
     for i=1:numel(featurelist)
+        if sum(strcmp(featurelist{i}, testdiff)) == 1
+            al = al * 2;
+        elseif sum(strcmp(featurelist{i}, testsim)) == 1
+            al = al;
+        end
+
         idx = strcmp(T.feature, featurelist{i});
         Y = T.diff(idx);
         sgm = T.stderr(idx);
-        CI = exactCI(Y, sgm, mu, q);
+        mu = linspace(min(Y), max(Y), 1024);
+        [CI, ~, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
         
-        results(end + 1, :) = table(featurelist(i), CI(1), CI(2), CI(3), CI(4));
+        results(end + 1, :) = table(featurelist(i), mu_hat, CI(1), CI(2));
     end
 
     %%
