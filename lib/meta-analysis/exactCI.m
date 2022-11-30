@@ -16,7 +16,11 @@ function [CI, pval, mu_hat] = exactCI(mu, Y, sgm, al, mu_null)
     %% mu
     p = zeros(numel(mu), 1);
     parfor i=1:numel(mu)
-        p(i) = find(T(i) > sort(T_null(:, i)), 1, 'last')/size(T_null, 1);
+        idx = find(T(i) > sort(T_null(:, i)), 1, 'last');
+        if isempty(idx)
+            idx = 0;
+        end
+        p(i) = idx/size(T_null, 1);
     end
     [~, idx] = min(abs(p - 0.5));
     mu_hat = mu(idx);
@@ -49,7 +53,7 @@ function V = h_V(K)
             V(l, :) = arrayfun(@str2double, b(l, :));
         end
     else
-        L = 12000;
+        L = 16000;
         V = binornd(1, 0.5, [L, K]);
     end
 
@@ -83,9 +87,34 @@ function CI = h_CI(T, c, mu)
     CI = [CI_l, CI_u];
 end
 
-%% Test code
+
 %{
-K = 11;
+%% Test code 1 ************
+K = 13;
+mu_0 = normrnd(0, 4);
+sgm = gamrnd(0.9, 1.5, [K, 1]);
+tau = gamrnd(0.9, 1.5);
+
+al = 0.05;
+mu_null = mu_0;
+
+Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
+mu = linspace(min(Y), max(Y), 512);
+[CI, pval, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
+
+figure(2);
+clf; cla;
+scatter(Y, zeros(K, 1), 'marker', '.');
+hold on
+scatter(mu_hat, 0.2);
+scatter(mu_0, 0.1, 'marker', 'x');
+plot(CI, [0, 0] + 0.2, 'k');
+hold off
+ylim([-0.5, 0.5]);
+
+
+%% Test code 2 ************
+K = 80;
 mu_0 = normrnd(0, 4);
 sgm = gamrnd(0.9, 1.5, [K, 1]);
 tau = gamrnd(0.9, 1.5);
@@ -100,8 +129,9 @@ writetable(table(Y, sgm, mu_0.*ones(K, 1)), './testdata.csv');
 CI = zeros(2, M);
 pval = zeros(1, M);
 mu_hat = zeros(1, M);
-al = 0.05;
-mu_null = 0;
+al = 0.05/6;
+%mu_null = 0;
+mu_null = mu_0;
 
 wf = waitbar(0, 'Simulating...');
 for m=1:M

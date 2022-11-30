@@ -3,9 +3,9 @@ function analysis_durationeffect(datadir, outputdir)
     fileid = {'results_effectsize_acoustic_song-desc', 'results_effectsize_seg_song-desc'};
     T_ref = [readtable(strcat(datadir, fileid{1}, '_Infsec.csv')); readtable(strcat(datadir, fileid{2}, '_Infsec.csv'))];
 
-    featurelist = {'f0', 'IOI rate', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
-    featurename = {{'Pitch height', '(f0)'}, {'Temporal rate', '(IOI rate)'}, {'Pitch stability', '(Rate of change of f0)'}, {'Pitch interval size', '(f0 ratio)'},...
-        {'Timbral brightness', '(Spectral centroid)'}, {'Pitch declination', '(Sign of f0 slope)'}...
+    featurelist = {'f0', 'IOI rate', '-|Δf0|', 'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
+    featurename = {{'Pitch height', '(f0)'}, {'Temporal rate', '(IOI rate)'}, {'Pitch stability', '(-|Δf0|)'},...
+        {'Pitch interval size', '(f0 ratio)'}, {'Timbral brightness', '(Spectral centroid)'}, {'Pitch declination', '(Sign of f0 slope)'}...
     };
     subplotnum = [1, 2, 3, 4, 5, 6];
     langlist = unique(T_ref.lang);
@@ -77,18 +77,13 @@ function analysis_durationeffect(datadir, outputdir)
             ylabel('Effect size (relative effect)', 'FontSize', 13);
         end
         
-        % Change name
-        if strcmp(featurelist{i}, 'Sign of f0 slope')
-            title({'Pitch declination', '(Coefficient of f0 slope)'}, 'FontSize', 18);
-        else
-            title(featurename{i}, 'FontSize', 18);
-        end
-        
         hold off
 
         ax = gca(figobj);
         ax.FontSize = 12;
         ylim([0, 1]);
+
+        title(featurename{i}, 'FontSize', 18)
     end
 
     saveas(figobj, strcat(outputdir, 'durationeffect.png'));

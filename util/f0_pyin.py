@@ -2,11 +2,8 @@ import librosa
 import numpy as np
 import datetime
 
-def get_f0(dataname):
+def get_f0(audiodir, dataname, outputdir):
     ####
-    audiodir = r'G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw' + '\\'
-    outputdir = r'C:\Users\yuto\Documents\MATLAB\projects\song-speech-analysis\data\Automated F0' + '\\'
-
     N = 2048
     M = 512
 
@@ -29,6 +26,10 @@ def get_f0(dataname):
     print(datetime.datetime.now().isoformat() + " - done")
 
 if __name__ == "__main__":
+    outputdir = r'C:\Users\yuto\Documents\MATLAB\projects\song-speech-analysis\data\Automated F0' + '\\'
+
+    """
+    audiodir = r'G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw' + '\\'
     dataname = ["ACO02A", "ACO02B", "ACO02C", "ACO02D",
                 "ACO05A", "ACO05B", "ACO05C", "ACO05D",
                 "ACO09A", "ACO09B", "ACO09C", "ACO09D",
@@ -38,5 +39,29 @@ if __name__ == "__main__":
                 "WEL01A", "WEL01B", "WEL01C", "WEL01D",
                 "WEL21A", "WEL21B", "WEL21C", "WEL21D",
                 "WEL51A", "WEL51B", "WEL51C", "WEL51D",]
+    """
 
-    get_f0(dataname)
+    audiodir = r'../data/Stage 1 RR Audio/full-length/'
+    dataname = ["Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_song",
+                "Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220430_desc",
+                "Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_inst",
+                "Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_recit",
+                "Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_recit",
+                "Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song",
+                "Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc",
+                "Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220507_inst",
+                "Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_desc",
+                "Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_recit",
+                "Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_song",
+                "Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220224_inst",
+                "Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc",
+                "Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_inst",
+                "Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_recit",
+                "Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song",
+                "John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_desc",
+                "John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_inst",
+                "John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_recit",
+                "John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song",
+                ]
+
+    get_f0(audiodir, dataname, outputdir)

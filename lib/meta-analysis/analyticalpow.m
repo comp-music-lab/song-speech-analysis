@@ -9,60 +9,103 @@ function power = analyticalpow(sgm, al, mu_0, mu_null, tausq)
 end
 
 %{
-%%
-al = 7;
-be = 0.2;
-K = 24;
+%% Test code 1 ************
+K = 6;
 
-mu_0 = normrnd(0, 2);
-tau = gamrnd(al, be);
-sgm = gamrnd(al, be, [K, 1]);
+mu_0 = normrnd(0, 1);
+tau = gamrnd(7, 0.2);
+sgm = gamrnd(7, 0.2, [K, 1]);
 
-%%
+M = 1024;
+X = zeros(K, M);
+for k=1:K
+    X(k, :) = normrnd(mu_0, sqrt(tau^2 + sgm(k)^2), [1, M]);
+end
+X = X(:);
+
+sgm_m = mean(sqrt(tau^2 + sgm.^2));
+
+figure(1);
+clf; cla;
+histogram(X, 64, 'Normalization', 'pdf');
+hold on
+plot(linspace(-8, 8, 1024), normpdf(linspace(-8, 8, 1024), mu_0, sgm_m));
+hold off
+
+%% Test code 2 ************
+K = 16;
+
+mu_0 = normrnd(0, 1);
+tau = gamrnd(7, 0.2);
+sgm = gamrnd(7, 0.2, [K, 1]);
+
 al = 0.05;
-mu_null = 0;
-power = analyticalpow(sgm, al, mu_0, mu_null, tau^2);
+mu_null = 0.0;
+power_twosided = analyticalpow(sgm, al, mu_0, mu_null, tau^2);
+power_onesided = analyticalpow(sgm, al*2, mu_0, mu_null, tau^2);
 
-%%
 M = 4096;
-T_H0 = zeros(M, 1);
-T_H1 = zeros(M, 1);
-tausq_hat_sim = zeros(M, 1);
+T_K = zeros(M, 1);
+T_H = zeros(M, 1);
 
 parfor m=1:M
     Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
-    
-    mu_F = sum(sgm.^-2 .* Y)/sum(sgm.^-2);
-    tausq_hat = max((sum(sgm.^-2 .* (Y - mu_F).^2) - (K - 1))/(sum(sgm.^-2) - sum(sgm.^-4)/sum(sgm.^-2)), 0);
-
-    T_H0(m) = sum((Y - mu_null)./(sgm.^2 + tausq_hat))/sqrt(sum(1./(sgm.^2 + tausq_hat)));
-    T_H1(m) = sum((Y - mu_0)./(sgm.^2 + tausq_hat))/sqrt(sum(1./(sgm.^2 + tausq_hat)));
-
-    tausq_hat_sim(m) = tausq_hat;
+    T_K(m) = sum((Y - mu_null)./(sgm.^2 + tau^2))/sqrt(sum(1./(sgm.^2 + tau^2)));
+    T_H(m) = sum((Y - mu_0)./(sgm.^2 + tau^2))/sqrt(sum(1./(sgm.^2 + tau^2)));
 end
 
-c_al = quantile(T_H0, [al/2, 1 - al/2]);
-if mu_null > mu_0
-    power_sim = sum(T_H1 > max(c_al))/numel(T_H1);
+hitrate_twosided = mean(T_K < norminv(al/2, 0, 1) | T_K > norminv(1 - al/2, 0, 1)) * 100;
+
+if mu_0 < mu_null
+    hitrate_onesided = mean(T_K < norminv(al, 0, 1)) * 100;
 else
-    power_sim = sum(T_H1 < min(c_al))/numel(T_H1);
+    hitrate_onesided = mean(T_K > norminv(1 - al, 0, 1)) * 100;
 end
 
 figure(1);
-subplot(1, 2, 1);
-histogram(T_H0, 'Normalization', 'pdf');
+clf; cla;
+histogram(T_K, 'Normalization', 'pdf', 'EdgeColor', 'none');
 hold on
-histogram(T_H1, 'Normalization', 'pdf');
+histogram(T_H, 'Normalization', 'pdf', 'EdgeColor', 'none');
+plot(linspace(-5, 5, 1024), normpdf(linspace(-5, 5, 1024), 0, 1), '-.m');
 hold off
-title(['Power: ', num2str(power, '%3.4f'), ' (theoretical), ', num2str(power_sim, '%3.4f'), ' (simulation)']);
+title(['\beta = ', num2str(power_twosided*100, '%3.3f'), ', ', num2str(power_onesided*100, '%3.3f'), ', (', num2str(hitrate_twosided, '%3.3f'), ', ', num2str(hitrate_onesided, '%3.3f'), ')']);
 
-subplot(1, 2, 2);
-histogram(tausq_hat_sim, 'Normalization', 'pdf');
+%% Test code 3 ************
+K = 48;
+
+mu_0 = normcdf(0.4/sqrt(2));
+tau = gamrnd(1, 0.2);
+sgm = gamrnd(1, 0.2, [K, 1]);
+
+al = 0.05/6;
+mu_null = 0.5;
+power_onesided = analyticalpow(sgm, al*2, mu_0, mu_null, tau^2);
+
+M = 8192;
+T_K = zeros(M, 1);
+T_H = zeros(M, 1);
+
+parfor m=1:M
+    Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
+    T_K(m) = sum((Y - mu_null)./(sgm.^2 + tau^2))/sqrt(sum(1./(sgm.^2 + tau^2)));
+    T_H(m) = sum((Y - mu_0)./(sgm.^2 + tau^2))/sqrt(sum(1./(sgm.^2 + tau^2)));
+end
+
+C = norminv(1 - al, 0, 1);
+hitrate_onesided = mean(C < T_K) * 100;
+mishit_onesided = mean(C < T_H) * 100;
+
+figure(1);
+clf; cla;
+histogram(T_K, 'Normalization', 'pdf', 'EdgeColor', 'none');
 hold on
+histogram(T_H, 'Normalization', 'pdf', 'EdgeColor', 'none');
+plot(linspace(-5, 5, 1024), normpdf(linspace(-5, 5, 1024), 0, 1), '-.m');
 yl = ylim();
-plot(tau^2.*[1, 1], yl, '-.m');
-tausq_hat_sim = sort(tausq_hat_sim);
-idx = find(tau^2 > tausq_hat_sim, 1, 'last');
-title(['Quantile of the true \tau^2: ', num2str(idx/numel(tausq_hat_sim)*100, '%3.4f'), '%']);
+plot([C, C], yl, 'k');
 hold off
+legend({'T_K', 'T_H'});
+title(['\beta = ', num2str(power_onesided*100, '%3.3f'), ' (', num2str(hitrate_onesided, '%3.3f'), ')',...
+', \alpha = ', num2str(al*100, '%3.3f'), ' (', num2str(mishit_onesided, '%3.3f') ,')']);
 %}

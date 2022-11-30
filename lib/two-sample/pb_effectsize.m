@@ -3,6 +3,7 @@ function [A, tau, dof] = pb_effectsize(x, y)
     n_x = length(x);
     n_y = length(y);
     
+    %{
     c_1 = 0;
     c_2 = 0;
     
@@ -12,6 +13,7 @@ function [A, tau, dof] = pb_effectsize(x, y)
     end
     
     A = (c_1 + c_2)/(n_x * n_y);
+    %}
 
     %%
     x = x(:);
@@ -31,13 +33,55 @@ function [A, tau, dof] = pb_effectsize(x, y)
     if n_y == 1
         S_ysq = 0;
     end
+    
+    A = 1 - 1/n_x*(R_iy - (n_y + 1)/2);
 
     tau = 1/(n_x*n_y)*sqrt(n_x*S_xsq + n_y*S_ysq);
 
     dof = (S_xsq/n_y + S_ysq/n_x)^2/((S_xsq/n_y)^2/(n_x - 1) + (S_ysq/n_x)^2/(n_y - 1));
 end
 
-% p = 1/n_x*(R_iy - (n_y + 1)/2);
+%% Test code 1 - coreset
+%{
+mu_X = normrnd(0, 2);
+mu_Y = normrnd(0, 2);
+sgm = gamrnd(5, 0.2);
+d = (mu_X - mu_Y)/sgm;
+p_0 = normcdf(d/sqrt(2));
+
+N = 8192;
+M = 4096;
+c = 256;
+p = zeros(M, 3);
+
+parfor m=1:M
+    X = normrnd(mu_X, sgm, [N, 1]);
+    Y = normrnd(mu_Y, sgm, [N, 1]);
+    p_XY = pb_effectsize(X, Y);
+    
+    x = sort(X);
+    y = sort(Y);
+    x = x(1:c:N);
+    y = y(1:c:N);
+    p_xy = pb_effectsize(x, y);
+    
+    X_c = normrnd(mu_X, sgm, [N/c, 1]);
+    Y_c = normrnd(mu_Y, sgm, [N/c, 1]);
+    p_c = pb_effectsize(X_c, Y_c);
+
+    p(m, :) = [p_XY, p_xy, p_c];
+end
+
+figure(1);
+clf; cla;
+histogram(p(:, 1), 32, 'Normalization', 'pdf', 'EdgeColor', 'None');
+hold on
+histogram(p(:, 2), 'Normalization', 'pdf', 'EdgeColor', 'None');
+histogram(p(:, 3), 32, 'Normalization', 'pdf', 'EdgeColor', 'None');
+yl = ylim();
+plot([p_0, p_0], yl, '-.m');
+hold off
+%}
 
 %{
 mu_x = 42.14;

@@ -10,9 +10,6 @@ outputdir = './output/Hilton-pyin/';
 analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outputdir);
 
 esinfofile = strcat(outputdir, 'results_effectsize_acoustic_song-desc_Infsec.csv');
-T = readtable(esinfofile);
-writetable(T(strcmp(T.feature, 'f0'), :), esinfofile);
-
 outputfile = strcat(outputdir, 'ma_acoustic_song-desc_Infsec.csv');
 analysis_metaCI(esinfofile, outputfile, al);
 
@@ -22,8 +19,14 @@ outputdir = './output/Hilton-sa/';
 analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outputdir);
 
 esinfofile = strcat(outputdir, 'results_effectsize_acoustic_song-desc_Infsec.csv');
-T = readtable(esinfofile);
-writetable(T(strcmp(T.feature, 'f0'), :), esinfofile);
+outputfile = strcat(outputdir, 'ma_acoustic_song-desc_Infsec.csv');
+analysis_metaCI(esinfofile, outputfile, al);
 
+%%
+datainfoid = 'datainfo_pilot-data-auto';
+outputdir = './output/pilot-data-auto/';
+analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outputdir);
+
+esinfofile = strcat(outputdir, 'results_effectsize_acoustic_song-desc_Infsec.csv');
 outputfile = strcat(outputdir, 'ma_acoustic_song-desc_Infsec.csv');
 analysis_metaCI(esinfofile, outputfile, al);

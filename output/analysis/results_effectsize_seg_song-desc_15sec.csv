@@ -1,16 +1,16 @@
 feature,lang,diff,stderr,method
 IOI rate,English,0.810495626822157,0.0520648339989879,common language effect size
-f0 ratio,English,0.417968392372131,0.00889279047045908,common language effect size
-Sign of f0 slope,English,0.8,0.234520787991171,common language effect size
+f0 ratio,English,0.4180588722229,0.0125798289980763,common language effect size
+Sign of f0 slope,English,0.55,0.278388218141501,common language effect size
 IOI rate,Marathi,0.911892361111111,0.0330766057829131,common language effect size
-f0 ratio,Marathi,0.582751512527466,0.00902980943362326,common language effect size
-Sign of f0 slope,Marathi,0.111111111111111,0.157134840263677,common language effect size
+f0 ratio,Marathi,0.582648754119873,0.0127736249126343,common language effect size
+Sign of f0 slope,Marathi,0.166666666666667,0.166666666666667,common language effect size
 IOI rate,Farsi,0.967105263157895,0.0183154173665539,common language effect size
-f0 ratio,Farsi,0.546370387077332,0.00915774404127736,common language effect size
-Sign of f0 slope,Farsi,0.5,0.5,common language effect size
+f0 ratio,Farsi,0.546390056610107,0.0129533387590245,common language effect size
+Sign of f0 slope,Farsi,0.75,0.25,common language effect size
 IOI rate,Japanese,0.918032786885246,0.0284315323900153,common language effect size
-f0 ratio,Japanese,0.616169571876526,0.00879862644346227,common language effect size
-Sign of f0 slope,Japanese,0.666666666666667,0.333333333333333,common language effect size
+f0 ratio,Japanese,0.616082191467285,0.0124468756384559,common language effect size
+Sign of f0 slope,Japanese,0.833333333333333,0.166666666666667,common language effect size
 IOI rate,Yoruba,0.809210526315789,0.0579461563055776,common language effect size
-f0 ratio,Yoruba,0.458017706871033,0.00898456273652209,common language effect size
-Sign of f0 slope,Yoruba,0.875,0.176776695296637,common language effect size
+f0 ratio,Yoruba,0.458117961883545,0.0127094742354486,common language effect size
+Sign of f0 slope,Yoruba,0.5,0,common language effect size

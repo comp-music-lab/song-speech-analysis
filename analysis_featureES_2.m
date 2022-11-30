@@ -66,7 +66,7 @@ function analysis_featureES_2(datainfoid, duration, typeflag, exploratory, outpu
         I = cat(1, I{:});
         tmp = cell(1, 1);
         tmp{1} = I;
-        interval{i} = helper.h_subsampling(tmp, 2048);
+        interval{i} = helper.h_subsampling(tmp, 1024);
         interval{i} = interval{i}{1};
     end
     

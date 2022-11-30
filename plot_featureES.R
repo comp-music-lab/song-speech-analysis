@@ -3,14 +3,14 @@ library(ggplot2)
 library(ggpubr)
 
 ## Constants
-LIST_FEATURE <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', 'Rate of change of f0', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
+LIST_FEATURE <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', '-|Δf0|', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
 CONCEPT_NAME <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Loudness', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Phrase length', 'Interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
-FEATURE_DIFF <- c('f0', 'IOI rate', 'Rate of change of f0')
+FEATURE_DIFF <- c('f0', 'IOI rate', '-|Δf0|')
 FEATURE_SIM <- c('Spectral centroid', 'Sign of f0 slope', 'f0 ratio')
 FEATURE_OTHER <- c('Spectral flatness', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'Onset-break interval', 'f0 ratio deviation', 'Pulse clarity')
 
 if (exploratory) {
-  CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', 'Rate of change of f0', 'f0 ratio')
+  CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', '-|Δf0|', 'f0 ratio')
   FILEID <- "_cnf"
 } else {
   CORE_FEATURE <- LIST_FEATURE
@@ -63,13 +63,6 @@ for (i in 1:length(file.data)) {
     print(paste(file.data[i], " does not exist.", sep = ""))
   }
 }
-
-## Change name
-CORE_FEATURE[CORE_FEATURE == "Sign of f0 slope"] <- "Coefficient of f0 slope"
-FEATURE_SIM[FEATURE_SIM == "Sign of f0 slope"] <- "Coefficient of f0 slope"
-LIST_FEATURE[LIST_FEATURE == "Sign of f0 slope"] <- "Coefficient of f0 slope"
-data$feature[data$feature == "Sign of f0 slope"] <- "Coefficient of f0 slope"
-data_ma$feature[data_ma$feature == "Sign of f0 slope"] <- "Coefficient of f0 slope"
 
 ## ELT
 data$diff[data$diff == 1 & !is.nan(data$diff)] <- 1 - 3e-3

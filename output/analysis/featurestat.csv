@@ -39,26 +39,26 @@ IOI rate,Temporal rate,Japanese,m,desc,8.93215304080853,5.6797112585295
 IOI rate,Temporal rate,Japanese,m,recit,7.40047985383884,3.1066211006091
 IOI rate,Temporal rate,Japanese,m,song,2.70465765528212,1.24220361486578
 IOI rate,Temporal rate,Japanese,m,inst,2.68075321002938,1.53118871871035
-Rate of change of f0,Pitch stability,Marathi,m,inst,-731.419054668937,1400.73296550569
-Rate of change of f0,Pitch stability,Marathi,m,recit,-1905.89142938113,1812.4309616562
-Rate of change of f0,Pitch stability,Marathi,m,song,-1210.72648594378,1515.79036282953
-Rate of change of f0,Pitch stability,Marathi,m,desc,-1724.30024302813,1580.60926835997
-Rate of change of f0,Pitch stability,Farsi,f,recit,-608.300703215694,586.783927788039
-Rate of change of f0,Pitch stability,Farsi,f,song,-521.688827477015,820.315237545091
-Rate of change of f0,Pitch stability,Farsi,f,desc,-680.37359740717,702.222532736629
-Rate of change of f0,Pitch stability,Farsi,f,inst,-73.8504821620921,111.247451993482
-Rate of change of f0,Pitch stability,Yoruba,f,desc,-1476.56365154756,1642.82643564484
-Rate of change of f0,Pitch stability,Yoruba,f,inst,-115.590240154274,191.154447801924
-Rate of change of f0,Pitch stability,Yoruba,f,recit,-1505.26473928131,1796.27946419216
-Rate of change of f0,Pitch stability,Yoruba,f,song,-1057.33512003775,1489.75169166991
-Rate of change of f0,Pitch stability,English,m,desc,-993.510434130254,1171.91045341608
-Rate of change of f0,Pitch stability,English,m,inst,-118.352520350329,182.342037297914
-Rate of change of f0,Pitch stability,English,m,recit,-1318.85278862201,1445.46616357589
-Rate of change of f0,Pitch stability,English,m,song,-825.461336019618,1332.38073245245
-Rate of change of f0,Pitch stability,Japanese,m,desc,-1021.15282311091,1233.42970041512
-Rate of change of f0,Pitch stability,Japanese,m,recit,-1036.89637458348,1157.2939587203
-Rate of change of f0,Pitch stability,Japanese,m,song,-1087.79970951009,1467.17906195947
-Rate of change of f0,Pitch stability,Japanese,m,inst,-82.3635182488122,261.080417009744
+-|Δf0|,Pitch stability,Marathi,m,inst,-731.419054668937,1400.73296550569
+-|Δf0|,Pitch stability,Marathi,m,recit,-1905.89142938113,1812.4309616562
+-|Δf0|,Pitch stability,Marathi,m,song,-1210.72648594378,1515.79036282953
+-|Δf0|,Pitch stability,Marathi,m,desc,-1724.30024302813,1580.60926835997
+-|Δf0|,Pitch stability,Farsi,f,recit,-608.300703215694,586.783927788039
+-|Δf0|,Pitch stability,Farsi,f,song,-521.688827477015,820.315237545091
+-|Δf0|,Pitch stability,Farsi,f,desc,-680.37359740717,702.222532736629
+-|Δf0|,Pitch stability,Farsi,f,inst,-73.8504821620921,111.247451993482
+-|Δf0|,Pitch stability,Yoruba,f,desc,-1476.56365154756,1642.82643564484
+-|Δf0|,Pitch stability,Yoruba,f,inst,-115.590240154274,191.154447801924
+-|Δf0|,Pitch stability,Yoruba,f,recit,-1505.26473928131,1796.27946419216
+-|Δf0|,Pitch stability,Yoruba,f,song,-1057.33512003775,1489.75169166991
+-|Δf0|,Pitch stability,English,m,desc,-993.510434130254,1171.91045341608
+-|Δf0|,Pitch stability,English,m,inst,-118.352520350329,182.342037297914
+-|Δf0|,Pitch stability,English,m,recit,-1318.85278862201,1445.46616357589
+-|Δf0|,Pitch stability,English,m,song,-825.461336019618,1332.38073245245
+-|Δf0|,Pitch stability,Japanese,m,desc,-1021.15282311091,1233.42970041512
+-|Δf0|,Pitch stability,Japanese,m,recit,-1036.89637458348,1157.2939587203
+-|Δf0|,Pitch stability,Japanese,m,song,-1087.79970951009,1467.17906195947
+-|Δf0|,Pitch stability,Japanese,m,inst,-82.3635182488122,261.080417009744
 f0 ratio,Pitch interval size,Marathi,m,inst,211.772826494765,164.481584165772
 f0 ratio,Pitch interval size,Marathi,m,recit,228.055440729483,175.241492302293
 f0 ratio,Pitch interval size,Marathi,m,song,249.642630261208,185.533936920968
@@ -99,23 +99,23 @@ Spectral centroid,Timbral brightness,Japanese,m,desc,763.677250098099,1300.63997
 Spectral centroid,Timbral brightness,Japanese,m,recit,1073.74108229358,1709.20567427819
 Spectral centroid,Timbral brightness,Japanese,m,song,619.757348087994,1143.81355129847
 Spectral centroid,Timbral brightness,Japanese,m,inst,312.35917768734,251.179147790467
-Sign of f0 slope,Pitch declination,Marathi,m,inst,123.486541133005,684.781391195374
-Sign of f0 slope,Pitch declination,Marathi,m,recit,-300.826995841762,214.653668687385
-Sign of f0 slope,Pitch declination,Marathi,m,song,-237.615538363151,244.734565537463
-Sign of f0 slope,Pitch declination,Marathi,m,desc,-31.0247671359825,98.1928433297701
-Sign of f0 slope,Pitch declination,Farsi,f,recit,-31.3043602945241,0
-Sign of f0 slope,Pitch declination,Farsi,f,song,-20.9745204377916,53.2944438704623
-Sign of f0 slope,Pitch declination,Farsi,f,desc,29.7082605993628,66.4246472539732
-Sign of f0 slope,Pitch declination,Farsi,f,inst,-22.3091453909918,37.3037347055304
-Sign of f0 slope,Pitch declination,Yoruba,f,desc,-251.321140036727,203.968054176546
-Sign of f0 slope,Pitch declination,Yoruba,f,inst,-2.26775260757006,0
-Sign of f0 slope,Pitch declination,Yoruba,f,recit,26.7881280376785,594.504306714093
-Sign of f0 slope,Pitch declination,Yoruba,f,song,-61.9341116077583,60.6923691468596
-Sign of f0 slope,Pitch declination,English,m,desc,8.78104487753145,199.261926503965
-Sign of f0 slope,Pitch declination,English,m,inst,1.47725666387,123.853355481225
-Sign of f0 slope,Pitch declination,English,m,recit,-102.384294408257,537.711798874205
-Sign of f0 slope,Pitch declination,English,m,song,-28.7772422709055,112.409794598616
-Sign of f0 slope,Pitch declination,Japanese,m,desc,-74.3898326859723,227.959146775082
-Sign of f0 slope,Pitch declination,Japanese,m,recit,-119.780200535258,579.068046935741
-Sign of f0 slope,Pitch declination,Japanese,m,song,111.324591848583,164.153203878114
-Sign of f0 slope,Pitch declination,Japanese,m,inst,14.7637896617887,63.5924070924454
+Sign of f0 slope,Pitch declination,Marathi,m,inst,-0.333333333333333,1.03279555898864
+Sign of f0 slope,Pitch declination,Marathi,m,recit,-1,0
+Sign of f0 slope,Pitch declination,Marathi,m,song,-1,0
+Sign of f0 slope,Pitch declination,Marathi,m,desc,0,1.15470053837925
+Sign of f0 slope,Pitch declination,Farsi,f,recit,-1,0
+Sign of f0 slope,Pitch declination,Farsi,f,song,-0.2,1.09544511501033
+Sign of f0 slope,Pitch declination,Farsi,f,desc,0,1.09544511501033
+Sign of f0 slope,Pitch declination,Farsi,f,inst,-1,0
+Sign of f0 slope,Pitch declination,Yoruba,f,desc,-1,0
+Sign of f0 slope,Pitch declination,Yoruba,f,inst,-1,0
+Sign of f0 slope,Pitch declination,Yoruba,f,recit,0.25,1.03509833901353
+Sign of f0 slope,Pitch declination,Yoruba,f,song,-1,0
+Sign of f0 slope,Pitch declination,English,m,desc,-0.222222222222222,1.0032626514091
+Sign of f0 slope,Pitch declination,English,m,inst,-0.2,1.03279555898864
+Sign of f0 slope,Pitch declination,English,m,recit,-0.8,0.632455532033676
+Sign of f0 slope,Pitch declination,English,m,song,-0.636363636363636,0.80903983495589
+Sign of f0 slope,Pitch declination,Japanese,m,desc,-0.375,0.957427107756338
+Sign of f0 slope,Pitch declination,Japanese,m,recit,-0.75,0.707106781186548
+Sign of f0 slope,Pitch declination,Japanese,m,song,0.636363636363636,0.80903983495589
+Sign of f0 slope,Pitch declination,Japanese,m,inst,0.333333333333333,1.15470053837925

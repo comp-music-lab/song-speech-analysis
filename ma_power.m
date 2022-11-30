@@ -1,78 +1,100 @@
-function ma_power
+function ma_power(esinfodir, al, be, numsim)
     %%
     addpath('./lib/meta-analysis/');
-    datadir = './output/20220918/';
-    %type = {{'inst', 'desc'}, {'song', 'desc'}, {'song', 'recit'}};
-    type = {{'song', 'desc'}};
-    
-    %testdiff = {'Energy', 'F0', 'IOI', 'Pitch range', 'Onset-break interval', 'Interval deviation'};
-    %testsim = {'IOI ratio deviation', 'Interval range', 'Spectral centroid', 'Magnitude of F0 modulatioin', 'Pulse clarity'};
-    testdiff = {'f0', 'IOI rate', 'Rate of change of f0'};
+    testdiff = {'f0', 'IOI rate', '-|Δf0|'};
     testsim = {'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
-
-    be = 0.95;
-    mu_null = 0.5;
-    Dlt = 0.5 - normcdf(-0.4/sqrt(2));
-    mu_sesoi_diff = normcdf(0.4/sqrt(2));
-    mu_sesoi_equi = 0.5;
     
+    mu_null_diff = 0.5;
+    mu_0_diff = normcdf(0.4/sqrt(2));
+    mu_null_sim = 0.5;
+    Dlt = normcdf(0.4/sqrt(2)) - mu_null_sim;
+
     %%
-    for j=1:numel(type)
-        result = [...
-            readtable(strcat(datadir, 'results_Marsden-all_', type{j}{1}, '-', type{j}{2}, '_Infsec.csv'));...
-            readtable(strcat(datadir, 'results_Marsden-complete_', type{j}{1}, '-', type{j}{2}, '_Infsec.csv'))...
+    esinfo = [...
+            readtable(strcat(esinfodir, 'results_effectsize_acoustic_song-desc_Infsec.csv'));...
+            readtable(strcat(esinfodir, 'results_effectsize_seg_song-desc_Infsec.csv'))...
             ];
     
-        featurelist = unique(result.feature);
-    
+    %% Impute zero standard error in the pilot data (Yoruba, sign of f0 slope)
+    % Zero standard error occurred because the signs of f0 slope of singing
+    % and spoken description are both all -1. ([-1, -1, -1, -1] in singing
+    % and [-1, -1, -1, -1, -1, -1, -1] in spoken description). Therefore the
+    % hypothetical standard error of the relative effect is estimated by assuming
+    % at least one of the observations was +1. First, test both patterns that
+    % one of the elements is 1 in singing and spoken description.
+    % Then take the smaller value (i.e. closer to zero) for the hypothetical standard error.
+    if esinfo.stderr(strcmp(esinfo.lang, 'Yoruba') & strcmp(esinfo.feature, 'Sign of f0 slope')) == 0
+        A = [-1, -1, -1, -1];
+        B = [-1, -1, -1, -1, -1, -1, -1];
+        addpath('./lib/two-sample/');
+
+        Z = A;
+        Z(1) = 1;
+        [~, tau_A] = pb_effectsize(Z, B);
+        Z = B;
+        Z(1) = 1;
+        [~, tau_B] = pb_effectsize(A, Z);
+        stderr = min(tau_A, tau_B);
+
+        esinfo.stderr(strcmp(esinfo.lang, 'Yoruba') & strcmp(esinfo.feature, 'Sign of f0 slope')) = stderr;
+    end
+
+    %%
+    for i=1:numel(testdiff)
+        idx = strcmp(esinfo.feature, testdiff{i});
+
+        Y = esinfo.diff(idx);
+        sgm = esinfo.stderr(idx);
+
+        K = numel(Y);
+        mu_F = sum(sgm.^-2 .* Y)/sum(sgm.^-2);
+        tausq_hat = max((sum(sgm.^-2 .* (Y - mu_F).^2) - (K - 1))/(sum(sgm.^-2) - sum(sgm.^-4)/sum(sgm.^-2)), 0);
+
+        power = analyticalpow(sgm, al, mu_0_diff, mu_null_diff, tausq_hat);
+
+        sgm_L = sgm;
+        sgm_mu = sqrt(mean(sgm.^2));
+        while power < be
+            sgm_L(end + 1) = sgm_mu;
+            power = analyticalpow(sgm_L, al, mu_0_diff, mu_null_diff, tausq_hat);
+        end
+
+        N = numel(sgm_L);
+
         %%
-        for i=1:numel(featurelist)
-            if sum(strcmp(featurelist{i}, testdiff)) == 1
-                al = 0.05/6 * 2;
-            elseif sum(strcmp(featurelist{i}, testsim)) == 1
-                al = 0.05/6;
-            else
-                al = 0.05/6;
-            end
-
-            idx = strcmp(result.feature, featurelist{i});
-            Y = result.diff(idx);
-            sgm = result.stderr(idx);
-            K = numel(Y);
-            mu = linspace(min(Y), max(Y), 1024);
-            [CI, ~, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
-            mu_CI_L = CI(1);
-            mu_CI_U = CI(2);
-
-            mu_F = sum(sgm.^-2 .* Y)/sum(sgm.^-2);
-            tausq_hat = max((sum(sgm.^-2 .* (Y - mu_F).^2) - (K - 1))/(sum(sgm.^-2) - sum(sgm.^-4)/sum(sgm.^-2)), 0);
-
-            %%
-            if sum(strcmp(featurelist{i}, testdiff)) == 1
-                mu_hat = mu_sesoi_diff; % Use SESOI instead of the estimate from the pilot data
-                power_org = analyticalpow(sgm, al, mu_hat, mu_null, tausq_hat);
+        [CI, ~, mu_hat] = exactCI(linspace(min(Y), max(Y), 1024), Y, sgm, al*2, mu_null_diff);
+        fprintf('(song-desc) diff: %s (%3.4f-%3.4f-Inf, tau = %3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n',...
+            testdiff{i}, CI(1), mu_hat, sqrt(tausq_hat), N, be, power, al);
+    end
     
-                %%
-                power = power_org;
-                L = 0;
-                sgmsq_hat = mean(sgm.^2);
-                while power < be
-                    L = L + 1;
-                    sgm_L = [sgm; repmat(sqrt(sgmsq_hat), [L, 1])];
-                    
-                    power = analyticalpow(sgm_L, al, mu_hat, mu_null, tausq_hat);
-                end
-        
-                fprintf('(%s-%s) diff: %s (%3.4f-%3.4f-Inf) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_hat, K + L, be, power, al);
-            elseif sum(strcmp(featurelist{i}, testsim)) == 1
-                mu_hat = mu_sesoi_equi;
-                sgm_K = sqrt(mean(sgm.^2 + tausq_hat));
-                n = simequivpow(mu_hat - 0.5, sgm_K, al, be, Dlt);
+    %%
+    for i=1:numel(testsim)
+        idx = strcmp(esinfo.feature, testsim{i});
 
-                fprintf('(%s-%s) equi: %s (%3.4f-%3.4f-%3.4f) - %d studies for beta = %3.4f and alpha = %3.4f\n', ...
-                    type{j}{1}, type{j}{2}, featurelist{i}, mu_CI_L, mu_hat, mu_CI_U, n, be, al);
+        Y = esinfo.diff(idx);
+        sgm = esinfo.stderr(idx);
+
+        K = numel(Y);
+        mu_F = sum(sgm.^-2 .* Y)/sum(sgm.^-2);
+        tausq_hat = max((sum(sgm.^-2 .* (Y - mu_F).^2) - (K - 1))/(sum(sgm.^-2) - sum(sgm.^-4)/sum(sgm.^-2)), 0);
+
+        sgm_m = sqrt(mean(sgm.^2 + tausq_hat));
+        n_max = 0;
+        power = 0;
+        wf = waitbar(0, 'Simulating...');
+        for j=1:numsim
+            waitbar(j/numsim, wf, 'Simulating...');
+            [n_j, pwr] = simequivpow(mu_null_sim - 0.5, sgm_m, al, be, Dlt);
+            if n_max < n_j
+                n_max = n_j;
+                power = pwr;
             end
         end
+        close(wf);
+
+        %%
+        [CI, ~, mu_hat] = exactCI(linspace(min(Y), max(Y), 1024), Y, sgm, al, mu_null_diff);
+        fprintf('(song-desc) sim: %s (%3.4f-%3.4f-%3.4f, tau = %3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n',...
+            testsim{i}, CI(1), mu_hat, CI(2), sqrt(tausq_hat), n_max, be, power, al);
     end
 end

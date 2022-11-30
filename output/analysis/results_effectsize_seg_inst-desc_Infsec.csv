@@ -1,46 +1,46 @@
 feature,lang,diff,stderr,method
 IOI rate,English,0.803492063492063,0.027751074620275,common language effect size
-f0 ratio,English,0.604714870452881,0.00904564505648744,common language effect size
-Sign of f0 slope,English,0.483333333333333,0.113313325016972,common language effect size
+f0 ratio,English,0.604653835296631,0.0127963825858387,common language effect size
+Sign of f0 slope,English,0.505555555555556,0.100804678223678,common language effect size
 IOI rate,Marathi,0.893241167434716,0.0318344930069587,common language effect size
-f0 ratio,Marathi,0.525668144226074,0.00932863063561188,common language effect size
-Sign of f0 slope,Marathi,0.416666666666667,0.206379729122297,common language effect size
+f0 ratio,Marathi,0.525671005249023,0.0131955556974194,common language effect size
+Sign of f0 slope,Marathi,0.416666666666667,0.17873008824606,common language effect size
 IOI rate,Farsi,0.915548281505728,0.0214342293931466,common language effect size
-f0 ratio,Farsi,0.66286301612854,0.008935169344129,common language effect size
-Sign of f0 slope,Farsi,0.277777777777778,0.198761597999981,common language effect size
+f0 ratio,Farsi,0.662857055664062,0.012638428548153,common language effect size
+Sign of f0 slope,Farsi,0.25,0.111803398874989,common language effect size
 IOI rate,Japanese,0.929441554886395,0.0161704265977696,common language effect size
-f0 ratio,Japanese,0.487185478210449,0.00967402354958386,common language effect size
-Sign of f0 slope,Japanese,0.6875,0.143129700310981,common language effect size
+f0 ratio,Japanese,0.487003803253174,0.0136862068652944,common language effect size
+Sign of f0 slope,Japanese,0.677083333333333,0.177083333333333,common language effect size
 IOI rate,Yoruba,0.987179487179487,0.0109726842321522,common language effect size
-f0 ratio,Yoruba,0.488814473152161,0.00923294810241891,common language effect size
-Sign of f0 slope,Yoruba,1,0,common language effect size
+f0 ratio,Yoruba,0.488681316375732,0.013060572483047,common language effect size
+Sign of f0 slope,Yoruba,0.5,0,common language effect size
 Spectral flatness,English,0.95437641723356,0.0154745303211638,common language effect size
 Onset-break interval,English,0.933333333333333,0.0447790599008056,common language effect size
 IOI ratio deviation,English,0.602412280701754,0.0346585266288645,common language effect size
-f0 ratio deviation,English,0.863606746201898,0.00613081408664584,common language effect size
+f0 ratio deviation,English,0.66377829034175,0.0120402872562408,common language effect size
 90% f0 quantile length,English,0.8,0.090481377587588,common language effect size
 Short-term energy,English,0.958114593124107,0.00221298666055738,common language effect size
 Spectral flatness,Marathi,0.61136712749616,0.0651914855148638,common language effect size
 Onset-break interval,Marathi,0.25,0.182574185835055,common language effect size
 IOI ratio deviation,Marathi,0.531609195402299,0.0677378768393567,common language effect size
-f0 ratio deviation,Marathi,0.906992431344751,0.0052242767997086,common language effect size
+f0 ratio deviation,Marathi,0.670632010563341,0.0119854398071766,common language effect size
 90% f0 quantile length,Marathi,0.458333333333333,0.212459146399699,common language effect size
 Short-term energy,Marathi,0.935474483143975,0.00562141023681721,common language effect size
 Spectral flatness,Farsi,1,0,common language effect size
 Onset-break interval,Farsi,0.722222222222222,0.194047213295255,common language effect size
 IOI ratio deviation,Farsi,0.676702085792995,0.0456915125645314,common language effect size
-f0 ratio deviation,Farsi,0.893318137077138,0.00551331462338567,common language effect size
+f0 ratio deviation,Farsi,0.935297035422734,0.00598799344152212,common language effect size
 90% f0 quantile length,Farsi,0.833333333333333,0.166666666666667,common language effect size
 Short-term energy,Farsi,0.391525507285937,0.00859991889871205,common language effect size
 Spectral flatness,Japanese,0.714481248289077,0.0335953539318987,common language effect size
 Onset-break interval,Japanese,0.729166666666667,0.27290871489688,common language effect size
 IOI ratio deviation,Japanese,0.79622641509434,0.0289677516282341,common language effect size
-f0 ratio deviation,Japanese,0.795959994902521,0.00696640321984887,common language effect size
+f0 ratio deviation,Japanese,0.793051350079343,0.00998218078166246,common language effect size
 90% f0 quantile length,Japanese,0.5625,0.290772438706132,common language effect size
 Short-term energy,Japanese,0.66465977369918,0.00749554283564789,common language effect size
 Spectral flatness,Yoruba,0.845726495726496,0.0398026563943454,common language effect size
 Onset-break interval,Yoruba,1,0,common language effect size
 IOI ratio deviation,Yoruba,0.359504132231405,0.0623969169591253,common language effect size
-f0 ratio deviation,Yoruba,0.906139522963452,0.00491639599204063,common language effect size
+f0 ratio deviation,Yoruba,0.906432512315271,0.00691953673958778,common language effect size
 90% f0 quantile length,Yoruba,0.142857142857143,0.142857142857143,common language effect size
 Short-term energy,Yoruba,0.875769762850082,0.00523547896216599,common language effect size

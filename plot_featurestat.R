@@ -5,7 +5,7 @@ library(ggpubr)
 ## Config
 featurestatfilepath = './output/analysis/featurestat.csv'  
 outputdir = './output/figure/'
-featurelist_diff = c("f0", "IOI rate", "Rate of change of f0")
+featurelist_diff = c("f0", "IOI rate", "-|Δf0|")
 featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
 
 SONG <- "Song"
@@ -38,7 +38,7 @@ T$xticklabel[T$type == "recit"] <- RECIT
 T$unit <- ""
 T$unit[T$feature == "f0"] <- "Cent (440 Hz = 0)"
 T$unit[T$feature == "IOI rate"] <- "Hz"
-T$unit[T$feature == "Rate of change of f0"] <- "Cent/sec."
+T$unit[T$feature == "-|Δf0|"] <- "Cent/sec."
 T$unit[T$feature == "f0 ratio"] <- "Cent"
 T$unit[T$feature == "Spectral centroid"] <- "Hz"
 T$unit[T$feature == "Sign of f0 slope"] <- "-"
@@ -46,13 +46,10 @@ T$unit[T$feature == "Sign of f0 slope"] <- "-"
 T$sex[T$sex == "f"] <- "Female"
 T$sex[T$sex == "m"] <- "Male"
 
-## Change name
-T$feature[T$feature == "Sign of f0 slope"] <- "Coefficient of f0 slope"
-featurelist_sim[featurelist_sim == "Sign of f0 slope"] <- "Coefficient of f0 slope"
-
 ## Plot
 tmp <- unique(T[c("feature", "name", "unit")])
 ylabelstr <- sub("ioi", "IOI", paste(tmp$name, "\n(Mean ", tolower(tmp$feature), " [", tmp$unit, "])", sep = ""))
+ylabelstr <- sub("δ", "Δ", ylabelstr)
 
 g_list_sim <- vector(mode = "list", length = length(featurelist_sim))
 ylabelstr_sim <- ylabelstr[tmp$feature %in% featurelist_sim]
@@ -68,7 +65,7 @@ for (i in 1:length(featurelist_sim)) {
   } else if(featurelist_sim[i] == "Spectral centroid") {
     g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(0, 1900))
   } else if(featurelist_sim[i] == "Coefficient of f0 slope") {
-    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(-320, 320))
+    g_list_sim[[i]] <- g_list_sim[[i]] + ylim(c(-1, 1))
   }
 }
 
@@ -83,7 +80,7 @@ for (i in 1:length(featurelist_diff)) {
   
   if (featurelist_diff[i] == "IOI rate") {
     g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(0, 9))
-  } else if(featurelist_diff[i] == "Rate of change of f0") {
+  } else if(featurelist_diff[i] == "-|Δf0|") {
     g_list_diff[[i]] <- g_list_diff[[i]] + ylim(c(-2000, 0))
   }
 }

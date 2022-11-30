@@ -2,18 +2,20 @@ rm(list = ls())
 
 ###
 library(ggplot2)
-DATANAME <- c('Hilton et al.\n(Automated)', 'Hilton et al.\n(Semi-automated)', 'Pilot data\n(Semi-automated)')
+DATANAME <- c('Hilton et al.\n(Automated)', 'Hilton et al.\n(Semi-automated)', 'Pilot data\n(Automated)', 'Pilot data\n(Semi-automated)')
 
 ###
 es_Hilton_pyin <- read.csv("./output/Hilton-pyin/results_effectsize_acoustic_song-desc_Infsec.csv")
 es_Hilton_pyin$dataname <- DATANAME[1]
 es_Hilton_sa <- read.csv("./output/Hilton-sa/results_effectsize_acoustic_song-desc_Infsec.csv")
 es_Hilton_sa$dataname <- DATANAME[2]
+es_Pilotdata_auto <- read.csv("./output/pilot-data-auto/results_effectsize_acoustic_song-desc_Infsec.csv")
+es_Pilotdata_auto$dataname <- DATANAME[3]
 es_Pilotdata <- read.csv("./output/analysis/results_effectsize_acoustic_song-desc_Infsec.csv")
-es_Pilotdata <- es_Pilotdata[es_Pilotdata$feature == 'f0', ]
-es_Pilotdata$dataname <- DATANAME[3]
+es_Pilotdata$dataname <- DATANAME[4]
 
-es_table <- rbind(es_Hilton_pyin, es_Hilton_sa, es_Pilotdata)
+es_table <- rbind(es_Hilton_pyin, es_Hilton_sa, es_Pilotdata_auto, es_Pilotdata)
+es_table <- es_table[es_table$feature == 'f0', ]
 es_table$dummyID <- 1:dim(es_table)[1]
 
 ###
@@ -21,11 +23,13 @@ ma_Hilton_pyin <- read.csv("./output/Hilton-pyin/ma_acoustic_song-desc_Infsec.cs
 ma_Hilton_pyin$dataname <- DATANAME[1]
 ma_Hilton_sa <- read.csv("./output/Hilton-sa/ma_acoustic_song-desc_Infsec.csv")
 ma_Hilton_sa$dataname <- DATANAME[2]
+ma_Pilotdata_auto <- read.csv("./output/pilot-data-auto/ma_acoustic_song-desc_Infsec.csv")
+ma_Pilotdata_auto$dataname <- DATANAME[3]
 ma_Pilotdata <- read.csv("./output/analysis/ma_acoustic_song-desc_Infsec.csv")
-ma_Pilotdata <- ma_Pilotdata[ma_Pilotdata$feature == 'f0', ]
-ma_Pilotdata$dataname <- DATANAME[3]
+ma_Pilotdata$dataname <- DATANAME[4]
 
-ma_table <- rbind(ma_Hilton_pyin, ma_Hilton_sa, ma_Pilotdata)
+ma_table <- rbind(ma_Hilton_pyin, ma_Hilton_sa, ma_Pilotdata_auto, ma_Pilotdata)
+ma_table <- ma_table[ma_table$feature == 'f0', ]
 ma_table$dummyID <- (1000 + 1:dim(ma_table)[1])
 ma_table$lang <- es_table$lang[1]
 
@@ -56,25 +60,25 @@ ggsave(file = paste("./output/Hilton-sa/Hilton_merge.png", sep = ""), plot = g_l
 
 
 ##
-#INPUTDIR <- "./output/Hilton-pyin/"
-#OUTPUTDIR <- "./output/Hilton-pyin/"
-#exploratory <- FALSE
-#source("plot_featureES.R")
+INPUTDIR <- "./output/Hilton-pyin/"
+OUTPUTDIR <- "./output/Hilton-pyin/"
+exploratory <- FALSE
+source("plot_featureES.R")
 
-#g_pyin <- g_list[[1]] +
-#  scale_x_continuous(breaks = c(-0.4, 0, 0.4, 1, 2))
-#g_pyin$labels$title <- paste(g_pyin$labels$title, "\n(Automated f0 extraction)", sep = "")
-
-##
-#INPUTDIR <- "./output/Hilton-sa/"
-#OUTPUTDIR <- "./output/Hilton-sa/"
-#exploratory <- FALSE
-#source("plot_featureES.R")
-
-#g_sa <- g_list[[1]] +
-#  scale_x_continuous(breaks = c(-0.4, 0, 0.4, 1, 2))
-#g_sa$labels$title <- paste(g_sa$labels$title, "\n(Semi-automated f0 extraction)", sep = "")
+g_pyin <- g_list[[1]] +
+  scale_x_continuous(breaks = c(-0.4, 0, 0.4, 1, 2))
+g_pyin$labels$title <- paste(g_pyin$labels$title, "\n(Automated f0 extraction)", sep = "")
 
 ##
-#g <- ggarrange(g_pyin, g_sa, ncol = 2, nrow = 1, common.legend = TRUE, legend = "bottom")
-#ggsave(file = paste(OUTPUTDIR, "Hilton_merge.png", sep = ""), plot = g, width = 9, height = 4)
+INPUTDIR <- "./output/Hilton-sa/"
+OUTPUTDIR <- "./output/Hilton-sa/"
+exploratory <- FALSE
+source("plot_featureES.R")
+
+g_sa <- g_list[[1]] +
+  scale_x_continuous(breaks = c(-0.4, 0, 0.4, 1, 2))
+g_sa$labels$title <- paste(g_sa$labels$title, "\n(Semi-automated f0 extraction)", sep = "")
+
+##
+g <- ggarrange(g_pyin, g_sa, ncol = 2, nrow = 1, common.legend = TRUE, legend = "bottom")
+ggsave(file = paste(OUTPUTDIR, "Hilton_merge2.png", sep = ""), plot = g, width = 9, height = 4)

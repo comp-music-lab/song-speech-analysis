@@ -1,4 +1,4 @@
-function n = simequivpow(mu, sgm, al, be, Dlt)
+function [n, pwr] = simequivpow(mu, sgm, al, be, Dlt)
     %%
     if abs(mu) <= Dlt
         n = 1;

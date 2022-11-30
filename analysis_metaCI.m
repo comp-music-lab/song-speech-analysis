@@ -3,7 +3,7 @@ function analysis_metaCI(esinfofile, outputfile, al)
     T = readtable(esinfofile);
     featurelist = unique(T.feature);
     
-    testdiff = {'f0', 'IOI rate', 'Rate of change of f0'};
+    testdiff = {'f0', 'IOI rate', '-|Δf0|'};
     testsim = {'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
 
     %%
@@ -16,8 +16,6 @@ function analysis_metaCI(esinfofile, outputfile, al)
     for i=1:numel(featurelist)
         if sum(strcmp(featurelist{i}, testdiff)) == 1
             al = al * 2;
-        elseif sum(strcmp(featurelist{i}, testsim)) == 1
-            al = al;
         end
 
         idx = strcmp(T.feature, featurelist{i});

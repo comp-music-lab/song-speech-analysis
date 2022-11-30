@@ -52,12 +52,14 @@ function analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outpu
     for i=1:numel(idx_pair)
         idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
         idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
-
-        [d, tau] = pb_effectsize(f0{idx_song}(f0{idx_song} ~= 0), f0{idx_desc}(f0{idx_desc} ~= 0));
+        
+        X = f0{idx_song}(f0{idx_song} ~= 0);
+        Y = f0{idx_desc}(f0{idx_desc} ~= 0);
+        [d, tau] = pb_effectsize(X, Y);
         results(end + 1, :) = table({'f0'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
         [d, tau] = pb_effectsize(modulationmagnitude{idx_song}, modulationmagnitude{idx_desc});
-        results(end + 1, :) = table({'Rate of change of f0'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+        results(end + 1, :) = table({'-|Δf0|'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
 
         [d, tau] = pb_effectsize(SC{idx_song}, SC{idx_desc});
         results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, {'common language effect size'});

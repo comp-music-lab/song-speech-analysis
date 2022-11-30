@@ -1,18 +1,18 @@
 feature,lang,diff,stderr,method
 f0,English,0.850369324057238,0.00357303315686895,common language effect size
-Rate of change of f0,English,0.651782343963065,0.00529282691069476,common language effect size
+-|Δf0|,English,0.651782343963065,0.00529282691069476,common language effect size
 Spectral centroid,English,0.583026940609337,0.00646656955712043,common language effect size
 f0,Marathi,0.975817422774422,0.00251703275526111,common language effect size
-Rate of change of f0,Marathi,0.657270318021201,0.00899232464950138,common language effect size
+-|Δf0|,Marathi,0.657270318021201,0.00899232464950138,common language effect size
 Spectral centroid,Marathi,0.598920695313205,0.0108287301641161,common language effect size
 f0,Farsi,0.989625867771354,0.00124917653956607,common language effect size
-Rate of change of f0,Farsi,0.619529094390213,0.00754953572344576,common language effect size
+-|Δf0|,Farsi,0.619529094390213,0.00754953572344576,common language effect size
 Spectral centroid,Farsi,0.481999968431945,0.00920526041663056,common language effect size
 f0,Japanese,0.996137193902434,0.000320186557992464,common language effect size
-Rate of change of f0,Japanese,0.530381350357543,0.00611328182622749,common language effect size
+-|Δf0|,Japanese,0.530381350357543,0.00611328182622749,common language effect size
 Spectral centroid,Japanese,0.395553200642994,0.00722015792730109,common language effect size
 f0,Yoruba,0.753579844420501,0.00741653180921327,common language effect size
-Rate of change of f0,Yoruba,0.598369507673403,0.00756461690043147,common language effect size
+-|Δf0|,Yoruba,0.598369507673403,0.00756461690043147,common language effect size
 Spectral centroid,Yoruba,0.530387598356389,0.00940182776074059,common language effect size
 Pulse clarity,English,0.566055930568949,0.0483211112916926,common language effect size
 Pulse clarity,Marathi,0.5,0.101339985941419,common language effect size

@@ -64,11 +64,11 @@ analysis_annotatoreffect(outputdir_analysis);
 %%
 analysis_rawdatastat(outputdir_analysis);
 
-%% Simulation is stochastic so run several times.
-for i=1:20
-    fprintf('Power analysis simulation (%d/%d)\n', i, 20);
-    ma_power();
-end
+%% Power analysis simulation is stochastic so run several times.
+al = 0.05/6;
+be = 0.95;
+numsim = 20;
+ma_power(outputdir_analysis, al, be, numsim);
 
 %%
 fig_script(outputdir_fig);

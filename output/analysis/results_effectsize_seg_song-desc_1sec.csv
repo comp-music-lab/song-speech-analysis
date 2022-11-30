@@ -1,16 +1,16 @@
 feature,lang,diff,stderr,method
 IOI rate,English,NaN,NaN,common language effect size
 f0 ratio,English,NaN,NaN,common language effect size
-Sign of f0 slope,English,0,0,common language effect size
+Sign of f0 slope,English,NaN,0,common language effect size
 IOI rate,Marathi,NaN,NaN,common language effect size
 f0 ratio,Marathi,NaN,NaN,common language effect size
-Sign of f0 slope,Marathi,0,0,common language effect size
+Sign of f0 slope,Marathi,NaN,0,common language effect size
 IOI rate,Farsi,NaN,NaN,common language effect size
 f0 ratio,Farsi,NaN,NaN,common language effect size
 Sign of f0 slope,Farsi,NaN,NaN,common language effect size
 IOI rate,Japanese,NaN,NaN,common language effect size
 f0 ratio,Japanese,NaN,NaN,common language effect size
-Sign of f0 slope,Japanese,0,0,common language effect size
+Sign of f0 slope,Japanese,NaN,0,common language effect size
 IOI rate,Yoruba,NaN,NaN,common language effect size
 f0 ratio,Yoruba,NaN,NaN,common language effect size
-Sign of f0 slope,Yoruba,0,0,common language effect size
+Sign of f0 slope,Yoruba,NaN,0,common language effect size
