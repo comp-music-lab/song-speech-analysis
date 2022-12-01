@@ -6,76 +6,77 @@ ID,Name,Language,Glottolog Name,Language Family,Genus,Longitude,Latitude,Place L
 5,Utae Ehara,Aynu,Hokkaido Ainu,Ainu,Ainu,142.4052062,38.32859001,
 6,Joel Maripil,Mapudungun,Mapudungun,Araucanian,Araucanian,-76.04252131,-36.14137869,Saavedra
 7,Neddiel Elcie Muñoz Millalonco,Tsesungún,Huilliche,Araucanian,Araucanian,-76.41059031,-45.12566331,Castro
-8,Mark Lenini Parselelo,Kiswahili,Swahili,Atlantic-Congo,Bantu,42.11344762,3.999436622,
-9,Cristiano Tsope,Ronga,Ronga,Atlantic-Congo,Bantu,32.56745,-25.966213,
-10,Florence Nweke,Yoruba,Yoruba,Atlantic-Congo,Defoid,6.039930811,9.100808811,
-11,Adwoa Arhine,Fante,Akan,Atlantic-Congo,Tano,1.402672011,2.461715689,
-12,Jehoshaphat Philip Sarbah,Twi,Akan,Atlantic-Congo,Tano,-4.335155811,8.857293311,
-13,Latyr Sy,Wolof,Wolof,Atlantic-Congo,Wolof,-17.3983563,14.6672047,
-14,I putu gede setiawan,Balinese,Balinese,Austronesian,Malayo-Sumbawan,115.23355,-8.67218,
-15,Lrawbalrate,Rukai,Rukai,Austronesian,Rukai,120.73176,17.45388738,
-16,Suzanne Purdy,Te Reo Māori,Maori,Austronesian,Oceanic,177.5928471,-33.4007584,Auckland
-17,Rob Throne,Te Reo Māori,Maori,Austronesian,Oceanic,174.77623,-41.286461,Wellington
-18,Aritz Irurtzun,Euskara,Basque,Basque,Basque,-9.835867233,35.37527317,Errenteria
-19,Nerea Bello Sagarzazu,Euskara,Basque,Basque,Basque,-4.442997211,40.72140519,Hondarribia
-20,Urise Kuikuro,língua Kuikuro,Kuikúro-Kalapálo,Cariban,Cariban,-52.5476,-12.3212,
-21,Shantala Hegde,Kannada,Kannada,Dravidian,Dravidian,77.590082,12.9767936,
-22,Rytis Ambrazevičius,Lithuanian,Lithuanian,Indo-European,Baltic,25.2829111,54.6870458,
-23,Tadhg Ó Meachair,Gaeilge/Irish,Irish,Indo-European,Celtic,-8.906024511,55.99551581,
-24,Niels Chr. Hansen,Danish,Danish,Indo-European,Germanic,12.1086079,61.04502352,
-25,Mark van Tongeren,Dutch,Dutch,Indo-European,Germanic,7.266051311,54.99681431,Heemstede
-26,Kayla Kolff,Dutch,Dutch,Indo-European,Germanic,36.821945,-1.292066,Nairobi
-27,Adam Tierney,English,English,Indo-European,Germanic,-88.41531308,38.73048465,"Indiana, USA"
-28,Christina Vanden Bosch der Nederlanden,English,English,Indo-European,Germanic,-85.670174,48.25696462,Michigan
-29,Patrick Savage,English,English,Indo-European,Germanic,-122.4595563,42.17538431,"Nevada, USA"
-30,John McBride,English,English,Indo-European,Germanic,-14.27282393,62.11540393,"Newry, Ireland"
-31,William Tecumseh Fitch,English,English,Indo-European,Germanic,-118.0943837,50.39682731,Washington
-32,Peter Pfordresher,English,English,Indo-European,Germanic,-69.09928877,30.95778287,"Washington, USA"
-33,Yannick Jadoul,Flemish,Dutch,Indo-European,Germanic,-0.895032022,51.2198264,Beveren
-34,Felix Haiduk,German,German,Indo-European,Germanic,9.728981589,48.69488079,
-35,Ulvhild Færøvik,Norwegian,Norwegian,Indo-European,Germanic,2.676302689,63.03701331,
-36,Daniel Fredriksson,Svenska (Swedish),Swedish,Indo-European,Germanic,18.27805721,57.96125549,
-37,Emmanouil Benetos,Greek,Greek,Indo-European,Greek,27.78009881,32.69426139,
-38,Dhwani P. Sadaphal,Hindi,Hindi,Indo-European,Indic,81.72780691,23.79556471,"Napgur, India"
-39,Parimal M. Sadaphal,Marathi,Marathi,Indo-European,Indic,73.8544541,18.521428,
-40,Meyha Chhatwal,Punjabi,Eastern Panjabi,Indo-European,Indic,-74.09168338,38.36172238,
-41,Ryan Mark David,Urdu,Urdu,Indo-European,Indic,-79.762421,43.731548,
-42,Shahaboddin Dabaghi Varnosfaderani,Western Farsi,Western Farsi,Indo-European,Iranian,56.95650282,27.37928508,Isfahan
-43,Shafagh Hadavi,Western Farsi,Western Farsi,Indo-European,Iranian,54.03535171,33.04350099,Tehran
-44,Manuel Anglada-Tort,Catalan,Catalan,Indo-European,Romance,7.468934822,36.09139128,
-45,Pauline Larrouy-Maestri,French,French,Indo-European,Romance,2.034213781,44.35238266,
-46,Andrea Ravignani,Italian,Italian,Indo-European,Romance,12.4829321,41.8933203,
-47,Violeta Magalhães,Portuguese,Portuguese,Indo-European,Romance,-11.25653971,43.79520251,Porto
-48,Camila Bruder,Portuguese,Portuguese,Indo-European,Romance,-46.6333824,-18.25914808,São Paulo
-49,Marco Antonio Correa Varella,Portuguese,Portuguese,Indo-European,Romance,-49.27913371,-26.19640201,São Paulo
-50,Juan Sebastián Gómez-Cañón,Spanish,Spanish,Indo-European,Romance,-74.0836453,4.6534649,Bogotá
-51,Martín Rocamora,Spanish,Spanish,Indo-European,Romance,-53.54555819,-37.55164291,"Montevideo, Uruguay"
-52,Javier Silva-Zurita,Spanish,Spanish,Indo-European,Romance,-70.6504502,-33.4377756,"Santiago, Chile"
-53,Ignacio Soto-Silva,Spanish,Spanish,Indo-European,Romance,-70.49006319,-43.21898841,Osorno
-54,Dilyana Kurdova,Bulgarian,Bulgarian,Indo-European,Slavic,27.9166653,43.2073873,
-55,"Aleksandar Arabadjiev, MA",Macedonian,Macedonian,Indo-European,Slavic,22.46184,36.34609738,
-56,Wojciech Krzyżanowski,Polish,Polish,Indo-European,Slavic,15.2400451,52.7309926,
-57,Polina Proutskova,Russian,Russian,Indo-European,Slavic,30.316229,59.938732,
-58,Vanessa Nina Borsan,Slovenian,Slovenian,Indo-European,Slavic,20.07150262,46.25,
-59,Olena Shcherbakova,Ukrainian,Ukrainian,Indo-European,Slavic,33.8715451,51.3359821,
-60,Diana Hereld,Cherokee,Cherokee,Iroquoian,Southern Iroquoian,-118.242766,34.0536909,
-61,Gakuto Chiba,Japanese,Japanese,Japonic,Japanese,139.719223,46.41637631,"Hokkaido, Japan"
-62,Shinya Fujii,Japanese,Japanese,Japonic,Japanese,129.9293174,29.78079738,"Hyogo, Japan"
-63,Yuto Ozaki,Japanese,Japanese,Japonic,Japanese,137.1137036,33.03708739,"Tokyo, Japan"
-64,Naruse Marin,Northern Amami-Oshima,Northern Amami-Oshima,Japonic,,124.0418274,22.95849738,
-65,Teona Lomsadze,Georgian,Georgian,Kartvelian,,41.46602979,44.62759821,
-66,Sangbuem Choo,Korean,Korean,Koreanic,,126.9782914,37.5666791,
-67,Patricia Opondo,Luo (dholuo),Luo (Kenya and Tanzania),Nilotic,,31.53044238,-6.583568622,
-68,Rogerdison Natsitsabui,Rikbaktsa,Rikbaktsa,Nuclear-Macro-Je,,-60.14440131,-8.605658689,
-69,Jakelin Troy,Ngarigu,Southern Inland Yuin,Pama-Nyungan,,148.2635105,-36.4558303,
-70,Tumi Uisu Paulo Matis,Matís,Matís,Pano-Tacanan,,-72.5311275,-4.9514917,
-71,Tutushamum Puri Righi,Puri Kwaytikindo,Puri,Puri-Coroado,,-39.85424869,-24.89575131,
-72,Dr.Su Zar Zar,Myanmar (Burmese),Burmese,Sino-Tibetan,,93.35421389,19.82080081,Myanmar
-73,Psyche Loui,Cantonese,Yue Chinese,Sino-Tibetan,,116.8085644,24.92507911,Hong Kong
-74,Minyu Zeng,HainanHua,Min Nan Chinese,Sino-Tibetan,,110.1956502,20.0462328,
-75,Fang Liu,Mandarin,Mandarin Chinese,Sino-Tibetan,,119.4200584,32.1901111,
-76,Great Lekakul,Thai,Thai,Tai-Kadai,,100.4935089,13.7524938,
-77,Brenda Suyanne Barbosa,Mbyá-Guarani,Mbyá Guaraní,Tupian,,-57.19992131,-31.20853131,
-78,Polina Dessiatnitchenko,Azerbaijani,North Azerbaijani,Turkic,,49.8326748,40.3754434,
-79,Olcay Muslu,Turkish,Turkish,Turkic,,31.61197001,38.36344689,
-80,Morzaniel Iramari Aranariutheri,Yanomami,Yanomám,Yanomamic,,-61.25,2.25,
+8,Nozuko Nguqu,IsiXhosa,Xhosa,Atlantic-Congo,Bantu,29.56449,-31.36144,
+9,Mark Lenini Parselelo,Kiswahili,Swahili,Atlantic-Congo,Bantu,42.11344762,3.999436622,
+10,Cristiano Tsope,Ronga,Ronga,Atlantic-Congo,Bantu,32.56745,-25.966213,
+11,Florence Nweke,Yoruba,Yoruba,Atlantic-Congo,Defoid,6.039930811,9.100808811,
+12,Adwoa Arhine,Fante,Akan,Atlantic-Congo,Tano,1.402672011,2.461715689,
+13,Jehoshaphat Philip Sarbah,Twi,Akan,Atlantic-Congo,Tano,-4.335155811,8.857293311,
+14,Latyr Sy,Wolof,Wolof,Atlantic-Congo,Wolof,-17.3983563,14.6672047,
+15,I putu gede setiawan,Balinese,Balinese,Austronesian,Malayo-Sumbawan,115.23355,-8.67218,
+16,Lrawbalrate,Rukai,Rukai,Austronesian,Rukai,120.73176,17.45388738,
+17,Suzanne Purdy,Te Reo Māori,Maori,Austronesian,Oceanic,177.5928471,-33.4007584,Auckland
+18,Rob Throne,Te Reo Māori,Maori,Austronesian,Oceanic,174.77623,-41.286461,Wellington
+19,Aritz Irurtzun,Euskara,Basque,Basque,Basque,-9.835867233,35.37527317,Errenteria
+20,Nerea Bello Sagarzazu,Euskara,Basque,Basque,Basque,-4.442997211,40.72140519,Hondarribia
+21,Urise Kuikuro,língua Kuikuro,Kuikúro-Kalapálo,Cariban,Cariban,-52.5476,-12.3212,
+22,Shantala Hegde,Kannada,Kannada,Dravidian,Dravidian,77.590082,12.9767936,
+23,Rytis Ambrazevičius,Lithuanian,Lithuanian,Indo-European,Baltic,25.2829111,54.6870458,
+24,Tadhg ÁEMeachair,Gaeilge/Irish,Irish,Indo-European,Celtic,-8.906024511,55.99551581,
+25,Niels Chr. Hansen,Danish,Danish,Indo-European,Germanic,9.462856589,63.69077483,
+26,Mark van Tongeren,Dutch,Dutch,Indo-European,Germanic,4.6203,52.351063,Heemstede
+27,Kayla Kolff,Dutch,Dutch,Indo-European,Germanic,31.53044238,-6.583568622,Nairobi
+28,Adam Tierney,English,English,Indo-European,Germanic,-88.41531308,38.73048465,"Indiana, USA"
+29,Christina Vanden Bosch der Nederlanden,English,English,Indo-European,Germanic,-85.670174,48.25696462,Michigan
+30,Patrick Savage,English,English,Indo-European,Germanic,-122.4595563,42.17538431,"Nevada, USA"
+31,John McBride,English,English,Indo-European,Germanic,-14.27282393,62.11540393,"Newry, Ireland"
+32,William Tecumseh Fitch,English,English,Indo-European,Germanic,-118.0943837,50.39682731,Washington
+33,Peter Pfordresher,English,English,Indo-European,Germanic,-69.09928877,30.95778287,"Washington, USA"
+34,Yannick Jadoul,Flemish,Dutch,Indo-European,Germanic,-3.540783333,48.57407509,Beveren
+35,Felix Haiduk,German,German,Indo-European,Germanic,9.728981589,48.69488079,
+36,Ulvhild Færøvik,Norwegian,Norwegian,Indo-European,Germanic,2.676302689,63.03701331,
+37,Daniel Fredriksson,Svenska (Swedish),Swedish,Indo-European,Germanic,18.27805721,57.96125549,
+38,Emmanouil Benetos,Greek,Greek,Indo-European,Greek,25.1343475,35.3400127,
+39,Dhwani P. Sadaphal,Hindi,Hindi,Indo-European,Indic,81.72780691,23.79556471,"Napgur, India"
+40,Parimal M. Sadaphal,Marathi,Marathi,Indo-European,Indic,73.8544541,18.521428,
+41,Meyha Chhatwal,Punjabi,Eastern Panjabi,Indo-European,Indic,-74.09168338,38.36172238,
+42,Ryan Mark David,Urdu,Urdu,Indo-European,Indic,-79.762421,43.731548,
+43,Shahaboddin Dabaghi Varnosfaderani,Western Farsi,Western Farsi,Indo-European,Iranian,56.95650282,27.37928508,Isfahan
+44,Shafagh Hadavi,Western Farsi,Western Farsi,Indo-European,Iranian,54.03535171,33.04350099,Tehran
+45,Manuel Anglada-Tort,Catalan,Catalan,Indo-European,Romance,7.468934822,36.09139128,
+46,Pauline Larrouy-Maestri,French,French,Indo-European,Romance,2.034213781,44.35238266,
+47,Andrea Ravignani,Italian,Italian,Indo-European,Romance,12.4829321,41.8933203,
+48,Violeta Magalhães,Portuguese,Portuguese,Indo-European,Romance,-11.25653971,43.79520251,Porto
+49,Camila Bruder,Portuguese,Portuguese,Indo-European,Romance,-46.6333824,-18.25914808,São Paulo
+50,Marco Antonio Correa Varella,Portuguese,Portuguese,Indo-European,Romance,-49.27913371,-26.19640201,São Paulo
+51,Juan Sebastián Gómez-Cañón,Spanish,Spanish,Indo-European,Romance,-74.0836453,4.6534649,Bogotá
+52,Martín Rocamora,Spanish,Spanish,Indo-European,Romance,-53.54555819,-37.55164291,"Montevideo, Uruguay"
+53,Javier Silva-Zurita,Spanish,Spanish,Indo-European,Romance,-70.6504502,-33.4377756,"Santiago, Chile"
+54,Ignacio Soto-Silva,Spanish ,Spanish,Indo-European,Romance,-70.49006319,-43.21898841,Osorno
+55,Dilyana Kurdova,Bulgarian,Bulgarian,Indo-European,Slavic,25.27091399,45.85313861,
+56,"Aleksandar Arabadjiev, MA",Macedonian,Macedonian,Indo-European,Slavic,19.81608869,38.99184869,
+57,Wojciech Krzyżanowski,Polish,Polish,Indo-European,Slavic,12.59429379,55.37674391,
+58,Polina Proutskova,Russian,Russian,Indo-European,Slavic,30.316229,59.938732,
+59,Vanessa Nina Borsan,Slovenian,Slovenian,Indo-European,Slavic,17.81544131,48.44996231,
+60,Olena Shcherbakova,Ukrainian ,Ukrainian,Indo-European,Slavic,33.8715451,51.3359821,
+61,Diana Hereld ,Cherokee ,Cherokee,Iroquoian,Southern Iroquoian,-118.242766,34.0536909,
+62,Gakuto Chiba,Japanese,Japanese,Japonic,Japanese,139.719223,46.41637631,"Hokkaido, Japan"
+63,Shinya Fujii,Japanese,Japanese,Japonic,Japanese,129.9293174,29.78079738,"Hyogo, Japan"
+64,Yuto Ozaki,Japanese,Japanese,Japonic,Japanese,137.1137036,33.03708739,"Tokyo, Japan"
+65,Naruse Marin,Northern Amami-Oshima,Northern Amami-Oshima,Japonic,,124.0418274,22.95849738,
+66,Teona Lomsadze,Georgian,Georgian,Kartvelian,Kartvelian,41.46602979,44.62759821,
+67,Sangbuem Choo,Korean,Korean,Koreanic,Korean,126.9782914,37.5666791,
+68,Patricia Opondo,Luo (dholuo),Luo (Kenya and Tanzania),Nilotic,Western Nilotic,36.821945,-1.292066,
+69,Rogerdison Natsitsabui,Rikbaktsa,Rikbaktsa,Nuclear-Macro-Je,,-60.14440131,-8.605658689,
+70,Jakelin Troy,Ngarigu,Southern Inland Yuin,Pama-Nyungan,Southeastern Pama-Nyungan,148.2635105,-36.4558303,
+71,Tumi Uisu Paulo Matis ,Matís,Matís,Pano-Tacanan,Panoan,-72.5311275,-4.9514917,
+72,Tutushamum Puri Righi,Puri Kwaytikindo,Puri,Puri-Coroado,,-39.85424869,-24.89575131,
+73,Su Zar Zar,Myanmar (Burmese),Burmese,Sino-Tibetan,Burmese-Lolo,93.35421389,19.82080081,Myanmar
+74,Psyche Loui,Cantonese,Yue Chinese,Sino-Tibetan,Chinese,116.8085644,24.92507911,Hong Kong
+75,Minyu Zeng,HainanHua,Min Nan Chinese,Sino-Tibetan,Chinese,110.1956502,20.0462328,
+76,Fang Liu,Mandarin,Mandarin Chinese,Sino-Tibetan,Chinese,119.4200584,32.1901111,
+77,Great Lekakul,Thai,Thai,Tai-Kadai,Kam-Tai,100.4935089,13.7524938,
+78,Brenda Suyanne Barbosa,Mbyá-Guarani,Mbyá Guaraní,Tupian,Maweti-Guarani,-57.19992131,-31.20853131,
+79,Polina Dessiatnitchenko,Azerbaijani,North Azerbaijani,Turkic,Turkic,49.8326748,40.3754434,
+80,Olcay Muslu,Turkish,Turkish,Turkic,Turkic,28.9662187,41.0091982,
+81,Morzaniel Iramari Aranariutheri,Yanomami,Yanomám,Yanomamic,Yanomam,-61.25,2.25,

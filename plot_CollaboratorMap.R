@@ -84,12 +84,12 @@ print("dodging...OK")
 ## Some adjustments
 long_tmp1 <- langlabel$Longitude[langlabel$Name == 'Kayla Kolff']
 lati_tmp1 <- langlabel$Latitude[langlabel$Name == 'Kayla Kolff']
-long_tmp2 <- langlabel$Longitude[langlabel$Name == 'Patricia Opondo ']
-lati_tmp2 <- langlabel$Latitude[langlabel$Name == 'Patricia Opondo ']
+long_tmp2 <- langlabel$Longitude[langlabel$Name == 'Patricia Opondo']
+lati_tmp2 <- langlabel$Latitude[langlabel$Name == 'Patricia Opondo']
 langlabel$Longitude[langlabel$Name == 'Kayla Kolff'] <- long_tmp2
 langlabel$Latitude[langlabel$Name == 'Kayla Kolff'] <- lati_tmp2
-langlabel$Longitude[langlabel$Name == 'Patricia Opondo '] <- long_tmp1
-langlabel$Latitude[langlabel$Name == 'Patricia Opondo '] <- lati_tmp1
+langlabel$Longitude[langlabel$Name == 'Patricia Opondo'] <- long_tmp1
+langlabel$Latitude[langlabel$Name == 'Patricia Opondo'] <- lati_tmp1
 
 ##
 theme_set(theme_bw())
