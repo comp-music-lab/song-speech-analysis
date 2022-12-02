@@ -41,7 +41,80 @@ function [A, tau, dof] = pb_effectsize(x, y)
     dof = (S_xsq/n_y + S_ysq/n_x)^2/((S_xsq/n_y)^2/(n_x - 1) + (S_ysq/n_x)^2/(n_y - 1));
 end
 
-%% Test code 1 - coreset
+%% Test code 1 - relative effects
+%{
+mu_X = normrnd(0, 2);
+mu_Y = normrnd(0, 2);
+sgm = gamrnd(5, 0.2);
+d = (mu_X - mu_Y)/sgm;
+p = normcdf(d/sqrt(2));
+
+support = linspace(min(mu_X, mu_Y) - 6*sgm, max(mu_X, mu_Y) + 6*sgm, 1024);
+A = 1 - trapz(support, normcdf(support, mu_X, sgm).*normpdf(support, mu_Y, sgm));
+
+fprintf('%3.4f, %3.4f, %e\n', p, A, abs(p - A));
+%}
+
+%% Test code 2 - confidence intervals
+%{
+for j=1:2
+    if j == 1
+        mu_X = normrnd(0, 2);
+        mu_Y = normrnd(0, 2);
+        sgm_X = gamrnd(5, 0.2);
+        sgm_Y = gamrnd(5, 0.2);
+        support = linspace(min(mu_X, mu_Y) - 6*max(sgm_X, sgm_Y), max(mu_X, mu_Y) + 6*max(sgm_X, sgm_Y), 1024);
+        p_0 = 1 - trapz(support, normcdf(support, mu_X, sgm_X).*normpdf(support, mu_Y, sgm_Y));
+
+        xrnd = @(N) normrnd(mu_X, sgm_X, [N, 1]);
+        yrnd = @(N) normrnd(mu_Y, sgm_Y, [N, 1]);
+    elseif j == 2
+        mu = 4.3423;
+        sgm = 0.89893;
+        a = 3.324;
+        b = 1.11221;
+        
+        support = linspace(0, 16, 1024);
+        p_0 = 1 - trapz(support, normcdf(support, mu, sgm).*gampdf(support, a, b));
+
+        xrnd = @(N) normrnd(mu, sgm, [N, 1]);
+        yrnd = @(N) gamrnd(a, b, [N, 1]);
+    end
+    
+    N = poissrnd(100, [2, 1]);
+    
+    M = 4096;
+    p = zeros(M, 1);
+    CI = zeros(M, 4);
+    al = 0.05;
+    
+    parfor m=1:M
+        X = xrnd(N(1));
+        Y = yrnd(N(2));
+        [p(m), tau, dof] = pb_effectsize(X, Y);
+        
+        u_ts = tinv(1 - al/2, dof);
+        u_os = tinv(1 - al, dof);
+        CI(m, :) = [p(m) - tau*u_ts, p(m) + tau*u_ts, p(m) - tau*u_os, p(m) + tau*u_os];
+    end
+    
+    hitrate_ts = mean(CI(:, 1) < p_0 & p_0 < CI(:, 2));
+    hitrate_os_l = mean(CI(:, 3) < p_0);
+    hitrate_os_u = mean(p_0 < CI(:, 4));
+
+    figure(j);
+    clf; cla;
+    histogram(p, 32, 'Normalization', 'pdf', 'EdgeColor', 'None');
+    hold on
+    yl = ylim();
+    plot([p_0, p_0], yl, '-.m');
+    hold off
+    title({[num2str(100*(1 - al), '%3.3f'), '% CI: ', num2str(hitrate_ts*100, '%3.3f'), '% (two-sided)'],...
+            [num2str(hitrate_os_l*100, '%3.3f'), '% (one-sided, lower limit), ', num2str(hitrate_os_u*100, '%3.3f'), '% (one-sided, upper limit)']});
+end
+%}
+
+%% Test code 3 - coreset
 %{
 mu_X = normrnd(0, 2);
 mu_Y = normrnd(0, 2);
