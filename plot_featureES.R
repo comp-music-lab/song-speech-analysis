@@ -26,8 +26,8 @@ XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5)
 
 ## Load effect size information
 file.data <- c(
-  paste(INPUTDIR, 'results_effectsize_acoustic_', DATATYPE, '_Infsec.csv', sep = ''),
-  paste(INPUTDIR, 'results_effectsize_seg_', DATATYPE, '_Infsec.csv', sep = '')
+  paste(INPUTDIR, 'results_effectsize_acoustic_', DATATYPE, '_', durationID, '.csv', sep = ''),
+  paste(INPUTDIR, 'results_effectsize_seg_', DATATYPE, '_', durationID, '.csv', sep = '')
 )
 
 data <- c()
@@ -46,8 +46,8 @@ for (i in 1:length(file.data)) {
 
 ## Load meta-analysis results
 file.data <- c(
-  paste(INPUTDIR, 'ma_acoustic_', DATATYPE, '_Infsec.csv', sep = ''),
-  paste(INPUTDIR, 'ma_seg_', DATATYPE, '_Infsec.csv', sep = '')
+  paste(INPUTDIR, 'ma_acoustic_', DATATYPE, '_', durationID, '.csv', sep = ''),
+  paste(INPUTDIR, 'ma_seg_', DATATYPE, '_', durationID, '.csv', sep = '')
 )
 
 data_ma <- c()
@@ -133,9 +133,9 @@ for (i in 1:length(g_list)) {
     data_j$x <- sqrt(2)*qnorm(data_j$CI_l, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) + 
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_l, 0, 1), y = featureplotname), shape = "|", size = 5, show.legend = FALSE) +
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23, size = 3, fill = "#d7003a", show.legend = FALSE)
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = 0.25), show.legend = FALSE) + 
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_l, 0, 1), y = featureplotname), shape = "|", size = 5, position = position_nudge(y = 0.25), show.legend = FALSE) +
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23, size = 3, fill = "#d7003a", position = position_nudge(y = 0.25), show.legend = FALSE)
   }
   
   ## similarity
@@ -150,9 +150,9 @@ for (i in 1:length(g_list)) {
     data_j$x <- sqrt(2)*qnorm(data_j$CI_u, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) + 
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#d7003a", show.legend = FALSE) +
-      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, show.legend = FALSE)
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = 0.25), show.legend = FALSE) + 
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#d7003a", position = position_nudge(y = 0.25), show.legend = FALSE) +
+      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, position = position_nudge(y = 0.25), show.legend = FALSE)
   }
   
   ## Others
@@ -167,10 +167,16 @@ for (i in 1:length(g_list)) {
     data_j$x <- sqrt(2)*qnorm(data_j$CI_u, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), show.legend = FALSE) +
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#008080", show.legend = FALSE) +
-      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, show.legend = FALSE)
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = 0.25), show.legend = FALSE) +
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#008080", position = position_nudge(y = 0.25), show.legend = FALSE) +
+      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, position = position_nudge(y = 0.25), show.legend = FALSE)
   }
   
+  # Save
+  g_list[[i]] <- g_list[[i]] + theme(legend.position = 'none')
   ggsave(file = paste(OUTPUTDIR, "effectsize_", LIST_COMPARISON[i], FILEID, ".png", sep = ""), plot = g_list[[i]], width = G_WID, height = G_HEI)
+  
+  g_list[[i]] <- g_list[[i]] + theme(legend.position = 'right')
+  l <- as_ggplot(get_legend(g_list[[i]]))
+  ggsave(file = paste(OUTPUTDIR, "effectsize_", LIST_COMPARISON[i], FILEID, "-legend.png", sep = ""), plot = l, width = G_WID, height = G_HEI)
 }

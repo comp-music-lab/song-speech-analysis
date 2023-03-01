@@ -18,11 +18,16 @@ function coef = ft_f0declination(t_onset, t_break, f0, t_f0)
         t_f0_idx = t_f0_i(idx);
 
         if ~isempty(f0_idx)
-            %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
-            mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
-            R = mdl.Coefficients.Estimate;
-            coef = sign(R(2));
-            %coef = R(2);
+            try
+                %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
+                mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
+                R = mdl.Coefficients.Estimate;
+                coef = sign(R(2));
+                %coef = R(2);
+            catch ME
+                coef = [];
+                disp(getReport(ME));
+            end
         else
             coef = [];
         end
@@ -37,11 +42,16 @@ function coef = ft_f0declination(t_onset, t_break, f0, t_f0)
         t_f0_idx = t_f0_i(idx);
 
         if ~isempty(f0_idx)
-            %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
-            mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
-            R = mdl.Coefficients.Estimate;
-            coef = sign(R(2));
-            %coef = R(2);
+            try
+                %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
+                mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
+                R = mdl.Coefficients.Estimate;
+                coef = sign(R(2));
+                %coef = R(2);
+            catch ME
+                coef = [];
+                disp(getReport(ME));
+            end
         else
             coef = [];
         end
@@ -67,11 +77,16 @@ function coef = ft_f0declination(t_onset, t_break, f0, t_f0)
             t_f0_idx = t_f0_i(idx);
 
             if ~isempty(f0_idx) && numel(f0_idx) > 2
-                %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
-                mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
-                R = mdl.Coefficients.Estimate;
-                coef(end + 1) = sign(R(2));
-                %coef(end + 1) = R(2);
+                try
+                    %R = [ones(numel(t_f0_idx), 1), t_f0_idx(:)]\f0_idx(:);
+                    mdl = fitlm(t_f0_idx(:), f0_idx(:), 'RobustOpts', 'huber');
+                    R = mdl.Coefficients.Estimate;
+                    coef(end + 1) = sign(R(2));
+                    %coef(end + 1) = R(2);
+                catch ME
+                    coef = [];
+                    disp(getReport(ME));
+                end
             end
 
             %{

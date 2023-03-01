@@ -1,4 +1,4 @@
-function analysis_featureES_2(datainfoid, duration, typeflag, exploratory, outputdir)
+function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir)
     switch typeflag
         case 1
             typelist = {'song', 'desc'};
@@ -10,12 +10,13 @@ function analysis_featureES_2(datainfoid, duration, typeflag, exploratory, outpu
 
     %% configuration
     fileid = strcat(num2str(duration, '%d'), 'sec');
-    datainfo = readtable(strcat(datainfoid, '_', typelist{1}, '-', typelist{2}, '.csv'));
-    
+    datainfo = readtable(datainfofile);
+    datainfo = datainfo(strcmp(datainfo.type, typelist{1}) | strcmp(datainfo.type, typelist{2}), :);
+
     addpath('./lib/two-sample/');
     
     varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
-    idx_pair = unique(datainfo.pair);
+    idx_pair = unique(datainfo.groupid);
     results = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'double', 'double', 'string'}, 'VariableNames', varNames);
     
     reffreq = 440;
@@ -29,11 +30,11 @@ function analysis_featureES_2(datainfoid, duration, typeflag, exploratory, outpu
     interval = cell(N, 1);
     
     for i=1:N
-        onsetfilepath = strcat(datainfo.path{i}, 'onset_', datainfo.dataname{i}, '.csv');
+        onsetfilepath = strcat(datainfo.annotationdir{i}, 'onset_', datainfo.dataname{i}, '.csv');
         T = readtable(onsetfilepath);
         t_onset{i} = table2array(T(:, 1));
         
-        breakfilepath = strcat(datainfo.path{i}, 'break_', datainfo.dataname{i}, '.csv');
+        breakfilepath = strcat(datainfo.annotationdir{i}, 'break_', datainfo.dataname{i}, '.csv');
         T = readtable(breakfilepath, 'ReadVariableNames', false);
         
         if isempty(T)
@@ -51,7 +52,7 @@ function analysis_featureES_2(datainfoid, duration, typeflag, exploratory, outpu
         idx = find(t_break{i} <= duration, 1, 'last');
         t_break{i} = t_break{i}(1:idx);
 
-        f0filepath = strcat(datainfo.path{i}, datainfo.dataname{i}, '_f0.csv');
+        f0filepath = strcat(datainfo.annotationdir{i}, datainfo.dataname{i}, '_f0.csv');
         T = readtable(f0filepath);
         f0{i} = table2array(T(:, 2));
         t_f0{i} = table2array(T(:, 1));
@@ -86,8 +87,8 @@ function analysis_featureES_2(datainfoid, duration, typeflag, exploratory, outpu
     end
 
     for i=1:numel(idx_pair)
-        idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
-        idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
+        idx_song = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{1});
+        idx_desc = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
         [d, tau] = pb_effectsize(IOIrate{idx_song}, IOIrate{idx_desc});
         results(end + 1, :) = table({'IOI rate'}, datainfo.language(idx_song), 1 - d, tau, {'common language effect size'});
@@ -111,7 +112,7 @@ function analysis_featureES_2(datainfoid, duration, typeflag, exploratory, outpu
         E = cell(N, 1);
 
         for i=1:N
-            audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
+            audiofilepath = strcat(datainfo.audiodir{i}, datainfo.dataname{i}, '.', datainfo.audioext{i});
     
             SF{i} = ft_spectralflatness(audiofilepath, t_onset{i}, t_break{i}, duration);
             E{i} = ft_energy(audiofilepath, t_onset{i}, t_break{i}, duration);

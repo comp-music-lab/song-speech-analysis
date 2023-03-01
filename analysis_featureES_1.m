@@ -1,4 +1,4 @@
-function analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outputdir)
+function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, outputdir)
     switch typeflag
         case 1
             typelist = {'song', 'desc'};
@@ -10,13 +10,14 @@ function analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outpu
 
     %% configuration
     fileid = strcat(num2str(duration, '%d'), 'sec');
-    datainfo = readtable(strcat(datainfoid, '_', typelist{1}, '-', typelist{2}, '.csv'));
-    
+    datainfo = readtable(datainfofile);
+    datainfo = datainfo(strcmp(datainfo.type, typelist{1}) | strcmp(datainfo.type, typelist{2}), :);
+
     addpath('./lib/two-sample/');
     addpath('./lib/CWT/');
     
     varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
-    idx_pair = unique(datainfo.pair);
+    idx_pair = unique(datainfo.groupid);
     results = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'double', 'double', 'string'}, 'VariableNames', varNames);
     
     reffreq = 440;
@@ -27,7 +28,7 @@ function analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outpu
     t_f0 = cell(N, 1);
     
     for i=1:N
-        f0filepath = strcat(datainfo.path{i}, datainfo.dataname{i}, '_f0.csv');
+        f0filepath = strcat(datainfo.annotationdir{i}, datainfo.dataname{i}, '_f0.csv');
         T = readtable(f0filepath);
         f0{i} = table2array(T(:, 2));
         t_f0{i} = table2array(T(:, 1));
@@ -45,13 +46,13 @@ function analysis_featureES_1(datainfoid, duration, typeflag, exploratory, outpu
         tmp = -abs(ft_deltaf0(f0{i}, 0.005, reffreq));
         modulationmagnitude{i} = tmp(~isnan(tmp));
 
-        audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
+        audiofilepath = strcat(datainfo.audiodir{i}, datainfo.dataname{i}, '.', datainfo.audioext{i});
         SC{i} = ft_spectralcentroid(audiofilepath, f0{i}, t_f0{i}, duration, false);
     end
 
     for i=1:numel(idx_pair)
-        idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
-        idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
+        idx_song = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{1});
+        idx_desc = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{2});
         
         X = f0{idx_song}(f0{idx_song} ~= 0);
         Y = f0{idx_desc}(f0{idx_desc} ~= 0);

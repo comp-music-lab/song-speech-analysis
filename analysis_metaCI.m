@@ -8,8 +8,8 @@ function analysis_metaCI(esinfofile, outputfile, al)
 
     %%
     addpath('./lib/meta-analysis/');
-    varNames = {'feature', 'mean', 'CI_l', 'CI_u'};
-    varTypes = {'string', 'double', 'double', 'double'};
+    varNames = {'feature', 'pvalue', 'mean', 'CI_l', 'CI_u'};
+    varTypes = {'string', 'double', 'double', 'double', 'double'};
     results = table('Size', [0, numel(varNames)], 'VariableTypes', varTypes, 'VariableNames', varNames);
     mu_null = 0.5;
     
@@ -22,9 +22,9 @@ function analysis_metaCI(esinfofile, outputfile, al)
         Y = T.diff(idx);
         sgm = T.stderr(idx);
         mu = linspace(min(Y), max(Y), 1024);
-        [CI, ~, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
+        [CI, pval, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
         
-        results(end + 1, :) = table(featurelist(i), mu_hat, CI(1), CI(2));
+        results(end + 1, :) = table(featurelist(i), pval, mu_hat, CI(1), CI(2));
     end
 
     %%
