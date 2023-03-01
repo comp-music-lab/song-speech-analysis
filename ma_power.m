@@ -82,6 +82,8 @@ function ma_power(esinfodir, al, be, numsim)
         n_max = 0;
         power = 0;
         wf = waitbar(0, 'Simulating...');
+        [n, pwr] = equivtestpow(mu_null_sim - 0.5, sgm_m, al, be, Dlt);
+        fprintf('Analytical simulation: n = %d (power = %3.3f)\n', n, pwr);
         for j=1:numsim
             waitbar(j/numsim, wf, 'Simulating...');
             [n_j, pwr] = simequivpow(mu_null_sim - 0.5, sgm_m, al, be, Dlt);
