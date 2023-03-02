@@ -18,7 +18,7 @@ exploratory = false;
 duration = 20;
 typeflag_songdesc = 1;
 datainfofile = './datainfo.csv';
-analysis_featureES_1(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis);
+%analysis_featureES_1(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis);
 analysis_featureES_2(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis);
 
 %% Confirmatory analysis

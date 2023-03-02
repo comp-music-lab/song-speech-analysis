@@ -12,7 +12,7 @@ INTERVAL <- 6
 SUBGROUPING <- TRUE
 
 ##
-collabT <- read.csv('./data/CollaboratorsPlotData.csv')
+collabT <- read.csv(collaboratorinfofile)
 
 langlabel <- data.frame(Name = collabT$Name,
                         Lang = collabT$ProvidedLanguageName,
@@ -99,11 +99,11 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 gobj<- ggplot(data = world) +
   geom_sf(fill= "darkolivegreen1") +
   geom_point(data = langlabel, aes(x = Longitude, y = Latitude, fill = Family),
-             size = 3.0, shape = 21) +
+             size = 4.0, shape = 21) +
   geom_text(data = langlabel, aes(x=Longitude, y=Latitude, label=ID),
-            size = 1.7, color = "darkblue", check_overlap = FALSE) + 
+            size = 2.6, color = "darkblue", check_overlap = FALSE) + 
   xlab("") + ylab("") + ylim(c(-50.5, 75)) + 
-  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), legend.title = element_blank()) +
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), legend.title = element_blank(), legend.position = "none") +
   theme(panel.background = element_rect(fill = "aliceblue"))
 
 ##
@@ -115,8 +115,8 @@ for (i in 1:length(FamilyList)) {
 }
 
 ##
-ggsave(file = "./output/figure/CollabMap.png", plot = gobj, width = 8, height = 7)
-write.csv(file = "./output/figure/langlabel.csv", langlabel)
+ggsave(file = paste(OUTPUTDIR, "CollabMap.png", sep = ""), plot = gobj, width = 8, height = 7)
+write.csv(file = paste(OUTPUTDIR, "langlabel.csv", sep = ""), langlabel)
 
 ##
 ggColorHue <- function(n, l=65) {
@@ -126,7 +126,7 @@ ggColorHue <- function(n, l=65) {
 
 cols <- ggColorHue(n = length(unique(langlabel$Family)))
 
-png("./output/figure/langfamily-colorcode.png", width = 500, height = 500)
+png(paste(OUTPUTDIR, "langfamily-colorcode.png", sep = ""), width = 500, height = 500)
 col2rgb(cols)
 scales::show_col(cols)
 dev.off()

@@ -24,6 +24,9 @@ G_HEI <- 6
 XL <- c(-1.8, 5.0)
 XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5)
 
+LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
+LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
+
 ## Load effect size information
 file.data <- c(
   paste(INPUTDIR, 'results_effectsize_acoustic_', DATATYPE, '_', durationID, '.csv', sep = ''),
@@ -105,7 +108,8 @@ for (i in 1:length(g_list)) {
   
   g_list[[i]] <- ggplot(data_i, aes(x = d, y = featureplotname, fill = lang, group = dummyID)) + 
     geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(featureplotname)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
-    geom_dotplot(binaxis = 'y', position = "dodge", stackdir = 'center', alpha = 0.8) +
+    geom_violin(data = data_i, aes(x = d, group = featureplotname), fill = "#FCAE1E", alpha = 0.2) + 
+    geom_dotplot(binaxis = 'y', position = position_jitter(width = 0.1, height = 0.0), stackdir = 'center', alpha = 0.8, dotsize = 0.5) +
     geom_vline(xintercept = 0, linetype = 2) +
     geom_vline(xintercept = 0.4, linetype = 3) +
     geom_vline(xintercept = -0.4, linetype = 3) +
@@ -116,6 +120,7 @@ for (i in 1:length(g_list)) {
     theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
     theme(axis.text.x = element_text(size = 10)) + 
     xlim(XL) + 
+    scale_fill_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) +
     scale_x_continuous(breaks = XBREAK) + 
     theme(legend.title = element_blank())
   

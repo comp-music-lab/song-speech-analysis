@@ -32,6 +32,9 @@ if (exploratory) {
 
 XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
 
+LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
+LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
+
 ## ETL
 T = read.csv(featurestatfilepath)
 
@@ -62,11 +65,12 @@ g_list <- vector(mode = "list", length = length(featurelist))
 
 for (i in 1:length(featurelist)) {
   g_list[[i]] <- ggplot(data = T[T$feature == featurelist[i] & !(T$xticklabel %in% TYPEFILTER), ], aes(x = xticklabel, y = mean, group = groupid, color = lang, shape = sex)) + 
-    geom_point(alpha = 0.8, size = 4) + 
+    geom_point(alpha = 0.8, size = 2) + 
     geom_line(linetype = 2) +
     xlab("") + ylab(ylabelstr[i]) + labs(color = "Language", shape = "Sex") +
     theme(axis.title.y = element_text(size = 10), legend.position = "none") +
-    scale_x_discrete(limits = XTICKORDER)
+    scale_x_discrete(limits = XTICKORDER) + 
+    scale_color_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename)
   
   if (featurelist[i] == "f0 ratio") {
     g_list[[i]] <- g_list[[i]] + ylim(c(0, 450))

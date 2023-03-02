@@ -105,9 +105,9 @@ f0,Pitch height,HainanHua,F,desc,-1127.14933837429,297.248289128918,29
 f0,Pitch height,HainanHua,F,recit,-1134.49367088608,341.950551634107,29
 f0,Pitch height,HainanHua,F,song,-315.554889022196,329.81539511684,29
 f0,Pitch height,HainanHua,F,inst,285.046811000585,371.654206012809,29
-f0,Pitch height,Traditional,F,desc,-1618.22386679001,272.618525691056,30
-f0,Pitch height,Traditional,F,recit,-1413.01383905689,219.594823424982,30
-f0,Pitch height,Traditional,F,song,-895.213856486391,318.177712044061,30
+f0,Pitch height,Williche,F,desc,-1618.22386679001,272.618525691056,30
+f0,Pitch height,Williche,F,recit,-1413.01383905689,219.594823424982,30
+f0,Pitch height,Williche,F,song,-895.213856486391,318.177712044061,30
 f0,Pitch height,Euskara,F,desc,-1330.55452865065,244.877106151783,31
 f0,Pitch height,Euskara,F,inst,-483.218163869694,303.670071453697,31
 f0,Pitch height,Euskara,F,recit,-1092.95556986478,270.891205211195,31
@@ -333,10 +333,10 @@ IOI rate,Temporal rate,HainanHua,F,desc,5.34741474178435,1.88078349229717,29
 IOI rate,Temporal rate,HainanHua,F,recit,4.40362749457912,1.53997609546962,29
 IOI rate,Temporal rate,HainanHua,F,song,1.3321132787542,0.68391460001538,29
 IOI rate,Temporal rate,HainanHua,F,inst,1.5533655366707,0.428639586854872,29
-IOI rate,Temporal rate,Traditional,F,desc,4.25298457473212,2.81569690667296,30
-IOI rate,Temporal rate,Traditional,F,recit,4.39665923484474,2.46429695992759,30
-IOI rate,Temporal rate,Traditional,F,song,2.95948821724132,2.24543324762828,30
-IOI rate,Temporal rate,Traditional,F,inst,3.07314095703107,1.15591292080917,30
+IOI rate,Temporal rate,Williche,F,desc,4.25298457473212,2.81569690667296,30
+IOI rate,Temporal rate,Williche,F,recit,4.39665923484474,2.46429695992759,30
+IOI rate,Temporal rate,Williche,F,song,2.95948821724132,2.24543324762828,30
+IOI rate,Temporal rate,Williche,F,inst,3.07314095703107,1.15591292080917,30
 IOI rate,Temporal rate,Euskara,F,desc,7.2160649895614,4.40212850175626,31
 IOI rate,Temporal rate,Euskara,F,inst,2.93421868764821,2.75260828759703,31
 IOI rate,Temporal rate,Euskara,F,recit,7.22216431063824,4.64556541159161,31
@@ -559,9 +559,9 @@ IOI rate,Temporal rate,Japanese,M,song,1.89051722893915,0.797089747569692,60
 -|Δf0|,Pitch stability,HainanHua,F,recit,-1565.15773850544,1346.70524221759,29
 -|Δf0|,Pitch stability,HainanHua,F,song,-658.238654441054,1184.94279809659,29
 -|Δf0|,Pitch stability,HainanHua,F,inst,-178.327750048771,210.840615595528,29
--|Δf0|,Pitch stability,Traditional,F,desc,-1180.75304167157,1451.23052712167,30
--|Δf0|,Pitch stability,Traditional,F,recit,-1127.34255488821,1267.84987951837,30
--|Δf0|,Pitch stability,Traditional,F,song,-993.358393711188,1702.8440084498,30
+-|Δf0|,Pitch stability,Williche,F,desc,-1180.75304167157,1451.23052712167,30
+-|Δf0|,Pitch stability,Williche,F,recit,-1127.34255488821,1267.84987951837,30
+-|Δf0|,Pitch stability,Williche,F,song,-993.358393711188,1702.8440084498,30
 -|Δf0|,Pitch stability,Euskara,F,desc,-1488.44588271361,1709.02307215463,31
 -|Δf0|,Pitch stability,Euskara,F,inst,-46.9084277672973,86.2791048189704,31
 -|Δf0|,Pitch stability,Euskara,F,recit,-1830.3546839247,1944.99033473604,31
@@ -778,9 +778,9 @@ f0 ratio,Pitch interval size,HainanHua,F,desc,163.086095901395,183.563596780067,
 f0 ratio,Pitch interval size,HainanHua,F,recit,272.686117335185,252.9007651223,29
 f0 ratio,Pitch interval size,HainanHua,F,song,300.677024937062,191.293181135757,29
 f0 ratio,Pitch interval size,HainanHua,F,inst,373.859040661969,269.934956584417,29
-f0 ratio,Pitch interval size,Traditional,F,desc,355.858553073376,294.920762269257,30
-f0 ratio,Pitch interval size,Traditional,F,recit,162.527582748245,132.367041239328,30
-f0 ratio,Pitch interval size,Traditional,F,song,368.105733803131,187.684304318508,30
+f0 ratio,Pitch interval size,Williche,F,desc,355.858553073376,294.920762269257,30
+f0 ratio,Pitch interval size,Williche,F,recit,162.527582748245,132.367041239328,30
+f0 ratio,Pitch interval size,Williche,F,song,368.105733803131,187.684304318508,30
 f0 ratio,Pitch interval size,Euskara,F,desc,116.887011078454,112.469989185344,31
 f0 ratio,Pitch interval size,Euskara,F,inst,205.144845934909,85.0114580637963,31
 f0 ratio,Pitch interval size,Euskara,F,recit,181.569385711106,193.940519782722,31
@@ -1006,10 +1006,10 @@ Spectral centroid,Timbral brightness,HainanHua,F,desc,1135.73424664911,2103.3016
 Spectral centroid,Timbral brightness,HainanHua,F,recit,2418.75107830269,2914.82604103683,29
 Spectral centroid,Timbral brightness,HainanHua,F,song,908.156020824497,1127.62902478658,29
 Spectral centroid,Timbral brightness,HainanHua,F,inst,615.566210825512,667.265616568311,29
-Spectral centroid,Timbral brightness,Traditional,F,desc,508.268961753653,563.926720603498,30
-Spectral centroid,Timbral brightness,Traditional,F,recit,459.75482157941,479.76804832903,30
-Spectral centroid,Timbral brightness,Traditional,F,song,456.946096010791,326.80804101816,30
-Spectral centroid,Timbral brightness,Traditional,F,inst,765.982892492729,1114.24928916376,30
+Spectral centroid,Timbral brightness,Williche,F,desc,508.268961753653,563.926720603498,30
+Spectral centroid,Timbral brightness,Williche,F,recit,459.75482157941,479.76804832903,30
+Spectral centroid,Timbral brightness,Williche,F,song,456.946096010791,326.80804101816,30
+Spectral centroid,Timbral brightness,Williche,F,inst,765.982892492729,1114.24928916376,30
 Spectral centroid,Timbral brightness,Euskara,F,desc,935.29605646464,1539.22070889338,31
 Spectral centroid,Timbral brightness,Euskara,F,inst,966.589662140718,338.303581297349,31
 Spectral centroid,Timbral brightness,Euskara,F,recit,995.173148591639,1425.65101627602,31
@@ -1026,7 +1026,7 @@ Spectral centroid,Timbral brightness,IsiXhosa,F,desc,661.846811333412,1069.78496
 Spectral centroid,Timbral brightness,IsiXhosa,F,inst,416.541993820815,136.558930516393,34
 Spectral centroid,Timbral brightness,IsiXhosa,F,recit,532.807752016797,803.209086987611,34
 Spectral centroid,Timbral brightness,IsiXhosa,F,song,730.160134238487,818.022207078088,34
-Spectral centroid,Timbral brightness,Turkish,F,desc,874.169219286034,1199.66965614165,35
+Spectral centroid,Timbral brightness,Turkish,F,desc,873.347985075499,1194.80160031617,35
 Spectral centroid,Timbral brightness,Turkish,F,recit,518.354081563993,900.059882281043,35
 Spectral centroid,Timbral brightness,Turkish,F,song,460.128463981641,566.220114865084,35
 Spectral centroid,Timbral brightness,Ukrainian,F,desc,1023.07510878565,1529.69499822035,36
@@ -1231,9 +1231,9 @@ Sign of f0 slope,Pitch declination,HainanHua,F,desc,-1,0,29
 Sign of f0 slope,Pitch declination,HainanHua,F,recit,-1,0,29
 Sign of f0 slope,Pitch declination,HainanHua,F,song,-0.333333333333333,1.15470053837925,29
 Sign of f0 slope,Pitch declination,HainanHua,F,inst,-0.5,1,29
-Sign of f0 slope,Pitch declination,Traditional,F,desc,-1,0,30
-Sign of f0 slope,Pitch declination,Traditional,F,recit,-0.6,0.894427190999916,30
-Sign of f0 slope,Pitch declination,Traditional,F,song,-1,0,30
+Sign of f0 slope,Pitch declination,Williche,F,desc,-1,0,30
+Sign of f0 slope,Pitch declination,Williche,F,recit,-0.6,0.894427190999916,30
+Sign of f0 slope,Pitch declination,Williche,F,song,-1,0,30
 Sign of f0 slope,Pitch declination,Euskara,F,desc,-0.333333333333333,1.15470053837925,31
 Sign of f0 slope,Pitch declination,Euskara,F,inst,-0.333333333333333,1.15470053837925,31
 Sign of f0 slope,Pitch declination,Euskara,F,recit,-1,0,31
