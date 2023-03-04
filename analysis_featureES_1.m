@@ -16,9 +16,10 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
     addpath('./lib/two-sample/');
     addpath('./lib/CWT/');
     
-    varNames = {'feature', 'lang', 'diff', 'stderr', 'method'};
+    varNames = {'feature', 'lang', 'diff', 'stderr', 'ci95_l', 'ci95_u', 'method'};
+    varTypes = {'string', 'string', 'double', 'double', 'double', 'double', 'string'};
     idx_pair = unique(datainfo.groupid);
-    results = table('Size', [0, numel(varNames)], 'VariableTypes', {'string', 'string', 'double', 'double', 'string'}, 'VariableNames', varNames);
+    results = table('Size', [0, numel(varNames)], 'VariableTypes', varTypes, 'VariableNames', varNames);
     
     reffreq = 440;
     
@@ -56,14 +57,17 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         
         X = f0{idx_song}(f0{idx_song} ~= 0);
         Y = f0{idx_desc}(f0{idx_desc} ~= 0);
-        [d, tau] = pb_effectsize(X, Y);
-        results(end + 1, :) = table({'f0'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+        [d, tau, dof] = pb_effectsize(X, Y);
+        u = tinv(1 - 0.05/2, dof);
+        results(end + 1, :) = table({'f0'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
 
-        [d, tau] = pb_effectsize(modulationmagnitude{idx_song}, modulationmagnitude{idx_desc});
-        results(end + 1, :) = table({'-|Δf0|'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+        [d, tau, dof] = pb_effectsize(modulationmagnitude{idx_song}, modulationmagnitude{idx_desc});
+        u = tinv(1 - 0.05/2, dof);
+        results(end + 1, :) = table({'-|Δf0|'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
 
-        [d, tau] = pb_effectsize(SC{idx_song}, SC{idx_desc});
-        results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+        [d, tau, dof] = pb_effectsize(SC{idx_song}, SC{idx_desc});
+        u = tinv(1 - 0.05/2, dof);
+        results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
     end
 
     %% Exploratory feature
@@ -80,8 +84,9 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
             idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
             idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
-            [d, tau] = pb_effectsize(PC{idx_song}, PC{idx_desc});
-            results(end + 1, :) = table({'Pulse clarity'}, datainfo.language(idx_song), d, tau, {'common language effect size'});
+            [d, tau, dof] = pb_effectsize(PC{idx_song}, PC{idx_desc});
+            u = tinv(1 - 0.05/2, dof);
+            results(end + 1, :) = table({'Pulse clarity'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
         end
     end
     

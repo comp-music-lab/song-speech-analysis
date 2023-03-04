@@ -90,25 +90,28 @@ end
 
 %{
 %% Test code 1 ************
-K = 13;
+K = 60;
 mu_0 = normrnd(0, 4);
 sgm = gamrnd(0.9, 1.5, [K, 1]);
 tau = gamrnd(0.9, 1.5);
 
-al = 0.05;
 mu_null = mu_0;
 
 Y = normrnd(mu_0, sqrt(tau^2 + sgm.^2));
-mu = linspace(min(Y), max(Y), 512);
-[CI, pval, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
+mu = linspace(min(Y), max(Y), 4096);
+[CI, pval, mu_hat] = exactCI(mu, Y, sgm, 0.01, mu_null);
+[CI2, pval2, mu_hat2] = exactCI(mu, Y, sgm, 0.05, mu_null);
+[CI3, pval3, mu_hat3] = exactCI(mu, Y, sgm, 0.10, mu_null);
 
-figure(2);
+figure(1);
 clf; cla;
 scatter(Y, zeros(K, 1), 'marker', '.');
 hold on
 scatter(mu_hat, 0.2);
 scatter(mu_0, 0.1, 'marker', 'x');
 plot(CI, [0, 0] + 0.2, 'k');
+plot(CI2, [0, 0] + 0.3, 'k');
+plot(CI3, [0, 0] + 0.4, 'k');
 hold off
 ylim([-0.5, 0.5]);
 

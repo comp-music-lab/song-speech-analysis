@@ -16,6 +16,6 @@ source("plot_featureES.R")
 
 ##
 rm(list = ls())
-INPUTDIR <- './output/analysis/'
-OUTPUTDIR <- './output/figure/'
+collaboratorinfofile <- './data/CollaboratorsPlotData.csv'
+OUTPUTDIR <- './output/figure/Stage2/'
 source("plot_CollaboratorMap.R")
