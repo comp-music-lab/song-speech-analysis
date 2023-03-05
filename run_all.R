@@ -14,6 +14,14 @@ durationID <- '20sec'
 exploratory <- FALSE
 source("plot_featureES.R")
 
+##### [Driver] #####
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/'
+OUTPUTDIR <- './output/figure/Stage2/'
+durationID <- '20sec'
+exploratory <- FALSE
+source("analysis_multilevelAIC.R")
+
 ##
 rm(list = ls())
 collaboratorinfofile <- './data/CollaboratorsPlotData.csv'

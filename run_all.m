@@ -1,60 +1,61 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
-%%
+%% Confirmatory analysis
 outputdir_analysis = './output/analysis/Stage2/';
 outputdir_fig = './output/figure/Stage2/';
-
-if not(isfolder(outputdir_analysis))
-    mkdir(outputdir_analysis)
-end
-
-if not(isfolder(outputdir_fig))
-    mkdir(outputdir_fig)
-end
-
-%% Confirmatory analysis
 exploratory = false;
 duration = 20;
 typeflag_songdesc = 1;
 datainfofile = './datainfo.csv';
-analysis_featureES_1(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis);
-analysis_featureES_2(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis);
-
-%% Confirmatory analysis
 al = 0.05/6;
 typeid = 'song-desc';
+blindedonly = false;
 
-esinfofile = strcat(outputdir_analysis, 'results_effectsize_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
-outputfile = strcat(outputdir_analysis, 'ma_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
-analysis_metaCI(esinfofile, outputfile, al);
-outputfile = strcat(outputdir_analysis, 'equiv_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
-analysis_equivtest(esinfofile, outputfile, al);
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
 
-esinfofile = strcat(outputdir_analysis, 'results_effectsize_seg_', typeid, '_', num2str(duration), 'sec.csv');
-outputfile = strcat(outputdir_analysis, 'ma_seg_', typeid, '_', num2str(duration), 'sec.csv');
-analysis_metaCI(esinfofile, outputfile, al);
-outputfile = strcat(outputdir_analysis, 'equiv_seg_', typeid, '_', num2str(duration), 'sec.csv');
-analysis_equivtest(esinfofile, outputfile, al);
+%% Exploratory - other combinations
+typeflag_instdesc = 2;
+typeid = 'inst-desc';
+local_main(datainfofile, duration, typeflag_instdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
 
-%% 
-analysis_rawdatastat(datainfofile, outputdir_analysis, duration);
+typeflag_songrect = 3;
+typeid = 'song-recit';
+local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
 
-%% Exploratory
-exploratory = false;
+%% Exploratory - 30 seconds
 duration = 30;
-typeflag_songdesc = 1;
-datainfofile = './datainfo.csv';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
 
-analysis_featureES_2(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis);
+%% Robustness check - hypothesis blinding
+outputdir_analysis = './output/analysis/Stage2/blinding/';
+duration = 20;
+blindedonly = true;
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
 
-al = 0.05/6;
-typeid = 'song-desc';
+function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly)
+    if not(isfolder(outputdir_analysis))
+        mkdir(outputdir_analysis)
+    end
+    
+    if not(isfolder(outputdir_fig))
+        mkdir(outputdir_fig)
+    end
 
-esinfofile = strcat(outputdir_analysis, 'results_effectsize_seg_', typeid, '_', num2str(duration), 'sec.csv');
-outputfile = strcat(outputdir_analysis, 'ma_seg_', typeid, '_', num2str(duration), 'sec.csv');
-analysis_metaCI(esinfofile, outputfile, al);
-outputfile = strcat(outputdir_analysis, 'equiv_seg_', typeid, '_', num2str(duration), 'sec.csv');
-analysis_equivtest(esinfofile, outputfile, al);
+    analysis_featureES_1(datainfofile, duration, typeflag, exploratory, outputdir_analysis, blindedonly);
+    analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir_analysis, blindedonly);
 
-analysis_rawdatastat(datainfofile, outputdir_analysis, duration);
+    esinfofile = strcat(outputdir_analysis, 'results_effectsize_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
+    outputfile = strcat(outputdir_analysis, 'ma_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
+    analysis_metaCI(esinfofile, outputfile, al);
+    outputfile = strcat(outputdir_analysis, 'equiv_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
+    analysis_equivtest(esinfofile, outputfile, al);
+    
+    esinfofile = strcat(outputdir_analysis, 'results_effectsize_seg_', typeid, '_', num2str(duration), 'sec.csv');
+    outputfile = strcat(outputdir_analysis, 'ma_seg_', typeid, '_', num2str(duration), 'sec.csv');
+    analysis_metaCI(esinfofile, outputfile, al);
+    outputfile = strcat(outputdir_analysis, 'equiv_seg_', typeid, '_', num2str(duration), 'sec.csv');
+    analysis_equivtest(esinfofile, outputfile, al);
+
+    analysis_rawdatastat(datainfofile, outputdir_analysis, duration);
+end

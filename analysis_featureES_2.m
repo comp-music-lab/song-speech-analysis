@@ -1,4 +1,4 @@
-function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir)
+function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir, blindonly)
     switch typeflag
         case 1
             typelist = {'song', 'desc'};
@@ -8,11 +8,25 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
             typelist = {'song', 'recit'};
     end
 
-    %% configuration
+    %% load data
     fileid = strcat(num2str(duration, '%d'), 'sec');
     datainfo = readtable(datainfofile);
     datainfo = datainfo(strcmp(datainfo.type, typelist{1}) | strcmp(datainfo.type, typelist{2}), :);
+    
+    idx_dlt = zeros(size(datainfo, 1), 1);
+    groupidset = unique(datainfo.groupid);
+    for i=1:numel(groupidset)
+        if sum(datainfo.groupid == groupidset(i)) ~= 2
+            idx_dlt(datainfo.groupid == groupidset(i)) = 1;
+        end
+    end
+    datainfo(idx_dlt == 1, :) = [];
+    
+    if blindonly
+        datainfo = datainfo(strcmp(datainfo.blinding, 'TRUE'), :);
+    end
 
+    %% configuration
     addpath('./lib/two-sample/');
     
     varNames = {'feature', 'lang', 'diff', 'stderr', 'ci95_l', 'ci95_u', 'method'};
@@ -54,22 +68,29 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
         t_break{i} = t_break{i}(1:idx);
 
         f0filepath = strcat(datainfo.annotationdir{i}, datainfo.dataname{i}, '_f0.csv');
-        T = readtable(f0filepath);
-        f0{i} = table2array(T(:, 2));
-        t_f0{i} = table2array(T(:, 1));
-        
-        idx = find(t_f0{i} <= duration, 1, 'last');
-        f0{i} = f0{i}(1:idx);
-        t_f0{i} = t_f0{i}(1:idx);
 
-        f0_cent = 1200.*log2(f0{i}./reffreq);
-        [~, ~, t_st, t_ed] = helper.h_ioi(t_onset{i}, t_break{i});
-        I = helper.h_interval(f0_cent, t_f0{i}, t_st, t_ed);
-        I = cat(1, I{:});
-        tmp = cell(1, 1);
-        tmp{1} = I;
-        interval{i} = helper.h_subsampling(tmp, 1024);
-        interval{i} = interval{i}{1};
+        if isfile(f0filepath)
+            T = readtable(f0filepath);
+            f0{i} = table2array(T(:, 2));
+            t_f0{i} = table2array(T(:, 1));
+            
+            idx = find(t_f0{i} <= duration, 1, 'last');
+            f0{i} = f0{i}(1:idx);
+            t_f0{i} = t_f0{i}(1:idx);
+    
+            f0_cent = 1200.*log2(f0{i}./reffreq);
+            [~, ~, t_st, t_ed] = helper.h_ioi(t_onset{i}, t_break{i});
+            I = helper.h_interval(f0_cent, t_f0{i}, t_st, t_ed);
+            I = cat(1, I{:});
+            tmp = cell(1, 1);
+            tmp{1} = I;
+            interval{i} = helper.h_subsampling(tmp, 1024);
+            interval{i} = interval{i}{1};
+        else
+            f0{i} = NaN;
+            t_f0{i} = NaN;
+            interval{i} = NaN;
+        end
     end
     
     %% Comparison
@@ -81,7 +102,11 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
         IOIrate{i} = 1./ft_ioi(t_onset{i}, t_break{i});
         intervalsize{i} = abs(interval{i});
         try
-            pitchdeclination{i} = ft_f0declination(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
+            if ~isnan(f0{i})
+                pitchdeclination{i} = ft_f0declination(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
+            else
+                pitchdeclination{i} = NaN;
+            end
         catch
             pitchdeclination{i} = NaN;
         end
@@ -91,17 +116,27 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
         idx_song = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{1});
         idx_desc = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
-        [d, tau, dof] = pb_effectsize(IOIrate{idx_song}, IOIrate{idx_desc});
+        X = IOIrate{idx_song};
+        Y = IOIrate{idx_desc};
+        [d, tau, dof] = pb_effectsize(X, Y);
         u = tinv(1 - 0.05/2, dof);
         results(end + 1, :) = table({'IOI rate'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'});
         
-        [d, tau, dof] = pb_effectsize(intervalsize{idx_song}, intervalsize{idx_desc});
-        u = tinv(1 - 0.05/2, dof);
-        results(end + 1, :) = table({'f0 ratio'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+        X = intervalsize{idx_song};
+        Y = intervalsize{idx_desc};
+        if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
+            [d, tau, dof] = pb_effectsize(X, Y);
+            u = tinv(1 - 0.05/2, dof);
+            results(end + 1, :) = table({'f0 ratio'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+        end
 
-        [d, tau, dof] = pb_effectsize(pitchdeclination{idx_song}, pitchdeclination{idx_desc});
-        u = tinv(1 - 0.05/2, dof);
-        results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+        X = pitchdeclination{idx_song};
+        Y = pitchdeclination{idx_desc};
+        if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
+            [d, tau, dof] = pb_effectsize(X, Y);
+            u = tinv(1 - 0.05/2, dof);
+            results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+        end
     end
     
     %% Exploratory feature
