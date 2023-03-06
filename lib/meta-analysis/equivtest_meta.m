@@ -26,5 +26,11 @@ function [reject, pval] = equivtest_meta(X, sgm, support, Dlt, al, center)
     end
 
     fun = @(al) fzero(@(C) normcdf((C - dlt)/sgm_X) - normcdf((-C - dlt)/sgm_X) - al, 0) - T;
-    pval = fzero(fun, [0, 1 - eps]);
+    T_min = fun(0);
+    T_max = fun(1 - eps);
+    if T_min < 0 && 0 < T_max
+        pval = fzero(fun, [0, 1 - eps]);
+    else
+        pval = 1;
+    end
 end

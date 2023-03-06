@@ -124,7 +124,7 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
         
         X = intervalsize{idx_song};
         Y = intervalsize{idx_desc};
-        if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
+        if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
             results(end + 1, :) = table({'f0 ratio'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
@@ -132,8 +132,14 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
 
         X = pitchdeclination{idx_song};
         Y = pitchdeclination{idx_desc};
-        if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
-            [d, tau, dof] = pb_effectsize(X, Y);
+        if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
+            if numel(unique([X; Y])) == 1
+                d = 0.5;
+                [~, tau, dof] = pb_effectsize([X; -1; 1], [Y; -1; 1]);
+            else
+                [d, tau, dof] = pb_effectsize(X, Y);
+            end
+            
             u = tinv(1 - 0.05/2, dof);
             results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
         end

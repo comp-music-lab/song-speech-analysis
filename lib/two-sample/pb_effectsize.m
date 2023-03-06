@@ -2,42 +2,44 @@ function [A, tau, dof] = pb_effectsize(x, y)
     %%
     n_x = length(x);
     n_y = length(y);
-    
-    %{
-    c_1 = 0;
-    c_2 = 0;
-    
-    parfor i=1:n_x
-        c_1 = c_1 + numel(find(x(i) > y));
-        c_2 = c_2 + 0.5 * numel(find(x(i) == y));
-    end
-    
-    A = (c_1 + c_2)/(n_x * n_y);
-    %}
 
     %%
     x = x(:);
     y = y(:);
-    
+
     R_ik = tiedrank([x; y]);
     R_ikx = tiedrank(x);
     R_iky = tiedrank(y);
     R_ix = mean(R_ik(1:n_x));
     R_iy = mean(R_ik((n_x + 1):end));
-    S_xsq = 1/(n_x - 1) * sum((R_ik(1:n_x) - R_ikx - R_ix + (n_x + 1)/2).^2);
-    S_ysq = 1/(n_y - 1) * sum((R_ik((n_x + 1):end) - R_iky - R_iy + (n_y + 1)/2).^2);
-    
-    if n_x == 1
-        S_xsq = 0;
-    end
-    if n_y == 1
-        S_ysq = 0;
-    end
     
     A = 1 - 1/n_x*(R_iy - (n_y + 1)/2);
 
-    tau = 1/(n_x*n_y)*sqrt(n_x*S_xsq + n_y*S_ysq);
+    %% Separated samples scenario (3.5.3)
+    if A == 1
+        A = 1 - 1/(2*n_x*n_y);
+        S_xsq = 1/(4*n_x);
+        S_ysq = 1/(4*n_y);
+    elseif A == 0
+        A = 1/(2*n_x*n_y);
+        S_xsq = 1/(4*n_x);
+        S_ysq = 1/(4*n_y);
+    else
+        if n_x == 1
+            S_xsq = 0;
+        else
+            S_xsq = 1/(n_x - 1) * sum((R_ik(1:n_x) - R_ikx - R_ix + (n_x + 1)/2).^2);
+        end
 
+        if n_y == 1
+            S_ysq = 0;
+        else
+            S_ysq = 1/(n_y - 1) * sum((R_ik((n_x + 1):end) - R_iky - R_iy + (n_y + 1)/2).^2);
+        end
+    end
+
+    %% Confidence interval using the approximation by a t-distribution (3.7.2)
+    tau = 1/(n_x*n_y)*sqrt(n_x*S_xsq + n_y*S_ysq);
     dof = (S_xsq/n_y + S_ysq/n_x)^2/((S_xsq/n_y)^2/(n_x - 1) + (S_ysq/n_x)^2/(n_y - 1));
 end
 
@@ -69,22 +71,30 @@ for j=1:2
         xrnd = @(N) normrnd(mu_X, sgm_X, [N, 1]);
         yrnd = @(N) normrnd(mu_Y, sgm_Y, [N, 1]);
     elseif j == 2
-        mu = 4.3423;
-        sgm = 0.89893;
-        a = 3.324;
-        b = 1.11221;
+        mu = normrnd(4, 0.1);
+        sgm = normrnd(0.9, 0.04);
+        a = normrnd(3, 0.1);
+        b = normrnd(1.1, 0.07);
         
         support = linspace(0, 16, 1024);
         p_0 = 1 - trapz(support, normcdf(support, mu, sgm).*gampdf(support, a, b));
 
         xrnd = @(N) normrnd(mu, sgm, [N, 1]);
         yrnd = @(N) gamrnd(a, b, [N, 1]);
+
+        figure(3)
+        clf; cla;
+        plot(support, normpdf(support, mu, sgm));
+        hold on
+        plot(support, gampdf(support, a, b));
+        hold off
     end
     
     N = poissrnd(100, [2, 1]);
     
-    M = 4096;
+    M = 8192;
     p = zeros(M, 1);
+    p_sim = zeros(M, 1);
     CI = zeros(M, 4);
     al = 0.05;
     
@@ -96,6 +106,8 @@ for j=1:2
         u_ts = tinv(1 - al/2, dof);
         u_os = tinv(1 - al, dof);
         CI(m, :) = [p(m) - tau*u_ts, p(m) + tau*u_ts, p(m) - tau*u_os, p(m) + tau*u_os];
+
+        p_sim(m) = mean(X(1:min(N)) >= Y(1:min(N)));
     end
     
     hitrate_ts = mean(CI(:, 1) < p_0 & p_0 < CI(:, 2));
@@ -104,8 +116,9 @@ for j=1:2
 
     figure(j);
     clf; cla;
-    histogram(p, 32, 'Normalization', 'pdf', 'EdgeColor', 'None');
+    histogram(p, 64, 'Normalization', 'pdf', 'EdgeColor', 'None');
     hold on
+    histogram(p_sim, 'Normalization', 'pdf', 'EdgeColor', 'None');
     yl = ylim();
     plot([p_0, p_0], yl, '-.m');
     hold off
@@ -291,4 +304,16 @@ plot([1, M], rho_ul(1).*[1, 1], '-.m');
 plot([1, M], rho_ul(2).*[1, 1], '-.m');
 plot([1, M], [rho, rho], 'Color', 'g');
 hold off
+%}
+
+%{
+c_1 = 0;
+c_2 = 0;
+
+parfor i=1:n_x
+    c_1 = c_1 + numel(find(x(i) > y));
+    c_2 = c_2 + 0.5 * numel(find(x(i) == y));
+end
+
+A = (c_1 + c_2)/(n_x * n_y);
 %}

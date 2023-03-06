@@ -259,7 +259,7 @@ IOI rate,Temporal rate,Greek,M,recit,7.36221995976319,2.31696839891101,10
 IOI rate,Temporal rate,Greek,M,song,3.28049127938969,1.23654771724642,10
 IOI rate,Temporal rate,Mandarin,F,desc,4.19132088441464,2.66660748021214,11
 IOI rate,Temporal rate,Mandarin,F,recit,3.14402354683018,1.3067326371912,11
-IOI rate,Temporal rate,Mandarin,F,song,1.10246458832377,0.396003999596101,11
+IOI rate,Temporal rate,Mandarin,F,song,1.11517555462491,0.37963991527729,11
 IOI rate,Temporal rate,Mandarin,F,inst,2.7869811231375,1.99007950357181,11
 IOI rate,Temporal rate,German,M,desc,4.91413795699446,2.39354461315576,12
 IOI rate,Temporal rate,German,M,inst,2.42692897023807,1.16223947399513,12
@@ -276,7 +276,7 @@ IOI rate,Temporal rate,Japanese,M,inst,1.50993719541572,0.572114574822711,14
 IOI rate,Temporal rate,Thai,M,desc,5.30896152643188,2.15512108099467,15
 IOI rate,Temporal rate,Thai,M,inst,4.27331201391617,3.38947144260749,15
 IOI rate,Temporal rate,Thai,M,recit,1.64964356865837,0.739521284498872,15
-IOI rate,Temporal rate,Thai,M,song,1.49961793242451,1.24932469774763,15
+IOI rate,Temporal rate,Thai,M,song,1.521264070187,1.23610497631371,15
 IOI rate,Temporal rate,Spanish,M,desc,5.7952480891652,3.06839103741317,16
 IOI rate,Temporal rate,Spanish,M,inst,2.86899780953126,1.30318922524641,16
 IOI rate,Temporal rate,Spanish,M,recit,4.18764750220502,1.78732557272355,16
@@ -709,7 +709,7 @@ f0 ratio,Pitch interval size,Greek,M,recit,219.500666355124,200.069692156195,10
 f0 ratio,Pitch interval size,Greek,M,song,201.173051167161,159.305027292199,10
 f0 ratio,Pitch interval size,Mandarin,F,desc,264.176143027165,218.821498252983,11
 f0 ratio,Pitch interval size,Mandarin,F,recit,361.957003525374,254.036360919517,11
-f0 ratio,Pitch interval size,Mandarin,F,song,315.424743030521,227.047542383258,11
+f0 ratio,Pitch interval size,Mandarin,F,song,338.241688599447,221.938482517604,11
 f0 ratio,Pitch interval size,German,M,desc,256.976318217696,292.793761209127,12
 f0 ratio,Pitch interval size,German,M,inst,266.210239922941,178.330567876174,12
 f0 ratio,Pitch interval size,German,M,recit,182.03499166865,137.709481418811,12
@@ -725,7 +725,7 @@ f0 ratio,Pitch interval size,Japanese,M,inst,279.747805725027,199.94886977127,14
 f0 ratio,Pitch interval size,Thai,M,desc,226.901169291936,212.123206416226,15
 f0 ratio,Pitch interval size,Thai,M,inst,193.873122739238,150.003730692744,15
 f0 ratio,Pitch interval size,Thai,M,recit,301.965541212393,258.413527230271,15
-f0 ratio,Pitch interval size,Thai,M,song,231.741712158087,174.30539656056,15
+f0 ratio,Pitch interval size,Thai,M,song,245.731350236241,180.971461136353,15
 f0 ratio,Pitch interval size,Spanish,M,desc,298.561725928885,241.041695115961,16
 f0 ratio,Pitch interval size,Spanish,M,recit,417.644135607496,304.545585699958,16
 f0 ratio,Pitch interval size,Spanish,M,song,297.368955881108,161.422337907875,16
@@ -1163,7 +1163,7 @@ Sign of f0 slope,Pitch declination,Greek,M,recit,-0.666666666666667,0.8164965809
 Sign of f0 slope,Pitch declination,Greek,M,song,0.333333333333333,1.15470053837925,10
 Sign of f0 slope,Pitch declination,Mandarin,F,desc,-1,0,11
 Sign of f0 slope,Pitch declination,Mandarin,F,recit,-0.333333333333333,1.15470053837925,11
-Sign of f0 slope,Pitch declination,Mandarin,F,song,-1,0,11
+Sign of f0 slope,Pitch declination,Mandarin,F,song,0,1.4142135623731,11
 Sign of f0 slope,Pitch declination,German,M,desc,0.5,1,12
 Sign of f0 slope,Pitch declination,German,M,inst,-1,0,12
 Sign of f0 slope,Pitch declination,German,M,recit,-1,0,12
@@ -1179,7 +1179,7 @@ Sign of f0 slope,Pitch declination,Japanese,M,inst,-0.333333333333333,1.15470053
 Sign of f0 slope,Pitch declination,Thai,M,desc,-1,0,15
 Sign of f0 slope,Pitch declination,Thai,M,inst,0,1.15470053837925,15
 Sign of f0 slope,Pitch declination,Thai,M,recit,-1,0,15
-Sign of f0 slope,Pitch declination,Thai,M,song,-1,0,15
+Sign of f0 slope,Pitch declination,Thai,M,song,0.333333333333333,1.15470053837925,15
 Sign of f0 slope,Pitch declination,Spanish,M,desc,0.333333333333333,1.15470053837925,16
 Sign of f0 slope,Pitch declination,Spanish,M,recit,-1,0,16
 Sign of f0 slope,Pitch declination,Spanish,M,song,-1,0,16

@@ -7,12 +7,13 @@ outputdir_fig = './output/figure/Stage2/';
 exploratory = false;
 duration = 20;
 typeflag_songdesc = 1;
+typeid = 'song-desc';
 datainfofile = './datainfo.csv';
 al = 0.05/6;
-typeid = 'song-desc';
 blindedonly = false;
 
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
+analysis_rawdatastat(datainfofile, outputdir_analysis, duration);
 
 %% Exploratory - other combinations
 typeflag_instdesc = 2;
@@ -24,6 +25,8 @@ typeid = 'song-recit';
 local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
 
 %% Exploratory - 30 seconds
+typeflag_songdesc = 1;
+typeid = 'song-desc';
 duration = 30;
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly);
 
@@ -56,6 +59,4 @@ function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, o
     analysis_metaCI(esinfofile, outputfile, al);
     outputfile = strcat(outputdir_analysis, 'equiv_seg_', typeid, '_', num2str(duration), 'sec.csv');
     analysis_equivtest(esinfofile, outputfile, al);
-
-    analysis_rawdatastat(datainfofile, outputdir_analysis, duration);
 end

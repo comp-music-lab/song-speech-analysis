@@ -76,7 +76,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         
         X = f0{idx_song}(f0{idx_song} ~= 0);
         Y = f0{idx_desc}(f0{idx_desc} ~= 0);
-        if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
+        if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
             results(end + 1, :) = table({'f0'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
@@ -84,7 +84,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         
         X = modulationmagnitude{idx_song};
         Y = modulationmagnitude{idx_desc};
-        if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
+        if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
             results(end + 1, :) = table({'-|Δf0|'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
@@ -92,7 +92,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         
         X = SC{idx_song};
         Y = SC{idx_desc};
-        if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
+        if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
             results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
@@ -115,7 +115,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
 
             X = PC{idx_song};
             Y = PC{idx_desc};
-            if numel(X) == 1 && numel(Y) == 1 && ~isnan(X) && ~isnan(Y)
+            if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
                 [d, tau, dof] = pb_effectsize(X, Y);
                 u = tinv(1 - 0.05/2, dof);
                 results(end + 1, :) = table({'Pulse clarity'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
