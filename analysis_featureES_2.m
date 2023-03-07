@@ -1,4 +1,4 @@
-function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir, blindonly)
+function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir, blindonly, continuitycorrection)
     switch typeflag
         case 1
             typelist = {'song', 'desc'};
@@ -134,8 +134,26 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
         Y = pitchdeclination{idx_desc};
         if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             if numel(unique([X; Y])) == 1
-                d = 0.5;
-                [~, tau, dof] = pb_effectsize([X; -1; 1], [Y; -1; 1]);
+                if continuitycorrection
+                    d = 0.5;
+                    [~, tau, dof] = pb_effectsize([X; -1; 1], [Y; -1; 1]);
+                else
+                    d = 0.5;
+                    unobserved = setdiff([1, -1], unique([X; Y]));
+                    Z = X;
+                    Z(1) = unobserved;
+                    [~, tau_X, dof_X] = pb_effectsize(Z, Y);
+                    Z = Y;
+                    Z(1) = unobserved;
+                    [~, tau_Y, dof_Y] = pb_effectsize(X, Z);
+                    if tau_X < tau_Y
+                        tau = tau_X;
+                        dof = dof_X;
+                    else
+                        tau = tau_Y;
+                        dof = dof_Y;
+                    end
+                end
             else
                 [d, tau, dof] = pb_effectsize(X, Y);
             end
