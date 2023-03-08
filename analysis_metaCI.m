@@ -4,7 +4,6 @@ function analysis_metaCI(esinfofile, outputfile, al)
     featurelist = unique(T.feature);
     
     testdiff = {'f0', 'IOI rate', '-|Δf0|'};
-    testsim = {'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
 
     %%
     addpath('./lib/meta-analysis/');
@@ -21,8 +20,7 @@ function analysis_metaCI(esinfofile, outputfile, al)
         idx = strcmp(T.feature, featurelist{i});
         Y = T.diff(idx);
         sgm = T.stderr(idx);
-        mu = linspace(min(Y), max(Y), 4096);
-        [CI, pval, mu_hat] = exactCI(mu, Y, sgm, al, mu_null);
+        [CI, pval, mu_hat] = exactCI(Y, sgm, al, mu_null);
         
         results(end + 1, :) = table(featurelist(i), pval, mu_hat, CI(1), CI(2));
     end

@@ -1,4 +1,4 @@
-function [reject, pval] = equivtest_meta(X, sgm, support, Dlt, al, center)
+function [reject, pval] = equivtest_meta(X, sgm, Dlt, al, center)
     %%
     K = numel(sgm);
     sgm2 = sgm.^2;
@@ -6,7 +6,7 @@ function [reject, pval] = equivtest_meta(X, sgm, support, Dlt, al, center)
     mu_F = sum(sgm2.^(-1).*X)/sum(sgm2.^(-1));
     tau2_DL = max((sum(sgm2.^(-1).*(X - mu_F).^2) - (K - 1))/V, 0);
 
-    [~, ~, mu_X] = exactCI(support, X, sgm, al, 0);
+    [~, ~, mu_X] = exactCI(X, sgm, al, 0);
     sgm_X = sqrt(mean(tau2_DL + sgm2));
     n = numel(X);
     

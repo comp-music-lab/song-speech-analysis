@@ -38,8 +38,8 @@ local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, o
 typeflag_songdesc = 1;
 typeid = 'song-desc';
 duration = 30;
-local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection);
 analysis_rawdatastat(datainfofile, outputdir_analysis, duration);
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection);
 
 %% Robustness check - hypothesis blinding
 continuitycorrection = false;

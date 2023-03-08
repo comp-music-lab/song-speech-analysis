@@ -12,14 +12,13 @@ function analysis_equivtest(esinfofile, outputfile, al)
     varTypes = {'string', 'double', 'double'};
     results = table('Size', [0, numel(varNames)], 'VariableTypes', varTypes, 'VariableNames', varNames);
     
-    support = linspace(0, 1, 512)';
     for i=1:numel(featurelist)
         idx = strcmp(T.feature, featurelist{i});
         
         if sum(idx) > 0
             Y = T.diff(idx);
             sgm = T.stderr(idx);
-            [reject, pval] = equivtest_meta(Y, sgm, support, Dlt, al, center);
+            [reject, pval] = equivtest_meta(Y, sgm, Dlt, al, center);
             
             results(end + 1, :) = table(featurelist(i), pval, reject);
         end
