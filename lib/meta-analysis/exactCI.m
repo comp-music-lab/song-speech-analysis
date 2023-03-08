@@ -1,6 +1,14 @@
 function [CI, pval, mu_hat] = exactCI(Y, sgm, al, mu_null)
     %%
-    V = binornd(1, 0.5, [numel(Y), 2^15]);
+    L = 15;
+    K = numel(Y);
+    if K <= L
+        L = 2^K;
+        V = dec2bin(0:(L - 1))' - '0';
+    else
+        V = binornd(1, 0.5, [K, 2^L]);
+    end
+
     mu_min = min(Y);
     mu_max = max(Y);
 
@@ -50,7 +58,7 @@ end
 %{
 al = 0.05/6;
 mu_null = 0;
-K = poissrnd(60);
+K = 15;
 
 mu_0 = normrnd(0, 1);
 sgm = gamrnd(0.8, 1.0, [K, 1]);
