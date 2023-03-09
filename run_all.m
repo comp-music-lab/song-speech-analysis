@@ -1,9 +1,14 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
+%% Exploratory - normalized f0 contour
+datainfo = readtable('./datainfo.csv');
+duration = 30;
+outputdir_fig = './output/figure/Stage2/';
+analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+
 %% Confirmatory analysis
 outputdir_analysis = './output/analysis/Stage2/';
-outputdir_fig = './output/figure/Stage2/';
 exploratory = false;
 duration = 20;
 typeflag_songdesc = 1;
