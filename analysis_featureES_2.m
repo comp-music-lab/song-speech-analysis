@@ -84,7 +84,7 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
             I = cat(1, I{:});
             tmp = cell(1, 1);
             tmp{1} = I;
-            interval{i} = helper.h_subsampling(tmp, 1024);
+            interval{i} = helper.h_subsampling(tmp, 128);
             interval{i} = interval{i}{1};
         else
             f0{i} = NaN;
@@ -186,8 +186,8 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
         end
 
         for i=1:numel(idx_pair)
-            idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
-            idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
+            idx_song = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{1});
+            idx_desc = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{2});
             
             [d, tau, dof] = pb_effectsize(SF{idx_song}, SF{idx_desc});
             u = tinv(1 - 0.05/2, dof);

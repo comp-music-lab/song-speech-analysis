@@ -1,34 +1,26 @@
 import librosa
 import numpy as np
-import datetime
+import datetime, csv
 
-def get_f0(audiodir, dataname, outputdir):
+def get_f0(audiofilepath, dataname, outputdir):
     ####
     N = 2048
     M = 512
 
     ####
-    for d in dataname:
-        print(datetime.datetime.now().isoformat() + " - " + d)
+    y, sr = librosa.load(audiofilepath, mono=True)
+    f0, voiced_flag, voiced_probs = librosa.pyin(y, sr=sr, fmin=25, fmax=2048, frame_length=N, hop_length=M)
+    t = librosa.times_like(f0, sr=sr, hop_length=M)
 
-        ####
-        audiofilepath = audiodir + d + ".wav"
-        y, sr = librosa.load(audiofilepath, mono=True)
-        f0, voiced_flag, voiced_probs = librosa.pyin(y, sr=sr, fmin=25, fmax=2048, frame_length=N, hop_length=M)
-        t = librosa.times_like(f0, sr=sr, hop_length=M)
+    f0[np.isnan(f0)] = 0
 
-        f0[np.isnan(f0)] = 0
-
-        ####
-        outputfilepath = outputdir + d + "_f0.csv"
-        np.savetxt(outputfilepath, np.vstack([t, f0]).transpose(), delimiter=',', header="time,voice_1", comments="")
-
-    print(datetime.datetime.now().isoformat() + " - done")
+    ####
+    outputfilepath = outputdir + dataname + "_f0.csv"
+    np.savetxt(outputfilepath, np.vstack([t, f0]).transpose(), delimiter=',', header="time,voice_1", comments="")
 
 if __name__ == "__main__":
-    outputdir = r'C:\Users\yuto\Documents\MATLAB\projects\song-speech-analysis\data\Automated F0' + '\\'
-
     """
+    outputdir = r'C:\yuto\Documents\MATLAB\projects\song-speech-analysis\data\Automated F0' + '\\'
     audiodir = r'G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw' + '\\'
     dataname = ["ACO02A", "ACO02B", "ACO02C", "ACO02D",
                 "ACO05A", "ACO05B", "ACO05C", "ACO05D",
@@ -41,6 +33,7 @@ if __name__ == "__main__":
                 "WEL51A", "WEL51B", "WEL51C", "WEL51D",]
     """
 
+    """
     audiodir = r'../data/Stage 1 RR Audio/full-length/'
     dataname = ["Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_song",
                 "Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220430_desc",
@@ -63,5 +56,23 @@ if __name__ == "__main__":
                 "John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_recit",
                 "John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song",
                 ]
+    """
+    datasetinfo = ['../datainfo_pyin.csv', '../datainfo_Hilton-pyin.csv']
 
-    get_f0(audiodir, dataname, outputdir)
+    for dinfo in datasetinfo:
+        print(datetime.datetime.now().isoformat() + " ** " + dinfo)
+
+        with open(dinfo, encoding="utf_8") as f:
+            reader = csv.reader(f)
+            T = [row for row in reader]
+            T = T[1:]
+
+            for row in T:
+                audiofilepath = row[2] + row[0] + '.' + row[3]
+                dataname = row[0]
+                outputdir = '.' + row[1]
+
+                print(datetime.datetime.now().isoformat() + " - " + dataname)
+                get_f0(audiofilepath, dataname, outputdir)
+
+    print(datetime.datetime.now().isoformat() + " - done")

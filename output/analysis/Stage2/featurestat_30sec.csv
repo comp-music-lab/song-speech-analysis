@@ -10,6 +10,9 @@ f0,Pitch height,Italian,M,desc,-2532.90357825731,293.966391039797,3
 f0,Pitch height,Italian,M,inst,-1094.69850352113,363.185149742633,3
 f0,Pitch height,Italian,M,recit,-2734.71206225681,306.786377220345,3
 f0,Pitch height,Italian,M,song,-2505.8695168114,318.44509462902,3
+f0,Pitch height,Guarani,F,recit,-1159.21270718232,228.511759841272,61
+f0,Pitch height,Guarani,F,song,-842.725892179195,313.339522304938,61
+f0,Pitch height,Guarani,F,desc,-1237.04873294347,194.697612365122,61
 f0,Pitch height,Portuguese,F,desc,-1176.15783724741,264.005682672729,4
 f0,Pitch height,Portuguese,F,recit,-1137.57575757576,315.585686314597,4
 f0,Pitch height,Portuguese,F,song,-242.11732355637,335.713441787247,4
@@ -68,6 +71,13 @@ f0,Pitch height,English,M,desc,-2420.97789887981,311.961488224519,19
 f0,Pitch height,English,M,inst,767.197932371312,371.173089727328,19
 f0,Pitch height,English,M,recit,-2139.22059349303,322.104078700768,19
 f0,Pitch height,English,M,song,-1786.17269544924,386.259816927745,19
+f0,Pitch height,Spanish,M,recit,-2579.89863547758,174.892627685921,62
+f0,Pitch height,Spanish,M,song,-2010.38329026701,333.469778222867,62
+f0,Pitch height,Spanish,M,desc,-2529.35003170577,167.197348184027,62
+f0,Pitch height,Spanish,M,inst,-2031.24070751089,372.088628460553,62
+f0,Pitch height,Dutch,F,desc,-992.983818770227,328.013774588051,63
+f0,Pitch height,Dutch,F,recit,-991.557008581937,315.43605543501,63
+f0,Pitch height,Dutch,F,song,-877.557344064386,302.763222456378,63
 f0,Pitch height,Wolof,M,desc,-3098.6396011396,259.719233510348,20
 f0,Pitch height,Wolof,M,recit,-3077.6936026936,244.774955033177,20
 f0,Pitch height,Wolof,M,song,-1143.87488748875,294.103686250889,20
@@ -154,6 +164,13 @@ f0,Pitch height,Azerbaijani,F,song,-856.494006849315,373.039891739456,41
 f0,Pitch height,Russian,F,desc,-1351.51895043732,315.115733375671,42
 f0,Pitch height,Russian,F,recit,-1234.81841763943,462.158339107755,42
 f0,Pitch height,Russian,F,song,146.411530815109,286.205601756285,42
+f0,Pitch height,Cantonese,F,song,-960.713522751549,444.081260570825,64
+f0,Pitch height,Cantonese,F,desc,-1604.84070522734,265.870128863286,64
+f0,Pitch height,Cantonese,F,inst,867.668179128033,432.699679915153,64
+f0,Pitch height,Cantonese,F,recit,-1518.75288683603,298.440983612911,64
+f0,Pitch height,Rikbaktsa,M,song,-2302.28400109022,165.238220742114,66
+f0,Pitch height,Rikbaktsa,M,desc,-2355.46397694525,150.280402080435,66
+f0,Pitch height,Rikbaktsa,M,recit,-2422.32548701299,176.05614826073,66
 f0,Pitch height,Urdu,M,desc,-2415.16592541909,141.528028784451,43
 f0,Pitch height,Urdu,M,inst,-571.64087391898,328.932033348761,43
 f0,Pitch height,Urdu,M,recit,-2377.09321566464,100.375622481782,43
@@ -179,6 +196,13 @@ f0,Pitch height,Kannada,F,song,-817.751154099802,341.81389698624,48
 f0,Pitch height,Japanese,M,desc,-2377.18869898849,317.668440801372,49
 f0,Pitch height,Japanese,M,recit,-2437.71749755621,244.292142148884,49
 f0,Pitch height,Japanese,M,song,-1787.32290926321,365.976052901438,49
+f0,Pitch height,Burmese,F,song,-568.012906097018,291.903640645486,65
+f0,Pitch height,Burmese,F,desc,-1417.32558139535,355.920574545955,65
+f0,Pitch height,Burmese,F,recit,-1463.5178098322,251.054233117052,65
+f0,Pitch height,Gaeilge,M,song,-1943.95531549227,242.496521285997,67
+f0,Pitch height,Gaeilge,M,desc,-2333.17424727739,210.208577403329,67
+f0,Pitch height,Gaeilge,M,inst,100.619318181818,235.565392502036,67
+f0,Pitch height,Gaeilge,M,recit,-2264.12002945508,204.512803698833,67
 f0,Pitch height,English,M,desc,-2596.76843467012,224.796743797604,50
 f0,Pitch height,English,M,inst,-1900.21317416329,330.487972493502,50
 f0,Pitch height,English,M,recit,-2496.19158878505,182.046468987446,50
@@ -230,6 +254,10 @@ IOI rate,Temporal rate,Italian,M,desc,6.2271735193094,3.68748288496527,3
 IOI rate,Temporal rate,Italian,M,inst,2.79605340372187,1.21699525812106,3
 IOI rate,Temporal rate,Italian,M,recit,4.71283714180818,2.38333837151233,3
 IOI rate,Temporal rate,Italian,M,song,3.04213481519771,1.39349462229605,3
+IOI rate,Temporal rate,Guarani,F,inst,3.08698959598025,1.17126682044501,61
+IOI rate,Temporal rate,Guarani,F,recit,5.20598482709026,2.1442241561287,61
+IOI rate,Temporal rate,Guarani,F,song,2.66250698259626,2.74173733784327,61
+IOI rate,Temporal rate,Guarani,F,desc,6.40074047724566,3.95031451758063,61
 IOI rate,Temporal rate,Portuguese,F,desc,7.30164913343182,4.31995816517056,4
 IOI rate,Temporal rate,Portuguese,F,inst,3.22347994568736,0.776700591312237,4
 IOI rate,Temporal rate,Portuguese,F,recit,6.16908726519555,2.76273098250035,4
@@ -241,6 +269,7 @@ IOI rate,Temporal rate,English,F,song,1.10485586538204,0.248304854993027,5
 IOI rate,Temporal rate,Ronga,M,desc,6.91490784215215,3.86795036434785,6
 IOI rate,Temporal rate,Ronga,M,recit,6.92405182845479,3.36191040313575,6
 IOI rate,Temporal rate,Ronga,M,song,4.28868237167745,1.9684916099493,6
+IOI rate,Temporal rate,Ronga,M,inst,3.34468915625196,1.69469721673877,6
 IOI rate,Temporal rate,Swedish,M,desc,4.05871065028906,2.85922649760619,7
 IOI rate,Temporal rate,Swedish,M,inst,10.6703684552028,8.09309358033733,7
 IOI rate,Temporal rate,Swedish,M,recit,4.64367664236036,2.79810511906061,7
@@ -259,7 +288,7 @@ IOI rate,Temporal rate,Greek,M,recit,7.36221995976319,2.31696839891101,10
 IOI rate,Temporal rate,Greek,M,song,3.17446943907314,1.31682382957888,10
 IOI rate,Temporal rate,Mandarin,F,desc,4.05659662997377,2.71879297260676,11
 IOI rate,Temporal rate,Mandarin,F,recit,3.09974720088577,1.3691061429859,11
-IOI rate,Temporal rate,Mandarin,F,song,1.12052993163546,0.432529818332286,11
+IOI rate,Temporal rate,Mandarin,F,song,1.12917338872024,0.422293213383766,11
 IOI rate,Temporal rate,Mandarin,F,inst,2.6729910149897,2.01437026302556,11
 IOI rate,Temporal rate,German,M,desc,4.83138558272308,2.4547357250795,12
 IOI rate,Temporal rate,German,M,inst,2.33038235124961,1.21269912590887,12
@@ -276,7 +305,7 @@ IOI rate,Temporal rate,Japanese,M,inst,1.45544004687322,0.610997590480399,14
 IOI rate,Temporal rate,Thai,M,desc,5.04055297499485,2.3630293070625,15
 IOI rate,Temporal rate,Thai,M,inst,4.00262869704629,3.4094429319071,15
 IOI rate,Temporal rate,Thai,M,recit,1.55172026874972,0.7742179038588,15
-IOI rate,Temporal rate,Thai,M,song,1.38086771090144,1.20695295249062,15
+IOI rate,Temporal rate,Thai,M,song,1.39890615903686,1.19761514413108,15
 IOI rate,Temporal rate,Spanish,M,desc,5.65515367602034,3.13500271187484,16
 IOI rate,Temporal rate,Spanish,M,inst,2.79121667575076,1.35826251950068,16
 IOI rate,Temporal rate,Spanish,M,recit,3.98918041042439,1.99680582887746,16
@@ -293,6 +322,14 @@ IOI rate,Temporal rate,English,M,desc,8.03231068670137,5.16384333536015,19
 IOI rate,Temporal rate,English,M,inst,3.9623112338568,2.38116078616864,19
 IOI rate,Temporal rate,English,M,recit,6.61238998456246,3.3928651623981,19
 IOI rate,Temporal rate,English,M,song,4.09490732204356,2.21102199040653,19
+IOI rate,Temporal rate,Spanish,M,recit,6.59651226833993,3.87451751039847,62
+IOI rate,Temporal rate,Spanish,M,song,3.75875744372784,1.30199173596045,62
+IOI rate,Temporal rate,Spanish,M,desc,5.95591511359964,4.13566643753194,62
+IOI rate,Temporal rate,Spanish,M,inst,3.69218771611215,1.3444027953925,62
+IOI rate,Temporal rate,Dutch,F,inst,2.00810415066568,0.670636274041717,63
+IOI rate,Temporal rate,Dutch,F,desc,5.98200397773544,3.83081491862954,63
+IOI rate,Temporal rate,Dutch,F,recit,4.97767237169912,1.92058414691538,63
+IOI rate,Temporal rate,Dutch,F,song,3.7305239296913,2.1670696111238,63
 IOI rate,Temporal rate,Wolof,M,desc,5.1973969790643,2.76409594816412,20
 IOI rate,Temporal rate,Wolof,M,recit,4.23554242683029,2.08388157488566,20
 IOI rate,Temporal rate,Wolof,M,song,3.58474179430539,1.35474144439921,20
@@ -356,6 +393,7 @@ IOI rate,Temporal rate,IsiXhosa,F,song,4.22139963362858,3.38863788457719,34
 IOI rate,Temporal rate,Turkish,F,desc,7.38159249902306,4.88959589572513,35
 IOI rate,Temporal rate,Turkish,F,recit,4.85107932053008,1.7150938916419,35
 IOI rate,Temporal rate,Turkish,F,song,2.75608811346458,1.31806039956846,35
+IOI rate,Temporal rate,Turkish,F,inst,2.56987696725026,1.05513767907967,35
 IOI rate,Temporal rate,Ukrainian,F,desc,7.13365023108992,4.4043469427776,36
 IOI rate,Temporal rate,Ukrainian,F,inst,1.56977481847956,0.621061109827008,36
 IOI rate,Temporal rate,Ukrainian,F,recit,5.38797461081588,1.84303018167144,36
@@ -383,6 +421,13 @@ IOI rate,Temporal rate,Azerbaijani,F,song,2.03694939469473,1.07699634909644,41
 IOI rate,Temporal rate,Russian,F,desc,5.70210677254101,2.75199265187088,42
 IOI rate,Temporal rate,Russian,F,recit,4.83609935580152,2.05548797722408,42
 IOI rate,Temporal rate,Russian,F,song,1.54796991935132,1.06469070340852,42
+IOI rate,Temporal rate,Cantonese,F,song,1.98740338936017,0.952636269621479,64
+IOI rate,Temporal rate,Cantonese,F,desc,4.45766776693494,1.54644320390543,64
+IOI rate,Temporal rate,Cantonese,F,inst,2.81503373372105,1.68689525137728,64
+IOI rate,Temporal rate,Cantonese,F,recit,3.27411287130208,0.683331850143921,64
+IOI rate,Temporal rate,Rikbaktsa,M,song,5.15519776779571,4.39486635637324,66
+IOI rate,Temporal rate,Rikbaktsa,M,desc,6.48207143688713,7.10446070766508,66
+IOI rate,Temporal rate,Rikbaktsa,M,recit,5.92223921182654,6.14562641157496,66
 IOI rate,Temporal rate,Urdu,M,desc,5.40781379518692,1.85518421950159,43
 IOI rate,Temporal rate,Urdu,M,inst,1.7804946837921,0.848727324753835,43
 IOI rate,Temporal rate,Urdu,M,recit,4.00417269639687,1.47836809213317,43
@@ -411,6 +456,14 @@ IOI rate,Temporal rate,Japanese,M,desc,6.81905521683986,4.1470826960964,49
 IOI rate,Temporal rate,Japanese,M,recit,5.12062265955689,2.76433386748063,49
 IOI rate,Temporal rate,Japanese,M,song,3.3530472689274,1.82093894504538,49
 IOI rate,Temporal rate,Japanese,M,inst,2.75622631869954,1.31903769600414,49
+IOI rate,Temporal rate,Burmese,F,song,1.87782429792038,0.846563340691322,65
+IOI rate,Temporal rate,Burmese,F,desc,5.26059659066739,1.76536143110071,65
+IOI rate,Temporal rate,Burmese,F,inst,3.24954565622399,1.28873105618041,65
+IOI rate,Temporal rate,Burmese,F,recit,3.41458205675379,1.21239054241904,65
+IOI rate,Temporal rate,Gaeilge,M,song,2.00572548952835,0.904864369592994,67
+IOI rate,Temporal rate,Gaeilge,M,desc,6.68447922904607,3.20201353208315,67
+IOI rate,Temporal rate,Gaeilge,M,inst,2.82501229394682,3.36418809819096,67
+IOI rate,Temporal rate,Gaeilge,M,recit,4.80801322101204,2.61386831961614,67
 IOI rate,Temporal rate,English,M,desc,6.18207661965382,3.82844455597297,50
 IOI rate,Temporal rate,English,M,inst,3.80085542632189,1.84054357319976,50
 IOI rate,Temporal rate,English,M,recit,5.46329411764084,2.43689086975043,50
@@ -430,9 +483,11 @@ IOI rate,Temporal rate,Norwegian,F,song,2.25205835492916,0.920345989636891,53
 IOI rate,Temporal rate,Kuikuro,M,desc,6.53215116338048,6.19758534293521,54
 IOI rate,Temporal rate,Kuikuro,M,recit,6.63244703611805,3.85400172700529,54
 IOI rate,Temporal rate,Kuikuro,M,song,3.76422079109801,1.42563254573629,54
+IOI rate,Temporal rate,Kuikuro,M,inst,2.99586082127263,2.08011235416423,54
 IOI rate,Temporal rate,Ainu,F,desc,7.35764404446373,3.47165347828019,55
 IOI rate,Temporal rate,Ainu,F,recit,2.79323526274521,1.1788099322555,55
 IOI rate,Temporal rate,Ainu,F,song,2.29559783341892,0.964818274672205,55
+IOI rate,Temporal rate,Ainu,F,inst,3.05681917591593,1.12197147579411,55
 IOI rate,Temporal rate,Slovenian,F,desc,6.2671862496826,3.27305415699452,56
 IOI rate,Temporal rate,Slovenian,F,inst,3.54352605976376,1.47546772505825,56
 IOI rate,Temporal rate,Slovenian,F,recit,5.0905242679506,2.31164852514776,56
@@ -464,6 +519,9 @@ IOI rate,Temporal rate,Japanese,M,song,1.94076480817392,0.849222767360358,60
 -|Δf0|,Pitch stability,Italian,M,inst,-76.0497612488259,104.048501657264,3
 -|Δf0|,Pitch stability,Italian,M,recit,-2481.48144972353,2059.73851004277,3
 -|Δf0|,Pitch stability,Italian,M,song,-1191.80510186951,1280.65466789851,3
+-|Δf0|,Pitch stability,Guarani,F,recit,-1664.60658720189,1775.78835435674,61
+-|Δf0|,Pitch stability,Guarani,F,song,-447.829864375492,684.013195989973,61
+-|Δf0|,Pitch stability,Guarani,F,desc,-1004.03307397735,998.809191163177,61
 -|Δf0|,Pitch stability,Portuguese,F,desc,-1439.12319728819,1607.94421824323,4
 -|Δf0|,Pitch stability,Portuguese,F,recit,-1904.09083543787,2083.31147753599,4
 -|Δf0|,Pitch stability,Portuguese,F,song,-778.400995146849,1171.11288819016,4
@@ -522,6 +580,13 @@ IOI rate,Temporal rate,Japanese,M,song,1.94076480817392,0.849222767360358,60
 -|Δf0|,Pitch stability,English,M,inst,-250.71130084148,564.624050024949,19
 -|Δf0|,Pitch stability,English,M,recit,-1798.43113525155,1515.14288803781,19
 -|Δf0|,Pitch stability,English,M,song,-1337.28641036585,1539.47863409383,19
+-|Δf0|,Pitch stability,Spanish,M,recit,-1138.18224019217,1006.55628127012,62
+-|Δf0|,Pitch stability,Spanish,M,song,-963.864048288919,1122.29216934726,62
+-|Δf0|,Pitch stability,Spanish,M,desc,-995.299101206649,1126.49655854226,62
+-|Δf0|,Pitch stability,Spanish,M,inst,-113.06422501521,146.070447335008,62
+-|Δf0|,Pitch stability,Dutch,F,desc,-2114.35922720606,1938.88829906551,63
+-|Δf0|,Pitch stability,Dutch,F,recit,-2572.23575731406,2611.56614854183,63
+-|Δf0|,Pitch stability,Dutch,F,song,-1027.53583207704,1159.41959436154,63
 -|Δf0|,Pitch stability,Wolof,M,desc,-1550.3698648861,1551.33361626951,20
 -|Δf0|,Pitch stability,Wolof,M,recit,-1680.1679624902,1864.21314599497,20
 -|Δf0|,Pitch stability,Wolof,M,song,-904.948796460311,1281.00753389673,20
@@ -608,6 +673,13 @@ IOI rate,Temporal rate,Japanese,M,song,1.94076480817392,0.849222767360358,60
 -|Δf0|,Pitch stability,Russian,F,desc,-2117.22866537585,1968.33225768796,42
 -|Δf0|,Pitch stability,Russian,F,recit,-2590.93806574691,2546.53448779841,42
 -|Δf0|,Pitch stability,Russian,F,song,-665.401425290022,983.07223234013,42
+-|Δf0|,Pitch stability,Cantonese,F,song,-813.789265960428,1219.86214811321,64
+-|Δf0|,Pitch stability,Cantonese,F,desc,-1675.41366797958,1783.89273865839,64
+-|Δf0|,Pitch stability,Cantonese,F,inst,-348.061556093733,747.269008329507,64
+-|Δf0|,Pitch stability,Cantonese,F,recit,-1263.45527736725,1282.33865150284,64
+-|Δf0|,Pitch stability,Rikbaktsa,M,song,-681.89309313697,760.280014755136,66
+-|Δf0|,Pitch stability,Rikbaktsa,M,desc,-893.648088947172,1140.45920524641,66
+-|Δf0|,Pitch stability,Rikbaktsa,M,recit,-1064.23716824284,1016.42160890133,66
 -|Δf0|,Pitch stability,Urdu,M,desc,-1319.25392184164,1299.78291339767,43
 -|Δf0|,Pitch stability,Urdu,M,inst,-117.488932480825,373.584858963789,43
 -|Δf0|,Pitch stability,Urdu,M,recit,-1093.60388098223,1146.3311498693,43
@@ -633,6 +705,13 @@ IOI rate,Temporal rate,Japanese,M,song,1.94076480817392,0.849222767360358,60
 -|Δf0|,Pitch stability,Japanese,M,desc,-2264.88731725723,2243.3029991199,49
 -|Δf0|,Pitch stability,Japanese,M,recit,-2195.55159332409,1762.55053361208,49
 -|Δf0|,Pitch stability,Japanese,M,song,-1314.37003273736,1688.32470061594,49
+-|Δf0|,Pitch stability,Burmese,F,song,-758.658555047353,915.923538878822,65
+-|Δf0|,Pitch stability,Burmese,F,desc,-1449.60636600482,1707.51290208142,65
+-|Δf0|,Pitch stability,Burmese,F,recit,-1249.39859534384,1483.809671371,65
+-|Δf0|,Pitch stability,Gaeilge,M,song,-792.043621281123,1143.6266709131,67
+-|Δf0|,Pitch stability,Gaeilge,M,desc,-1426.04703322002,1416.68806704917,67
+-|Δf0|,Pitch stability,Gaeilge,M,inst,-207.318203341985,634.007174333235,67
+-|Δf0|,Pitch stability,Gaeilge,M,recit,-1046.21073636919,1059.68270654752,67
 -|Δf0|,Pitch stability,English,M,desc,-2034.76847140594,1980.68149997164,50
 -|Δf0|,Pitch stability,English,M,inst,-90.378090818421,258.602696387719,50
 -|Δf0|,Pitch stability,English,M,recit,-1176.78348252521,1200.72671711239,50
@@ -683,6 +762,9 @@ f0 ratio,Pitch interval size,Italian,M,desc,272.943533211116,231.320878884197,3
 f0 ratio,Pitch interval size,Italian,M,inst,237.310618433635,178.517950472913,3
 f0 ratio,Pitch interval size,Italian,M,recit,331.133539597784,252.655413041719,3
 f0 ratio,Pitch interval size,Italian,M,song,251.797217792929,190.853773749987,3
+f0 ratio,Pitch interval size,Guarani,F,recit,257.047348380332,183.007379693628,61
+f0 ratio,Pitch interval size,Guarani,F,song,179.420976980671,243.605660542924,61
+f0 ratio,Pitch interval size,Guarani,F,desc,129.420190995907,109.311802101079,61
 f0 ratio,Pitch interval size,Portuguese,F,desc,225.437828801809,227.082929240368,4
 f0 ratio,Pitch interval size,Portuguese,F,recit,215.126357975623,200.892434315613,4
 f0 ratio,Pitch interval size,Portuguese,F,song,150.683240014931,145.874754473853,4
@@ -709,7 +791,7 @@ f0 ratio,Pitch interval size,Greek,M,recit,219.500666355124,200.069692156195,10
 f0 ratio,Pitch interval size,Greek,M,song,196.836243715197,158.425950931085,10
 f0 ratio,Pitch interval size,Mandarin,F,desc,242.622220476594,198.400005135325,11
 f0 ratio,Pitch interval size,Mandarin,F,recit,330.590508373814,247.617962682446,11
-f0 ratio,Pitch interval size,Mandarin,F,song,305.142629130818,220.928033000611,11
+f0 ratio,Pitch interval size,Mandarin,F,song,320.090032247944,217.972274227421,11
 f0 ratio,Pitch interval size,German,M,desc,256.976318217696,292.793761209127,12
 f0 ratio,Pitch interval size,German,M,inst,253.770462091385,178.030647023046,12
 f0 ratio,Pitch interval size,German,M,recit,182.03499166865,137.709481418811,12
@@ -725,7 +807,7 @@ f0 ratio,Pitch interval size,Japanese,M,inst,279.747805725027,199.94886977127,14
 f0 ratio,Pitch interval size,Thai,M,desc,251.87338839269,229.239040433936,15
 f0 ratio,Pitch interval size,Thai,M,inst,249.909904399042,232.937401366055,15
 f0 ratio,Pitch interval size,Thai,M,recit,348.178730298594,288.819659890778,15
-f0 ratio,Pitch interval size,Thai,M,song,220.772100099104,175.319636436839,15
+f0 ratio,Pitch interval size,Thai,M,song,231.491629221065,182.602861479335,15
 f0 ratio,Pitch interval size,Spanish,M,desc,319.5980603286,262.70089125041,16
 f0 ratio,Pitch interval size,Spanish,M,recit,449.158247956306,317.473434446382,16
 f0 ratio,Pitch interval size,Spanish,M,song,299.406746376084,163.413800816337,16
@@ -741,6 +823,13 @@ f0 ratio,Pitch interval size,English,M,desc,542.137004061706,374.78962401613,19
 f0 ratio,Pitch interval size,English,M,inst,220.682970561012,187.590125101331,19
 f0 ratio,Pitch interval size,English,M,recit,198.243898430438,149.506793227319,19
 f0 ratio,Pitch interval size,English,M,song,194.848963710555,165.13435063413,19
+f0 ratio,Pitch interval size,Spanish,M,recit,144.241783122692,121.474040762401,62
+f0 ratio,Pitch interval size,Spanish,M,song,173.40725032687,166.945437712709,62
+f0 ratio,Pitch interval size,Spanish,M,desc,146.121530139604,133.8938259543,62
+f0 ratio,Pitch interval size,Spanish,M,inst,229.669394493146,188.130880535205,62
+f0 ratio,Pitch interval size,Dutch,F,desc,266.359568307449,216.644669549339,63
+f0 ratio,Pitch interval size,Dutch,F,recit,310.236161407139,256.998150682272,63
+f0 ratio,Pitch interval size,Dutch,F,song,188.859221223791,155.137358751374,63
 f0 ratio,Pitch interval size,Wolof,M,desc,194.966130524305,191.960414463277,20
 f0 ratio,Pitch interval size,Wolof,M,recit,160.699424672197,147.961458643879,20
 f0 ratio,Pitch interval size,Wolof,M,song,136.563502820932,171.76431815385,20
@@ -827,6 +916,13 @@ f0 ratio,Pitch interval size,Azerbaijani,F,song,169.661299948598,135.40374773013
 f0 ratio,Pitch interval size,Russian,F,desc,332.026048500753,311.143678746873,42
 f0 ratio,Pitch interval size,Russian,F,recit,378.708740549511,292.6459134802,42
 f0 ratio,Pitch interval size,Russian,F,song,208.682211327213,154.580246587218,42
+f0 ratio,Pitch interval size,Cantonese,F,song,376.935052475005,273.58735199838,64
+f0 ratio,Pitch interval size,Cantonese,F,desc,303.545706371191,216.031223498612,64
+f0 ratio,Pitch interval size,Cantonese,F,inst,398.255624743569,249.619915269857,64
+f0 ratio,Pitch interval size,Cantonese,F,recit,274.436134387971,196.414102383255,64
+f0 ratio,Pitch interval size,Rikbaktsa,M,song,126.372960727162,104.541272399739,66
+f0 ratio,Pitch interval size,Rikbaktsa,M,desc,66.8186943080563,73.5083550132334,66
+f0 ratio,Pitch interval size,Rikbaktsa,M,recit,193.080274320972,160.428590888937,66
 f0 ratio,Pitch interval size,Urdu,M,desc,140.148284081082,133.560203948881,43
 f0 ratio,Pitch interval size,Urdu,M,inst,176.854822413593,152.58156253276,43
 f0 ratio,Pitch interval size,Urdu,M,recit,79.8345295654525,71.4682154240756,43
@@ -852,6 +948,13 @@ f0 ratio,Pitch interval size,Kannada,F,song,122.986524248672,127.680537808172,48
 f0 ratio,Pitch interval size,Japanese,M,desc,265.759955363601,244.010467476496,49
 f0 ratio,Pitch interval size,Japanese,M,recit,212.27607824926,176.275240897082,49
 f0 ratio,Pitch interval size,Japanese,M,song,274.220935777282,213.993070852049,49
+f0 ratio,Pitch interval size,Burmese,F,song,141.2093365671,114.07302108676,65
+f0 ratio,Pitch interval size,Burmese,F,desc,195.098649466969,202.744093629621,65
+f0 ratio,Pitch interval size,Burmese,F,recit,188.955357852996,195.363963505492,65
+f0 ratio,Pitch interval size,Gaeilge,M,song,177.741061733115,148.629477436451,67
+f0 ratio,Pitch interval size,Gaeilge,M,desc,139.262938600721,129.487217009649,67
+f0 ratio,Pitch interval size,Gaeilge,M,inst,140.084660329458,133.279880377412,67
+f0 ratio,Pitch interval size,Gaeilge,M,recit,137.726714870839,122.807651172454,67
 f0 ratio,Pitch interval size,English,M,desc,173.48273048681,162.854267300532,50
 f0 ratio,Pitch interval size,English,M,inst,190.102542681201,230.393803361236,50
 f0 ratio,Pitch interval size,English,M,recit,123.438627007596,115.941550642958,50
@@ -903,6 +1006,10 @@ Spectral centroid,Timbral brightness,Italian,M,desc,899.656731472007,1513.334287
 Spectral centroid,Timbral brightness,Italian,M,inst,476.004641968565,388.567665507812,3
 Spectral centroid,Timbral brightness,Italian,M,recit,712.110603621588,1385.23935566261,3
 Spectral centroid,Timbral brightness,Italian,M,song,597.794062730507,930.43445024018,3
+Spectral centroid,Timbral brightness,Guarani,F,inst,2138.21634030679,890.742290660041,61
+Spectral centroid,Timbral brightness,Guarani,F,recit,1378.43581845304,890.540006526396,61
+Spectral centroid,Timbral brightness,Guarani,F,song,954.488693053638,678.616995606241,61
+Spectral centroid,Timbral brightness,Guarani,F,desc,1389.26600005556,1479.04510651246,61
 Spectral centroid,Timbral brightness,Portuguese,F,desc,1078.46446657779,1713.88433937837,4
 Spectral centroid,Timbral brightness,Portuguese,F,inst,3065.59313720762,2487.62539286444,4
 Spectral centroid,Timbral brightness,Portuguese,F,recit,841.760886629918,1293.42174253237,4
@@ -914,6 +1021,7 @@ Spectral centroid,Timbral brightness,English,F,song,835.276607818297,1405.476899
 Spectral centroid,Timbral brightness,Ronga,M,desc,963.119241036599,1393.77089673585,6
 Spectral centroid,Timbral brightness,Ronga,M,recit,1223.3334352297,1443.18952498259,6
 Spectral centroid,Timbral brightness,Ronga,M,song,900.595117879671,1256.89857047009,6
+Spectral centroid,Timbral brightness,Ronga,M,inst,960.382394929053,900.149616545965,6
 Spectral centroid,Timbral brightness,Swedish,M,desc,711.176381873008,1168.66489966079,7
 Spectral centroid,Timbral brightness,Swedish,M,inst,806.335300622861,346.188203271753,7
 Spectral centroid,Timbral brightness,Swedish,M,recit,667.986478952509,1155.95387811421,7
@@ -966,6 +1074,14 @@ Spectral centroid,Timbral brightness,English,M,desc,652.644557520536,1006.664709
 Spectral centroid,Timbral brightness,English,M,inst,875.702013694861,308.19977080884,19
 Spectral centroid,Timbral brightness,English,M,recit,723.254434472864,1210.47180438643,19
 Spectral centroid,Timbral brightness,English,M,song,775.446276567262,1068.67297117389,19
+Spectral centroid,Timbral brightness,Spanish,M,recit,1489.99308902498,1823.33100248095,62
+Spectral centroid,Timbral brightness,Spanish,M,song,995.496772403877,1242.21884395379,62
+Spectral centroid,Timbral brightness,Spanish,M,desc,2508.22917833135,3319.61396092843,62
+Spectral centroid,Timbral brightness,Spanish,M,inst,545.756904682019,620.704916230219,62
+Spectral centroid,Timbral brightness,Dutch,F,inst,1748.25117204492,2264.85930681444,63
+Spectral centroid,Timbral brightness,Dutch,F,desc,1384.12993936552,1502.97544268223,63
+Spectral centroid,Timbral brightness,Dutch,F,recit,1383.85568345556,1692.80273607426,63
+Spectral centroid,Timbral brightness,Dutch,F,song,1433.65282553722,1779.05109459354,63
 Spectral centroid,Timbral brightness,Wolof,M,desc,346.7086790285,590.206653921112,20
 Spectral centroid,Timbral brightness,Wolof,M,recit,306.062492846033,505.728705614957,20
 Spectral centroid,Timbral brightness,Wolof,M,song,669.127330009736,430.946071745533,20
@@ -1029,6 +1145,7 @@ Spectral centroid,Timbral brightness,IsiXhosa,F,song,761.823489476685,761.189523
 Spectral centroid,Timbral brightness,Turkish,F,desc,882.280126971986,1217.97006697262,35
 Spectral centroid,Timbral brightness,Turkish,F,recit,518.354081563993,900.059882281043,35
 Spectral centroid,Timbral brightness,Turkish,F,song,575.360958994713,834.901411155742,35
+Spectral centroid,Timbral brightness,Turkish,F,inst,1362.53496820036,1437.0558859143,35
 Spectral centroid,Timbral brightness,Ukrainian,F,desc,1215.39732865515,1893.22894627527,36
 Spectral centroid,Timbral brightness,Ukrainian,F,inst,442.173615400207,81.6252097546987,36
 Spectral centroid,Timbral brightness,Ukrainian,F,recit,1195.00969272887,1879.38445205245,36
@@ -1056,6 +1173,13 @@ Spectral centroid,Timbral brightness,Azerbaijani,F,song,875.168127768208,1673.52
 Spectral centroid,Timbral brightness,Russian,F,desc,1229.49500915397,1814.94619042205,42
 Spectral centroid,Timbral brightness,Russian,F,recit,1370.27127163196,1923.51835229065,42
 Spectral centroid,Timbral brightness,Russian,F,song,1035.16782766778,869.174439175535,42
+Spectral centroid,Timbral brightness,Cantonese,F,song,481.119027980824,866.540082152286,64
+Spectral centroid,Timbral brightness,Cantonese,F,desc,478.727054654014,973.061279458282,64
+Spectral centroid,Timbral brightness,Cantonese,F,inst,2034.92245525772,597.857552012806,64
+Spectral centroid,Timbral brightness,Cantonese,F,recit,541.712806915288,1021.22723391814,64
+Spectral centroid,Timbral brightness,Rikbaktsa,M,song,1326.0727912747,1636.35700807291,66
+Spectral centroid,Timbral brightness,Rikbaktsa,M,desc,2212.81544709436,1525.96458114627,66
+Spectral centroid,Timbral brightness,Rikbaktsa,M,recit,1584.56727342244,1434.48884190628,66
 Spectral centroid,Timbral brightness,Urdu,M,desc,1141.49173566942,1468.41376032633,43
 Spectral centroid,Timbral brightness,Urdu,M,inst,468.290259118919,317.460988427036,43
 Spectral centroid,Timbral brightness,Urdu,M,recit,1138.5226030397,1246.21234277516,43
@@ -1084,6 +1208,14 @@ Spectral centroid,Timbral brightness,Japanese,M,desc,891.727813664891,1621.90525
 Spectral centroid,Timbral brightness,Japanese,M,recit,732.017534526232,1524.54486416408,49
 Spectral centroid,Timbral brightness,Japanese,M,song,742.044446746011,1118.09060772712,49
 Spectral centroid,Timbral brightness,Japanese,M,inst,519.160873651681,577.846203916881,49
+Spectral centroid,Timbral brightness,Burmese,F,song,772.749080139721,1165.8089883906,65
+Spectral centroid,Timbral brightness,Burmese,F,desc,732.626058388943,1354.92516050889,65
+Spectral centroid,Timbral brightness,Burmese,F,inst,565.048804677559,755.5271535547,65
+Spectral centroid,Timbral brightness,Burmese,F,recit,699.542306487603,1477.88180492297,65
+Spectral centroid,Timbral brightness,Gaeilge,M,song,957.757594745353,1797.43384964798,67
+Spectral centroid,Timbral brightness,Gaeilge,M,desc,1635.81366010562,2283.9289472916,67
+Spectral centroid,Timbral brightness,Gaeilge,M,inst,1586.45862029749,1664.07654480828,67
+Spectral centroid,Timbral brightness,Gaeilge,M,recit,1489.86175799372,1999.9600337263,67
 Spectral centroid,Timbral brightness,English,M,desc,742.792959263119,1415.13712268486,50
 Spectral centroid,Timbral brightness,English,M,inst,337.042573711663,108.285294249225,50
 Spectral centroid,Timbral brightness,English,M,recit,1317.67683934628,2282.75175213839,50
@@ -1103,9 +1235,11 @@ Spectral centroid,Timbral brightness,Norwegian,F,song,1214.28280081197,1700.0879
 Spectral centroid,Timbral brightness,Kuikuro,M,desc,1189.83758658489,2047.02724722802,54
 Spectral centroid,Timbral brightness,Kuikuro,M,recit,861.371264656684,1793.10903624226,54
 Spectral centroid,Timbral brightness,Kuikuro,M,song,822.608950186382,1372.95396913252,54
+Spectral centroid,Timbral brightness,Kuikuro,M,inst,972.777801703896,1107.59255282155,54
 Spectral centroid,Timbral brightness,Ainu,F,desc,776.887709104188,915.244987538265,55
 Spectral centroid,Timbral brightness,Ainu,F,recit,566.39194717174,1018.1124154764,55
 Spectral centroid,Timbral brightness,Ainu,F,song,673.370573119349,662.404513828776,55
+Spectral centroid,Timbral brightness,Ainu,F,inst,505.397190482986,723.15627122045,55
 Spectral centroid,Timbral brightness,Slovenian,F,desc,1209.74437865277,1839.66460127025,56
 Spectral centroid,Timbral brightness,Slovenian,F,inst,489.326520872439,926.602817804787,56
 Spectral centroid,Timbral brightness,Slovenian,F,recit,1259.0643103713,2049.67698377798,56
@@ -1137,6 +1271,9 @@ Sign of f0 slope,Pitch declination,Italian,M,desc,-0.25,1.03509833901353,3
 Sign of f0 slope,Pitch declination,Italian,M,inst,0.6,0.843274042711568,3
 Sign of f0 slope,Pitch declination,Italian,M,recit,-0.384615384615385,0.960768922830523,3
 Sign of f0 slope,Pitch declination,Italian,M,song,0.142857142857143,1.0690449676497,3
+Sign of f0 slope,Pitch declination,Guarani,F,recit,-0.5,0.925820099772551,61
+Sign of f0 slope,Pitch declination,Guarani,F,song,0.25,1.03509833901353,61
+Sign of f0 slope,Pitch declination,Guarani,F,desc,-1,0,61
 Sign of f0 slope,Pitch declination,Portuguese,F,desc,0,1.09544511501033,4
 Sign of f0 slope,Pitch declination,Portuguese,F,recit,-0.25,1.03509833901353,4
 Sign of f0 slope,Pitch declination,Portuguese,F,song,-0.2,1.09544511501033,4
@@ -1163,7 +1300,7 @@ Sign of f0 slope,Pitch declination,Greek,M,recit,-0.666666666666667,0.8164965809
 Sign of f0 slope,Pitch declination,Greek,M,song,0.2,1.09544511501033,10
 Sign of f0 slope,Pitch declination,Mandarin,F,desc,-0.6,0.894427190999916,11
 Sign of f0 slope,Pitch declination,Mandarin,F,recit,-0.5,1,11
-Sign of f0 slope,Pitch declination,Mandarin,F,song,-1,0,11
+Sign of f0 slope,Pitch declination,Mandarin,F,song,-0.333333333333333,1.15470053837925,11
 Sign of f0 slope,Pitch declination,German,M,desc,0.2,1.09544511501033,12
 Sign of f0 slope,Pitch declination,German,M,inst,-0.5,1,12
 Sign of f0 slope,Pitch declination,German,M,recit,-1,0,12
@@ -1179,7 +1316,7 @@ Sign of f0 slope,Pitch declination,Japanese,M,inst,-0.5,1,14
 Sign of f0 slope,Pitch declination,Thai,M,desc,-1,0,15
 Sign of f0 slope,Pitch declination,Thai,M,inst,0.428571428571429,0.975900072948533,15
 Sign of f0 slope,Pitch declination,Thai,M,recit,-0.333333333333333,1.03279555898864,15
-Sign of f0 slope,Pitch declination,Thai,M,song,-0.5,1,15
+Sign of f0 slope,Pitch declination,Thai,M,song,0,1.09544511501033,15
 Sign of f0 slope,Pitch declination,Spanish,M,desc,0.2,1.09544511501033,16
 Sign of f0 slope,Pitch declination,Spanish,M,recit,-0.6,0.843274042711568,16
 Sign of f0 slope,Pitch declination,Spanish,M,song,-1,0,16
@@ -1195,6 +1332,13 @@ Sign of f0 slope,Pitch declination,English,M,desc,-1,0,19
 Sign of f0 slope,Pitch declination,English,M,inst,-0.2,1.09544511501033,19
 Sign of f0 slope,Pitch declination,English,M,recit,-1,0,19
 Sign of f0 slope,Pitch declination,English,M,song,0,1.09544511501033,19
+Sign of f0 slope,Pitch declination,Spanish,M,recit,-0.454545454545455,0.934198732993827,62
+Sign of f0 slope,Pitch declination,Spanish,M,song,0.333333333333333,1.03279555898864,62
+Sign of f0 slope,Pitch declination,Spanish,M,desc,0.166666666666667,1.02985730108887,62
+Sign of f0 slope,Pitch declination,Spanish,M,inst,0,1.15470053837925,62
+Sign of f0 slope,Pitch declination,Dutch,F,desc,-1,0,63
+Sign of f0 slope,Pitch declination,Dutch,F,recit,-1,0,63
+Sign of f0 slope,Pitch declination,Dutch,F,song,-0.428571428571429,0.975900072948533,63
 Sign of f0 slope,Pitch declination,Wolof,M,desc,-1,0,20
 Sign of f0 slope,Pitch declination,Wolof,M,recit,-0.777777777777778,0.666666666666667,20
 Sign of f0 slope,Pitch declination,Wolof,M,song,-0.25,1.03509833901353,20
@@ -1281,6 +1425,13 @@ Sign of f0 slope,Pitch declination,Azerbaijani,F,song,-0.5,1,41
 Sign of f0 slope,Pitch declination,Russian,F,desc,0,1.09544511501033,42
 Sign of f0 slope,Pitch declination,Russian,F,recit,-1,0,42
 Sign of f0 slope,Pitch declination,Russian,F,song,-1,0,42
+Sign of f0 slope,Pitch declination,Cantonese,F,song,0,1.15470053837925,64
+Sign of f0 slope,Pitch declination,Cantonese,F,desc,-0.777777777777778,0.666666666666667,64
+Sign of f0 slope,Pitch declination,Cantonese,F,inst,-0.333333333333333,1.15470053837925,64
+Sign of f0 slope,Pitch declination,Cantonese,F,recit,-0.555555555555556,0.881917103688197,64
+Sign of f0 slope,Pitch declination,Rikbaktsa,M,song,-1,0,66
+Sign of f0 slope,Pitch declination,Rikbaktsa,M,desc,-0.454545454545455,0.934198732993827,66
+Sign of f0 slope,Pitch declination,Rikbaktsa,M,recit,0.25,1.03509833901353,66
 Sign of f0 slope,Pitch declination,Urdu,M,desc,-1,0,43
 Sign of f0 slope,Pitch declination,Urdu,M,inst,-0.2,1.09544511501033,43
 Sign of f0 slope,Pitch declination,Urdu,M,recit,0.666666666666667,0.778498944161523,43
@@ -1306,6 +1457,13 @@ Sign of f0 slope,Pitch declination,Kannada,F,song,0.5,0.925820099772551,48
 Sign of f0 slope,Pitch declination,Japanese,M,desc,-1,0,49
 Sign of f0 slope,Pitch declination,Japanese,M,recit,-0.8,0.632455532033676,49
 Sign of f0 slope,Pitch declination,Japanese,M,song,0,1.09544511501033,49
+Sign of f0 slope,Pitch declination,Burmese,F,song,-1,0,65
+Sign of f0 slope,Pitch declination,Burmese,F,desc,-1,0,65
+Sign of f0 slope,Pitch declination,Burmese,F,recit,-1,0,65
+Sign of f0 slope,Pitch declination,Gaeilge,M,song,-1,0,67
+Sign of f0 slope,Pitch declination,Gaeilge,M,desc,-1,0,67
+Sign of f0 slope,Pitch declination,Gaeilge,M,inst,-1,0,67
+Sign of f0 slope,Pitch declination,Gaeilge,M,recit,-1,0,67
 Sign of f0 slope,Pitch declination,English,M,desc,-1,0,50
 Sign of f0 slope,Pitch declination,English,M,inst,0.2,1.09544511501033,50
 Sign of f0 slope,Pitch declination,English,M,recit,-1,0,50

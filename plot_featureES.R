@@ -10,19 +10,19 @@ FEATURE_SIM <- c('Spectral centroid', 'Sign of f0 slope', 'f0 ratio')
 FEATURE_OTHER <- c('Spectral flatness', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'Onset-break interval', 'f0 ratio deviation', 'Pulse clarity')
 
 if (exploratory) {
-  CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', '-|Δf0|', 'f0 ratio')
-  FILEID <- "_cnf"
-} else {
   CORE_FEATURE <- LIST_FEATURE
   FILEID <- "_exp"
+} else {
+  CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', '-|Δf0|', 'f0 ratio')
+  FILEID <- "_cnf"
 }
 
 TITLESTR <- c('Instrumental vs. Spoken description', 'Song vs. Spoken description', 'Song vs. Lyrics recitation')
 DATATYPE <- c('inst-desc', 'song-desc', 'song-recit')
 G_WID <- 7.5
 G_HEI <- 6
-XL <- c(-1.8, 5.0)
-XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5)
+XL <- c(-1.8, 8.0)
+XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5, 6, 7, 8)
 
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
 LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
@@ -88,12 +88,15 @@ data_ma$dummyID <- 0
 data_ma$lang <- ""
 
 ## Extract core features
-idx = 0
+idx <- 0
+idx_ma <- 0
 for (i in 1:length(CORE_FEATURE)) {
   idx <- idx | data$feature == CORE_FEATURE[i]
+  idx_ma <- idx_ma | data_ma$feature == CORE_FEATURE[i]
 }
 
 data <- data[idx, ]
+data_ma <- data_ma[idx_ma, ]
 
 ## ggplot
 LIST_COMPARISON <- unique(data$Comparison)
@@ -109,7 +112,7 @@ for (i in 1:length(g_list)) {
   g_list[[i]] <- ggplot(data_i, aes(x = d, y = featureplotname, fill = lang, group = dummyID)) + 
     geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(featureplotname)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
     geom_violin(data = data_i, aes(x = d, group = featureplotname), fill = "#FCAE1E", alpha = 0.2) + 
-    geom_dotplot(binaxis = 'y', position = position_jitter(width = 0.1, height = 0.0), stackdir = 'center', alpha = 0.8, dotsize = 0.5) +
+    geom_dotplot(binaxis = 'y', position = position_jitter(width = 0.05, height = 0.08), stackdir = 'center', alpha = 0.8, dotsize = 0.5) +
     geom_vline(xintercept = 0, linetype = 2) +
     geom_vline(xintercept = 0.4, linetype = 3) +
     geom_vline(xintercept = -0.4, linetype = 3) +

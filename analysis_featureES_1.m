@@ -104,14 +104,14 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         PC = cell(N, 1); % Pulse clarity
         
         for i=1:N
-            audiofilepath = strcat(datainfo.audiofilepath{i}, datainfo.dataname{i}, '.wav');
+            audiofilepath = strcat(datainfo.audiodir{i}, datainfo.dataname{i}, '.', datainfo.audioext{i});
             tmp =  mirpulseclarity(miraudio(audiofilepath, 'Extract', 0, duration), 'Frame');
             PC{i} = mirgetdata(tmp);
         end
 
         for i=1:numel(idx_pair)
-            idx_song = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{1});
-            idx_desc = datainfo.pair == idx_pair(i) & strcmp(datainfo.type, typelist{2});
+            idx_song = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{1});
+            idx_desc = datainfo.groupid == idx_pair(i) & strcmp(datainfo.type, typelist{2});
 
             X = PC{idx_song};
             Y = PC{idx_desc};

@@ -1,3 +1,27 @@
+## Exploratory - Hilton's data with pYIN
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/Hilton/'
+OUTPUTDIR <- './output/figure/Stage2/Hilton/'
+durationID <- 'Infsec'
+exploratory <- FALSE
+source("plot_featureES.R")
+
+## Exploratory - our data with pYIN
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/pyin/'
+OUTPUTDIR <- './output/figure/Stage2/pyin/'
+durationID <- 'Infsec'
+exploratory <- FALSE
+source("plot_featureES.R")
+
+## Exploratory - our data with all features
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/'
+OUTPUTDIR <- './output/figure/Stage2/'
+durationID <- '20sec'
+exploratory <- TRUE
+source("plot_featureES.R")
+
 ##
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
@@ -21,6 +45,14 @@ OUTPUTDIR <- './output/figure/Stage2/'
 durationID <- '20sec'
 exploratory <- FALSE
 source("analysis_multilevelAIC.R")
+
+##
+rm(list = ls())
+INPUTDIR <- "./output/analysis/Stage2/"
+OUTPUTDIR <- "./output/figure/Stage2/"
+durationID <- "20sec"
+exploratory <- FALSE
+source("plot_metaCIs.R")
 
 ##
 rm(list = ls())

@@ -1,8 +1,8 @@
 function analysis_normalizedcontour(datainfo, duration, outputdir)
     %%
     N = 512;
-    datatype = {'song', 'desc', 'recit', 'inst'};
-    plottitle = {'Song', 'Spoken description', 'Lyrics recitation', 'Instrumental'};
+    datatype = {'desc', 'song', 'recit', 'inst'};
+    plottitle = {'Spoken description', 'Song', 'Lyrics recitation', 'Instrumental'};
 
     %%
     for i=1:numel(datatype)
@@ -71,6 +71,8 @@ function analysis_normalizedcontour(datainfo, duration, outputdir)
             end
         end
         
+        writematrix(C, strcat('./output/analysis/Stage2/contour_', datatype{i}, '.csv'));
+
         df = arrayfun(@(n) sum(~isnan(C(:, n))), 1:N);
         t = tinv(1 - 0.05/2, df - 1);
         s = std(C, 0, 1,'omitnan')./sqrt(size(C, 1));
@@ -86,6 +88,7 @@ function analysis_normalizedcontour(datainfo, duration, outputdir)
         ax.FontSize = 18;
         title(plottitle{i}, 'FontSize', 22);
         xlim([1, N]);
+        ylim([-0.4, 0.4]);
         xlabel('Normalized sampling point', 'FontSize', 18);
         ylabel('Normalized frequency', 'FontSize', 18);
 

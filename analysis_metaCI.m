@@ -13,6 +13,8 @@ function analysis_metaCI(esinfofile, outputfile, al)
     mu_null = 0.5;
     
     for i=1:numel(featurelist)
+        fprintf('$s - %s\n', datetime, featurelist{i});
+
         if sum(strcmp(featurelist{i}, testdiff)) == 1
             al = al * 2;
         end
