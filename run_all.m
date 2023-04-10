@@ -1,32 +1,6 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
-%% Exploratory - Hilton's data + α
-datainfofile = './datainfo_pyin.csv';
-outputdir_analysis = './output/analysis/Stage2/pyin/';
-outputdir_fig = './output/figure/Stage2/pyin/';
-duration = Inf;
-typeflag_songdesc = 1;
-typeid = 'song-desc';
-exploratory = false;
-al = 0.05/6;
-blindedonly = false;
-continuitycorrection = false;
-onsetavailable = false;
-
-local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-datainfofile = './datainfo_Hilton-pyin.csv';
-outputdir_analysis = './output/analysis/Stage2/Hilton/';
-outputdir_fig = './output/figure/Stage2/Hilton/';
-local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-%% Exploratory - normalized f0 contour
-datainfo = readtable('./datainfo.csv');
-duration = 30;
-outputdir_fig = './output/figure/Stage2/';
-analysis_normalizedcontour(datainfo, duration, outputdir_fig);
-
 %% Confirmatory + Exploratory analysis
 outputdir_analysis = './output/analysis/Stage2/';
 exploratory = true;
@@ -39,7 +13,63 @@ blindedonly = false;
 continuitycorrection = false;
 onsetavailable = true;
 
-analysis_rawdatastat(datainfofile, outputdir_analysis, duration);
+analysis_rawdatastat(datainfofile, outputdir_analysis, duration, exploratory);
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+%% Exploratory - normalized f0 contour
+datainfo = readtable('./datainfo.csv');
+duration = 30;
+outputdir_fig = './output/figure/Stage2/';
+analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+
+%% Exploratory - Hilton's data + α
+typeflag_songdesc = 1;
+typeid = 'song-desc';
+exploratory = false;
+al = 0.05/6;
+blindedonly = false;
+continuitycorrection = false;
+
+duration = Inf;
+onsetavailable = false;
+datainfofile = './datainfo_Hilton-subset-pyin.csv';
+outputdir_analysis = './output/analysis/Stage2/Hilton-subset/';
+outputdir_fig = './output/figure/Stage2/Hilton-subset/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+duration = Inf;
+onsetavailable = false;
+datainfofile = './datainfo_Hilton-pyin.csv';
+outputdir_analysis = './output/analysis/Stage2/Hilton/';
+outputdir_fig = './output/figure/Stage2/Hilton/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+duration = 20;
+onsetavailable = false;
+datainfofile = './datainfo_subset.csv';
+outputdir_analysis = './output/analysis/Stage2/subset/';
+outputdir_fig = './output/figure/Stage2/subset/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+duration = Inf;
+onsetavailable = false;
+datainfofile = './datainfo_pyin-subset.csv';
+outputdir_analysis = './output/analysis/Stage2/pyin-subset/';
+outputdir_fig = './output/figure/Stage2/pyin-subset/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+duration = Inf;
+onsetavailable = false;
+datainfofile = './datainfo_pyin.csv';
+outputdir_analysis = './output/analysis/Stage2/pyin/';
+outputdir_fig = './output/figure/Stage2/pyin/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+duration = Inf;
+onsetavailable = true;
+datainfofile = './datainfo_pyin-praat.csv';
+outputdir_analysis = './output/analysis/Stage2/pyin-praat/';
+outputdir_fig = './output/figure/Stage2/pyin-praat/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
 %% Exploratory - zero cell correction

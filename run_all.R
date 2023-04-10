@@ -1,3 +1,19 @@
+## Exploratory - our data with pYIN+Praat
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/pyin-praat/'
+OUTPUTDIR <- './output/figure/Stage2/pyin-praat/'
+durationID <- 'Infsec'
+exploratory <- FALSE
+source("plot_featureES.R")
+
+## Exploratory - our data (subset) with pYIN
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/pyin-subset/'
+OUTPUTDIR <- './output/figure/Stage2/pyin-subset/'
+durationID <- 'Infsec'
+exploratory <- FALSE
+source("plot_featureES.R")
+
 ## Exploratory - Hilton's data with pYIN
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/Hilton/'

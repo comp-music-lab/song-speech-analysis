@@ -1,4 +1,4 @@
-﻿lang_filename,family,rgb
+lang_filename,family,rgb
 Hebrew,Afro-Asiatic,F8766D
 Ainu,Ainu,EC823C
 Williche,Araucanian,DD8D00
@@ -48,6 +48,8 @@ Rikbaksta,Nuclear-Macro-Je,00AEFA
 Ngarigu,Pama-Nyungan,3DA1FF
 Matis,Pano-Tacanan,8F91FF
 Puri,Puri-Coroado,BE80FF
+Burmese,Sino-Tibetan,DE71F9
+Cantonese,Sino-Tibetan,DE71F9
 HainanHua,Sino-Tibetan,DE71F9
 Mandarin,Sino-Tibetan,DE71F9
 Thai,Tai-Kadai,F265E7
@@ -55,3 +57,13 @@ Guarani,Tupian,FE61CF
 Azerbaijani,Turkic,FF64B3
 Turkish,Turkic,FF64B3
 Yanomami,Yanomamic,FF6C92
+Hadza,Hadza,60B200
+Mbendjele,Atlantic-Congo,D69100
+Mentawai,Austronesian,C69900
+Nyangatom,Nilotic,00BECF
+Enga,Nuclear Trans New Guinea,00B3F1
+Quechua & Achuar,Quechuan & Jivaroan,CE79FF
+Toposa,Nilotic,00BECF
+Tsimane,Mosetén-Chimané,00C0BA
+Finnish & Swedish,Uralic & Indo-European,FF67A6
+Quechua,Quechuan,B086FF

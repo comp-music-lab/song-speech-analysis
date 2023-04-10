@@ -1,7 +1,7 @@
 function analysis_equivtest(esinfofile, outputfile, al)
     %%
     T = readtable(esinfofile);
-    featurelist = {'f0 ratio', 'Spectral centroid', 'Sign of f0 slope'};
+    featurelist = {'f0 ratio', 'Spectral centroid', 'Sign of f0 slope', '-|Δf0|', 'IOI rate'};
     
     center = 0.5;
     Dlt = normcdf(0.4/sqrt(2)) - center;

@@ -57,7 +57,7 @@ if __name__ == "__main__":
                 "John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song",
                 ]
     """
-    datasetinfo = ['../datainfo_pyin.csv', '../datainfo_Hilton-pyin.csv']
+    datasetinfo = ['../datainfo_Hilton-pyin.csv', '../datainfo_pyin.csv']
 
     for dinfo in datasetinfo:
         print(datetime.datetime.now().isoformat() + " ** " + dinfo)

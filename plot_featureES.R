@@ -21,8 +21,8 @@ TITLESTR <- c('Instrumental vs. Spoken description', 'Song vs. Spoken descriptio
 DATATYPE <- c('inst-desc', 'song-desc', 'song-recit')
 G_WID <- 7.5
 G_HEI <- 6
-XL <- c(-1.8, 8.0)
-XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5, 6, 7, 8)
+XL <- c(-2.5, 7.5)
+XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5, 6, 7)
 
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
 LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
@@ -122,9 +122,8 @@ for (i in 1:length(g_list)) {
     ggtitle(LIST_COMPARISON[i]) +
     theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
     theme(axis.text.x = element_text(size = 10)) + 
-    xlim(XL) + 
     scale_fill_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) +
-    scale_x_continuous(breaks = XBREAK) + 
+    scale_x_continuous(breaks = XBREAK, limits = XL) + 
     theme(legend.title = element_blank())
   
   ## difference

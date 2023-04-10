@@ -1,0 +1,29 @@
+dataname,annotationdir,audiodir,audioext,performer,type,language,sex,groupid,blinding
+Adam_Tierney_English_Traditional_SimpleGifts_20230129_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Adam Tierney,desc,English,M,1,FALSE
+Adam_Tierney_English_Traditional_SimpleGifts_20230129_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Adam Tierney,song,English,M,1,FALSE
+Christina_derNederlanden_English_Traditional_SleepNowRestNow_20221022_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Christina derNederlanden,desc,English,F,5,TRUE
+Christina_derNederlanden_English_Traditional_SleepNowRestNow_20221022_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Christina derNederlanden,song,English,F,5,TRUE
+Fang_Liu_Mandarin_Traditional_Farewell_20220218_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Fang Liu,desc,Mandarin,F,11,TRUE
+Fang_Liu_Mandarin_Traditional_Farewell_20220218_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Fang Liu,song,Mandarin,F,11,TRUE
+Ignacio_Soto_Spanish_Traditional_El Lobo Chilote_20221130_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ignacio Soto,desc,Spanish,M,16,FALSE
+Ignacio_Soto_Spanish_Traditional_El Lobo Chilote_20221130_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ignacio Soto,song,Spanish,M,16,FALSE
+Javier_SilvaZurita_Chilean_Traditional_Song_20221009_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Javier SilvaZurita,desc,Chilean,M,18,TRUE
+Javier_SilvaZurita_Chilean_Traditional_Song_20221009_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Javier SilvaZurita,song,Chilean,M,18,TRUE
+John_McBride_English_Traditional_Arthur McBride_20220209_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,John McBride,desc,English,M,19,TRUE
+John_McBride_English_Traditional_Arthur McBride_20220209_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,John McBride,song,English,M,19,TRUE
+Juan_S-Gómez-Cañón_Spanish_Traditional_Unknown_20221003_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Juan S. Gómez,desc,Spanish,M,62,TRUE
+Juan_S-Gómez-Cañón_Spanish_Traditional_Unknown_20221003_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Juan S. Gómez,song,Spanish,M,62,TRUE
+Manuel_Anglada-Tort_Catalan_Traditional_LaPresódeLleida_20221108_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Manuel Anglada-Tort,desc,Catalan,M,22,TRUE
+Manuel_Anglada-Tort_Catalan_Traditional_LaPresódeLleida_20221108_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Manuel Anglada-Tort,song,Catalan,M,22,TRUE
+Martin_Rocamora_Spanish_Traditional_Aquello_20221022_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Martin Rocamora,desc,Spanish,M,27,TRUE
+Martin_Rocamora_Spanish_Traditional_Aquello_20221022_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Martin Rocamora,song,Spanish,M,27,TRUE
+Patrick_Savage_English_Traditional_Scarborough Fair_20220208_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Patrick Savage,desc,English,M,38,TRUE
+Patrick_Savage_English_Traditional_Scarborough Fair_20220208_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Patrick Savage,song,English,M,38,TRUE
+Peter_Pfordresher_English_Traditional_America-the-beautiful_20221030_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Peter Pfordresher,desc,English,M,40,FALSE
+Peter_Pfordresher_English_Traditional_America-the-beautiful_20221030_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Peter Pfordresher,song,English,M,40,FALSE
+Shantala_Hegde_Kannada_Traditional_Moodala Maneya_20220214_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shantala Hegde,desc,Kannada,F,48,FALSE
+Shantala_Hegde_Kannada_Traditional_Moodala Maneya_20220214_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shantala Hegde,song,Kannada,F,48,FALSE
+Tecumseh_Fitch_English_Traditional_RovinGambler_20221210_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tecumseh Fitch,desc,English,M,50,FALSE
+Tecumseh_Fitch_English_Traditional_RovinGambler_20221210_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tecumseh Fitch,song,English,M,50,FALSE
+Wojciech_Krzyżanowski_Polish_Traditional_Wlazł Kotek Na Płotek_20221022_desc,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Wojciech Krzyżanowski,desc,Polish,M,58,TRUE
+Wojciech_Krzyżanowski_Polish_Traditional_Wlazł Kotek Na Płotek_20221022_song,./data/Stage 2 Annotation (pYIN)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Wojciech Krzyżanowski,song,Polish,M,58,TRUE

@@ -1,6 +1,6 @@
 function analysis_normalizedcontour(datainfo, duration, outputdir)
     %%
-    N = 512;
+    N = 128;
     datatype = {'desc', 'song', 'recit', 'inst'};
     plottitle = {'Spoken description', 'Song', 'Lyrics recitation', 'Instrumental'};
 
@@ -53,7 +53,7 @@ function analysis_normalizedcontour(datainfo, duration, outputdir)
                         f0_k = f0_k(idx:end);
                     end
                     f0_k = flipud(f0_k);
-
+                   
                     f0_n = f0_k - mean(f0_k(f0_k ~= 0));
                     f0_n = f0_n./std(f0_n(f0_n ~= 0), 0);
                     f0_min = min(f0_n(f0_n ~= min(f0_n)));
