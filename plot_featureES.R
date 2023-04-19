@@ -19,10 +19,11 @@ if (exploratory) {
 
 TITLESTR <- c('Instrumental vs. Spoken description', 'Song vs. Spoken description', 'Song vs. Lyrics recitation')
 DATATYPE <- c('inst-desc', 'song-desc', 'song-recit')
-G_WID <- 7.5
+G_WID <- 9
 G_HEI <- 6
-XL <- c(-2.5, 7.5)
-XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5, 6, 7)
+XL <- c(-4, 8)
+XBREAK <- c(-3, -2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5, 6, 7)
+YPOSNUDGE <- 0.38
 
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
 LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
@@ -102,9 +103,11 @@ data_ma <- data_ma[idx_ma, ]
 LIST_COMPARISON <- unique(data$Comparison)
 g_list <- vector(mode = "list", length = length(LIST_COMPARISON))
 
-magnitude <- aggregate(d ~ featureplotname, data = data[data$Comparison == "Song vs. Spoken description", ], median)
-idx <- sort(magnitude$d, decreasing = FALSE, index=T)$ix
-ORDER_Y_AXIS <- as.factor(magnitude[idx, 1])
+FEATURE_PLOTORDER <- c("f0", "IOI rate", "-|Δf0|", "Spectral centroid", "f0 ratio", "Sign of f0 slope",
+                       "Spectral flatness", "90% f0 quantile length", "Onset-break interval", "Short-term energy", "f0 ratio deviation", "IOI ratio deviation", "Pulse clarity")
+tmp <- unique(data[, c("feature", "featureplotname")])
+idx <- as.vector(sapply(FEATURE_PLOTORDER, function(s) {match(s, tmp$feature)}))
+ORDER_Y_AXIS <- rev(as.factor(tmp$featureplotname[idx]))
 
 for (i in 1:length(g_list)) {
   data_i <- data[data$Comparison == LIST_COMPARISON[i], ]
@@ -112,10 +115,14 @@ for (i in 1:length(g_list)) {
   g_list[[i]] <- ggplot(data_i, aes(x = d, y = featureplotname, fill = lang, group = dummyID)) + 
     geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(featureplotname)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
     geom_violin(data = data_i, aes(x = d, group = featureplotname), fill = "#FCAE1E", alpha = 0.2) + 
-    geom_dotplot(binaxis = 'y', position = position_jitter(width = 0.05, height = 0.08), stackdir = 'center', alpha = 0.8, dotsize = 0.5) +
+    geom_dotplot(binaxis = 'y', position = position_jitter(width = 0.00, height = 0.05), stackdir = 'center', alpha = 0.8, dotsize = 0.4) +
     geom_vline(xintercept = 0, linetype = 2) +
     geom_vline(xintercept = 0.4, linetype = 3) +
     geom_vline(xintercept = -0.4, linetype = 3) +
+    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 7.6, xend = XL[1] + .05, yend = 13.65), color = "red") +
+    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[2] - .05, y = 7.6, xend = XL[2] - .05, yend = 13.65), color = "red") +
+    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 7.6, xend = XL[2] - .05, yend = 7.6), color = "red") +
+    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 13.65, xend = XL[2] - .05, yend = 13.65), color = "red") +
     theme(axis.title.y = element_blank()) +
     xlab("Translated Cohen's D") + 
     scale_y_discrete(limits = ORDER_Y_AXIS) +
@@ -123,7 +130,6 @@ for (i in 1:length(g_list)) {
     theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
     theme(axis.text.x = element_text(size = 10)) + 
     scale_fill_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) +
-    scale_x_continuous(breaks = XBREAK, limits = XL) + 
     theme(legend.title = element_blank())
   
   ## difference
@@ -140,9 +146,9 @@ for (i in 1:length(g_list)) {
     data_j$x <- sqrt(2)*qnorm(data_j$CI_l, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = 0.25), show.legend = FALSE) + 
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_l, 0, 1), y = featureplotname), shape = "|", size = 5, position = position_nudge(y = 0.25), show.legend = FALSE) +
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23, size = 3, fill = "#d7003a", position = position_nudge(y = 0.25), show.legend = FALSE)
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = YPOSNUDGE), show.legend = FALSE) + 
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_l, 0, 1), y = featureplotname), shape = "|", size = 3, position = position_nudge(y = YPOSNUDGE), show.legend = FALSE) +
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23, size = 3, fill = "#d7003a", position = position_nudge(y = YPOSNUDGE), show.legend = FALSE)
   }
   
   ## similarity
@@ -157,9 +163,9 @@ for (i in 1:length(g_list)) {
     data_j$x <- sqrt(2)*qnorm(data_j$CI_u, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = 0.25), show.legend = FALSE) + 
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#d7003a", position = position_nudge(y = 0.25), show.legend = FALSE) +
-      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, position = position_nudge(y = 0.25), show.legend = FALSE)
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = YPOSNUDGE), show.legend = FALSE) + 
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#d7003a", position = position_nudge(y = YPOSNUDGE), show.legend = FALSE) +
+      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 3, position = position_nudge(y = YPOSNUDGE), show.legend = FALSE)
   }
   
   ## Others
@@ -174,10 +180,12 @@ for (i in 1:length(g_list)) {
     data_j$x <- sqrt(2)*qnorm(data_j$CI_u, 0, 1)
     
     g_list[[i]] <- g_list[[i]] + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = 0.25), show.legend = FALSE) +
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#008080", position = position_nudge(y = 0.25), show.legend = FALSE) +
-      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 5, position = position_nudge(y = 0.25), show.legend = FALSE)
+      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = YPOSNUDGE), show.legend = FALSE) +
+      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname), shape = 23,  size = 3, fill = "#008080", position = position_nudge(y = YPOSNUDGE), show.legend = FALSE) +
+      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = 3, position = position_nudge(y = YPOSNUDGE), show.legend = FALSE)
   }
+  
+  g_list[[i]] <- g_list[[i]] + scale_x_continuous(breaks = XBREAK, limits = XL, expand = c(0.0, 0.0))
   
   # Save
   g_list[[i]] <- g_list[[i]] + theme(legend.position = 'none')

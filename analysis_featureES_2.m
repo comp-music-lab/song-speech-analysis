@@ -6,6 +6,12 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
             typelist = {'inst', 'desc'};
         case 3
             typelist = {'song', 'recit'};
+        case 4
+            typelist = {'inst', 'song'};
+        case 5
+            typelist = {'recit', 'desc'};
+        case 6
+            typelist = {'inst', 'recit'};
     end
 
     %% load data
@@ -46,21 +52,12 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
     
     for i=1:N
         onsetfilepath = strcat(datainfo.annotationdir{i}, 'onset_', datainfo.dataname{i}, '.csv');
-        T = readtable(onsetfilepath);
-        t_onset{i} = table2array(T(:, 1));
+        T = readtable(onsetfilepath, 'ReadVariableNames', false, 'Format', '%f%s');
+        t_onset{i} = unique(T.Var1);
         
         breakfilepath = strcat(datainfo.annotationdir{i}, 'break_', datainfo.dataname{i}, '.csv');
-        T = readtable(breakfilepath, 'ReadVariableNames', false);
-        
-        if isempty(T)
-            t_break{i} = [];
-        else
-            t_break{i} = table2array(T(:, 1));
-
-            if iscell(t_break{i})
-                t_break{i} = str2double(cell2mat(t_break{i}));
-            end
-        end
+        T = readtable(breakfilepath, 'ReadVariableNames', false, 'Format', '%f%s');
+        t_break{i} = unique(T.Var1);
         
         idx = find(t_onset{i} <= duration, 1, 'last');
         t_onset{i} = t_onset{i}(1:idx);

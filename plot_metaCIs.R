@@ -2,124 +2,94 @@
 library(ggplot2)
 library(ggpubr)
 
-## Constants
-LIST_FEATURE <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', '-|Δf0|', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
-CONCEPT_NAME <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Loudness', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Phrase length', 'Interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
-FEATURE_DIFF <- c('f0', 'IOI rate', '-|Δf0|')
-FEATURE_SIM <- c('Spectral centroid', 'Sign of f0 slope', 'f0 ratio')
-FEATURE_OTHER <- c('Spectral flatness', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'Onset-break interval', 'f0 ratio deviation', 'Pulse clarity')
+##
+WID <- 7
+HEI <- 5
 
-TITLESTR <- c('Instrumental vs. Spoken description', 'Song vs. Spoken description', 'Song vs. Lyrics recitation')
-DATATYPE <- c('inst-desc', 'song-desc', 'song-recit')
-XL <- c(-1.8, 7.0)
-XBREAK <- c(-2, -1, -0.4, 0, 0.4, 1, 2, 3, 4, 5, 6, 7, 8)
-G_WID <- 15.0
-G_HEI <- 6.0
+COMPARISONPATTERN <- c("inst-desc", "inst-recit", "inst-song", "song-desc", "song-recit", "recit-desc")
+ANALYSISPATTERN <- c("Instrumental vs. Spoken description", "Instrumental vs. Lyrics recitation", "Instrumental vs. Song",
+                     "Song vs. Spoken description", "Song vs. Lyrics recitation", "Lyrics recitation vs. spoken description")
+ANALYSISPATTERN <- factor(ANALYSISPATTERN, levels = ANALYSISPATTERN)
 
-if (exploratory) {
-  CORE_FEATURE <- LIST_FEATURE
-  FILEID <- "_exp"
-} else {
-  CORE_FEATURE <- c('IOI rate', 'f0', 'Sign of f0 slope', 'Spectral centroid', '-|Δf0|', 'f0 ratio')
-  FILEID <- "_cnf"
+FEATURESET_DIFF <- c("f0", "IOI rate", "-|Δf0|")
+FEATURESET_SIM <- c("Spectral centroid", "f0 ratio", "Sign of f0 slope")
+
+FEATURESET <- c(FEATURESET_DIFF, FEATURESET_SIM)
+FEATURENAMESET <- c("Pitch height", "Temporal rate", "Pitch stability", "Timbral brightness", "Pitch interval size", "Pitch declination")
+FIGLABEL <- c("(A) ", "(B) ", "(C) ", "(D) ", "(E) ", "(F) ")
+
+LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
+LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
+
+##
+esinfo = c()
+
+for (i in 1:length(COMPARISONPATTERN)) {
+  esinfo_i <- rbind(
+    read.csv(file = paste(INPUTDIR, "results_effectsize_acoustic_", COMPARISONPATTERN[i], "_", durationID, ".csv", sep = "")),
+    read.csv(file = paste(INPUTDIR, "results_effectsize_seg_", COMPARISONPATTERN[i], "_", durationID, ".csv", sep = ""))
+  )
+  esinfo_i$analysis <- ANALYSISPATTERN[i]
+  esinfo <- rbind(esinfo, esinfo_i)
 }
 
-## Load meta-analysis results
-file.data <- c(
-  paste(INPUTDIR, 'ma_acoustic_', DATATYPE, '_', durationID, '.csv', sep = ''),
-  paste(INPUTDIR, 'ma_seg_', DATATYPE, '_', durationID, '.csv', sep = '')
-)
+##
+CIinfo = c()
+meaninfo = c()
 
-data_ma <- c()
-for (i in 1:length(file.data)) {
-  if (file.exists(file.data[i])) {
-    data_i <- read.csv(file = file.data[i])
-    
-    idx <- sapply(DATATYPE, function (x) grepl(x, file.data[i], fixed = TRUE))
-    data_i$Comparison <- TITLESTR[idx]
-    
-    data_ma <- rbind(data_ma, data_i)
-  } else {
-    print(paste(file.data[i], " does not exist.", sep = ""))
-  }
-}
-
-## ETL
-data_ma$featureplotname <- ""
-for (i in 1:length(LIST_FEATURE)) {
-  plotname <- paste(CONCEPT_NAME[i], "\n(", LIST_FEATURE[i], ")", sep = "") 
-  data_ma$featureplotname[data_ma$feature == LIST_FEATURE[i]] <- plotname
-}
-
-data_ma$dummyID <- 0
-data_ma$lang <- ""
-
-## Extract core features
-idx_ma <- 0
-for (i in 1:length(CORE_FEATURE)) {
-  idx_ma <- idx_ma | data_ma$feature == CORE_FEATURE[i]
-}
-
-data_ma <- data_ma[idx_ma, ]
-
-## ggplot
-magnitude <- aggregate(mean ~ featureplotname, data = data_ma[data_ma$Comparison == "Song vs. Spoken description", ], median)
-idx <- sort(magnitude$mean, decreasing = FALSE, index=T)$ix
-ORDER_Y_AXIS <- as.factor(magnitude[idx, 1])
-
-LIST_COMPARISON <- unique(data_ma$Comparison)
-PNUDGE <- c(-0.25, 0, 0.25)
-BARSIZE <- 3
-DOTSIZE <- 3
-g_list <- ggplot()
-
-for (i in 1:length(LIST_COMPARISON)) {
-  ## difference
-  idx <- data_ma$feature %in% FEATURE_DIFF & data_ma$Comparison == LIST_COMPARISON[i]
+for (i in 1:length(COMPARISONPATTERN)) {
+  CI_temp <- rbind(
+    read.csv(file = paste(INPUTDIR, "ma_acoustic_", COMPARISONPATTERN[i], "_20sec.csv", sep = "")),
+    read.csv(file = paste(INPUTDIR, "ma_seg_", COMPARISONPATTERN[i], "_20sec.csv", sep = ""))
+  )
+  CI_temp$CI_u[CI_temp$feature %in% FEATURESET_DIFF] <- CI_temp$mean[CI_temp$feature %in% FEATURESET_DIFF]
   
-  if (sum(idx) > 0) {
-    data_i <- data_ma[idx, ]
-    data_i$grp <- 1:sum(idx)
-    data_i$x <- sqrt(2)*qnorm(data_i$mean, 0, 1)
-    data_j <- data_ma[idx, ]
-    data_j$grp <- 1:sum(idx)
-    data_j$x <- sqrt(2)*qnorm(data_j$CI_l, 0, 1)
-    
-    g_list <- g_list + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = PNUDGE[i])) + 
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(CI_l, 0, 1), y = featureplotname), shape = "|", size = BARSIZE, position = position_nudge(y = PNUDGE[i])) +
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname, fill = Comparison), shape = 23, size = DOTSIZE, position = position_nudge(y = PNUDGE[i]))
-  }
+  CIinfo_i <- rbind(data.frame(feature = CI_temp$feature, vertex = CI_temp$CI_l, type = "CI_l"),
+                    data.frame(feature = CI_temp$feature, vertex = CI_temp$CI_u, type = "CI_u")
+  )
+  CIinfo_i$analysis <- ANALYSISPATTERN[i]
+  CIinfo_i$groupID <- paste(CIinfo_i$feature, "-", CIinfo_i$analysis, sep = "")
+  CIinfo = rbind(CIinfo, CIinfo_i)
   
-  ## similarity
-  idx <- data_ma$feature %in% FEATURE_SIM & data_ma$Comparison == LIST_COMPARISON[i]
-  
-  if (sum(idx) > 0) {
-    data_i <- data_ma[idx, ]
-    data_i$grp <- 1:sum(idx)
-    data_i$x <- sqrt(2)*qnorm(data_i$CI_l, 0, 1)
-    data_j <- data_ma[idx, ]
-    data_j$grp <- 1:sum(idx)
-    data_j$x <- sqrt(2)*qnorm(data_j$CI_u, 0, 1)
-    
-    g_list <- g_list + 
-      geom_line(data = rbind(data_i, data_j), aes(x = x, y = featureplotname, group = grp), position = position_nudge(y = PNUDGE[i])) + 
-      geom_point(data = data_ma[idx, ], aes(x = sqrt(2)*qnorm(mean, 0, 1), y = featureplotname, fill = Comparison), shape = 23,  size = DOTSIZE, position = position_nudge(y = PNUDGE[i])) +
-      geom_point(data = rbind(data_i, data_j), aes(x = x, y = featureplotname), shape = "|", size = BARSIZE, position = position_nudge(y = PNUDGE[i]))
-  }
+  muinfo_i <- data.frame(feature = CI_temp$feature, vertex = CI_temp$mean, type = "mean")
+  muinfo_i$analysis <- ANALYSISPATTERN[i]
+  meaninfo = rbind(meaninfo, muinfo_i)
 }
+CIinfo$lang = ""
+meaninfo$lang = ""
 
-g_list <- g_list + 
-  geom_rect(data = data_ma, aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(featureplotname)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
-  geom_vline(xintercept = 0, linetype = 2) +
-  geom_vline(xintercept = 0.4, linetype = 3) +
-  geom_vline(xintercept = -0.4, linetype = 3)
+##
+esinfo$d <- sqrt(2)*qnorm(esinfo$diff, 0, 1)
+CIinfo$d <- sqrt(2)*qnorm(CIinfo$vertex, 0, 1)
+meaninfo$d <- sqrt(2)*qnorm(meaninfo$vertex, 0, 1)
 
-g_list <- g_list + 
-  theme(axis.title.y = element_blank(), legend.position = "bottom", legend.title = element_blank(), legend.text = element_text(size = 14)) +
-  ggtitle("Confidence intervals of each type of comparison") + theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
-  xlab("Translated Cohen's D") + 
-  scale_y_discrete(limits = ORDER_Y_AXIS) + 
-  scale_x_continuous(breaks = XBREAK, limits = XL)
-
-ggsave(file = paste(OUTPUTDIR, "CIs", FILEID, ".png", sep = ""), plot = g_list, width = G_WID, height = G_HEI)
+##
+for (i in 1:length(FEATURESET)) {
+  esinfo_i <- esinfo[esinfo$feature == FEATURESET[i], ]
+  CIinfo_i <- CIinfo[CIinfo$feature == FEATURESET[i], ]
+  meaninfo_i <- meaninfo[meaninfo$feature == FEATURESET[i], ]
+  
+  g <- ggplot(data = esinfo_i, aes(x = d, y = analysis, fill = lang)) + 
+    geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(analysis)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
+    geom_violin(fill = "#FCAE1E", alpha = 0.2) + 
+    geom_point(position = position_jitter(width = 0, height = 0.08), shape = 21, alpha = 0.8, size = 2, stroke = 0.5) +
+    geom_vline(xintercept = 0, linetype = 2) +
+    geom_vline(xintercept = 0.4, linetype = 3) +
+    geom_vline(xintercept = -0.4, linetype = 3)
+  
+  g <- g +
+    geom_line(data = CIinfo_i, aes(x = d, y = analysis, group = groupID), position = position_nudge(y = 0.25), show.legend = FALSE) +
+    geom_point(data = CIinfo_i, aes(x = d, y = analysis), shape = "|", size = 4, position = position_nudge(y = 0.25), show.legend = FALSE) +
+    geom_point(data = meaninfo_i, aes(x = d, y = analysis), shape = 23, size = 3, fill = "#d7003a", position = position_nudge(y = 0.25), show.legend = FALSE)
+  
+  g <- g + 
+    guides(fill = "none", colour = "none") +
+    scale_fill_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) + 
+    scale_y_discrete(limits = rev(ANALYSISPATTERN)) +
+    theme(axis.title.y = element_blank()) +
+    xlab("Translated Cohen's D") + 
+    ggtitle(paste(FIGLABEL[i], FEATURENAMESET[i], sep = "")) +
+    theme(plot.title = element_text(size = 18, face = "bold", hjust = 0.5), axis.title.x = element_text(size = 16), axis.text = element_text(size = 15))
+    
+  ggsave(file = paste(OUTPUTDIR, "AllCombinations_", FEATURENAMESET[i], ".png", sep = ""), plot = g, width = WID, height = HEI)
+}

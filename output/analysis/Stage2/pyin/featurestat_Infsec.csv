@@ -1,0 +1,403 @@
+feature,name,lang,sex,type,mean,std,groupid
+f0,Pitch height,English,M,desc,-2534.42186577115,637.435531569783,1
+-|Δf0|,Pitch stability,English,M,desc,-3435.71108060213,2567.19333196948,1
+Spectral centroid,Timbral brightness,English,M,desc,1084.69343285753,1489.02838011726,1
+f0,Pitch height,English,M,song,-1587.34543972593,368.956377963468,1
+-|Δf0|,Pitch stability,English,M,song,-1584.5859016437,1876.42237906424,1
+Spectral centroid,Timbral brightness,English,M,song,858.792648067224,1367.67111285032,1
+f0,Pitch height,Macedonian,M,desc,-2182.51944148168,329.956791928737,2
+-|Δf0|,Pitch stability,Macedonian,M,desc,-2649.19988845072,2340.62629711183,2
+Spectral centroid,Timbral brightness,Macedonian,M,desc,1694.27737312303,2363.84957065822,2
+f0,Pitch height,Macedonian,M,song,-1496.36786486357,435.432863030147,2
+-|Δf0|,Pitch stability,Macedonian,M,song,-1457.28898323322,1717.73633405038,2
+Spectral centroid,Timbral brightness,Macedonian,M,song,1001.19961582861,1271.62791508939,2
+f0,Pitch height,Italian,M,desc,-2599.26866052974,412.313126013716,3
+-|Δf0|,Pitch stability,Italian,M,desc,-2990.86847770931,2549.98776285092,3
+Spectral centroid,Timbral brightness,Italian,M,desc,830.933179528406,1388.2400397902,3
+f0,Pitch height,Italian,M,song,-2563.7512356827,526.146802241548,3
+-|Δf0|,Pitch stability,Italian,M,song,-2085.6407896784,2145.31908004741,3
+Spectral centroid,Timbral brightness,Italian,M,song,569.242810258645,945.604122555828,3
+f0,Pitch height,Guarani,F,desc,-1291.7174067945,456.266294592008,61
+-|Δf0|,Pitch stability,Guarani,F,desc,-2232.70755497311,1937.18445113381,61
+Spectral centroid,Timbral brightness,Guarani,F,desc,1389.26600005556,1479.04510651246,61
+f0,Pitch height,Guarani,F,song,-904.208310132575,540.466997386725,61
+-|Δf0|,Pitch stability,Guarani,F,song,-1215.58046869273,2312.62973192499,61
+Spectral centroid,Timbral brightness,Guarani,F,song,990.258537479931,687.865321585091,61
+f0,Pitch height,Portuguese,F,desc,-1196.24800959446,270.45391929694,4
+-|Δf0|,Pitch stability,Portuguese,F,desc,-2812.2837844849,2659.09558192279,4
+Spectral centroid,Timbral brightness,Portuguese,F,desc,1127.97891508,1765.03092052675,4
+f0,Pitch height,Portuguese,F,song,-299.403067637567,346.749693264213,4
+-|Δf0|,Pitch stability,Portuguese,F,song,-1869.16628708666,2293.20659078701,4
+Spectral centroid,Timbral brightness,Portuguese,F,song,991.745384841461,1326.7602601327,4
+f0,Pitch height,English,F,desc,-1521.83560104895,700.097211653769,5
+-|Δf0|,Pitch stability,English,F,desc,-3373.59619007423,3110.85098251839,5
+Spectral centroid,Timbral brightness,English,F,desc,1142.09518702203,1931.57949094259,5
+f0,Pitch height,English,F,song,-794.238545843105,576.020083485849,5
+-|Δf0|,Pitch stability,English,F,song,-988.25015199657,1461.41547984327,5
+Spectral centroid,Timbral brightness,English,F,song,808.739205602231,1375.89336379632,5
+f0,Pitch height,Ronga,M,desc,-2252.91599320582,181.202868919298,6
+-|Δf0|,Pitch stability,Ronga,M,desc,-2066.63108971552,2005.15154223615,6
+Spectral centroid,Timbral brightness,Ronga,M,desc,871.757030828125,1360.36829610082,6
+f0,Pitch height,Ronga,M,song,-1816.96867839268,305.865562709035,6
+-|Δf0|,Pitch stability,Ronga,M,song,-1924.11971715639,2092.83216518108,6
+Spectral centroid,Timbral brightness,Ronga,M,song,1039.87764354579,1444.02066679482,6
+f0,Pitch height,Swedish,M,desc,-2511.0739590863,475.615646030463,7
+-|Δf0|,Pitch stability,Swedish,M,desc,-3567.87793676596,3600.6610538471,7
+Spectral centroid,Timbral brightness,Swedish,M,desc,862.950536284628,1514.61776731035,7
+f0,Pitch height,Swedish,M,song,-1768.99858940219,433.482391771219,7
+-|Δf0|,Pitch stability,Swedish,M,song,-2173.90565967215,2599.01613400445,7
+Spectral centroid,Timbral brightness,Swedish,M,song,645.902287824228,1166.04179439276,7
+f0,Pitch height,Hindi,F,desc,-1400.05409250718,787.248633150282,8
+-|Δf0|,Pitch stability,Hindi,F,desc,-2626.40766768981,2070.22983495055,8
+Spectral centroid,Timbral brightness,Hindi,F,desc,863.647846217612,1449.76634817219,8
+f0,Pitch height,Hindi,F,song,-522.922317237123,651.097293693706,8
+-|Δf0|,Pitch stability,Hindi,F,song,-2375.22809998089,3063.41077838663,8
+Spectral centroid,Timbral brightness,Hindi,F,song,785.337957954451,1366.7409892924,8
+f0,Pitch height,Bulgarian,F,desc,-1590.44602373134,504.97675693883,9
+-|Δf0|,Pitch stability,Bulgarian,F,desc,-3159.05215171266,3762.85401211747,9
+Spectral centroid,Timbral brightness,Bulgarian,F,desc,2700.02361164681,3134.82484980959,9
+f0,Pitch height,Bulgarian,F,song,-1075.11425294981,249.630405938807,9
+-|Δf0|,Pitch stability,Bulgarian,F,song,-2065.7233896226,2528.78790344844,9
+Spectral centroid,Timbral brightness,Bulgarian,F,song,1929.27979670902,1994.98668599835,9
+f0,Pitch height,Greek,M,desc,-2269.97578708924,260.076592645515,10
+-|Δf0|,Pitch stability,Greek,M,desc,-3189.98888839373,2586.66201388815,10
+Spectral centroid,Timbral brightness,Greek,M,desc,1745.97651068591,2305.94763574971,10
+f0,Pitch height,Greek,M,song,-1691.5055204896,383.857181722665,10
+-|Δf0|,Pitch stability,Greek,M,song,-2357.55098583869,2161.25422364452,10
+Spectral centroid,Timbral brightness,Greek,M,song,1197.78028341286,1862.8352467255,10
+f0,Pitch height,Mandarin,F,desc,-1063.84067709806,285.443318632517,11
+-|Δf0|,Pitch stability,Mandarin,F,desc,-2990.08148606101,2562.22889868599,11
+Spectral centroid,Timbral brightness,Mandarin,F,desc,1368.01599251538,2233.88541700899,11
+f0,Pitch height,Mandarin,F,song,-318.280914639061,467.103177864093,11
+-|Δf0|,Pitch stability,Mandarin,F,song,-1445.24581975719,2065.5866359567,11
+Spectral centroid,Timbral brightness,Mandarin,F,song,1018.0727470785,1673.95336995687,11
+f0,Pitch height,German,M,desc,-2607.20333696948,397.702594453308,12
+-|Δf0|,Pitch stability,German,M,desc,-2009.51459287166,2472.19475564407,12
+Spectral centroid,Timbral brightness,German,M,desc,1897.12236413379,1879.40885760258,12
+f0,Pitch height,German,M,song,-1439.32061268073,432.881868668621,12
+-|Δf0|,Pitch stability,German,M,song,-1787.44466467245,2019.24941698544,12
+Spectral centroid,Timbral brightness,German,M,song,1311.71927178213,1535.05670579874,12
+f0,Pitch height,Yoruba,F,desc,-1392.58347922038,325.825255136651,13
+-|Δf0|,Pitch stability,Yoruba,F,desc,-3238.30071767512,3713.15664708541,13
+Spectral centroid,Timbral brightness,Yoruba,F,desc,968.939847505591,1242.24328781659,13
+f0,Pitch height,Yoruba,F,song,-1172.76558013667,442.648016435164,13
+-|Δf0|,Pitch stability,Yoruba,F,song,-2657.49100365889,2731.2997604631,13
+Spectral centroid,Timbral brightness,Yoruba,F,song,682.581351527868,761.028363229737,13
+f0,Pitch height,Japanese,M,desc,-2519.03728635117,536.594546668749,14
+-|Δf0|,Pitch stability,Japanese,M,desc,-3283.24980662965,3290.56918912842,14
+Spectral centroid,Timbral brightness,Japanese,M,desc,1028.17840155743,1712.16456723729,14
+f0,Pitch height,Japanese,M,song,-1915.49154492183,571.104909634203,14
+-|Δf0|,Pitch stability,Japanese,M,song,-2260.89559950596,2202.88769798935,14
+Spectral centroid,Timbral brightness,Japanese,M,song,889.103133190883,1039.45149832993,14
+f0,Pitch height,Thai,M,desc,-2517.78541459401,388.259685772995,15
+-|Δf0|,Pitch stability,Thai,M,desc,-3069.90153466512,2959.70808987857,15
+Spectral centroid,Timbral brightness,Thai,M,desc,767.038493564893,933.096564607281,15
+f0,Pitch height,Thai,M,song,-1482.55268140712,431.276315117639,15
+-|Δf0|,Pitch stability,Thai,M,song,-1669.55310014279,2406.84245408125,15
+Spectral centroid,Timbral brightness,Thai,M,song,592.068331280877,517.907942108046,15
+f0,Pitch height,Spanish,M,desc,-2114.22297849993,385.261464866734,16
+-|Δf0|,Pitch stability,Spanish,M,desc,-3906.2892481225,3137.89539279177,16
+Spectral centroid,Timbral brightness,Spanish,M,desc,1016.54423070181,1643.35043241597,16
+f0,Pitch height,Spanish,M,song,-1682.18116686972,444.767228004791,16
+-|Δf0|,Pitch stability,Spanish,M,song,-2508.6021592415,3193.62641974313,16
+Spectral centroid,Timbral brightness,Spanish,M,song,1066.58363440512,1563.78003976563,16
+f0,Pitch height,Balinese,M,desc,-2058.12017052891,441.760235366424,17
+-|Δf0|,Pitch stability,Balinese,M,desc,-3033.43940440323,3698.14430114469,17
+Spectral centroid,Timbral brightness,Balinese,M,desc,778.728611059085,806.809329459561,17
+f0,Pitch height,Balinese,M,song,-1055.28941138896,538.626636095526,17
+-|Δf0|,Pitch stability,Balinese,M,song,-1313.98295406248,1628.69619527857,17
+Spectral centroid,Timbral brightness,Balinese,M,song,825.396063111308,679.321225010172,17
+f0,Pitch height,Chilean,M,desc,-1946.88320939164,1110.32890424511,18
+-|Δf0|,Pitch stability,Chilean,M,desc,-4413.89663270574,4170.61521116737,18
+Spectral centroid,Timbral brightness,Chilean,M,desc,870.304964562124,1689.54620275236,18
+f0,Pitch height,Chilean,M,song,-1869.32476475832,616.687189648679,18
+-|Δf0|,Pitch stability,Chilean,M,song,-1486.5234606693,3066.05012303372,18
+Spectral centroid,Timbral brightness,Chilean,M,song,412.351557756021,754.965129758046,18
+f0,Pitch height,English,M,desc,-2526.54112761978,564.883619473478,19
+-|Δf0|,Pitch stability,English,M,desc,-2204.9431674511,2119.34391660557,19
+Spectral centroid,Timbral brightness,English,M,desc,630.223748033062,984.159135184358,19
+f0,Pitch height,English,M,song,-1729.9269775676,542.704430643212,19
+-|Δf0|,Pitch stability,English,M,song,-2571.76432309505,2446.52324322851,19
+Spectral centroid,Timbral brightness,English,M,song,863.359833941629,1217.98101112702,19
+f0,Pitch height,Spanish,M,desc,-2410.39638536268,573.337526805922,62
+-|Δf0|,Pitch stability,Spanish,M,desc,-2492.37785155545,2166.57481942657,62
+Spectral centroid,Timbral brightness,Spanish,M,desc,2588.85894469848,3374.4218360961,62
+f0,Pitch height,Spanish,M,song,-1977.41248538067,342.719349326938,62
+-|Δf0|,Pitch stability,Spanish,M,song,-2161.2099293341,2302.37886478384,62
+Spectral centroid,Timbral brightness,Spanish,M,song,1058.14014659137,1336.99976746844,62
+f0,Pitch height,Dutch,F,desc,-911.857983440635,602.411476468981,63
+-|Δf0|,Pitch stability,Dutch,F,desc,-4054.86470723786,3448.13621816728,63
+Spectral centroid,Timbral brightness,Dutch,F,desc,1362.71747053574,1467.2834519988,63
+f0,Pitch height,Dutch,F,song,-779.113553258767,338.007677574945,63
+-|Δf0|,Pitch stability,Dutch,F,song,-2414.45417053699,2144.14949516929,63
+Spectral centroid,Timbral brightness,Dutch,F,song,1322.50022179686,1658.56877938851,63
+f0,Pitch height,Wolof,M,desc,-3413.52448686753,434.224237052835,20
+-|Δf0|,Pitch stability,Wolof,M,desc,-3085.11055803701,2851.40760949892,20
+Spectral centroid,Timbral brightness,Wolof,M,desc,356.108965058193,588.837867952755,20
+f0,Pitch height,Wolof,M,song,-1294.06117889797,693.988784953993,20
+-|Δf0|,Pitch stability,Wolof,M,song,-1708.1544965958,2315.97679343517,20
+Spectral centroid,Timbral brightness,Wolof,M,song,665.976559186704,443.702872278616,20
+f0,Pitch height,Hebrew,F,desc,-1552.52381074537,277.082842559956,21
+-|Δf0|,Pitch stability,Hebrew,F,desc,-3143.70028107425,3267.73320765507,21
+Spectral centroid,Timbral brightness,Hebrew,F,desc,995.725277609747,1221.93745055611,21
+f0,Pitch height,Hebrew,F,song,-838.929300546038,342.528230055379,21
+-|Δf0|,Pitch stability,Hebrew,F,song,-1530.75545923074,1812.03026621304,21
+Spectral centroid,Timbral brightness,Hebrew,F,song,845.324855458156,783.552801248156,21
+f0,Pitch height,Catalan,M,desc,-2506.40018414247,496.414042116847,22
+-|Δf0|,Pitch stability,Catalan,M,desc,-2514.08961186687,2224.21860499657,22
+Spectral centroid,Timbral brightness,Catalan,M,desc,806.776130733042,1227.02832638314,22
+f0,Pitch height,Catalan,M,song,-2393.19666006194,818.864124932689,22
+-|Δf0|,Pitch stability,Catalan,M,song,-1870.01099235109,2306.231832041,22
+Spectral centroid,Timbral brightness,Catalan,M,song,312.58719733439,589.941752970119,22
+f0,Pitch height,Portuguese,M,desc,-2486.22400871971,269.081774091941,23
+-|Δf0|,Pitch stability,Portuguese,M,desc,-3059.42246561979,2437.61625099941,23
+Spectral centroid,Timbral brightness,Portuguese,M,desc,1448.40942758888,1356.24052293019,23
+f0,Pitch height,Portuguese,M,song,-2300.15574365145,315.962320360096,23
+-|Δf0|,Pitch stability,Portuguese,M,song,-1614.79741460748,2429.12867692784,23
+Spectral centroid,Timbral brightness,Portuguese,M,song,941.057089955676,1043.31675787457,23
+f0,Pitch height,Amamidialect,F,desc,-2116.12982091699,1466.28096568455,24
+-|Δf0|,Pitch stability,Amamidialect,F,desc,-2100.52598944978,1912.2385818721,24
+Spectral centroid,Timbral brightness,Amamidialect,F,desc,653.253981475646,1078.34510015403,24
+f0,Pitch height,Amamidialect,F,song,-402.208608061966,721.866338085629,24
+-|Δf0|,Pitch stability,Amamidialect,F,song,-2292.34754320386,3121.38921238472,24
+Spectral centroid,Timbral brightness,Amamidialect,F,song,945.146551628522,964.342086167129,24
+f0,Pitch height,Swahili,M,desc,-2293.31296856803,529.737477889136,25
+-|Δf0|,Pitch stability,Swahili,M,desc,-3268.29747024562,2737.64468784258,25
+Spectral centroid,Timbral brightness,Swahili,M,desc,682.812955818317,1051.56088758971,25
+f0,Pitch height,Swahili,M,song,-2252.04229720932,314.131705967553,25
+-|Δf0|,Pitch stability,Swahili,M,song,-1714.45401199335,1922.59521281895,25
+Spectral centroid,Timbral brightness,Swahili,M,song,573.267464838726,966.398986075948,25
+f0,Pitch height,Dutch,M,desc,-2134.03287109021,780.563006047878,26
+-|Δf0|,Pitch stability,Dutch,M,desc,-3322.1549103015,2542.48901966378,26
+Spectral centroid,Timbral brightness,Dutch,M,desc,993.924277698969,1147.86948527465,26
+f0,Pitch height,Dutch,M,song,-1715.87407807482,362.216980237391,26
+-|Δf0|,Pitch stability,Dutch,M,song,-2125.2113386856,2615.30080342947,26
+Spectral centroid,Timbral brightness,Dutch,M,song,912.496442141713,923.296055239805,26
+f0,Pitch height,Spanish,M,desc,-2553.24899500558,320.94538733667,27
+-|Δf0|,Pitch stability,Spanish,M,desc,-4233.67708141672,3560.75745263271,27
+Spectral centroid,Timbral brightness,Spanish,M,desc,1338.27495995174,3186.18807795886,27
+f0,Pitch height,Spanish,M,song,-1941.22059017917,494.594638296739,27
+-|Δf0|,Pitch stability,Spanish,M,song,-3225.59705550731,3295.44851133904,27
+Spectral centroid,Timbral brightness,Spanish,M,song,1482.27539730582,2281.0161015434,27
+f0,Pitch height,Punjabi,F,desc,-1382.98186130515,455.184183919308,28
+-|Δf0|,Pitch stability,Punjabi,F,desc,-2855.29935658137,2416.38827110866,28
+Spectral centroid,Timbral brightness,Punjabi,F,desc,1005.76859276912,1596.74067618882,28
+f0,Pitch height,Punjabi,F,song,-557.759067209599,486.657442153144,28
+-|Δf0|,Pitch stability,Punjabi,F,song,-2198.58558218972,1783.40579971397,28
+Spectral centroid,Timbral brightness,Punjabi,F,song,932.570397638403,1783.71200496254,28
+f0,Pitch height,HainanHua,F,desc,-1160.14063489691,322.428338030099,29
+-|Δf0|,Pitch stability,HainanHua,F,desc,-3063.71331126129,3823.82614768412,29
+Spectral centroid,Timbral brightness,HainanHua,F,desc,1167.4145618763,2196.60832681245,29
+f0,Pitch height,HainanHua,F,song,-471.754068551105,331.617393256955,29
+-|Δf0|,Pitch stability,HainanHua,F,song,-1481.49275725805,2443.78181714005,29
+Spectral centroid,Timbral brightness,HainanHua,F,song,879.431922923035,997.311416086681,29
+f0,Pitch height,Williche,F,desc,-1549.80328287345,574.399728699854,30
+-|Δf0|,Pitch stability,Williche,F,desc,-3154.22496380987,2667.78123169841,30
+Spectral centroid,Timbral brightness,Williche,F,desc,486.573714779055,510.869017199907,30
+f0,Pitch height,Williche,F,song,-947.72332213539,358.876121707726,30
+-|Δf0|,Pitch stability,Williche,F,song,-1607.82218279902,2534.53059261996,30
+Spectral centroid,Timbral brightness,Williche,F,song,626.492966923791,508.399843334854,30
+f0,Pitch height,Euskara,F,desc,-1419.08702070772,418.562550760848,31
+-|Δf0|,Pitch stability,Euskara,F,desc,-2310.82785774692,1987.48812497969,31
+Spectral centroid,Timbral brightness,Euskara,F,desc,922.975537197589,1471.9324927178,31
+f0,Pitch height,Euskara,F,song,-746.189308764328,568.088610654433,31
+-|Δf0|,Pitch stability,Euskara,F,song,-1677.06316572354,2526.49762158766,31
+Spectral centroid,Timbral brightness,Euskara,F,song,713.015361867553,946.879370031421,31
+f0,Pitch height,Danish,M,desc,-2319.09025000531,233.667937299552,32
+-|Δf0|,Pitch stability,Danish,M,desc,-2848.77027961332,2519.43003320643,32
+Spectral centroid,Timbral brightness,Danish,M,desc,1338.43422088535,2004.22839327032,32
+f0,Pitch height,Danish,M,song,-1660.40392684081,560.430924604219,32
+-|Δf0|,Pitch stability,Danish,M,song,-2103.29179132199,2516.64342752785,32
+Spectral centroid,Timbral brightness,Danish,M,song,843.748122911921,1511.08437136284,32
+f0,Pitch height,Hebrew,M,desc,-2781.21871062643,448.735292939529,33
+-|Δf0|,Pitch stability,Hebrew,M,desc,-2628.78008118025,2368.16290489566,33
+Spectral centroid,Timbral brightness,Hebrew,M,desc,993.321742381705,1366.46670133394,33
+f0,Pitch height,Hebrew,M,song,-1977.3696157235,431.350726462342,33
+-|Δf0|,Pitch stability,Hebrew,M,song,-1637.5146117653,2087.66341393259,33
+Spectral centroid,Timbral brightness,Hebrew,M,song,471.14534127004,653.802251960438,33
+f0,Pitch height,IsiXhosa,F,desc,-1634.71373554218,385.488767084468,34
+-|Δf0|,Pitch stability,IsiXhosa,F,desc,-3379.01620284812,2787.99197659838,34
+Spectral centroid,Timbral brightness,IsiXhosa,F,desc,815.492831252188,1342.79038915155,34
+f0,Pitch height,IsiXhosa,F,song,-607.825805263407,332.290776640109,34
+-|Δf0|,Pitch stability,IsiXhosa,F,song,-1795.14049076642,2445.2370377779,34
+Spectral centroid,Timbral brightness,IsiXhosa,F,song,761.823489476685,761.189523720777,34
+f0,Pitch height,Turkish,F,desc,-1252.43750950464,343.872300907489,35
+-|Δf0|,Pitch stability,Turkish,F,desc,-4545.79245580515,4047.18825423919,35
+Spectral centroid,Timbral brightness,Turkish,F,desc,898.408276368559,1260.29361766383,35
+f0,Pitch height,Turkish,F,song,-648.139024738166,346.821785731274,35
+-|Δf0|,Pitch stability,Turkish,F,song,-1797.98218444221,1964.57832241608,35
+Spectral centroid,Timbral brightness,Turkish,F,song,567.807509074044,820.943583826171,35
+f0,Pitch height,Ukrainian,F,desc,-1368.16878546195,420.170578522233,36
+-|Δf0|,Pitch stability,Ukrainian,F,desc,-3010.70737771532,2840.46824517639,36
+Spectral centroid,Timbral brightness,Ukrainian,F,desc,1215.39732865515,1893.22894627527,36
+f0,Pitch height,Ukrainian,F,song,-1060.85810977846,275.511119861395,36
+-|Δf0|,Pitch stability,Ukrainian,F,song,-1559.22674560874,1570.25087033221,36
+Spectral centroid,Timbral brightness,Ukrainian,F,song,713.561512774381,1261.3923014502,36
+f0,Pitch height,Marathi,M,desc,-2302.34251057841,372.877174907364,37
+-|Δf0|,Pitch stability,Marathi,M,desc,-4195.09613512876,3381.29657419056,37
+Spectral centroid,Timbral brightness,Marathi,M,desc,312.579256207105,524.237315072675,37
+f0,Pitch height,Marathi,M,song,-2045.48099373832,362.109129061829,37
+-|Δf0|,Pitch stability,Marathi,M,song,-1226.05766702704,1592.62323597689,37
+Spectral centroid,Timbral brightness,Marathi,M,song,390.301401154864,500.241875847879,37
+f0,Pitch height,English,M,desc,-2731.8966218209,494.688866623281,38
+-|Δf0|,Pitch stability,English,M,desc,-4284.15156739966,3192.65904216906,38
+Spectral centroid,Timbral brightness,English,M,desc,465.964778385564,1001.18376434387,38
+f0,Pitch height,English,M,song,-1713.82491815511,581.585896958719,38
+-|Δf0|,Pitch stability,English,M,song,-2167.92026036844,2620.52333225408,38
+Spectral centroid,Timbral brightness,English,M,song,396.756017684083,1006.01987253631,38
+f0,Pitch height,French,F,desc,-1157.65581221033,343.07503676485,39
+-|Δf0|,Pitch stability,French,F,desc,-3577.28017965702,3301.98859368991,39
+Spectral centroid,Timbral brightness,French,F,desc,1383.38585276387,1967.68219016337,39
+f0,Pitch height,French,F,song,-567.119726437459,639.364691197813,39
+-|Δf0|,Pitch stability,French,F,song,-1763.39097370268,2047.54197269211,39
+Spectral centroid,Timbral brightness,French,F,song,1158.82561291725,1745.87035953194,39
+f0,Pitch height,English,M,desc,-2463.8975771238,522.934789554781,40
+-|Δf0|,Pitch stability,English,M,desc,-3719.34112811857,3572.84316073835,40
+Spectral centroid,Timbral brightness,English,M,desc,715.065753657554,1081.94845488172,40
+f0,Pitch height,English,M,song,-1358.37929654566,501.688583640689,40
+-|Δf0|,Pitch stability,English,M,song,-1392.44436296168,2338.70079718567,40
+Spectral centroid,Timbral brightness,English,M,song,1104.27476026622,773.017700600581,40
+f0,Pitch height,Azerbaijani,F,desc,-1412.35258205279,725.754615780013,41
+-|Δf0|,Pitch stability,Azerbaijani,F,desc,-4126.16784071957,3670.06464829004,41
+Spectral centroid,Timbral brightness,Azerbaijani,F,desc,1188.92267723384,1963.5267558032,41
+f0,Pitch height,Azerbaijani,F,song,-973.01505393971,575.373154257018,41
+-|Δf0|,Pitch stability,Azerbaijani,F,song,-1778.60326924283,1971.25783580646,41
+Spectral centroid,Timbral brightness,Azerbaijani,F,song,883.825596831887,1718.07048271348,41
+f0,Pitch height,Russian,F,desc,-1368.59072639022,509.732025338194,42
+-|Δf0|,Pitch stability,Russian,F,desc,-3615.40650642346,3357.42732943754,42
+Spectral centroid,Timbral brightness,Russian,F,desc,1235.99444216028,1844.85485325393,42
+f0,Pitch height,Russian,F,song,114.646465633531,360.735588304089,42
+-|Δf0|,Pitch stability,Russian,F,song,-1203.81900303156,1659.69496442774,42
+Spectral centroid,Timbral brightness,Russian,F,song,984.336340629013,890.986266419739,42
+f0,Pitch height,Cantonese,F,desc,-1653.56209200142,241.052220823785,64
+-|Δf0|,Pitch stability,Cantonese,F,desc,-3536.15710287678,2722.66130671678,64
+Spectral centroid,Timbral brightness,Cantonese,F,desc,438.397425183563,886.499016452184,64
+f0,Pitch height,Cantonese,F,song,-958.971660032122,637.371415974605,64
+-|Δf0|,Pitch stability,Cantonese,F,song,-2626.51262607688,3196.7440861825,64
+Spectral centroid,Timbral brightness,Cantonese,F,song,517.759163619859,952.234004870717,64
+f0,Pitch height,Rikbaktsa,M,desc,-1741.94933589849,1636.9110319882,66
+-|Δf0|,Pitch stability,Rikbaktsa,M,desc,-2119.77671854994,2345.48612534222,66
+Spectral centroid,Timbral brightness,Rikbaktsa,M,desc,2303.42486171723,1496.62427363191,66
+f0,Pitch height,Rikbaktsa,M,song,-2287.90165193212,618.955570086749,66
+-|Δf0|,Pitch stability,Rikbaktsa,M,song,-2314.15799586554,1909.14472905146,66
+Spectral centroid,Timbral brightness,Rikbaktsa,M,song,1019.80694995177,1338.91841694959,66
+f0,Pitch height,Urdu,M,desc,-2564.91163590733,555.322192277878,43
+-|Δf0|,Pitch stability,Urdu,M,desc,-2075.01528314199,1960.62611017039,43
+Spectral centroid,Timbral brightness,Urdu,M,desc,1114.20471469975,1438.17396047504,43
+f0,Pitch height,Urdu,M,song,-2051.41831601327,586.889482139333,43
+-|Δf0|,Pitch stability,Urdu,M,song,-1683.6558210367,1903.53519469803,43
+Spectral centroid,Timbral brightness,Urdu,M,song,907.147448405821,1281.44446721761,43
+f0,Pitch height,Lithuanian,M,desc,-2493.53932514287,640.863637740804,44
+-|Δf0|,Pitch stability,Lithuanian,M,desc,-3727.53028516193,3282.10034402451,44
+Spectral centroid,Timbral brightness,Lithuanian,M,desc,1562.84512264787,2766.33283055353,44
+f0,Pitch height,Lithuanian,M,song,-1914.05793693984,425.34635736774,44
+-|Δf0|,Pitch stability,Lithuanian,M,song,-2353.54333884669,2456.51947173577,44
+Spectral centroid,Timbral brightness,Lithuanian,M,song,951.952011784388,1700.55516002452,44
+f0,Pitch height,Korean,M,desc,-1709.49964134397,490.179192209142,45
+-|Δf0|,Pitch stability,Korean,M,desc,-4107.08154979804,3348.11556760805,45
+Spectral centroid,Timbral brightness,Korean,M,desc,663.222870572886,719.738294655393,45
+f0,Pitch height,Korean,M,song,-1200.96666981448,350.69029834613,45
+-|Δf0|,Pitch stability,Korean,M,song,-1685.42065980195,1845.41000340956,45
+Spectral centroid,Timbral brightness,Korean,M,song,661.622848015181,389.928217279926,45
+f0,Pitch height,Farsi,F,desc,-1685.55641705212,626.209098499903,46
+-|Δf0|,Pitch stability,Farsi,F,desc,-2100.47765691692,1979.29029451015,46
+Spectral centroid,Timbral brightness,Farsi,F,desc,699.441606370783,1167.13269330235,46
+f0,Pitch height,Farsi,F,song,-819.027332467786,475.645488385748,46
+-|Δf0|,Pitch stability,Farsi,F,song,-2002.59673653401,2316.70901869148,46
+Spectral centroid,Timbral brightness,Farsi,F,song,688.60164408991,1013.26032239173,46
+f0,Pitch height,Persian,M,desc,-3452.13672762269,1142.59301329077,47
+-|Δf0|,Pitch stability,Persian,M,desc,-2413.46740243374,2344.37006964685,47
+Spectral centroid,Timbral brightness,Persian,M,desc,579.606503933346,1272.65237097739,47
+f0,Pitch height,Persian,M,song,-1209.74605294054,813.396139771798,47
+-|Δf0|,Pitch stability,Persian,M,song,-1947.27893730595,2577.23690103054,47
+Spectral centroid,Timbral brightness,Persian,M,song,769.189401447219,1100.71147908969,47
+f0,Pitch height,Kannada,F,desc,-1532.23380048437,646.845771963743,48
+-|Δf0|,Pitch stability,Kannada,F,desc,-2858.03194822035,2516.48951499319,48
+Spectral centroid,Timbral brightness,Kannada,F,desc,494.906930192221,871.783147413091,48
+f0,Pitch height,Kannada,F,song,-695.368341520617,373.883202931557,48
+-|Δf0|,Pitch stability,Kannada,F,song,-1554.47024162098,1767.49017579228,48
+Spectral centroid,Timbral brightness,Kannada,F,song,440.706028346584,347.35630219649,48
+f0,Pitch height,Japanese,M,desc,-2682.71431253355,641.000473254182,49
+-|Δf0|,Pitch stability,Japanese,M,desc,-3920.64687151833,3207.92583453254,49
+Spectral centroid,Timbral brightness,Japanese,M,desc,914.035736639618,1658.59232162988,49
+f0,Pitch height,Japanese,M,song,-2081.09526557174,728.246185202745,49
+-|Δf0|,Pitch stability,Japanese,M,song,-1640.62602666055,2070.54205534438,49
+Spectral centroid,Timbral brightness,Japanese,M,song,709.009514832029,1023.91672211958,49
+f0,Pitch height,Burmese,F,desc,-1575.09351421422,640.257527583617,65
+-|Δf0|,Pitch stability,Burmese,F,desc,-3634.63715636384,3965.37063392798,65
+Spectral centroid,Timbral brightness,Burmese,F,desc,700.185365901054,1268.75796446977,65
+f0,Pitch height,Burmese,F,song,-932.137303140433,712.049006736797,65
+-|Δf0|,Pitch stability,Burmese,F,song,-1751.15986498136,2452.73297265317,65
+Spectral centroid,Timbral brightness,Burmese,F,song,723.122956351494,1113.28067262926,65
+f0,Pitch height,Gaeilge,M,desc,-2335.71623700153,261.721434975921,67
+-|Δf0|,Pitch stability,Gaeilge,M,desc,-3249.73696295992,4228.69345851095,67
+Spectral centroid,Timbral brightness,Gaeilge,M,desc,1530.8696259935,2175.68029416749,67
+f0,Pitch height,Gaeilge,M,song,-1902.72647994655,336.098229178977,67
+-|Δf0|,Pitch stability,Gaeilge,M,song,-1747.14872844283,3077.27008785757,67
+Spectral centroid,Timbral brightness,Gaeilge,M,song,920.404167950015,1714.99206971454,67
+f0,Pitch height,English,M,desc,-2603.6878312713,232.634818409886,50
+-|Δf0|,Pitch stability,English,M,desc,-4371.11015931381,3295.82809001835,50
+Spectral centroid,Timbral brightness,English,M,desc,745.395774174357,1401.93582378018,50
+f0,Pitch height,English,M,song,-1947.07162376405,533.42942608148,50
+-|Δf0|,Pitch stability,English,M,song,-2887.40257997959,3335.70893596747,50
+Spectral centroid,Timbral brightness,English,M,song,500.193945329151,967.453645949988,50
+f0,Pitch height,Georgian,F,desc,-1588.71764928703,403.2880521074,51
+-|Δf0|,Pitch stability,Georgian,F,desc,-4502.77081996363,3868.31343134056,51
+Spectral centroid,Timbral brightness,Georgian,F,desc,1093.89856428184,1664.11296234918,51
+f0,Pitch height,Georgian,F,song,-781.905762174089,347.359475852497,51
+-|Δf0|,Pitch stability,Georgian,F,song,-1258.26775622667,1955.14475640638,51
+Spectral centroid,Timbral brightness,Georgian,F,song,626.611013784185,878.031213521967,51
+f0,Pitch height,Puri,M,desc,-2465.99062305775,611.848969644013,52
+-|Δf0|,Pitch stability,Puri,M,desc,-2556.01426153818,2061.68570035868,52
+Spectral centroid,Timbral brightness,Puri,M,desc,1608.69026185745,1380.32532686061,52
+f0,Pitch height,Puri,M,song,-1478.38164457318,232.589990745626,52
+-|Δf0|,Pitch stability,Puri,M,song,-968.395320072084,1607.79513581675,52
+Spectral centroid,Timbral brightness,Puri,M,song,1203.08353054622,1054.57409126833,52
+f0,Pitch height,Norwegian,F,desc,-1137.59466023854,352.776121789164,53
+-|Δf0|,Pitch stability,Norwegian,F,desc,-4332.31226319136,4247.31634891534,53
+Spectral centroid,Timbral brightness,Norwegian,F,desc,1431.71067532731,2186.26120145376,53
+f0,Pitch height,Norwegian,F,song,-531.343463222937,334.919380059973,53
+-|Δf0|,Pitch stability,Norwegian,F,song,-1890.88082742114,2419.07379861429,53
+Spectral centroid,Timbral brightness,Norwegian,F,song,1173.7025514145,1617.6535011519,53
+f0,Pitch height,Kuikuro,M,desc,-3036.91801034188,1444.64173196611,54
+-|Δf0|,Pitch stability,Kuikuro,M,desc,-1381.98429619395,1749.66519014717,54
+Spectral centroid,Timbral brightness,Kuikuro,M,desc,1193.68877874863,2036.709582388,54
+f0,Pitch height,Kuikuro,M,song,-2141.84587329434,1124.78505373619,54
+-|Δf0|,Pitch stability,Kuikuro,M,song,-1388.63044986275,1749.70008435713,54
+Spectral centroid,Timbral brightness,Kuikuro,M,song,843.568627516363,1381.09073974435,54
+f0,Pitch height,Ainu,F,desc,-2333.55844536739,868.906849293284,55
+-|Δf0|,Pitch stability,Ainu,F,desc,-2973.26140474902,2556.16876336576,55
+Spectral centroid,Timbral brightness,Ainu,F,desc,776.887709104188,915.244987538265,55
+f0,Pitch height,Ainu,F,song,-1343.07007212133,323.259188693153,55
+-|Δf0|,Pitch stability,Ainu,F,song,-2779.21270895731,3558.591986548,55
+Spectral centroid,Timbral brightness,Ainu,F,song,635.703221858617,623.366968429565,55
+f0,Pitch height,Slovenian,F,desc,-1556.70707788935,388.47555371875,56
+-|Δf0|,Pitch stability,Slovenian,F,desc,-3006.32009012696,2765.80071226258,56
+Spectral centroid,Timbral brightness,Slovenian,F,desc,1172.92630573953,1822.83171088853,56
+f0,Pitch height,Slovenian,F,song,-834.016314679645,440.731839708833,56
+-|Δf0|,Pitch stability,Slovenian,F,song,-2058.7304671824,2358.28446610562,56
+Spectral centroid,Timbral brightness,Slovenian,F,song,1241.22225943473,1980.09802348419,56
+f0,Pitch height,Portuguese,F,desc,-1525.50118590358,927.311082729614,57
+-|Δf0|,Pitch stability,Portuguese,F,desc,-1754.79022375826,1751.94311202502,57
+Spectral centroid,Timbral brightness,Portuguese,F,desc,735.636481936367,1375.62325235369,57
+f0,Pitch height,Portuguese,F,song,-630.38301637871,900.321402726704,57
+-|Δf0|,Pitch stability,Portuguese,F,song,-2097.61873869932,2344.74034616015,57
+Spectral centroid,Timbral brightness,Portuguese,F,song,797.540895100064,926.649216849881,57
+f0,Pitch height,Polish,M,desc,-2229.37014659769,280.643959334635,58
+-|Δf0|,Pitch stability,Polish,M,desc,-2156.59703402402,2123.45298766598,58
+Spectral centroid,Timbral brightness,Polish,M,desc,1130.39074906583,1439.67517241365,58
+f0,Pitch height,Polish,M,song,-2257.81616879845,301.75181055621,58
+-|Δf0|,Pitch stability,Polish,M,song,-1639.43431309931,1907.80935682325,58
+Spectral centroid,Timbral brightness,Polish,M,song,854.527263682413,1251.92062233069,58
+f0,Pitch height,DutchFlemish,M,desc,-1978.14064750116,353.564893229865,59
+-|Δf0|,Pitch stability,DutchFlemish,M,desc,-2338.30166669147,2472.34342848795,59
+Spectral centroid,Timbral brightness,DutchFlemish,M,desc,1119.29872534769,1497.53287145028,59
+f0,Pitch height,DutchFlemish,M,song,-1552.51434995743,299.393268146477,59
+-|Δf0|,Pitch stability,DutchFlemish,M,song,-2397.58368175664,2751.107333125,59
+Spectral centroid,Timbral brightness,DutchFlemish,M,song,947.126407385436,1240.63755328791,59
+f0,Pitch height,Japanese,M,desc,-2821.59355564611,681.388529583766,60
+-|Δf0|,Pitch stability,Japanese,M,desc,-2964.09012617806,3108.70904955215,60
+Spectral centroid,Timbral brightness,Japanese,M,desc,631.596831628735,1219.84905128558,60
+f0,Pitch height,Japanese,M,song,-1775.02811385025,821.659529184172,60
+-|Δf0|,Pitch stability,Japanese,M,song,-2936.70749212201,3293.31937842928,60
+Spectral centroid,Timbral brightness,Japanese,M,song,480.298984927947,999.128066218409,60

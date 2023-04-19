@@ -3,7 +3,6 @@ library(ggplot2)
 library(ggpubr)
 
 ##
-OUTPUTDIR <- "./output/figure/Stage2/"
 INPUTDIR <- c("./output/analysis/Stage2/Hilton/", "./output/analysis/Stage2/pyin/", "./output/analysis/Stage2/", 
               "./output/analysis/Stage2/Hilton-subset/", "./output/analysis/Stage2/pyin-subset/", "./output/analysis/Stage2/subset/")
 ANALYSISPATTERN <- c("Hilton\n(full, pYIN, whole)", "Ours\n(full, pYIN, whole)", "Ours\n(full, SA, 20 sec.)",

@@ -6,6 +6,12 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
             typelist = {'inst', 'desc'};
         case 3
             typelist = {'song', 'recit'};
+        case 4
+            typelist = {'inst', 'song'};
+        case 5
+            typelist = {'recit', 'desc'};
+        case 6
+            typelist = {'inst', 'recit'};
     end
 
     %% load data

@@ -1,36 +1,16 @@
-## Exploratory - our data with pYIN+Praat
+## Exploratory - Meta-analysis [Hilton and ours]
 rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/pyin-praat/'
-OUTPUTDIR <- './output/figure/Stage2/pyin-praat/'
-durationID <- 'Infsec'
-exploratory <- FALSE
-source("plot_featureES.R")
+OUTPUTDIR <- "./output/figure/Stage2/"
+source("plot_mixES.R")
 
-## Exploratory - our data (subset) with pYIN
+## Exploratory - mean feature values [Hilton and ours]
 rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/pyin-subset/'
-OUTPUTDIR <- './output/figure/Stage2/pyin-subset/'
-durationID <- 'Infsec'
-exploratory <- FALSE
-source("plot_featureES.R")
+INPUTDIR <- c("./output/analysis/Stage2/Hilton/", "./output/analysis/Stage2/pyin/")
+DURATION <- c("Inf", "Inf")
+OUTPUTDIR <- "./output/figure/Stage2/pyin/"
+source("plot_mixStats.R")
 
-## Exploratory - Hilton's data with pYIN
-rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/Hilton/'
-OUTPUTDIR <- './output/figure/Stage2/Hilton/'
-durationID <- 'Infsec'
-exploratory <- FALSE
-source("plot_featureES.R")
-
-## Exploratory - our data with pYIN
-rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/pyin/'
-OUTPUTDIR <- './output/figure/Stage2/pyin/'
-durationID <- 'Infsec'
-exploratory <- FALSE
-source("plot_featureES.R")
-
-## Exploratory - our data with all features
+## Exploratory + confirmatory - our data with all features
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
 OUTPUTDIR <- './output/figure/Stage2/'
@@ -38,21 +18,55 @@ durationID <- '20sec'
 exploratory <- TRUE
 source("plot_featureES.R")
 
-##
+## Mean feature values (Ours, full feature)
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
 OUTPUTDIR <- './output/figure/Stage2/'
+fullfeature <- TRUE
 exploratory <- FALSE
 featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
 source("plot_featurestat.R")
 
-##
+## Mean feature values (Ours, full feature, all types)
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
 OUTPUTDIR <- './output/figure/Stage2/'
-durationID <- '20sec'
+fullfeature <- TRUE
+exploratory <- TRUE
+featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
+source("plot_featurestat.R")
+
+## Exploratory analysis - Plot CIs of all combinations
+rm(list = ls())
+INPUTDIR <- "./output/analysis/Stage2/"
+OUTPUTDIR <- "./output/figure/Stage2/"
+durationID <- "20sec"
+source("plot_metaCIs.R")
+
+## Exploratory analysis - nPVI
+rm(list = ls())
+INPUTDIR <- "./output/analysis/Stage2/"
+OUTPUTDIR <- "./output/figure/Stage2/"
+durationID <- "20sec"
+source("plot_nPVI.R")
+
+## Mean feature values (Ours, all recording types)
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/'
+OUTPUTDIR <- './output/figure/Stage2/'
+fullfeature <- FALSE
+exploratory <- TRUE
+featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
+source("plot_featurestat.R")
+
+## Mean feature values (Hilton)
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/Hilton/'
+OUTPUTDIR <- './output/figure/Stage2/Hilton/'
+fullfeature <- FALSE
 exploratory <- FALSE
-source("plot_featureES.R")
+featurestatfilepath = paste(INPUTDIR, 'featurestat_Infsec.csv', sep = '')
+source("plot_featurestat.R")
 
 ##
 rm(list = ls())
@@ -64,22 +78,14 @@ source("analysis_multilevelAIC.R")
 
 ##
 rm(list = ls())
-INPUTDIR <- "./output/analysis/Stage2/"
-OUTPUTDIR <- "./output/figure/Stage2/"
-durationID <- "20sec"
-exploratory <- FALSE
-source("plot_metaCIs.R")
-
-##
-rm(list = ls())
 collaboratorinfofile <- './data/CollaboratorsPlotData.csv'
 OUTPUTDIR <- './output/figure/Stage2/'
 source("plot_CollaboratorMap.R")
 
-##
+## Exploratory - our data with pYIN+Praat
 rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/'
-OUTPUTDIR <- './output/figure/Stage2/'
-exploratory <- TRUE
-featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
-source("plot_featurestat.R")
+INPUTDIR <- './output/analysis/Stage2/pyin-praat/'
+OUTPUTDIR <- './output/figure/Stage2/pyin-praat/'
+durationID <- 'Infsec'
+exploratory <- FALSE
+source("plot_featureES.R")

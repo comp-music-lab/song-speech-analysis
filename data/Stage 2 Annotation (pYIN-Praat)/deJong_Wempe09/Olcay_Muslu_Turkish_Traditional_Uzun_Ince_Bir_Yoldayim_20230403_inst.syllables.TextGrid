@@ -1,0 +1,17 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 38.074557823129254 
+tiers? <exists> 
+size = 1 
+item []: 
+    item [1]:
+        class = "TextTier" 
+        name = "syllables" 
+        xmin = 0 
+        xmax = 38.074557823129254 
+        points: size = 1 
+        points [1]:
+            number = 20.596770635899844 
+            mark = "1" 

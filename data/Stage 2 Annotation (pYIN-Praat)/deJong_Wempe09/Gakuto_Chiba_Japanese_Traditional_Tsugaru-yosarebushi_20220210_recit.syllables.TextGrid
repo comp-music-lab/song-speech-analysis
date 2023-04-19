@@ -1,0 +1,68 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0 
+xmax = 6.248145833333333 
+tiers? <exists> 
+size = 1 
+item []: 
+    item [1]:
+        class = "TextTier" 
+        name = "syllables" 
+        xmin = 0 
+        xmax = 6.248145833333333 
+        points: size = 18 
+        points [1]:
+            number = 0.7428300581964826 
+            mark = "1" 
+        points [2]:
+            number = 1.1365978182674057 
+            mark = "2" 
+        points [3]:
+            number = 1.48994395427119 
+            mark = "3" 
+        points [4]:
+            number = 1.6383103078211996 
+            mark = "4" 
+        points [5]:
+            number = 1.7645200762577868 
+            mark = "5" 
+        points [6]:
+            number = 2.1011330724897146 
+            mark = "6" 
+        points [7]:
+            number = 2.5314905199555224 
+            mark = "7" 
+        points [8]:
+            number = 2.678359017042608 
+            mark = "8" 
+        points [9]:
+            number = 2.825857537915082 
+            mark = "9" 
+        points [10]:
+            number = 2.9308110917750674 
+            mark = "10" 
+        points [11]:
+            number = 3.1620852834076985 
+            mark = "11" 
+        points [12]:
+            number = 3.992772638304738 
+            mark = "12" 
+        points [13]:
+            number = 4.158728790155104 
+            mark = "13" 
+        points [14]:
+            number = 4.2633547713032485 
+            mark = "14" 
+        points [15]:
+            number = 4.654371647823366 
+            mark = "15" 
+        points [16]:
+            number = 4.722535989604175 
+            mark = "16" 
+        points [17]:
+            number = 4.828166149456688 
+            mark = "17" 
+        points [18]:
+            number = 5.015404696044772 
+            mark = "18" 

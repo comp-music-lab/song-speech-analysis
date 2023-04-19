@@ -76,7 +76,11 @@ function analysis_rawdatastat(datainfofile, outputdir, duration, exploratory)
                     X = [];
                 end
             elseif strcmp(featurelist{k}, 'IOI rate')
-                X = 1./ft_ioi(t_onset{i}, t_break{i});
+                if ~isempty(t_onset{i}) && ~isempty(t_break{i})
+                    X = 1./ft_ioi(t_onset{i}, t_break{i});
+                else
+                    X = [];
+                end
             elseif strcmp(featurelist{k}, '-|Δf0|')
                 if ~isempty(f0{i})
                     tmp = -abs(ft_deltaf0(f0{i}, 0.005, reffreq));
@@ -85,7 +89,7 @@ function analysis_rawdatastat(datainfofile, outputdir, duration, exploratory)
                     X = [];
                 end
             elseif strcmp(featurelist{k}, 'f0 ratio')
-                if ~isempty(f0{i})
+                if ~isempty(f0{i}) && ~isempty(t_onset{i}) && ~isempty(t_break{i})
                     [~, ~, t_st, t_ed] = helper.h_ioi(t_onset{i}, t_break{i});
                     X = helper.h_interval(1200.*log2(f0{i}./440), t_f0{i}, t_st, t_ed);
                     X = abs(cat(1, X{:}));
@@ -93,9 +97,13 @@ function analysis_rawdatastat(datainfofile, outputdir, duration, exploratory)
                     X = [];
                 end
             elseif strcmp(featurelist{k}, 'Spectral centroid')
-                X = ft_spectralcentroid(audiofilepath{i}, f0{i}, t_f0{i}, duration, false);
-            elseif strcmp(featurelist{k}, 'Sign of f0 slope')
                 if ~isempty(f0{i})
+                    X = ft_spectralcentroid(audiofilepath{i}, f0{i}, t_f0{i}, duration, false);
+                else
+                    X = [];
+                end
+            elseif strcmp(featurelist{k}, 'Sign of f0 slope')
+                if ~isempty(f0{i}) && ~isempty(t_onset{i}) && ~isempty(t_break{i})
                     X = ft_f0declination(t_onset{i}, t_break{i}, f0{i}, t_f0{i});
                 else
                     X = [];
