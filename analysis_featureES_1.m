@@ -36,8 +36,8 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
     addpath('./lib/two-sample/');
     addpath('./lib/CWT/');
     
-    varNames = {'feature', 'lang', 'diff', 'stderr', 'ci95_l', 'ci95_u', 'method'};
-    varTypes = {'string', 'string', 'double', 'double', 'double', 'double', 'string'};
+    varNames = {'feature', 'lang', 'diff', 'stderr', 'ci95_l', 'ci95_u', 'method', 'groupid'};
+    varTypes = {'string', 'string', 'double', 'double', 'double', 'double', 'string', 'double'};
     idx_pair = unique(datainfo.groupid);
     results = table('Size', [0, numel(varNames)], 'VariableTypes', varTypes, 'VariableNames', varNames);
     
@@ -85,7 +85,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'f0'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'f0'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
         end
         
         X = modulationmagnitude{idx_song};
@@ -93,7 +93,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'-|Δf0|'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'-|Δf0|'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
         end
         
         X = SC{idx_song};
@@ -101,7 +101,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
         if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'Spectral centroid'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
         end
     end
 
@@ -124,7 +124,7 @@ function analysis_featureES_1(datainfofile, duration, typeflag, exploratory, out
             if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
                 [d, tau, dof] = pb_effectsize(X, Y);
                 u = tinv(1 - 0.05/2, dof);
-                results(end + 1, :) = table({'Pulse clarity'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+                results(end + 1, :) = table({'Pulse clarity'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
             end
         end
     end

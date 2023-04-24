@@ -68,7 +68,7 @@ for (i in 1:length(file.data)) {
   }
 }
 
-## ELT
+## ETL
 data$diff[data$diff == 1 & !is.nan(data$diff)] <- 1 - 3e-3
 data$diff[data$diff == 0 & !is.nan(data$diff)] <- 3e-3
 
@@ -104,7 +104,8 @@ LIST_COMPARISON <- unique(data$Comparison)
 g_list <- vector(mode = "list", length = length(LIST_COMPARISON))
 
 FEATURE_PLOTORDER <- c("f0", "IOI rate", "-|Δf0|", "Spectral centroid", "f0 ratio", "Sign of f0 slope",
-                       "Spectral flatness", "90% f0 quantile length", "Onset-break interval", "Short-term energy", "f0 ratio deviation", "IOI ratio deviation", "Pulse clarity")
+                       "Onset-break interval", "Short-term energy", "Spectral flatness", "IOI ratio deviation", 
+                       "f0 ratio deviation", "Pulse clarity", "90% f0 quantile length")
 tmp <- unique(data[, c("feature", "featureplotname")])
 idx <- as.vector(sapply(FEATURE_PLOTORDER, function(s) {match(s, tmp$feature)}))
 ORDER_Y_AXIS <- rev(as.factor(tmp$featureplotname[idx]))

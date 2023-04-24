@@ -3,129 +3,83 @@ library(ggplot2)
 library(ggpubr)
 
 ## Config
-WID <- 8
-HEI <- 6
-NCOL <- 3
-FILEID_FEATURE <- "main"
+FEATURENAME <- c("-|Δf0|" = "Pitch stability", "90% f0 quantile length" = "Pitch range", "f0" = "Pitch height",
+            "f0 ratio" = "Pitch interval size", "f0 ratio deviation" = "Interval regularity", "IOI rate" = "Temporal rate",
+            "IOI ratio deviation" = "Rhythmic regularity", "Onset-break interval" = "Phrase length", "Pulse clarity" = "Pulse clarity",
+            "Short-term energy" = "Loudness", "Sign of f0 slope" = "Pitch declination", "Spectral centroid" = "Timbral brightness",    
+            "Spectral flatness" = "Timbral noisiness")
+FEATUREUNIT <- c("-|Δf0|" = "Cent/sec.", "90% f0 quantile length" = "Cent", "f0" = "Cent",
+                 "f0 ratio" = "Cent", "f0 ratio deviation" = "Cent", "IOI rate" = "Hz",
+                 "IOI ratio deviation" = "-", "Onset-break interval" = "Sec.", "Pulse clarity" = "-",
+                 "Short-term energy" = "-", "Sign of f0 slope" = "-", "Spectral centroid" = "Hz",    
+                 "Spectral flatness" = "-")
+FEATUREORDER <- c("f0" = 1, "IOI rate" = 2, "-|Δf0|" = 3, "Spectral centroid" = 4,
+                  "f0 ratio" = 5, "Sign of f0 slope" = 6, "Onset-break interval" = 7,
+                  "Short-term energy" = 8, "Spectral flatness" = 9, "IOI ratio deviation" = 10,
+                  "f0 ratio deviation" = 11, "Pulse clarity" = 12, "90% f0 quantile length" = 13)
 
-featurelist_diff = c("f0", "IOI rate", "-|Δf0|")
-featurelist_sim = c("f0 ratio", "Spectral centroid", "Sign of f0 slope")
-featurelist_other = c()
-
-SONG <- "Song"
-INST <- "Inst."
-RECIT <- "Recit."
-
-if (fullfeature) {
-  featurelist_other = c('Pulse clarity', 'Onset-break interval', 'IOI ratio deviation', 'Spectral flatness', 'f0 ratio deviation',
-                        '90% f0 quantile length', 'Short-term energy')
-  NCOL <- 7
-  WID <- 14
-  FILEID_FEATURE <- "full"
-}
-
-if (exploratory) {
-  DESC <- "Desc."
-  TYPEFILTER <- c()
-  XTICKORDER <- c(INST, SONG, RECIT, DESC)
-  FILEID <- "_exp"
-  
-  ylim_sc <- c(0, 4000)
-  ylim_f0 <- c(-3100, 2100)
-  ylim_ioirate <- c(0, 12)
-} else {
-  DESC <- "Speech"
-  TYPEFILTER <- c(INST, RECIT)
-  XTICKORDER <- c(SONG, DESC, INST, RECIT)
-  FILEID <- "_cnf"
-  
-  ylim_sc <- c(0, 4000)
-  ylim_f0 <- c(-3100, 400)
-  ylim_ioirate <- c(0, 10)
-}
-
-XTICKORDER <- XTICKORDER[!(XTICKORDER %in% TYPEFILTER)]
+XLABEL <- c("desc" = "Desc.", "song" = "Song", "recit" = "Recit.", "inst" = "Inst.")
+XLIMIT <- c("inst", "song", "recit", "desc")
 
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
 LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
 
+NCOL <- 3
+WID <- 8
+HEI <- 6
+FILEID_TYPE <- "isrd"
+FILEID_FEATURE <- "full"
+SEX <- "MF"
+
+if (!FULLFEATURE) {
+  FILEID_FEATURE <- "main"
+}
+
+if (!FULLTYPE) {
+  FILEID_TYPE <- "sd"
+}
+
 ## ETL
-T = read.csv(featurestatfilepath)
-
-T$xticklabel <- ""
-T$xticklabel[T$type == "inst"] <- INST
-T$xticklabel[T$type == "desc"] <- DESC
-T$xticklabel[T$type == "song"] <- SONG
-T$xticklabel[T$type == "recit"] <- RECIT
-
-T$unit <- ""
-T$unit[T$feature == "f0"] <- "Cent (440 Hz = 0)"
-T$unit[T$feature == "IOI rate"] <- "Hz"
-T$unit[T$feature == "-|Δf0|"] <- "Cent/sec."
-T$unit[T$feature == "f0 ratio"] <- "Cent"
-T$unit[T$feature == "Spectral centroid"] <- "Hz"
-T$unit[T$feature == "Sign of f0 slope"] <- "-"
-T$unit[T$feature == "Pulse clarity"] <- "-"
-T$unit[T$feature == "Onset-break interval"] <- "Sec."
-T$unit[T$feature == "IOI ratio deviation"] <- "-"
-T$unit[T$feature == "Spectral flatness"] <- "-"
-T$unit[T$feature == "f0 ratio deviation"] <- "Cent"
-T$unit[T$feature == "90% f0 quantile length"] <- "Cent"
-T$unit[T$feature == "Short-term energy"] <- "-"
-
-T$sex[T$sex == "f"] <- "Female"
-T$sex[T$sex == "m"] <- "Male"
+featurestatinfo <- read.csv(featurestatfilepath)
 
 ## Plot
-tmp <- unique(T[c("feature", "name", "unit")])
-ylabelstr <- sub("ioi", "IOI", paste(tmp$name, "\n(Mean ", tolower(tmp$feature), " [", tmp$unit, "])", sep = ""))
-ylabelstr <- sub("δ", "Δ", ylabelstr)
+featureset <- sort(unique(featurestatinfo$feature))
+g_list <- vector(mode = "list", length = length(featureset))
 
-featurelist <- intersect(tmp$feature, c(featurelist_diff, featurelist_sim, featurelist_other))
-g_list <- vector(mode = "list", length = length(featurelist))
-
-for (i in 1:length(featurelist)) {
-  g_list[[i]] <- ggplot(data = T[T$feature == featurelist[i] & !(T$xticklabel %in% TYPEFILTER), ], aes(x = xticklabel, y = mean, group = groupid, color = lang, shape = sex)) + 
-    geom_point(alpha = 0.8, size = 2) + 
-    geom_line(linetype = 2) +
-    xlab("") + ylab(ylabelstr[i]) + labs(color = "Language", shape = "Sex") +
-    theme(axis.title.y = element_text(size = 12), legend.position = "none") +
-    scale_x_discrete(limits = XTICKORDER) + 
-    scale_color_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename)
+for (i in 1:length(featureset)) {
+  featurestatinfo_i <- featurestatinfo[featurestatinfo$feature == featureset[i], ]
+  ylabel <- paste("Mean ", sub("δ", "Δ", sub("ioi", "IOI", tolower(featureset[i]))), "\n[", FEATUREUNIT[i], "]", sep = "")
   
-  if (featurelist[i] == "f0 ratio") {
-    g_list[[i]] <- g_list[[i]] + ylim(c(0, 450))
-  } else if(featurelist[i] == "Spectral centroid") {
-    g_list[[i]] <- g_list[[i]] + ylim(ylim_sc)
-  } else if(featurelist[i] == "Coefficient of f0 slope") {
-    g_list[[i]] <- g_list[[i]] + ylim(c(-1, 1))
-  } else if (featurelist[i] == "IOI rate") {
-    g_list[[i]] <- g_list[[i]] + ylim(ylim_ioirate)
-  } else if(featurelist[i] == "-|Δf0|") {
-    #g_list[[i]] <- g_list[[i]] + ylim(ylim_dltf0)
-  } else if(featurelist[i] == "f0") {
-    g_list[[i]] <- g_list[[i]] + ylim(ylim_f0)
-  } else if(featurelist[i] == "Onset-break interval" || featurelist[i] == "Short-term energy" || featurelist[i] == "Spectral flatness") {
-    g_list[[i]] <- g_list[[i]] + scale_y_log10() 
+  g <- ggplot(data = featurestatinfo_i, aes(x = type, y = mean, color = lang)) + 
+    geom_violin(aes(group = type)) +
+    geom_point(aes(shape = sex)) +
+    geom_line(aes(group = groupid), linetype = "dotdash") +
+    geom_violin(aes(group = type), alpha = 0, draw_quantiles = 0.5) +
+    ggtitle(FEATURENAME[featureset[i]]) + 
+    xlab("") +
+    ylab(ylabel) +
+    guides(color = "none", shape = "none") + 
+    theme(plot.title = element_text(size = 9, face = "bold", hjust = 0.5),
+          axis.text = element_text(size = 6),
+          axis.title = element_text(size = 7)) + 
+    scale_x_discrete(limits = XLIMIT, label = XLABEL) +
+    scale_color_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) + 
+    scale_shape_manual(breaks = c("F", "M"), values = c(16, 17))
+  
+  if (featureset[i] == "f0 ratio deviation" || featureset[i] == "IOI ratio deviation") {
+    g <- g + scale_y_reverse()
   }
   
-  if (exploratory && fullfeature) {
-    g_list[[i]] <- g_list[[i]] + theme(axis.text.x = element_text(angle = -40, vjust = 0.5, hjust = 1, size = 10))
+  if(featureset[i] == "Onset-break interval" || featureset[i] == "Short-term energy" || featureset[i] == "Spectral flatness") {
+    g <- g + scale_y_log10() 
   }
+  
+  g_list[[FEATUREORDER[featureset[i]]]] <- g
 }
 
-## Merge plots
-if (fullfeature) {
-  g_cnf <- ggarrange(plotlist = lapply(1:6, function(i){g_list[[i]]}), ncol = NCOL, nrow = 1)
-  g_exp <- ggarrange(plotlist = lapply(7:length(g_list), function(i){g_list[[i]]}), ncol = NCOL, nrow = 1)
-  g <- ggarrange(g_cnf, g_exp, ncol = 1, nrow = 2)
-} else {
-  g <- ggarrange(plotlist = g_list, ncol = NCOL, nrow = ceiling(length(featurelist)/NCOL))  
-}
+## Combine plots
+g <- ggarrange(plotlist = g_list, ncol = NCOL, nrow = ceiling(length(featureset)/NCOL), common.legend = FALSE)
 
-ggsave(file = paste(OUTPUTDIR, "featurestat", FILEID, "_", FILEID_FEATURE, ".png", sep = ""), plot = g, width = WID, height = HEI)
-
-## Save legend
-l <- g_list[[1]] + theme(legend.position = "right")
-l <- as_ggplot(get_legend(l))
-ggsave(file = paste(OUTPUTDIR, "featurestat-legend", FILEID, "_", FILEID_FEATURE, ".png", sep = ""), plot = l, width = 8, height = 6)
+## Save
+ggsave(file = paste(OUTPUTDIR, "featurestat_", FILEID_TYPE, "_", FILEID_FEATURE, "_", SEX, ".png", sep = ""),
+       plot = g, width = WID, height = HEI)

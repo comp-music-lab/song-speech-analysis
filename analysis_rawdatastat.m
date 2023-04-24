@@ -144,6 +144,7 @@ function analysis_rawdatastat(datainfofile, outputdir, duration, exploratory)
             
             if ~isempty(X)
                 mu = mean(X);
+                %mu = median(X);
                 sgm = std(X);
     
                 featurestat(end + 1, :) = table(featurelist(k), featurename(k), langlist(i), sex(i), typelist(i), mu, sgm, groupid(i));

@@ -1,14 +1,23 @@
-## Exploratory - Meta-analysis [Hilton and ours]
+## Exploratory - mean feature values [Ours]
 rm(list = ls())
-OUTPUTDIR <- "./output/figure/Stage2/"
-source("plot_mixES.R")
+INPUTDIR <- './output/analysis/Stage2/'
+featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
+OUTPUTDIR <- './output/figure/Stage2/'
+FULLFEATURE <- TRUE
+FULLTYPE <- TRUE
+source("plot_featurestat.R")
 
-## Exploratory - mean feature values [Hilton and ours]
+## Exploratory - mean feature values [Hilton vs. ours]
 rm(list = ls())
 INPUTDIR <- c("./output/analysis/Stage2/Hilton/", "./output/analysis/Stage2/pyin/")
 DURATION <- c("Inf", "Inf")
 OUTPUTDIR <- "./output/figure/Stage2/pyin/"
 source("plot_mixStats.R")
+
+## Exploratory - Meta-analysis [Hilton and ours]
+rm(list = ls())
+OUTPUTDIR <- "./output/figure/Stage2/"
+source("plot_mixES.R")
 
 ## Exploratory + confirmatory - our data with all features
 rm(list = ls())
@@ -17,24 +26,6 @@ OUTPUTDIR <- './output/figure/Stage2/'
 durationID <- '20sec'
 exploratory <- TRUE
 source("plot_featureES.R")
-
-## Mean feature values (Ours, full feature)
-rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/'
-OUTPUTDIR <- './output/figure/Stage2/'
-fullfeature <- TRUE
-exploratory <- FALSE
-featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
-source("plot_featurestat.R")
-
-## Mean feature values (Ours, full feature, all types)
-rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/'
-OUTPUTDIR <- './output/figure/Stage2/'
-fullfeature <- TRUE
-exploratory <- TRUE
-featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
-source("plot_featurestat.R")
 
 ## Exploratory analysis - Plot CIs of all combinations
 rm(list = ls())

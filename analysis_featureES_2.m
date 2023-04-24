@@ -35,8 +35,8 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
     %% configuration
     addpath('./lib/two-sample/');
     
-    varNames = {'feature', 'lang', 'diff', 'stderr', 'ci95_l', 'ci95_u', 'method'};
-    varTypes = {'string', 'string', 'double', 'double', 'double', 'double', 'string'};
+    varNames = {'feature', 'lang', 'diff', 'stderr', 'ci95_l', 'ci95_u', 'method', 'groupid'};
+    varTypes = {'string', 'string', 'double', 'double', 'double', 'double', 'string', 'double'};
     idx_pair = unique(datainfo.groupid);
     results = table('Size', [0, numel(varNames)], 'VariableTypes', varTypes, 'VariableNames', varNames);
     
@@ -117,14 +117,14 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
         Y = IOIrate{idx_desc};
         [d, tau, dof] = pb_effectsize(X, Y);
         u = tinv(1 - 0.05/2, dof);
-        results(end + 1, :) = table({'IOI rate'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'});
+        results(end + 1, :) = table({'IOI rate'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'}, idx_pair(i));
         
         X = intervalsize{idx_song};
         Y = intervalsize{idx_desc};
         if ~(numel(X) == 1 && numel(Y) == 1 && isnan(X) && isnan(Y))
             [d, tau, dof] = pb_effectsize(X, Y);
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'f0 ratio'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'f0 ratio'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
         end
 
         X = pitchdeclination{idx_song};
@@ -156,7 +156,7 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
             end
             
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'Sign of f0 slope'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
         end
     end
     
@@ -188,27 +188,27 @@ function analysis_featureES_2(datainfofile, duration, typeflag, exploratory, out
             
             [d, tau, dof] = pb_effectsize(SF{idx_song}, SF{idx_desc});
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'Spectral flatness'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'Spectral flatness'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'}, idx_pair(i));
     
             [d, tau, dof] = pb_effectsize(OBI{idx_song}, OBI{idx_desc});
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'Onset-break interval'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'Onset-break interval'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
     
             [d, tau, dof] = pb_effectsize(IOIratiodev{idx_song}, IOIratiodev{idx_desc});
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'IOI ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'IOI ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'}, idx_pair(i));
     
             [d, tau, dof] = pb_effectsize(intervaldev{idx_song}, intervaldev{idx_desc});
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'f0 ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'f0 ratio deviation'}, datainfo.language(idx_song), 1 - d, tau, 1 - d - tau*u, 1 - d + tau*u, {'common language effect size'}, idx_pair(i));
     
             [d, tau, dof] = pb_effectsize(pitchrange{idx_song}, pitchrange{idx_desc});
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'90% f0 quantile length'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'90% f0 quantile length'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
             
             [d, tau, dof] = pb_effectsize(E{idx_song}, E{idx_desc});
             u = tinv(1 - 0.05/2, dof);
-            results(end + 1, :) = table({'Short-term energy'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'});
+            results(end + 1, :) = table({'Short-term energy'}, datainfo.language(idx_song), d, tau, d - tau*u, d + tau*u, {'common language effect size'}, idx_pair(i));
         end
     end
 
