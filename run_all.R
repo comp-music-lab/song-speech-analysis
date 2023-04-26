@@ -3,9 +3,13 @@ rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
 featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
 OUTPUTDIR <- './output/figure/Stage2/'
-FULLFEATURE <- TRUE
-FULLTYPE <- TRUE
 source("plot_featurestat.R")
+source("plot_featurestat_MF.R")
+
+## Exploratory - Meta-analysis [Hilton and ours]
+rm(list = ls())
+OUTPUTDIR <- "./output/figure/Stage2/"
+source("plot_mixES.R")
 
 ## Exploratory - mean feature values [Hilton vs. ours]
 rm(list = ls())
@@ -13,11 +17,6 @@ INPUTDIR <- c("./output/analysis/Stage2/Hilton/", "./output/analysis/Stage2/pyin
 DURATION <- c("Inf", "Inf")
 OUTPUTDIR <- "./output/figure/Stage2/pyin/"
 source("plot_mixStats.R")
-
-## Exploratory - Meta-analysis [Hilton and ours]
-rm(list = ls())
-OUTPUTDIR <- "./output/figure/Stage2/"
-source("plot_mixES.R")
 
 ## Exploratory + confirmatory - our data with all features
 rm(list = ls())

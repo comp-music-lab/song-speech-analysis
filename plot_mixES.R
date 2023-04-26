@@ -3,12 +3,14 @@ library(ggplot2)
 library(ggpubr)
 
 ##
-INPUTDIR <- c("./output/analysis/Stage2/Hilton/", "./output/analysis/Stage2/pyin/", "./output/analysis/Stage2/", 
-              "./output/analysis/Stage2/Hilton-subset/", "./output/analysis/Stage2/pyin-subset/", "./output/analysis/Stage2/subset/")
-ANALYSISPATTERN <- c("Hilton\n(full, pYIN, whole)", "Ours\n(full, pYIN, whole)", "Ours\n(full, SA, 20 sec.)",
-                     "Hilton\n(matched, pYIN, whole)", "Ours\n(matched, pYIN, whole)", "Ours\n(matched, SA, 20 sec.)")
+INPUTDIR <- c("./output/analysis/Stage2/", "./output/analysis/Stage2/pyin/",
+              "./output/analysis/Stage2/subset/", "./output/analysis/Stage2/pyin-subset/",
+              "./output/analysis/Stage2/Hilton-subset/", "./output/analysis/Stage2/Hilton/")
+ANALYSISPATTERN <- c("Ours\n(full, SA, 20 sec.)", "Ours\n(full, FA, full length)", 
+                     "Ours\n(matched, SA, 20 sec.)", "Ours\n(matched, FA, full length)",
+                     "Hilton\n(matched, FA, full length)", "Hilton\n(full, FA, full length)")
 ANALYSISPATTERN <- factor(ANALYSISPATTERN, levels = ANALYSISPATTERN)
-DURATION <- c("Inf", "Inf", "20", "Inf", "Inf", "20")
+DURATION <- c("20", "Inf", "20", "Inf", "Inf", "Inf")
 FEATURESET <- c("f0", "-|Δf0|", "Spectral centroid")
 FEATURENAMESET <- c("Pitch height", "Pitch stability", "Timbral brightness")
 FIGLABEL <- c("(A) ", "(B) ", "(C) ")

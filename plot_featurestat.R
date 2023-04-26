@@ -27,17 +27,6 @@ LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
 NCOL <- 3
 WID <- 8
 HEI <- 6
-FILEID_TYPE <- "isrd"
-FILEID_FEATURE <- "full"
-SEX <- "MF"
-
-if (!FULLFEATURE) {
-  FILEID_FEATURE <- "main"
-}
-
-if (!FULLTYPE) {
-  FILEID_TYPE <- "sd"
-}
 
 ## ETL
 featurestatinfo <- read.csv(featurestatfilepath)
@@ -81,5 +70,5 @@ for (i in 1:length(featureset)) {
 g <- ggarrange(plotlist = g_list, ncol = NCOL, nrow = ceiling(length(featureset)/NCOL), common.legend = FALSE)
 
 ## Save
-ggsave(file = paste(OUTPUTDIR, "featurestat_", FILEID_TYPE, "_", FILEID_FEATURE, "_", SEX, ".png", sep = ""),
+ggsave(file = paste(OUTPUTDIR, "featurestat.png", sep = ""),
        plot = g, width = WID, height = HEI)
