@@ -2,12 +2,15 @@ lang_filename,family,rgb
 Hebrew,Afro-Asiatic,F8766D
 Ainu,Ainu,EC823C
 Williche,Araucanian,DD8D00
+Fante,Atlantic-Congo,CA9700
 IsiXhosa,Atlantic-Congo,CA9700
 Ronga,Atlantic-Congo,CA9700
 Swahili,Atlantic-Congo,CA9700
+Twi,Atlantic-Congo,CA9700
 Wolof,Atlantic-Congo,CA9700
 Yoruba,Atlantic-Congo,CA9700
 Balinese,Austronesian,B3A000
+Te Reo Māori,Austronesian,B3A000
 Euskara,Basque,97A900
 Kuikuro,Cariban,71B000
 Kannada,Dravidian,2FB600
@@ -20,6 +23,7 @@ DutchFlemish,Indo-European,00BB4B
 English,Indo-European,00BB4B
 Farsi,Indo-European,00BB4B
 French,Indo-European,00BB4B
+Gaeilge,Indo-European,00BB4B
 German,Indo-European,00BB4B
 Greek,Indo-European,00BB4B
 Hindi,Indo-European,00BB4B
@@ -44,7 +48,7 @@ Japanese,Japonic,00C098
 Georgian,Kartvelian,00C0B7
 Korean,Koreanic,00BDD1
 Luo,Nilotic,00B7E8
-Rikbaksta,Nuclear-Macro-Je,00AEFA
+Rikbaktsa,Nuclear-Macro-Je,00AEFA
 Ngarigu,Pama-Nyungan,3DA1FF
 Matis,Pano-Tacanan,8F91FF
 Puri,Puri-Coroado,BE80FF

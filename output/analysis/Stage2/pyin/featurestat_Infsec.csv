@@ -5,6 +5,12 @@ Spectral centroid,Timbral brightness,English,M,desc,1084.69343285753,1489.028380
 f0,Pitch height,English,M,song,-1587.34543972593,368.956377963468,1
 -|Δf0|,Pitch stability,English,M,song,-1584.5859016437,1876.42237906424,1
 Spectral centroid,Timbral brightness,English,M,song,858.792648067224,1367.67111285032,1
+f0,Pitch height,Fante,F,desc,-1975.1489230337,856.127116464279,69
+-|Δf0|,Pitch stability,Fante,F,desc,-5013.53536378492,4871.40393825388,69
+Spectral centroid,Timbral brightness,Fante,F,desc,719.544733462293,1520.79848794863,69
+f0,Pitch height,Fante,F,song,-1298.11023795301,419.130303189474,69
+-|Δf0|,Pitch stability,Fante,F,song,-1615.60328353655,2246.93171722714,69
+Spectral centroid,Timbral brightness,Fante,F,song,439.44861743095,616.241050869996,69
 f0,Pitch height,Macedonian,M,desc,-2182.51944148168,329.956791928737,2
 -|Δf0|,Pitch stability,Macedonian,M,desc,-2649.19988845072,2340.62629711183,2
 Spectral centroid,Timbral brightness,Macedonian,M,desc,1694.27737312303,2363.84957065822,2
@@ -107,12 +113,24 @@ Spectral centroid,Timbral brightness,Balinese,M,desc,778.728611059085,806.809329
 f0,Pitch height,Balinese,M,song,-1055.28941138896,538.626636095526,17
 -|Δf0|,Pitch stability,Balinese,M,song,-1313.98295406248,1628.69619527857,17
 Spectral centroid,Timbral brightness,Balinese,M,song,825.396063111308,679.321225010172,17
+f0,Pitch height,Ngarigu,F,desc,-1571.65836383827,1250.55094778104,71
+-|Δf0|,Pitch stability,Ngarigu,F,desc,-2425.86048752797,2292.8265639737,71
+Spectral centroid,Timbral brightness,Ngarigu,F,desc,608.771411769858,669.765057946062,71
+f0,Pitch height,Ngarigu,F,song,-953.512000520647,881.224658969813,71
+-|Δf0|,Pitch stability,Ngarigu,F,song,-1299.42290399497,1465.60320633269,71
+Spectral centroid,Timbral brightness,Ngarigu,F,song,701.540571113408,667.331940259173,71
 f0,Pitch height,Chilean,M,desc,-1946.88320939164,1110.32890424511,18
 -|Δf0|,Pitch stability,Chilean,M,desc,-4413.89663270574,4170.61521116737,18
 Spectral centroid,Timbral brightness,Chilean,M,desc,870.304964562124,1689.54620275236,18
 f0,Pitch height,Chilean,M,song,-1869.32476475832,616.687189648679,18
 -|Δf0|,Pitch stability,Chilean,M,song,-1486.5234606693,3066.05012303372,18
 Spectral centroid,Timbral brightness,Chilean,M,song,412.351557756021,754.965129758046,18
+f0,Pitch height,Twi,M,desc,-3773.16339805012,105.465934263954,68
+-|Δf0|,Pitch stability,Twi,M,desc,-1275.44963424077,1339.74778150526,68
+Spectral centroid,Timbral brightness,Twi,M,desc,230.921583081468,367.961063140548,68
+f0,Pitch height,Twi,M,song,-3627.56443128829,693.628607221711,68
+-|Δf0|,Pitch stability,Twi,M,song,-1501.08703148607,1900.85915682585,68
+Spectral centroid,Timbral brightness,Twi,M,song,296.248556382548,224.019976262551,68
 f0,Pitch height,English,M,desc,-2526.54112761978,564.883619473478,19
 -|Δf0|,Pitch stability,English,M,desc,-2204.9431674511,2119.34391660557,19
 Spectral centroid,Timbral brightness,English,M,desc,630.223748033062,984.159135184358,19
@@ -223,7 +241,7 @@ f0,Pitch height,IsiXhosa,F,song,-607.825805263407,332.290776640109,34
 Spectral centroid,Timbral brightness,IsiXhosa,F,song,761.823489476685,761.189523720777,34
 f0,Pitch height,Turkish,F,desc,-1252.43750950464,343.872300907489,35
 -|Δf0|,Pitch stability,Turkish,F,desc,-4545.79245580515,4047.18825423919,35
-Spectral centroid,Timbral brightness,Turkish,F,desc,898.408276368559,1260.29361766383,35
+Spectral centroid,Timbral brightness,Turkish,F,desc,898.125043330171,1258.23482401607,35
 f0,Pitch height,Turkish,F,song,-648.139024738166,346.821785731274,35
 -|Δf0|,Pitch stability,Turkish,F,song,-1797.98218444221,1964.57832241608,35
 Spectral centroid,Timbral brightness,Turkish,F,song,567.807509074044,820.943583826171,35
@@ -329,6 +347,12 @@ Spectral centroid,Timbral brightness,Burmese,F,desc,700.185365901054,1268.757964
 f0,Pitch height,Burmese,F,song,-932.137303140433,712.049006736797,65
 -|Δf0|,Pitch stability,Burmese,F,song,-1751.15986498136,2452.73297265317,65
 Spectral centroid,Timbral brightness,Burmese,F,song,723.122956351494,1113.28067262926,65
+f0,Pitch height,Te Reo Māori,F,desc,-1756.96357617189,583.459612878218,70
+-|Δf0|,Pitch stability,Te Reo Māori,F,desc,-3401.74614692548,3345.90289761303,70
+Spectral centroid,Timbral brightness,Te Reo Māori,F,desc,822.957206313186,1113.57210316878,70
+f0,Pitch height,Te Reo Māori,F,song,-1382.72672324415,273.115496465287,70
+-|Δf0|,Pitch stability,Te Reo Māori,F,song,-1170.54481671078,1576.29518718109,70
+Spectral centroid,Timbral brightness,Te Reo Māori,F,song,561.837333111229,708.777657634091,70
 f0,Pitch height,Gaeilge,M,desc,-2335.71623700153,261.721434975921,67
 -|Δf0|,Pitch stability,Gaeilge,M,desc,-3249.73696295992,4228.69345851095,67
 Spectral centroid,Timbral brightness,Gaeilge,M,desc,1530.8696259935,2175.68029416749,67

@@ -62,14 +62,14 @@ outputdir_fig = './output/figure/Stage2/pyin-praat/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
 %% Confirmatory + Exploratory analysis
+datainfofile = './datainfo.csv';
 outputdir_analysis = './output/analysis/Stage2/';
 outputdir_fig = './output/figure/Stage2/';
-exploratory = true;
 duration = 20;
 typeflag_songdesc = 1;
 typeid = 'song-desc';
-datainfofile = './datainfo.csv';
 al = 0.05/6;
+exploratory = true;
 blindedonly = false;
 continuitycorrection = false;
 onsetavailable = true;
@@ -77,7 +77,7 @@ onsetavailable = true;
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 analysis_rawdatastat(datainfofile, outputdir_analysis, duration, exploratory);
 
-%%
+%% nPVI
 datainfofile = './datainfo.csv';
 outputdir_analysis = './output/analysis/Stage2/';
 duration = 20;
@@ -86,11 +86,11 @@ analysis_npvi(datainfofile, outputdir_analysis, duration);
 
 %% Exploratory - other combinations
 datainfofile = './datainfo.csv';
-duration = 20;
-exploratory = false;
-al = 0.05/6;
 outputdir_analysis = './output/analysis/Stage2/';
 outputdir_fig = './output/figure/Stage2/';
+duration = 20;
+al = 0.05/6;
+exploratory = false;
 blindedonly = false;
 continuitycorrection = false;
 onsetavailable = true;
@@ -122,12 +122,12 @@ outputdir_fig = './output/figure/Stage2/';
 analysis_normalizedcontour(datainfo, duration, outputdir_fig);
 
 %% Exploratory - zero cell correction
+datainfofile = './datainfo.csv';
 outputdir_analysis = './output/analysis/Stage2/continuity/';
 outputdir_fig = './output/figure/Stage2/continuity/';
 duration = 20;
 typeflag_songdesc = 1;
 typeid = 'song-desc';
-datainfofile = './datainfo.csv';
 al = 0.05/6;
 blindedonly = false;
 exploratory = false;
@@ -140,9 +140,10 @@ local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, o
 datainfofile = './datainfo.csv';
 outputdir_analysis = './output/analysis/Stage2/';
 outputdir_fig = './output/figure/Stage2/';
+duration = 30;
 typeflag_songdesc = 1;
 typeid = 'song-desc';
-duration = 30;
+al = 0.05/6;
 blindedonly = false;
 exploratory = false;
 continuitycorrection = false;

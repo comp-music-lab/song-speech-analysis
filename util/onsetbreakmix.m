@@ -15,7 +15,7 @@ function onsetbreakmix
     %%
     dirinfo = dir(audiodir);
 
-    for i=1:numel(dirinfo)
+    for i=1:length(dirinfo)
         st = strsplit(dirinfo(i).name, '.');
         onsetfileinfo = dir(fullfile(annotdir, '**', strcat('onset_', st{1}, '.csv')));
         breakfileinfo = dir(fullfile(annotdir, '**', strcat('break_', st{1}, '.csv')));

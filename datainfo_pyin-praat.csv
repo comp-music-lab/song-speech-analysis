@@ -1,135 +1,143 @@
-dataname,annotationdir,audiodir,audioext,performer,type,language,sex,groupid,blinding
-Adam_Tierney_English_Traditional_SimpleGifts_20230129_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Adam Tierney,desc,English,M,1,FALSE
-Adam_Tierney_English_Traditional_SimpleGifts_20230129_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Adam Tierney,song,English,M,1,FALSE
-Aleksandar_Arabadjiev_Macedonian_Traditional_Jovano_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Aleksandar Arabadjiev,desc,Macedonian,M,2,TRUE
-Aleksandar_Arabadjiev_Macedonian_Traditional_Jovano_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Aleksandar Arabadjiev,song,Macedonian,M,2,TRUE
-Andrea_Ravignani_Italian_Traditional_Bella-Ciao_20221213_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Andrea Ravignani,desc,Italian,M,3,FALSE
-Andrea_Ravignani_Italian_Traditional_Bella-Ciao_20221213_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Andrea Ravignani,song,Italian,M,3,FALSE
-Brenda_Barbosa_Guarani_Traditional_Apykaxu_20230228_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Brenda Barbosa,desc,Guarani,F,61,FALSE
-Brenda_Barbosa_Guarani_Traditional_Apykaxu_20230228_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Brenda Barbosa,song,Guarani,F,61,FALSE
-Camila_Bruder_Portuguese_Traditional_A Canoa Virou_20221015_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Camila Bruder,desc,Portuguese,F,4,TRUE
-Camila_Bruder_Portuguese_Traditional_A Canoa Virou_20221015_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Camila Bruder,song,Portuguese,F,4,TRUE
-Christina_derNederlanden_English_Traditional_SleepNowRestNow_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Christina derNederlanden,desc,English,F,5,TRUE
-Christina_derNederlanden_English_Traditional_SleepNowRestNow_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Christina derNederlanden,song,English,F,5,TRUE
-Cristiano_Tsope_Ronga_Traditional_Hiya Tlanguela xinwanana xinga pswaliwa namuntla_20230131_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Cristiano Tsope,desc,Ronga,M,6,FALSE
-Cristiano_Tsope_Ronga_Traditional_Hiya Tlanguela xinwanana xinga pswaliwa namuntla_20230131_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Cristiano Tsope,song,Ronga,M,6,FALSE
-Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Daniel Fredriksson,desc,Swedish,M,7,TRUE
-Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Daniel Fredriksson,song,Swedish,M,7,TRUE
-Dhwani_Sadaphal_Hindi_Traditional_Saraswatee maateshwaree_20221006_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Dhwani Sadaphal,desc,Hindi,F,8,FALSE
-Dhwani_Sadaphal_Hindi_Traditional_Saraswatee maateshwaree_20221006_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Dhwani Sadaphal,song,Hindi,F,8,FALSE
-"Dilyana_Kurdova_Bulgarian_Traditional_Zarad tebe, mome, mori_20221014_desc",./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Dilyana Kurdova,desc,Bulgarian,F,9,TRUE
-"Dilyana_Kurdova_Bulgarian_Traditional_Zarad tebe, mome, mori_20221014_song",./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Dilyana Kurdova,song,Bulgarian,F,9,TRUE
-Emmanouil_Benetos_Greek_Traditional_Saranta Palikaria_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Emmanouil Benetos,desc,Greek,M,10,TRUE
-Emmanouil_Benetos_Greek_Traditional_Saranta Palikaria_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Emmanouil Benetos,song,Greek,M,10,TRUE
-Fang_Liu_Mandarin_Traditional_Farewell_20220218_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Fang Liu,desc,Mandarin,F,11,TRUE
-Fang_Liu_Mandarin_Traditional_Farewell_20220218_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Fang Liu,song,Mandarin,F,11,TRUE
-Felix_Haiduk_German_Traditional_DieGedankenSindFrei_20221012_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Felix Haiduk,desc,German,M,12,TRUE
-Felix_Haiduk_German_Traditional_DieGedankenSindFrei_20221012_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Felix Haiduk,song,German,M,12,TRUE
-Florence_Nweke_Yoruba_Traditional_Pat omo o_20230113_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Florence Nweke,desc,Yoruba,F,13,FALSE
-Florence_Nweke_Yoruba_Traditional_Pat omo o_20230113_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Florence Nweke,song,Yoruba,F,13,FALSE
-Gakuto_Chiba_Japanese_Traditional_Tsugaru-yosarebushi_20220210_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Gakuto Chiba,desc,Japanese,M,14,TRUE
-Gakuto_Chiba_Japanese_Traditional_Tsugaru-yosarebushi_20220210_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Gakuto Chiba,song,Japanese,M,14,TRUE
-Great_Lekakul_Thai_Traditional_Lao Doung Duan_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Great Lekakul,desc,Thai,M,15,TRUE
-Great_Lekakul_Thai_Traditional_Lao Doung Duan_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Great Lekakul,song,Thai,M,15,TRUE
-Ignacio_Soto_Spanish_Traditional_El Lobo Chilote_20221130_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ignacio Soto,desc,Spanish,M,16,FALSE
-Ignacio_Soto_Spanish_Traditional_El Lobo Chilote_20221130_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ignacio Soto,song,Spanish,M,16,FALSE
-Iputugede_Setiawan_Balinese_Traditional_Putriceningayu_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Iputugede Setiawan,desc,Balinese,M,17,TRUE
-Iputugede_Setiawan_Balinese_Traditional_Putriceningayu_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Iputugede Setiawan,song,Balinese,M,17,TRUE
-Javier_SilvaZurita_Chilean_Traditional_Song_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Javier SilvaZurita,desc,Chilean,M,18,TRUE
-Javier_SilvaZurita_Chilean_Traditional_Song_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Javier SilvaZurita,song,Chilean,M,18,TRUE
-John_McBride_English_Traditional_Arthur McBride_20220209_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,John McBride,desc,English,M,19,TRUE
-John_McBride_English_Traditional_Arthur McBride_20220209_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,John McBride,song,English,M,19,TRUE
-Juan_S-Gómez-Cañón_Spanish_Traditional_El pescador_20221003_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Juan S. Gómez,desc,Spanish,M,62,TRUE
-Juan_S-Gómez-Cañón_Spanish_Traditional_El pescador_20221003_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Juan S. Gómez,song,Spanish,M,62,TRUE
-Kayla_Kolff_Dutch_Traditional_Dikkertje Dap_20221017_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Kayla Kolff,desc,Dutch,F,63,TRUE
-Kayla_Kolff_Dutch_Traditional_Dikkertje Dap_20221017_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Kayla Kolff,song,Dutch,F,63,TRUE
-Latyr_Sy_Wolof_Traditional_Mbeuguel_20221021_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Latyr Sy,desc,Wolof,M,20,TRUE
-Latyr_Sy_Wolof_Traditional_Mbeuguel_20221021_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Latyr Sy,song,Wolof,M,20,TRUE
-Limor_Raviv_Hebrew_Traditional_YerushalayimShelZahav_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Limor Raviv,desc,Hebrew,F,21,TRUE
-Limor_Raviv_Hebrew_Traditional_YerushalayimShelZahav_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Limor Raviv,song,Hebrew,F,21,TRUE
-Manuel_Anglada-Tort_Catalan_Traditional_LaPresódeLleida_20221108_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Manuel Anglada-Tort,desc,Catalan,M,22,TRUE
-Manuel_Anglada-Tort_Catalan_Traditional_LaPresódeLleida_20221108_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Manuel Anglada-Tort,song,Catalan,M,22,TRUE
-Marco_Varella_Portuguese_Traditional_Suite do Pescador_20220928_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WMA,Marco Varella,desc,Portuguese,M,23,TRUE
-Marco_Varella_Portuguese_Traditional_Suite do Pescador_20220928_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WMA,Marco Varella,song,Portuguese,M,23,TRUE
-Marin_Naruse_Amamidialect_Traditional_Asabanabushi_20221010_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Marin Naruse,desc,Amamidialect,F,24,TRUE
-Marin_Naruse_Amamidialect_Traditional_Asabanabushi_20221010_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Marin Naruse,song,Amamidialect,F,24,TRUE
-Mark_Parselelo_Swahili_Traditional_Lala Mtoto Lala_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Mark Parselelo,desc,Swahili,M,25,TRUE
-Mark_Parselelo_Swahili_Traditional_Lala Mtoto Lala_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Mark Parselelo,song,Swahili,M,25,TRUE
-Mark_vanTongeren_Dutch_Traditional_Hoor De Wind waait_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WAV,Mark vanTongeren,desc,Dutch,M,26,TRUE
-Mark_vanTongeren_Dutch_Traditional_Hoor De Wind waait_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WAV,Mark vanTongeren,song,Dutch,M,26,TRUE
-Martin_Rocamora_Spanish_Traditional_Aquello_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Martin Rocamora,desc,Spanish,M,27,TRUE
-Martin_Rocamora_Spanish_Traditional_Aquello_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Martin Rocamora,song,Spanish,M,27,TRUE
-Meyha_Chhatwal_Punjabi_Traditional_BajreDaSitta_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Meyha Chhatwal,desc,Punjabi,F,28,TRUE
-Meyha_Chhatwal_Punjabi_Traditional_BajreDaSitta_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Meyha Chhatwal,song,Punjabi,F,28,TRUE
-Minyu_Zeng_HainanHua_Traditional_The Song of the Five-Fingers Mountain_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Minyu Zeng,desc,HainanHua,F,29,TRUE
-Minyu_Zeng_HainanHua_Traditional_The Song of the Five-Fingers Mountain_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Minyu Zeng,song,HainanHua,F,29,TRUE
-Neddiel_Muñoz_Williche_Traditional_Singing_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Neddiel Muñoz,desc,Williche,F,30,TRUE
-Neddiel_Muñoz_Williche_Traditional_Singing_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Neddiel Muñoz,song,Williche,F,30,TRUE
-Nerea_Bello_Euskara_Traditional_XoxoBeltza_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nerea Bello,desc,Euskara,F,31,TRUE
-Nerea_Bello_Euskara_Traditional_XoxoBeltza_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nerea Bello,song,Euskara,F,31,TRUE
-Niels_Hansen_Danish_Traditional_ISkovensDybeStilleRo_20221025_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Niels Hansen,desc,Danish,M,32,TRUE
-Niels_Hansen_Danish_Traditional_ISkovensDybeStilleRo_20221025_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Niels Hansen,song,Danish,M,32,TRUE
-Nori_Jacoby_Hebrew_Traditional_LailaLaila_20230203_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nori Jacoby,desc,Hebrew,M,33,FALSE
-Nori_Jacoby_Hebrew_Traditional_LailaLaila_20230203_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nori Jacoby,song,Hebrew,M,33,FALSE
-Nozuko_Nguqu_IsiXhosa_Traditional_Ulele_20221213_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nozuko Nguqu,desc,IsiXhosa,F,34,FALSE
-Nozuko_Nguqu_IsiXhosa_Traditional_Ulele_20221213_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nozuko Nguqu,song,IsiXhosa,F,34,FALSE
-Olcay_Muslu_Turkish_Traditional_Uzun Ince Bir Yoldayim_20221109_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Olcay Muslu,desc,Turkish,F,35,TRUE
-Olcay_Muslu_Turkish_Traditional_Uzun Ince Bir Yoldayim_20221109_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Olcay Muslu,song,Turkish,F,35,TRUE
-Olena_Shcherbakova_Ukrainian_Traditional_Podolyanochka_20221012_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Olena Shcherbakova,desc,Ukrainian,F,36,FALSE
-Olena_Shcherbakova_Ukrainian_Traditional_Podolyanochka_20221012_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Olena Shcherbakova,song,Ukrainian,F,36,FALSE
-Parimal_Sadaphal_Marathi_Traditional_Sukhakartaa_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Parimal Sadaphal,desc,Marathi,M,37,TRUE
-Parimal_Sadaphal_Marathi_Traditional_Sukhakartaa_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Parimal Sadaphal,song,Marathi,M,37,TRUE
-Patrick_Savage_English_Traditional_Scarborough Fair_20220208_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Patrick Savage,desc,English,M,38,TRUE
-Patrick_Savage_English_Traditional_Scarborough Fair_20220208_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Patrick Savage,song,English,M,38,TRUE
-Pauline_Larrouy-Maestri_French_Traditional_ClaireFontaine_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Pauline Larrouy-Maestri,desc,French,F,39,TRUE
-Pauline_Larrouy-Maestri_French_Traditional_ClaireFontaine_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Pauline Larrouy-Maestri,song,French,F,39,TRUE
-Peter_Pfordresher_English_Traditional_America-the-beautiful_20221030_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Peter Pfordresher,desc,English,M,40,FALSE
-Peter_Pfordresher_English_Traditional_America-the-beautiful_20221030_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Peter Pfordresher,song,English,M,40,FALSE
-Polina_Dessiatnitchenko_Azerbaijani_Traditional_Ay Lachin_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Polina Dessiatnitchenko,desc,Azerbaijani,F,41,TRUE
-Polina_Dessiatnitchenko_Azerbaijani_Traditional_Ay Lachin_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Polina Dessiatnitchenko,song,Azerbaijani,F,41,TRUE
-Polina_Proutskova_Russian_Traditional_Dusha moia pregreshnaia_20220301_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Polina Proutskova,desc,Russian,F,42,TRUE
-Polina_Proutskova_Russian_Traditional_Dusha moia pregreshnaia_20220301_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Polina Proutskova,song,Russian,F,42,TRUE
-Psyche_Loui_Cantonese_Traditional_ButterflyLovers_20220928_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Psyche Loui,desc,Cantonese,F,64,TRUE
-Psyche_Loui_Cantonese_Traditional_ButterflyLovers_20220928_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Psyche Loui,song,Cantonese,F,64,TRUE
-Rogederson_Natsitsabui_Rikbaktsa_Traditional_Jakara Wata_20230312_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Rogederson Natsitsabui,desc,Rikbaktsa,M,66,FALSE
-Rogederson_Natsitsabui_Rikbaktsa_Traditional_Jakara Wata_20230312_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Rogederson Natsitsabui,song,Rikbaktsa,M,66,FALSE
-Ryan_David_Urdu_Traditional_DilDilPakistan_20230201_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Ryan David,desc,Urdu,M,43,FALSE
-Ryan_David_Urdu_Traditional_DilDilPakistan_20230201_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Ryan David,song,Urdu,M,43,FALSE
-Rytis_Ambrazevičius_Lithuanian_Traditional_Sėjau rugelius_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Rytis Ambrazevičius,desc,Lithuanian,M,44,TRUE
-Rytis_Ambrazevičius_Lithuanian_Traditional_Sėjau rugelius_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Rytis Ambrazevičius,song,Lithuanian,M,44,TRUE
-SangBuem_Choo_Korean_Traditional_Arirang_20230215_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,SangBuem Choo,desc,Korean,M,45,FALSE
-SangBuem_Choo_Korean_Traditional_Arirang_20230215_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,SangBuem Choo,song,Korean,M,45,FALSE
-Shafagh_Hadavi_Farsi_Traditional_MahPishanoo_20230118_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shafagh Hadavi,desc,Farsi,F,46,FALSE
-Shafagh_Hadavi_Farsi_Traditional_MahPishanoo_20230118_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shafagh Hadavi,song,Farsi,F,46,FALSE
-Shahaboddin_Dabaghi-Varnosfaderani_Persian_Traditional_Morgh e Sahar_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Shahaboddin Dabaghi-Varnosfaderani,desc,Persian,M,47,TRUE
-Shahaboddin_Dabaghi-Varnosfaderani_Persian_Traditional_Morgh e Sahar_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Shahaboddin Dabaghi-Varnosfaderani,song,Persian,M,47,TRUE
-Shantala_Hegde_Kannada_Traditional_Moodala Maneya_20220214_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shantala Hegde,desc,Kannada,F,48,FALSE
-Shantala_Hegde_Kannada_Traditional_Moodala Maneya_20220214_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shantala Hegde,song,Kannada,F,48,FALSE
-Shinya_Fujii_Japanese_Traditional_Dekanshobushi_20220928_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shinya Fujii,desc,Japanese,M,49,TRUE
-Shinya_Fujii_Japanese_Traditional_Dekanshobushi_20220928_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shinya Fujii,song,Japanese,M,49,TRUE
-Su Zar Zar_ _Burmese_Traditional_Mya Man Giri_20230309_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Su Zar Zar,desc,Burmese,F,65,FALSE
-Su Zar Zar_ _Burmese_Traditional_Mya Man Giri_20230309_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Su Zar Zar,song,Burmese,F,65,FALSE
-Tadhg_מ Meachair_Gaeilge_Traditional_Éiníní_20230305_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tadhgמ Meachair,desc,Gaeilge,M,67,FALSE
-Tadhg_מ Meachair_Gaeilge_Traditional_Éiníní_20230305_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tadhgמ Meachair,song,Gaeilge,M,67,FALSE
-Tecumseh_Fitch_English_Traditional_RovinGambler_20221210_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tecumseh Fitch,desc,English,M,50,FALSE
-Tecumseh_Fitch_English_Traditional_RovinGambler_20221210_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tecumseh Fitch,song,English,M,50,FALSE
-Teona_Lomsadze_Georgian_Traditional_Nana_20221109_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Teona Lomsadze,desc,Georgian,F,51,TRUE
-Teona_Lomsadze_Georgian_Traditional_Nana_20221109_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Teona Lomsadze,song,Georgian,F,51,TRUE
-Tutushamum_Teyxokawa_Puri_Traditional_Petara_20221020_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tutushamum Teyxokawa,desc,Puri,M,52,TRUE
-Tutushamum_Teyxokawa_Puri_Traditional_Petara_20221020_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tutushamum Teyxokawa,song,Puri,M,52,TRUE
-Ulvhild_Faeroevik_Norwegian_Traditional_Nordmannen_20230119_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ulvhild Faeroevik,desc,Norwegian,F,53,FALSE
-Ulvhild_Faeroevik_Norwegian_Traditional_Nordmannen_20230119_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ulvhild Faeroevik,song,Norwegian,F,53,FALSE
-Urise_Kuikuro_Kuikuro_Traditional_Toló_20221020_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Urise Kuikuro,desc,Kuikuro,M,54,TRUE
-Urise_Kuikuro_Kuikuro_Traditional_Toló_20221020_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Urise Kuikuro,song,Kuikuro,M,54,TRUE
-Utae_Ehara_Ainu_Traditional_Itasan_20221202_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Utae Ehara,desc,Ainu,F,55,FALSE
-Utae_Ehara_Ainu_Traditional_Itasan_20221202_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Utae Ehara,song,Ainu,F,55,FALSE
-VanessaNina_Borsan_Slovenian_Traditional_EnHribčekBomKupil_20221027_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,VanessaNina Borsan,desc,Slovenian,F,56,TRUE
-VanessaNina_Borsan_Slovenian_Traditional_EnHribčekBomKupil_20221027_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,VanessaNina Borsan,song,Slovenian,F,56,TRUE
-Violeta_Magalhaes_Portuguese_Traditional_O milho da nossa terra_20221024_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Violeta Magalhaes,desc,Portuguese,F,57,TRUE
-Violeta_Magalhaes_Portuguese_Traditional_O milho da nossa terra_20221024_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Violeta Magalhaes,song,Portuguese,F,57,TRUE
-Wojciech_Krzyżanowski_Polish_Traditional_Wlazł Kotek Na Płotek_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Wojciech Krzyżanowski,desc,Polish,M,58,TRUE
-Wojciech_Krzyżanowski_Polish_Traditional_Wlazł Kotek Na Płotek_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Wojciech Krzyżanowski,song,Polish,M,58,TRUE
-Yannick_Jadoul_DutchFlemish_Traditional_VandaagIs'tSinteMaarten_20221026_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Yannick Jadoul,desc,DutchFlemish,M,59,TRUE
-Yannick_Jadoul_DutchFlemish_Traditional_VandaagIs'tSinteMaarten_20221026_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Yannick Jadoul,song,DutchFlemish,M,59,TRUE
-Yuto_Ozaki_Japanese_Traditional_Omori-Jinku_20220701_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Yuto Ozaki,desc,Japanese,M,60,TRUE
-Yuto_Ozaki_Japanese_Traditional_Omori-Jinku_20220701_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Yuto Ozaki,song,Japanese,M,60,TRUE
+dataname,annotationdir,audiodir,audioext,performer,type,language,sex,groupid,blinding,melodic
+Adam_Tierney_English_Traditional_SimpleGifts_20230129_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Adam Tierney,desc,English,M,1,FALSE,n/a
+Adam_Tierney_English_Traditional_SimpleGifts_20230129_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Adam Tierney,song,English,M,1,FALSE,n/a
+Adwoa_Arhine_Fante_Traditional_Yɛyɛ Eguafo_20230421_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Adwoa Arhine,desc,Fante,F,69,FALSE,n/a
+Adwoa_Arhine_Fante_Traditional_Yɛyɛ Eguafo_20230421_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Adwoa Arhine,song,Fante,F,69,FALSE,n/a
+Aleksandar_Arabadjiev_Macedonian_Traditional_Jovano_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Aleksandar Arabadjiev,desc,Macedonian,M,2,TRUE,n/a
+Aleksandar_Arabadjiev_Macedonian_Traditional_Jovano_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Aleksandar Arabadjiev,song,Macedonian,M,2,TRUE,n/a
+Andrea_Ravignani_Italian_Traditional_Bella-Ciao_20221213_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Andrea Ravignani,desc,Italian,M,3,FALSE,n/a
+Andrea_Ravignani_Italian_Traditional_Bella-Ciao_20221213_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Andrea Ravignani,song,Italian,M,3,FALSE,n/a
+Brenda_Barbosa_Guarani_Traditional_Apykaxu_20230228_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Brenda Barbosa,desc,Guarani,F,61,FALSE,n/a
+Brenda_Barbosa_Guarani_Traditional_Apykaxu_20230228_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Brenda Barbosa,song,Guarani,F,61,FALSE,n/a
+Camila_Bruder_Portuguese_Traditional_A Canoa Virou_20221015_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Camila Bruder,desc,Portuguese,F,4,TRUE,n/a
+Camila_Bruder_Portuguese_Traditional_A Canoa Virou_20221015_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Camila Bruder,song,Portuguese,F,4,TRUE,n/a
+Christina_derNederlanden_English_Traditional_SleepNowRestNow_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Christina derNederlanden,desc,English,F,5,TRUE,n/a
+Christina_derNederlanden_English_Traditional_SleepNowRestNow_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Christina derNederlanden,song,English,F,5,TRUE,n/a
+Cristiano_Tsope_Ronga_Traditional_Hiya Tlanguela xinwanana xinga pswaliwa namuntla_20230131_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Cristiano Tsope,desc,Ronga,M,6,FALSE,n/a
+Cristiano_Tsope_Ronga_Traditional_Hiya Tlanguela xinwanana xinga pswaliwa namuntla_20230131_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Cristiano Tsope,song,Ronga,M,6,FALSE,n/a
+Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Daniel Fredriksson,desc,Swedish,M,7,TRUE,n/a
+Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Daniel Fredriksson,song,Swedish,M,7,TRUE,n/a
+Dhwani_Sadaphal_Hindi_Traditional_Saraswatee maateshwaree_20221006_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Dhwani Sadaphal,desc,Hindi,F,8,FALSE,n/a
+Dhwani_Sadaphal_Hindi_Traditional_Saraswatee maateshwaree_20221006_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Dhwani Sadaphal,song,Hindi,F,8,FALSE,n/a
+"Dilyana_Kurdova_Bulgarian_Traditional_Zarad tebe, mome, mori_20221014_desc",./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Dilyana Kurdova,desc,Bulgarian,F,9,TRUE,n/a
+"Dilyana_Kurdova_Bulgarian_Traditional_Zarad tebe, mome, mori_20221014_song",./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Dilyana Kurdova,song,Bulgarian,F,9,TRUE,n/a
+Emmanouil_Benetos_Greek_Traditional_Saranta Palikaria_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Emmanouil Benetos,desc,Greek,M,10,TRUE,n/a
+Emmanouil_Benetos_Greek_Traditional_Saranta Palikaria_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Emmanouil Benetos,song,Greek,M,10,TRUE,n/a
+Fang_Liu_Mandarin_Traditional_Farewell_20220218_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Fang Liu,desc,Mandarin,F,11,TRUE,n/a
+Fang_Liu_Mandarin_Traditional_Farewell_20220218_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Fang Liu,song,Mandarin,F,11,TRUE,n/a
+Felix_Haiduk_German_Traditional_DieGedankenSindFrei_20221012_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Felix Haiduk,desc,German,M,12,TRUE,n/a
+Felix_Haiduk_German_Traditional_DieGedankenSindFrei_20221012_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Felix Haiduk,song,German,M,12,TRUE,n/a
+Florence_Nweke_Yoruba_Traditional_Pat omo o_20230113_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Florence Nweke,desc,Yoruba,F,13,FALSE,n/a
+Florence_Nweke_Yoruba_Traditional_Pat omo o_20230113_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Florence Nweke,song,Yoruba,F,13,FALSE,n/a
+Gakuto_Chiba_Japanese_Traditional_Tsugaru-yosarebushi_20220210_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Gakuto Chiba,desc,Japanese,M,14,TRUE,n/a
+Gakuto_Chiba_Japanese_Traditional_Tsugaru-yosarebushi_20220210_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Gakuto Chiba,song,Japanese,M,14,TRUE,n/a
+Great_Lekakul_Thai_Traditional_Lao Doung Duan_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Great Lekakul,desc,Thai,M,15,TRUE,n/a
+Great_Lekakul_Thai_Traditional_Lao Doung Duan_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Great Lekakul,song,Thai,M,15,TRUE,n/a
+Ignacio_Soto_Spanish_Traditional_El Lobo Chilote_20221130_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ignacio Soto,desc,Spanish,M,16,FALSE,n/a
+Ignacio_Soto_Spanish_Traditional_El Lobo Chilote_20221130_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ignacio Soto,song,Spanish,M,16,FALSE,n/a
+Iputugede_Setiawan_Balinese_Traditional_Putriceningayu_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Iputugede Setiawan,desc,Balinese,M,17,TRUE,n/a
+Iputugede_Setiawan_Balinese_Traditional_Putriceningayu_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Iputugede Setiawan,song,Balinese,M,17,TRUE,n/a
+Jakelin_Troy_Ngarigu_Traditional_Gundji gawalgu yuri_20230421_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Jakelin Troy,desc,Ngarigu,F,71,FALSE,n/a
+Jakelin_Troy_Ngarigu_Traditional_Gundji gawalgu yuri_20230421_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Jakelin Troy,song,Ngarigu,F,71,FALSE,n/a
+Javier_SilvaZurita_Chilean_Traditional_Song_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Javier SilvaZurita,desc,Chilean,M,18,TRUE,n/a
+Javier_SilvaZurita_Chilean_Traditional_Song_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Javier SilvaZurita,song,Chilean,M,18,TRUE,n/a
+Jehoshaphat_Philip Sarbah_Twi_Traditional_daa na se_20230327_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Jehoshaphat Philip Sarbah,desc,Twi,M,68,FALSE,n/a
+Jehoshaphat_Philip Sarbah_Twi_Traditional_daa na se_20230327_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Jehoshaphat Philip Sarbah,song,Twi,M,68,FALSE,n/a
+John_McBride_English_Traditional_Arthur McBride_20220209_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,John McBride,desc,English,M,19,TRUE,n/a
+John_McBride_English_Traditional_Arthur McBride_20220209_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,John McBride,song,English,M,19,TRUE,n/a
+Juan_S-Gómez-Cañón_Spanish_Traditional_El pescador_20221003_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Juan S. Gómez,desc,Spanish,M,62,TRUE,n/a
+Juan_S-Gómez-Cañón_Spanish_Traditional_El pescador_20221003_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Juan S. Gómez,song,Spanish,M,62,TRUE,n/a
+Kayla_Kolff_Dutch_Traditional_Dikkertje Dap_20221017_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Kayla Kolff,desc,Dutch,F,63,TRUE,n/a
+Kayla_Kolff_Dutch_Traditional_Dikkertje Dap_20221017_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Kayla Kolff,song,Dutch,F,63,TRUE,n/a
+Latyr_Sy_Wolof_Traditional_Mbeuguel_20221021_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Latyr Sy,desc,Wolof,M,20,TRUE,n/a
+Latyr_Sy_Wolof_Traditional_Mbeuguel_20221021_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Latyr Sy,song,Wolof,M,20,TRUE,n/a
+Limor_Raviv_Hebrew_Traditional_YerushalayimShelZahav_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Limor Raviv,desc,Hebrew,F,21,TRUE,n/a
+Limor_Raviv_Hebrew_Traditional_YerushalayimShelZahav_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Limor Raviv,song,Hebrew,F,21,TRUE,n/a
+Manuel_Anglada-Tort_Catalan_Traditional_LaPresódeLleida_20221108_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Manuel Anglada-Tort,desc,Catalan,M,22,TRUE,n/a
+Manuel_Anglada-Tort_Catalan_Traditional_LaPresódeLleida_20221108_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Manuel Anglada-Tort,song,Catalan,M,22,TRUE,n/a
+Marco_Varella_Portuguese_Traditional_Suite do Pescador_20220928_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WMA,Marco Varella,desc,Portuguese,M,23,TRUE,n/a
+Marco_Varella_Portuguese_Traditional_Suite do Pescador_20220928_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WMA,Marco Varella,song,Portuguese,M,23,TRUE,n/a
+Marin_Naruse_Amamidialect_Traditional_Asabanabushi_20221010_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Marin Naruse,desc,Amamidialect,F,24,TRUE,n/a
+Marin_Naruse_Amamidialect_Traditional_Asabanabushi_20221010_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Marin Naruse,song,Amamidialect,F,24,TRUE,n/a
+Mark_Parselelo_Swahili_Traditional_Lala Mtoto Lala_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Mark Parselelo,desc,Swahili,M,25,TRUE,n/a
+Mark_Parselelo_Swahili_Traditional_Lala Mtoto Lala_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Mark Parselelo,song,Swahili,M,25,TRUE,n/a
+Mark_vanTongeren_Dutch_Traditional_Hoor De Wind waait_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WAV,Mark vanTongeren,desc,Dutch,M,26,TRUE,n/a
+Mark_vanTongeren_Dutch_Traditional_Hoor De Wind waait_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,WAV,Mark vanTongeren,song,Dutch,M,26,TRUE,n/a
+Martin_Rocamora_Spanish_Traditional_Aquello_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Martin Rocamora,desc,Spanish,M,27,TRUE,n/a
+Martin_Rocamora_Spanish_Traditional_Aquello_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Martin Rocamora,song,Spanish,M,27,TRUE,n/a
+Meyha_Chhatwal_Punjabi_Traditional_BajreDaSitta_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Meyha Chhatwal,desc,Punjabi,F,28,TRUE,n/a
+Meyha_Chhatwal_Punjabi_Traditional_BajreDaSitta_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Meyha Chhatwal,song,Punjabi,F,28,TRUE,n/a
+Minyu_Zeng_HainanHua_Traditional_The Song of the Five-Fingers Mountain_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Minyu Zeng,desc,HainanHua,F,29,TRUE,n/a
+Minyu_Zeng_HainanHua_Traditional_The Song of the Five-Fingers Mountain_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Minyu Zeng,song,HainanHua,F,29,TRUE,n/a
+Neddiel_Muñoz_Williche_Traditional_Singing_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Neddiel Muñoz,desc,Williche,F,30,TRUE,n/a
+Neddiel_Muñoz_Williche_Traditional_Singing_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Neddiel Muñoz,song,Williche,F,30,TRUE,n/a
+Nerea_Bello_Euskara_Traditional_XoxoBeltza_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nerea Bello,desc,Euskara,F,31,TRUE,n/a
+Nerea_Bello_Euskara_Traditional_XoxoBeltza_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nerea Bello,song,Euskara,F,31,TRUE,n/a
+Niels_Hansen_Danish_Traditional_ISkovensDybeStilleRo_20221025_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Niels Hansen,desc,Danish,M,32,TRUE,n/a
+Niels_Hansen_Danish_Traditional_ISkovensDybeStilleRo_20221025_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Niels Hansen,song,Danish,M,32,TRUE,n/a
+Nori_Jacoby_Hebrew_Traditional_LailaLaila_20230203_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nori Jacoby,desc,Hebrew,M,33,FALSE,n/a
+Nori_Jacoby_Hebrew_Traditional_LailaLaila_20230203_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nori Jacoby,song,Hebrew,M,33,FALSE,n/a
+Nozuko_Nguqu_IsiXhosa_Traditional_Ulele_20221213_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nozuko Nguqu,desc,IsiXhosa,F,34,FALSE,n/a
+Nozuko_Nguqu_IsiXhosa_Traditional_Ulele_20221213_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Nozuko Nguqu,song,IsiXhosa,F,34,FALSE,n/a
+Olcay_Muslu_Turkish_Traditional_Uzun Ince Bir Yoldayim_20221109_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Olcay Muslu,desc,Turkish,F,35,TRUE,n/a
+Olcay_Muslu_Turkish_Traditional_Uzun Ince Bir Yoldayim_20221109_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Olcay Muslu,song,Turkish,F,35,TRUE,n/a
+Olena_Shcherbakova_Ukrainian_Traditional_Podolyanochka_20221012_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Olena Shcherbakova,desc,Ukrainian,F,36,FALSE,n/a
+Olena_Shcherbakova_Ukrainian_Traditional_Podolyanochka_20221012_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Olena Shcherbakova,song,Ukrainian,F,36,FALSE,n/a
+Parimal_Sadaphal_Marathi_Traditional_Sukhakartaa_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Parimal Sadaphal,desc,Marathi,M,37,TRUE,n/a
+Parimal_Sadaphal_Marathi_Traditional_Sukhakartaa_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Parimal Sadaphal,song,Marathi,M,37,TRUE,n/a
+Patrick_Savage_English_Traditional_Scarborough Fair_20220208_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Patrick Savage,desc,English,M,38,TRUE,n/a
+Patrick_Savage_English_Traditional_Scarborough Fair_20220208_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Patrick Savage,song,English,M,38,TRUE,n/a
+Pauline_Larrouy-Maestri_French_Traditional_ClaireFontaine_20221009_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Pauline Larrouy-Maestri,desc,French,F,39,TRUE,n/a
+Pauline_Larrouy-Maestri_French_Traditional_ClaireFontaine_20221009_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Pauline Larrouy-Maestri,song,French,F,39,TRUE,n/a
+Peter_Pfordresher_English_Traditional_America-the-beautiful_20221030_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Peter Pfordresher,desc,English,M,40,FALSE,n/a
+Peter_Pfordresher_English_Traditional_America-the-beautiful_20221030_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Peter Pfordresher,song,English,M,40,FALSE,n/a
+Polina_Dessiatnitchenko_Azerbaijani_Traditional_Ay Lachin_20221023_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Polina Dessiatnitchenko,desc,Azerbaijani,F,41,TRUE,n/a
+Polina_Dessiatnitchenko_Azerbaijani_Traditional_Ay Lachin_20221023_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Polina Dessiatnitchenko,song,Azerbaijani,F,41,TRUE,n/a
+Polina_Proutskova_Russian_Traditional_Dusha moia pregreshnaia_20220301_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Polina Proutskova,desc,Russian,F,42,TRUE,n/a
+Polina_Proutskova_Russian_Traditional_Dusha moia pregreshnaia_20220301_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Polina Proutskova,song,Russian,F,42,TRUE,n/a
+Psyche_Loui_Cantonese_Traditional_ButterflyLovers_20220928_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Psyche Loui,desc,Cantonese,F,64,TRUE,n/a
+Psyche_Loui_Cantonese_Traditional_ButterflyLovers_20220928_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Psyche Loui,song,Cantonese,F,64,TRUE,n/a
+Rogederson_Natsitsabui_Rikbaktsa_Traditional_Jakara Wata_20230312_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Rogederson Natsitsabui,desc,Rikbaktsa,M,66,FALSE,n/a
+Rogederson_Natsitsabui_Rikbaktsa_Traditional_Jakara Wata_20230312_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,aac,Rogederson Natsitsabui,song,Rikbaktsa,M,66,FALSE,n/a
+Ryan_David_Urdu_Traditional_DilDilPakistan_20230201_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Ryan David,desc,Urdu,M,43,FALSE,n/a
+Ryan_David_Urdu_Traditional_DilDilPakistan_20230201_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp3,Ryan David,song,Urdu,M,43,FALSE,n/a
+Rytis_Ambrazevičius_Lithuanian_Traditional_Sėjau rugelius_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Rytis Ambrazevičius,desc,Lithuanian,M,44,TRUE,n/a
+Rytis_Ambrazevičius_Lithuanian_Traditional_Sėjau rugelius_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Rytis Ambrazevičius,song,Lithuanian,M,44,TRUE,n/a
+SangBuem_Choo_Korean_Traditional_Arirang_20230215_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,SangBuem Choo,desc,Korean,M,45,FALSE,n/a
+SangBuem_Choo_Korean_Traditional_Arirang_20230215_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,SangBuem Choo,song,Korean,M,45,FALSE,n/a
+Shafagh_Hadavi_Farsi_Traditional_MahPishanoo_20230118_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shafagh Hadavi,desc,Farsi,F,46,FALSE,n/a
+Shafagh_Hadavi_Farsi_Traditional_MahPishanoo_20230118_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shafagh Hadavi,song,Farsi,F,46,FALSE,n/a
+Shahaboddin_Dabaghi-Varnosfaderani_Persian_Traditional_Morgh e Sahar_20221018_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Shahaboddin Dabaghi-Varnosfaderani,desc,Persian,M,47,TRUE,n/a
+Shahaboddin_Dabaghi-Varnosfaderani_Persian_Traditional_Morgh e Sahar_20221018_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Shahaboddin Dabaghi-Varnosfaderani,song,Persian,M,47,TRUE,n/a
+Shantala_Hegde_Kannada_Traditional_Moodala Maneya_20220214_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shantala Hegde,desc,Kannada,F,48,FALSE,n/a
+Shantala_Hegde_Kannada_Traditional_Moodala Maneya_20220214_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shantala Hegde,song,Kannada,F,48,FALSE,n/a
+Shinya_Fujii_Japanese_Traditional_Dekanshobushi_20220928_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shinya Fujii,desc,Japanese,M,49,TRUE,n/a
+Shinya_Fujii_Japanese_Traditional_Dekanshobushi_20220928_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Shinya Fujii,song,Japanese,M,49,TRUE,n/a
+Su Zar Zar_ _Burmese_Traditional_Mya Man Giri_20230309_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Su Zar Zar,desc,Burmese,F,65,FALSE,n/a
+Su Zar Zar_ _Burmese_Traditional_Mya Man Giri_20230309_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Su Zar Zar,song,Burmese,F,65,FALSE,n/a
+Suzanne_Purdy_Te Reo Māori_Traditional_Pōkarekare ana_20230417_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Suzanne Purdy,desc,Te Reo Māori,F,70,FALSE,n/a
+Suzanne_Purdy_Te Reo Māori_Traditional_Pōkarekare ana_20230417_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Suzanne Purdy,song,Te Reo Māori,F,70,FALSE,n/a
+Tadhg_מ Meachair_Gaeilge_Traditional_Éiníní_20230305_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tadhgמ Meachair,desc,Gaeilge,M,67,FALSE,n/a
+Tadhg_מ Meachair_Gaeilge_Traditional_Éiníní_20230305_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tadhgמ Meachair,song,Gaeilge,M,67,FALSE,n/a
+Tecumseh_Fitch_English_Traditional_RovinGambler_20221210_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tecumseh Fitch,desc,English,M,50,FALSE,n/a
+Tecumseh_Fitch_English_Traditional_RovinGambler_20221210_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tecumseh Fitch,song,English,M,50,FALSE,n/a
+Teona_Lomsadze_Georgian_Traditional_Nana_20221109_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Teona Lomsadze,desc,Georgian,F,51,TRUE,n/a
+Teona_Lomsadze_Georgian_Traditional_Nana_20221109_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mov,Teona Lomsadze,song,Georgian,F,51,TRUE,n/a
+Tutushamum_Teyxokawa_Puri_Traditional_Petara_20221020_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tutushamum Teyxokawa,desc,Puri,M,52,TRUE,n/a
+Tutushamum_Teyxokawa_Puri_Traditional_Petara_20221020_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Tutushamum Teyxokawa,song,Puri,M,52,TRUE,n/a
+Ulvhild_Faeroevik_Norwegian_Traditional_Nordmannen_20230119_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ulvhild Faeroevik,desc,Norwegian,F,53,FALSE,n/a
+Ulvhild_Faeroevik_Norwegian_Traditional_Nordmannen_20230119_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Ulvhild Faeroevik,song,Norwegian,F,53,FALSE,n/a
+Urise_Kuikuro_Kuikuro_Traditional_Toló_20221020_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Urise Kuikuro,desc,Kuikuro,M,54,TRUE,n/a
+Urise_Kuikuro_Kuikuro_Traditional_Toló_20221020_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Urise Kuikuro,song,Kuikuro,M,54,TRUE,n/a
+Utae_Ehara_Ainu_Traditional_Itasan_20221202_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Utae Ehara,desc,Ainu,F,55,FALSE,n/a
+Utae_Ehara_Ainu_Traditional_Itasan_20221202_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Utae Ehara,song,Ainu,F,55,FALSE,n/a
+VanessaNina_Borsan_Slovenian_Traditional_EnHribčekBomKupil_20221027_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,VanessaNina Borsan,desc,Slovenian,F,56,TRUE,n/a
+VanessaNina_Borsan_Slovenian_Traditional_EnHribčekBomKupil_20221027_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,VanessaNina Borsan,song,Slovenian,F,56,TRUE,n/a
+Violeta_Magalhaes_Portuguese_Traditional_O milho da nossa terra_20221024_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Violeta Magalhaes,desc,Portuguese,F,57,TRUE,n/a
+Violeta_Magalhaes_Portuguese_Traditional_O milho da nossa terra_20221024_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Violeta Magalhaes,song,Portuguese,F,57,TRUE,n/a
+Wojciech_Krzyżanowski_Polish_Traditional_Wlazł Kotek Na Płotek_20221022_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Wojciech Krzyżanowski,desc,Polish,M,58,TRUE,n/a
+Wojciech_Krzyżanowski_Polish_Traditional_Wlazł Kotek Na Płotek_20221022_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,MOV,Wojciech Krzyżanowski,song,Polish,M,58,TRUE,n/a
+Yannick_Jadoul_DutchFlemish_Traditional_VandaagIs'tSinteMaarten_20221026_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Yannick Jadoul,desc,DutchFlemish,M,59,TRUE,n/a
+Yannick_Jadoul_DutchFlemish_Traditional_VandaagIs'tSinteMaarten_20221026_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,wav,Yannick Jadoul,song,DutchFlemish,M,59,TRUE,n/a
+Yuto_Ozaki_Japanese_Traditional_Omori-Jinku_20220701_desc,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Yuto Ozaki,desc,Japanese,M,60,TRUE,n/a
+Yuto_Ozaki_Japanese_Traditional_Omori-Jinku_20220701_song,./data/Stage 2 Annotation (pYIN-Praat)/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Yuto Ozaki,song,Japanese,M,60,TRUE,n/a
