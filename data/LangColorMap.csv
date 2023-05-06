@@ -1,5 +1,6 @@
 lang_filename,family,rgb
 Hebrew,Afro-Asiatic,F8766D
+Tunisian,Afro-Asiatic,F8766D
 Ainu,Ainu,EC823C
 Williche,Araucanian,DD8D00
 Fante,Atlantic-Congo,CA9700
@@ -48,6 +49,7 @@ Japanese,Japonic,00C098
 Georgian,Kartvelian,00C0B7
 Korean,Koreanic,00BDD1
 Luo,Nilotic,00B7E8
+Dholuo,Nilotic,00B7E8
 Rikbaktsa,Nuclear-Macro-Je,00AEFA
 Ngarigu,Pama-Nyungan,3DA1FF
 Matis,Pano-Tacanan,8F91FF

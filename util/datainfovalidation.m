@@ -1,6 +1,24 @@
 function datainfovalidation
     %%
+    %%{
     datainfofile = '../datainfo.csv';
+    K = 4;
+    datatypelist = {'desc', 'inst', 'recit', 'song'};
+    onsetavailable = true;
+    %}
+    %{
+    datainfofile = '../datainfo_pyin-Praat.csv';
+    K = 2;
+    datatypelist = {'desc', 'song'};
+    onsetavailable = true;
+    %}
+    %{
+    datainfofile = '../datainfo_pyin.csv';
+    K = 2;
+    datatypelist = {'desc', 'song'};
+    onsetavailable = false;
+    %}
+
     T = readtable(datainfofile);
 
     %% validation 0
@@ -12,23 +30,25 @@ function datainfovalidation
     groupid = unique(T.groupid);
     for i=1:numel(groupid)
         idx = T.groupid == groupid(i);
-        assert(sum(idx) == 4, 'Check group id');
+        assert(sum(idx) == K, 'Check group id');
 
         dataname = T.dataname(idx);
         datatype = cellfun(@(s) h_strsplit(s), dataname, 'UniformOutput', false);
 
         %% validation 1
-        assert(isempty(setdiff(datatype, {'desc', 'inst', 'recit', 'song'})), 'Check dataname datatype');
+        assert(isempty(setdiff(datatype, datatypelist)), 'Check dataname datatype');
 
         %% validation 2
         assert(all(strcmp(datatype, T.type(idx))), 'Check datatype');
 
         %% validation 3
-        onsetfilepath = strcat('.', T.annotationdir(idx), 'onset_', dataname, '.csv');
-        assert(all(isfile(onsetfilepath)), 'Check onset file path');
-
-        breakfilepath = strcat('.', T.annotationdir(idx), 'break_', dataname, '.csv');
-        assert(all(isfile(breakfilepath)), 'Check break file path');
+        if onsetavailable
+            onsetfilepath = strcat('.', T.annotationdir(idx), 'onset_', dataname, '.csv');
+            assert(all(isfile(onsetfilepath)), 'Check onset file path');
+    
+            breakfilepath = strcat('.', T.annotationdir(idx), 'break_', dataname, '.csv');
+            assert(all(isfile(breakfilepath)), 'Check break file path');
+        end
 
         audiofilepath = strcat(T.audiodir(idx), dataname, '.', T.audioext(idx));
         assert(all(isfile(audiofilepath)),  ['Check audio file path: ', num2str(i), ' - ', T.performer{idx(1)}]);
@@ -49,7 +69,7 @@ function datainfovalidation
     for i=1:numel(lang)
         idx = strcmp(lang{i}, M.lang_filename);
         assert(sum(idx) == 1, 'Check language-color mapping');
-        disp(M(idx, :));
+        fprintf('%s, %s\n', M.lang_filename{idx}, M.family{idx});
     end
 end
 

@@ -1,7 +1,14 @@
-function analysis_npvi(datainfofile, outputdir, duration)
+function analysis_npvi(datainfofile, outputdir, duration, typeid)
     %%
-    typelist = {'song', 'desc'};
-
+    switch typeid
+        case 1
+            typelist = {'song', 'desc'};
+            fileid = 'song-desc';
+        case 2
+            typelist = {'song', 'inst'};
+            fileid = 'song-inst';
+    end
+    
     %%
     datainfo = readtable(datainfofile);
     datainfo = datainfo(strcmp(datainfo.type, typelist{1}) | strcmp(datainfo.type, typelist{2}), :);
@@ -33,5 +40,6 @@ function analysis_npvi(datainfofile, outputdir, duration)
     %%
     T = table(nPVI, datainfo.type, datainfo.language, datainfo.groupid,...
         'VariableNames', {'npvi', 'type', 'lang', 'groupid'});
-    writetable(T, strcat(outputdir, 'npvi_', num2str(duration, '%d'), 'sec.csv'));
+
+    writetable(T, strcat(outputdir, 'npvi_', num2str(duration, '%d'), 'sec_', fileid, '.csv'));
 end

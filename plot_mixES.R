@@ -81,6 +81,7 @@ for (i in 1:length(FEATURESET)) {
     geom_point(data = meaninfo_i, aes(x = d, y = analysis), shape = 23, size = 3, fill = "#d7003a", position = position_nudge(y = 0.25), show.legend = FALSE)
   
   g <- g + guides(fill = "none", colour = "none") +
+    theme_gray() +
     theme(axis.title.y = element_blank()) +
     xlab("Translated Cohen's D") + 
     ggtitle(paste(FIGLABEL[i], FEATURENAMESET[i], sep = "")) +

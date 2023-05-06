@@ -1,3 +1,20 @@
+## Exploratory analysis - nPVI
+rm(list = ls())
+INPUTDIR <- "./output/analysis/Stage2/"
+OUTPUTDIR <- "./output/figure/Stage2/"
+durationID <- "20sec"
+
+typeid <- "song-desc"
+source("plot_nPVI.R")
+
+typeid <- "song-inst"
+source("plot_nPVI.R")
+
+## Exploratory analysis - IRR
+rm(list = ls())
+OUTPUTDIR <-  "./output/figure/Stage2/"
+source("plot_irr.R")
+
 ## Exploratory - mean feature values [Ours]
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
@@ -32,31 +49,6 @@ INPUTDIR <- "./output/analysis/Stage2/"
 OUTPUTDIR <- "./output/figure/Stage2/"
 durationID <- "20sec"
 source("plot_metaCIs.R")
-
-## Exploratory analysis - nPVI
-rm(list = ls())
-INPUTDIR <- "./output/analysis/Stage2/"
-OUTPUTDIR <- "./output/figure/Stage2/"
-durationID <- "20sec"
-source("plot_nPVI.R")
-
-## Mean feature values (Ours, all recording types)
-rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/'
-OUTPUTDIR <- './output/figure/Stage2/'
-fullfeature <- FALSE
-exploratory <- TRUE
-featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
-source("plot_featurestat.R")
-
-## Mean feature values (Hilton)
-rm(list = ls())
-INPUTDIR <- './output/analysis/Stage2/Hilton/'
-OUTPUTDIR <- './output/figure/Stage2/Hilton/'
-fullfeature <- FALSE
-exploratory <- FALSE
-featurestatfilepath = paste(INPUTDIR, 'featurestat_Infsec.csv', sep = '')
-source("plot_featurestat.R")
 
 ##
 rm(list = ls())

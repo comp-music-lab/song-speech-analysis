@@ -14,9 +14,6 @@ DATATYPE <- c("desc", "song")
 DATATYPELABEL <- c("Spoken description", "Song")
 SEXLABEL <- c("Female", "Male")
 SHAPETYPE <- c(16, 17)
-YL <- list(
-  c(-3500, 250), c(-8000, 0), c(0, 4000)
-)
 
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
 LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
@@ -30,6 +27,12 @@ for (i in 1:length(INPUTDIR)) {
 }
 
 ##
+YL <- list(
+  c(min(statsinfo$mean[statsinfo$feature == "f0"]), max(statsinfo$mean[statsinfo$feature == "f0"])),
+  c(min(statsinfo$mean[statsinfo$feature == "-|Δf0|"]), 0),
+  c(0, max(statsinfo$mean[statsinfo$feature == "Spectral centroid"]))
+)
+
 SEX <- sort(unique(statsinfo$sex))
 
 for (j in 1:length(FEATURESET)) {
@@ -42,6 +45,7 @@ for (j in 1:length(FEATURESET)) {
         geom_point(position = position_jitter(width = 0.05, height = 0), shape = SHAPETYPE[i]) + 
         ggtitle(paste(DATATYPELABEL[k], " (", SEXLABEL[i], ")", sep = "")) +
         ylab(paste(FEATURESETLABEL[j], "\n", FEATUREUNITDESC[j], sep = "")) +
+        theme_gray() +
         theme(axis.title.x = element_blank(), plot.title = element_text(face = "bold", hjust = 0.5)) + 
         guides(color = "none", shape = "none") + 
         ylim(YL[[j]]) +

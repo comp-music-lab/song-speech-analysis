@@ -62,6 +62,7 @@ for (i in 1:length(featureset)) {
       xlab("") +
       ylab("") +
       guides(color = "none", shape = "none") + 
+      theme_gray() +
       theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
             axis.text = element_text(size = 9, angle = -30),
             axis.title = element_text(size = 9)) + 

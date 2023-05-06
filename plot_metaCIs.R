@@ -84,6 +84,7 @@ for (i in 1:length(FEATURESET)) {
   
   g <- g + 
     guides(fill = "none", colour = "none") +
+    theme_gray() +
     scale_fill_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) + 
     scale_y_discrete(limits = rev(ANALYSISPATTERN)) +
     theme(axis.title.y = element_blank()) +

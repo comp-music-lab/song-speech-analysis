@@ -109,6 +109,7 @@ FEATURE_PLOTORDER <- c("f0", "IOI rate", "-|Δf0|", "Spectral centroid", "f0 rat
 tmp <- unique(data[, c("feature", "featureplotname")])
 idx <- as.vector(sapply(FEATURE_PLOTORDER, function(s) {match(s, tmp$feature)}))
 ORDER_Y_AXIS <- rev(as.factor(tmp$featureplotname[idx]))
+ORDER_Y_AXIS <- ORDER_Y_AXIS[!is.na(ORDER_Y_AXIS)]
 
 for (i in 1:length(g_list)) {
   data_i <- data[data$Comparison == LIST_COMPARISON[i], ]
@@ -120,18 +121,23 @@ for (i in 1:length(g_list)) {
     geom_vline(xintercept = 0, linetype = 2) +
     geom_vline(xintercept = 0.4, linetype = 3) +
     geom_vline(xintercept = -0.4, linetype = 3) +
-    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 7.6, xend = XL[1] + .05, yend = 13.65), color = "red") +
-    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[2] - .05, y = 7.6, xend = XL[2] - .05, yend = 13.65), color = "red") +
-    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 7.6, xend = XL[2] - .05, yend = 7.6), color = "red") +
-    geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 13.65, xend = XL[2] - .05, yend = 13.65), color = "red") +
     theme(axis.title.y = element_blank()) +
     xlab("Translated Cohen's D") + 
     scale_y_discrete(limits = ORDER_Y_AXIS) +
     ggtitle(LIST_COMPARISON[i]) +
+    theme_gray() +
     theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
     theme(axis.text.x = element_text(size = 10)) + 
     scale_fill_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) +
     theme(legend.title = element_blank())
+  
+  if (exploratory) {
+    g_list[[i]] <- g_list[[i]] + 
+      geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 7.6, xend = XL[1] + .05, yend = 13.65), color = "red") +
+      geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[2] - .05, y = 7.6, xend = XL[2] - .05, yend = 13.65), color = "red") +
+      geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 7.6, xend = XL[2] - .05, yend = 7.6), color = "red") +
+      geom_segment(data = data.frame(dummyID = 0, lang = "English"), aes(x = XL[1] + .05, y = 13.65, xend = XL[2] - .05, yend = 13.65), color = "red")
+  }
   
   ## difference
   data_ma$lang <- data_i$lang[1]

@@ -113,6 +113,12 @@ Spectral centroid,Timbral brightness,Balinese,M,desc,778.728611059085,806.809329
 f0,Pitch height,Balinese,M,song,-1055.28941138896,538.626636095526,17
 -|Δf0|,Pitch stability,Balinese,M,song,-1313.98295406248,1628.69619527857,17
 Spectral centroid,Timbral brightness,Balinese,M,song,825.396063111308,679.321225010172,17
+f0,Pitch height,Tunisian,M,desc,-2402.74616398381,624.18554950289,73
+-|Δf0|,Pitch stability,Tunisian,M,desc,-2564.97631803928,2390.2384481495,73
+Spectral centroid,Timbral brightness,Tunisian,M,desc,402.983917545611,585.828947630784,73
+f0,Pitch height,Tunisian,M,song,-1618.14376338366,742.399826405968,73
+-|Δf0|,Pitch stability,Tunisian,M,song,-1901.64018488787,2260.78850698274,73
+Spectral centroid,Timbral brightness,Tunisian,M,song,295.060441763185,368.970158903415,73
 f0,Pitch height,Ngarigu,F,desc,-1571.65836383827,1250.55094778104,71
 -|Δf0|,Pitch stability,Ngarigu,F,desc,-2425.86048752797,2292.8265639737,71
 Spectral centroid,Timbral brightness,Ngarigu,F,desc,608.771411769858,669.765057946062,71
@@ -241,7 +247,7 @@ f0,Pitch height,IsiXhosa,F,song,-607.825805263407,332.290776640109,34
 Spectral centroid,Timbral brightness,IsiXhosa,F,song,761.823489476685,761.189523720777,34
 f0,Pitch height,Turkish,F,desc,-1252.43750950464,343.872300907489,35
 -|Δf0|,Pitch stability,Turkish,F,desc,-4545.79245580515,4047.18825423919,35
-Spectral centroid,Timbral brightness,Turkish,F,desc,898.125043330171,1258.23482401607,35
+Spectral centroid,Timbral brightness,Turkish,F,desc,898.408276368559,1260.29361766383,35
 f0,Pitch height,Turkish,F,song,-648.139024738166,346.821785731274,35
 -|Δf0|,Pitch stability,Turkish,F,song,-1797.98218444221,1964.57832241608,35
 Spectral centroid,Timbral brightness,Turkish,F,song,567.807509074044,820.943583826171,35
@@ -257,6 +263,12 @@ Spectral centroid,Timbral brightness,Marathi,M,desc,312.579256207105,524.2373150
 f0,Pitch height,Marathi,M,song,-2045.48099373832,362.109129061829,37
 -|Δf0|,Pitch stability,Marathi,M,song,-1226.05766702704,1592.62323597689,37
 Spectral centroid,Timbral brightness,Marathi,M,song,390.301401154864,500.241875847879,37
+f0,Pitch height,Dholuo,F,desc,-1311.22089516659,708.947716334838,72
+-|Δf0|,Pitch stability,Dholuo,F,desc,-3557.31619290148,3266.60495009093,72
+Spectral centroid,Timbral brightness,Dholuo,F,desc,622.428633893477,762.420392773585,72
+f0,Pitch height,Dholuo,F,song,-1229.7011981969,253.756824177848,72
+-|Δf0|,Pitch stability,Dholuo,F,song,-2268.41674273277,2117.94300666293,72
+Spectral centroid,Timbral brightness,Dholuo,F,song,619.117094142189,380.612132565094,72
 f0,Pitch height,English,M,desc,-2731.8966218209,494.688866623281,38
 -|Δf0|,Pitch stability,English,M,desc,-4284.15156739966,3192.65904216906,38
 Spectral centroid,Timbral brightness,English,M,desc,465.964778385564,1001.18376434387,38
