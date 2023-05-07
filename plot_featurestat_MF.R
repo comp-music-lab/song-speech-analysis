@@ -64,7 +64,8 @@ for (i in 1:length(featureset)) {
       guides(color = "none", shape = "none") + 
       theme_gray() +
       theme(plot.title = element_text(size = 10, face = "bold", hjust = 0.5),
-            axis.text = element_text(size = 9, angle = -30),
+            axis.text.x = element_text(size = 9, angle = -30),
+            axis.text.y = element_text(size = 9),
             axis.title = element_text(size = 9)) + 
       scale_x_discrete(limits = XLIMIT, label = XLABEL) +
       scale_color_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) + 

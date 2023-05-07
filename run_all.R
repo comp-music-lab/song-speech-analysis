@@ -20,8 +20,8 @@ rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
 featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
 OUTPUTDIR <- './output/figure/Stage2/'
-source("plot_featurestat.R")
 source("plot_featurestat_MF.R")
+source("plot_featurestat.R")
 
 ## Exploratory - Meta-analysis [Hilton and ours]
 rm(list = ls())
@@ -58,12 +58,6 @@ durationID <- '20sec'
 exploratory <- FALSE
 source("analysis_multilevelAIC.R")
 
-##
-rm(list = ls())
-collaboratorinfofile <- './data/CollaboratorsPlotData.csv'
-OUTPUTDIR <- './output/figure/Stage2/'
-source("plot_CollaboratorMap.R")
-
 ## Exploratory - our data with pYIN+Praat
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/pyin-praat/'
@@ -71,3 +65,17 @@ OUTPUTDIR <- './output/figure/Stage2/pyin-praat/'
 durationID <- 'Infsec'
 exploratory <- FALSE
 source("plot_featureES.R")
+
+## Map figure
+rm(list = ls())
+collaboratorinfofile <- './data/CollaboratorsPlotData.csv'
+OUTPUTDIR <- './output/figure/Stage2/'
+
+exclusion <- c()
+fileid <- "full"
+source("plot_CollaboratorMap.R")
+
+exclusion <- c("Aeles Lrawbalrate", "Morzaniel Iramari Aranariutheri", "Samira Farwaneh",
+               "Aritz Irurtzun", "Joel Maripil", "Tumi Uisu Paulo Matis")
+fileid <- "final"
+source("plot_CollaboratorMap.R")

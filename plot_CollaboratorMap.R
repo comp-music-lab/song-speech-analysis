@@ -8,7 +8,6 @@ library(grid)
 
 ##
 INTERVAL <- 6
-
 SUBGROUPING <- TRUE
 
 ##
@@ -92,21 +91,6 @@ langlabel$Longitude[langlabel$Name == 'Patricia Opondo'] <- long_tmp1
 langlabel$Latitude[langlabel$Name == 'Patricia Opondo'] <- lati_tmp1
 
 ##
-theme_set(theme_bw())
-world <- ne_countries(scale = "medium", returnclass = "sf")
-
-##
-gobj<- ggplot(data = world) +
-  geom_sf(fill= "darkolivegreen1") +
-  geom_point(data = langlabel, aes(x = Longitude, y = Latitude, fill = Family),
-             size = 4.0, shape = 21) +
-  geom_text(data = langlabel, aes(x=Longitude, y=Latitude, label=ID),
-            size = 2.6, color = "darkblue", check_overlap = FALSE) + 
-  xlab("") + ylab("") + ylim(c(-50.5, 75)) + 
-  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), legend.title = element_blank(), legend.position = "none") +
-  theme(panel.background = element_rect(fill = "aliceblue"))
-
-##
 FamilyList <- unique(langlabel$Family)
 langtable <- vector(mode = "list", length = length(FamilyList))
 for (i in 1:length(FamilyList)) {
@@ -114,18 +98,36 @@ for (i in 1:length(FamilyList)) {
   langtable[[i]] <- tableGrob(cbind(langlabel[idx, 5], langlabel[idx, 1]))
 }
 
-##
-ggsave(file = paste(OUTPUTDIR, "CollabMap.png", sep = ""), plot = gobj, width = 8, height = 7)
-write.csv(file = paste(OUTPUTDIR, "langlabel.csv", sep = ""), langlabel)
-
-##
 ggColorHue <- function(n, l=65) {
   hues <- seq(15, 375, length=n+1)
   hcl(h=hues, l=l, c=100)[1:n]
 }
 
 cols <- ggColorHue(n = length(unique(langlabel$Family)))
+LANGCOLORMAP <- data.frame(languagefamily = unique(langlabel$Family), rgb = cols)
 
+##
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+langlabel <- langlabel[!(langlabel$Name %in% exclusion), ]
+langlabel$ID <- 1:nrow(langlabel)
+
+gobj <- ggplot(data = world) + theme_set(theme_bw()) +
+  geom_sf(fill= "darkolivegreen1") +
+  geom_point(data = langlabel, aes(x = Longitude, y = Latitude, fill = Family),
+             size = 4.0, shape = 21) +
+  geom_text(data = langlabel, aes(x=Longitude, y=Latitude, label=ID),
+            size = 2.6, color = "darkblue", check_overlap = FALSE) + 
+  xlab("") + ylab("") + ylim(c(-50.5, 75)) + 
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), legend.title = element_blank(), legend.position = "none") +
+  theme(panel.background = element_rect(fill = "aliceblue")) + 
+  scale_fill_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$languagefamily)
+
+##
+ggsave(file = paste(OUTPUTDIR, "CollabMap_", fileid, ".png", sep = ""), plot = gobj, width = 8, height = 7)
+write.csv(file = paste(OUTPUTDIR, "langlabel.csv", sep = ""), langlabel)
+
+##
 png(paste(OUTPUTDIR, "langfamily-colorcode.png", sep = ""), width = 500, height = 500)
 col2rgb(cols)
 scales::show_col(cols)

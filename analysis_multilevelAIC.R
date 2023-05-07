@@ -42,4 +42,4 @@ for (i in 1:length(featureset)) {
   result[nrow(result) + 1, ] <- list(featureset[i], sm_plain$AIC, sm_ml$AIC, sm_plain$logLik, sm_ml$logLik, model_ml$par[1]^2)
 }
 
-print(result)
+write.table(result, file = paste(OUTPUTDIR, "AIC_modelcomparison.csv.", sep = ""), sep = ",", row.names = FALSE)
