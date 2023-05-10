@@ -5,12 +5,14 @@ library(ggpubr)
 ##
 INPUTDIR <- c("./output/analysis/Stage2/", "./output/analysis/Stage2/pyin/",
               "./output/analysis/Stage2/subset/", "./output/analysis/Stage2/pyin-subset/",
-              "./output/analysis/Stage2/Hilton-subset/", "./output/analysis/Stage2/Hilton/")
+              "./output/analysis/Stage2/Hilton-subset/", "./output/analysis/Stage2/Hilton (20sec)/",
+              "./output/analysis/Stage2/Hilton/")
 ANALYSISPATTERN <- c("Ours\n(full, SA, 20 sec.)", "Ours\n(full, FA, full length)", 
                      "Ours\n(matched, SA, 20 sec.)", "Ours\n(matched, FA, full length)",
-                     "Hilton\n(matched, FA, full length)", "Hilton\n(full, FA, full length)")
+                     "Hilton\n(matched, FA, full length)", "Hilton\n(n=73, FS, 20 sec.)",
+                     "Hilton\n(full, FA, full length)")
 ANALYSISPATTERN <- factor(ANALYSISPATTERN, levels = ANALYSISPATTERN)
-DURATION <- c("20", "Inf", "20", "Inf", "Inf", "Inf")
+DURATION <- c("20", "Inf", "20", "Inf", "Inf", "20", "Inf")
 FEATURESET <- c("f0", "-|Δf0|", "Spectral centroid")
 FEATURENAMESET <- c("Pitch height", "Pitch stability", "Timbral brightness")
 FIGLABEL <- c("(A) ", "(B) ", "(C) ")

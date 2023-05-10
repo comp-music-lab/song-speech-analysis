@@ -91,6 +91,7 @@ function analysis_normalizedcontour(datainfo, duration, outputdir)
         ylim([-0.4, 0.4]);
         xlabel('Normalized sampling point', 'FontSize', 18);
         ylabel('Normalized frequency', 'FontSize', 18);
+        fprintf('%s: %3.4f\n', plottitle{i}, mean(2.*t.*s));
 
         saveas(fobj, strcat(outputdir, 'meancontour_', plottitle{i}, '_', num2str(duration, '%d'), 'sec.png')); 
     end

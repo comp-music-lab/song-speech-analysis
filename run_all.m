@@ -1,6 +1,27 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
+%% Exploratory - Hilton et al. [20 seconds]
+typeflag_songdesc = 1;
+typeid = 'song-desc';
+exploratory = false;
+al = 0.05/6;
+blindedonly = false;
+continuitycorrection = false;
+onsetavailable = false;
+duration = 20;
+
+datainfofile = './datainfo_Hilton-pyin-20sec.csv';
+outputdir_analysis = './output/analysis/Stage2/Hilton (20sec)/';
+outputdir_fig = './output/figure/Stage2/Hilton (20sec)/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+%% Exploratory - normalized f0 contour
+datainfo = readtable('./datainfo.csv');
+duration = 30;
+outputdir_fig = './output/figure/Stage2/';
+analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+
 %% Robustness check - hypothesis blinding
 datainfofile = './datainfo.csv';
 duration = 20;
@@ -111,12 +132,6 @@ local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, o
 typeflag_songrect = 6;
 typeid = 'inst-recit';
 local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-%% Exploratory - normalized f0 contour
-datainfo = readtable('./datainfo.csv');
-duration = 30;
-outputdir_fig = './output/figure/Stage2/';
-analysis_normalizedcontour(datainfo, duration, outputdir_fig);
 
 %% Exploratory - zero cell correction
 datainfofile = './datainfo.csv';

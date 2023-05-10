@@ -1,3 +1,9 @@
+## plot permutation importance
+rm(list = ls())
+INPUTDIR <- './output/analysis/Stage2/PermutationImportance/'
+OUTPUTDIR <- "./output/figure/Stage2/PermutationImportance/"
+source("plot_PI.R")
+
 ## Exploratory analysis - nPVI
 rm(list = ls())
 INPUTDIR <- "./output/analysis/Stage2/"
