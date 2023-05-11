@@ -7,7 +7,6 @@ WID = 7
 HEI = 4
 
 MODELNAME <- c("SVM", "LRM", "BNB")
-ACCURACY <- c("SVM" = "93.12%", "LRM" = "95.79%", "BNB" = "91.48%")
 MODELORDER <- c("SVM" = 2, "LRM" = 1, "BNB" = 3)
 MODELNAME_PLOT <- c("SVM" = "SVM", "LRM" = "Logistic regression", "BNB" = "Naive Bayes")
 
@@ -23,14 +22,18 @@ PLOTTITLE <- c("desc" = "Spoken description", "song" = "Song")
 
 ##
 inputfilepath <- paste(INPUTDIR, "PermutationImportance_", MODELNAME, ".csv", sep = "")
+#ACCURACY <- c("SVM" = "93.12%", "LRM" = "95.79%", "BNB" = "91.48%")
+
 PIinfo <- c()
 for (i in 1:length(inputfilepath)) {
   PIinfo_i <- read.csv(inputfilepath[i])
-  PIinfo_i$Model <- paste(MODELNAME_PLOT[MODELNAME[i]], "\n(", ACCURACY[MODELNAME[i]], ")", sep = "")
+  #PIinfo_i$Model <- paste(MODELNAME_PLOT[MODELNAME[i]], "\n(", ACCURACY[MODELNAME[i]], ")", sep = "")
+  PIinfo_i$Model <- MODELNAME_PLOT[MODELNAME[i]]
   PIinfo <- rbind(PIinfo, PIinfo_i)
 }
 
-PIinfo$Model <- factor(PIinfo$Model, levels = paste(MODELNAME_PLOT[MODELNAME[MODELORDER]], "\n(", ACCURACY[MODELNAME[MODELORDER]], ")", sep = ""))
+#PIinfo$Model <- factor(PIinfo$Model, levels = paste(MODELNAME_PLOT[MODELNAME[MODELORDER]], "\n(", ACCURACY[MODELNAME[MODELORDER]], ")", sep = ""))
+PIinfo$Model <- factor(PIinfo$Model, levels = MODELNAME_PLOT[MODELNAME[MODELORDER]])
 
 ##
 idx_order <- order(FEATUREORDER[FEATURENAME_L], decreasing = TRUE)
