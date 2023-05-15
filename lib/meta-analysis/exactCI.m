@@ -1,6 +1,18 @@
 function [CI, pval, mu_hat] = exactCI(Y, sgm, al, mu_null)
     %%
-    L = 15;
+    % Y      : effect sizes. The size shold be K*1 (column vector).
+    % sgm    : square root of the variance in effect size estimates (e.g., standard errors). Size The size should be K*1 (column vector).
+    % al     : alpha-level for hypothesis testing. Scalar value.
+    %          Note this function performs two-sided test. If you want to perform one-sided test, double the alpha value.
+    % mu_null: Location parameter of the null distribution of effect sizes to be tested. Scalar value.
+    %
+    % References
+    % Brockwell, S. E., & Gordon, I. R. (2001). A comparison of statistical methods for meta-analysis. Statistics in Medicine, 20(6), 825–840. https://doi.org/10.1002/sim.650
+    % 
+    % 
+
+    %%
+    L = 16;
     K = numel(Y);
     if K <= L
         L = 2^K;
@@ -8,13 +20,28 @@ function [CI, pval, mu_hat] = exactCI(Y, sgm, al, mu_null)
     else
         V = binornd(1, 0.5, [K, 2^L]);
     end
+    V(V == 0) = -1;
 
     mu_min = min(Y);
     mu_max = max(Y);
 
     %% CI
-    mu_u = fzero(@(mu) h_upperp(mu, Y, sgm, V, al) - 0.5, [mu_min, mu_max]);
-    mu_l = fzero(@(mu) h_lowerp(mu, Y, sgm, V, al) - 0.5, [mu_min, mu_max]);
+    mu_u_min = h_upperp(mu_min, Y, sgm, V, al);
+    mu_u_max = h_upperp(mu_max, Y, sgm, V, al);
+    if mu_u_min ~= mu_u_max
+        mu_u = fzero(@(mu) h_upperp(mu, Y, sgm, V, al) - 0.5, [mu_min, mu_max]);
+    else
+        mu_u = fzero(@(mu) h_upperp(mu, Y, sgm, V, al) - 0.5, [0 + 1e-5, 1 - 1e-5]);
+    end
+
+    mu_l_min = h_lowerp(mu_min, Y, sgm, V, al);
+    mu_l_max = h_lowerp(mu_max, Y, sgm, V, al);
+    if mu_l_min ~= mu_l_max
+        mu_l = fzero(@(mu) h_lowerp(mu, Y, sgm, V, al) - 0.5, [mu_min, mu_max]);
+    else
+        mu_l = fzero(@(mu) h_lowerp(mu, Y, sgm, V, al) - 0.5, [0 + 1e-5, 1 - 1e-5]);
+    end
+    
     CI = [mu_l, mu_u];
 
     %% mu
@@ -49,20 +76,24 @@ end
 
 function [T_mu, T_null] = h_stat(mu, Y, sgm, V)
     sgm_musq = sgm.^2 + max(0, mean((Y - mu).^2 - sgm.^2));
-    w = sign(Y - mu)./sqrt(sgm_musq);
+    w = (Y - mu)./sgm_musq;
     T_mu = sum(w);
-    T_null = w'*V;
+    T_null = abs(w)'*V;
 end
 
 %% Test code
 %{
+rng(11);
+
 al = 0.05/6;
-mu_null = 0;
-K = 15;
+K = 16;
 
 mu_0 = normrnd(0, 1);
 sgm = gamrnd(0.8, 1.0, [K, 1]);
 tau_0 = gamrnd(0.8, 1.0);
+
+mu_null = 0;
+%mu_null = mu_0;
 
 %%
 M = 2048;
@@ -91,7 +122,7 @@ hold on
 plot(CI(:, 2));
 plot([1, M], mu_0.*[1, 1], '-.m');
 hold off
-title(['alpha level = ', num2str(hitrate*100, '%3.4f')]);
+title(['alpha level = ', num2str(hitrate*100, '%3.4f'), ' (nominal = ', num2str(1 - al, '%3.4f'), ')']);
 
 figure(2);
 clf; cla;
@@ -107,4 +138,11 @@ histogram(pval);
 A = pval > al;
 B = CI(:, 1) < mu_null & mu_null < CI(:, 2);
 disp([mean(A), mean(B), all(A == B)]);
+
+figure(4);
+plot(sort(pval));
+hold on
+plot([1, M], [0, 1], '-.m');
+hold off
+axis tight;
 %}

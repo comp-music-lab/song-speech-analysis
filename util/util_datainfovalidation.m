@@ -1,4 +1,4 @@
-function datainfovalidation
+function util_datainfovalidation
     %%
     %%{
     datainfofile = '../datainfo.csv';

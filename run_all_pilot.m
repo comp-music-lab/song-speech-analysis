@@ -1,7 +1,6 @@
-%%
+%% setup
 helper.h_addpath_MIRtoolbox();
 
-%%
 outputdir_analysis = './output/analysis/Stage1/';
 outputdir_fig = './output/figure/Stage1/';
 
@@ -13,16 +12,22 @@ if not(isfolder(outputdir_fig))
     mkdir(outputdir_fig)
 end
 
-%%
-datainfoid = {'datainfo_Marsden-all', 'datainfo_Marsden-complete'};
+blindedonly = false;
+continuitycorrection = false;
+
+%% Figure materials
+fig_script(outputdir_fig);
+
+%% Analysis
+datainfofile = './datainfo_pilot.csv';
 duration = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70];
 typeflag_songdesc = 1;
 exploratory = false;
 
 for i=1:numel(duration)
     fprintf('%s: %d/%d\n', datetime, i, numel(duration));
-    analysis_featureES_1(datainfoid{1}, duration(i), typeflag_songdesc, exploratory, outputdir_analysis);
-    analysis_featureES_2(datainfoid{2}, duration(i), typeflag_songdesc, exploratory, outputdir_analysis);
+    analysis_featureES_1(datainfofile, duration(i), typeflag_songdesc, exploratory, outputdir_analysis, blindedonly);
+    analysis_featureES_2(datainfofile, duration(i), typeflag_songdesc, exploratory, outputdir_analysis, blindedonly, continuitycorrection);
     close all
 end
 
@@ -30,16 +35,16 @@ end
 duration = Inf;
 exploratory = true;
 
-analysis_featureES_1(datainfoid{1}, duration, typeflag_songdesc, exploratory, outputdir_analysis);
-analysis_featureES_2(datainfoid{2}, duration, typeflag_songdesc, exploratory, outputdir_analysis);
+analysis_featureES_1(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis, blindedonly);
+analysis_featureES_2(datainfofile, duration, typeflag_songdesc, exploratory, outputdir_analysis, blindedonly, continuitycorrection);
 
 typeflag_instdesc = 2;
-analysis_featureES_1(datainfoid{1}, duration, typeflag_instdesc, exploratory, outputdir_analysis);
-analysis_featureES_2(datainfoid{2}, duration, typeflag_instdesc, exploratory, outputdir_analysis);
+analysis_featureES_1(datainfofile, duration, typeflag_instdesc, exploratory, outputdir_analysis, blindedonly);
+analysis_featureES_2(datainfofile, duration, typeflag_instdesc, exploratory, outputdir_analysis, blindedonly, continuitycorrection);
 
 typeflag_songrecit = 3;
-analysis_featureES_1(datainfoid{1}, duration, typeflag_songrecit, exploratory, outputdir_analysis);
-analysis_featureES_2(datainfoid{2}, duration, typeflag_songrecit, exploratory, outputdir_analysis);
+analysis_featureES_1(datainfofile, duration, typeflag_songrecit, exploratory, outputdir_analysis, blindedonly);
+analysis_featureES_2(datainfofile, duration, typeflag_songrecit, exploratory, outputdir_analysis, blindedonly, continuitycorrection);
 
 %%
 al = 0.05/6;
@@ -56,7 +61,7 @@ for i=1:numel(typeid)
 end
 
 %%
-analysis_durationeffect(outputdir_analysis, outputdir_fig);
+analysis_durationeffect(datainfofile, outputdir_analysis, outputdir_fig);
 
 %%
 analysis_annotatoreffect(outputdir_analysis);
@@ -69,6 +74,3 @@ al = 0.05/6;
 be = 0.95;
 numsim = 20;
 ma_power(outputdir_analysis, al, be, numsim);
-
-%%
-fig_script(outputdir_fig);

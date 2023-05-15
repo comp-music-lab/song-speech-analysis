@@ -108,19 +108,11 @@ end
 
 function [X, t_st, t_ed, t_onset, t_break] = h_ioirate(onsetfilepath, breakfilepath)
     %%
-    T = readtable(onsetfilepath, 'ReadVariableNames', false);
+    T = readtable(onsetfilepath, 'ReadVariableNames', false, 'Format', '%f%s');
     t_onset = unique(T.Var1);
 
-    T = readtable(breakfilepath, 'ReadVariableNames', false);
-
-    if isempty(T)
-        t_break = [];
-    else
-        t_break = unique(T.Var1);
-        if iscell(t_break)
-            t_break = str2double(cell2mat(t_break));
-        end
-    end
+    T = readtable(breakfilepath, 'ReadVariableNames', false, 'Format', '%f%s');
+    t_break = unique(T.Var1);
 
     %%
     t_break(t_break < t_onset(1)) = [];

@@ -1,0 +1,19 @@
+dataname,annotationdir,audiodir,audioext,performer,type,language,sex,groupid,blinding,melodic
+ACO02C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,ACO02,song,Spanish,M,1,TRUE,n/a
+ACO02D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,ACO02,desc,Spanish,M,1,TRUE,n/a
+ACO05C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,ACO05,song,Spanish,F,2,TRUE,n/a
+ACO05D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,ACO05,desc,Spanish,F,2,TRUE,n/a
+ACO09C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,ACO09,song,Spanish,F,3,TRUE,n/a
+ACO09D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,ACO09,desc,Spanish,F,3,TRUE,n/a
+BEJ01C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,BEJ01,song,Mandarin,F,4,TRUE,n/a
+BEJ01D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,BEJ01,desc,Mandarin,F,4,TRUE,n/a
+BEJ16C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,BEJ16,song,Mandarin,F,5,TRUE,n/a
+BEJ16D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,BEJ16,desc,Mandarin,F,5,TRUE,n/a
+BEJ21C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,BEJ21,song,Mandarin,M,6,TRUE,n/a
+BEJ21D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,BEJ21,desc,Mandarin,M,6,TRUE,n/a
+WEL01C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,WEL01,song,English,F,7,TRUE,n/a
+WEL01D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,WEL01,desc,English,F,7,TRUE,n/a
+WEL21C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,WEL21,song,English,F,8,TRUE,n/a
+WEL21D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,WEL21,desc,English,F,8,TRUE,n/a
+WEL51C,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,WEL51,song,English,M,9,TRUE,n/a
+WEL51D,./data/Automated F0/,G:\Datasets\Hilton\IDS-corpus-raw\IDS-corpus-raw\,wav,WEL51,desc,English,M,9,TRUE,n/a

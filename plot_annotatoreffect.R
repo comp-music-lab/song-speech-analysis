@@ -3,8 +3,7 @@ library(ggplot2)
 library(ggpubr)
 
 ## Config
-inputfilepath <- './output/analysis/onsetqualitytable.csv'  
-outputdir <- './output/figure/'
+inputfilepath <- paste(INPUTDIR, 'onsetqualitytable.csv', sep = "")
 REFVALUENAME <- "Reference"
 
 ## ETL
@@ -57,5 +56,5 @@ for(j in 1:length(comparisonlist)) {
   }
   
   g <- ggarrange(plotlist = g_list, ncol = 2, nrow = 1, common.legend = TRUE, legend = "right")
-  ggsave(file = paste(outputdir, "onsetquality_", comparisonlist[j], ".png", sep = ""), plot = g, width = 10, height = 6)
+  ggsave(file = paste(OUTPUTDIR, "onsetquality_", comparisonlist[j], ".png", sep = ""), plot = g, width = 10, height = 6)
 }

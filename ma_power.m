@@ -62,7 +62,8 @@ function ma_power(esinfodir, al, be, numsim)
         N = numel(sgm_L);
 
         %%
-        [CI, ~, mu_hat] = exactCI(linspace(min(Y), max(Y), 1024), Y, sgm, al*2, mu_null_diff);
+        %[CI, ~, mu_hat] = exactCI(linspace(min(Y), max(Y), 1024), Y, sgm, al*2, mu_null_diff);
+        [CI, ~, mu_hat] = exactCI(Y, sgm, al*2, mu_null_diff);
         fprintf('(song-desc) diff: %s (%3.4f-%3.4f-Inf, tau = %3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n',...
             testdiff{i}, CI(1), mu_hat, sqrt(tausq_hat), N, be, power, al);
     end
@@ -95,7 +96,8 @@ function ma_power(esinfodir, al, be, numsim)
         close(wf);
 
         %%
-        [CI, ~, mu_hat] = exactCI(linspace(min(Y), max(Y), 1024), Y, sgm, al, mu_null_diff);
+        %[CI, ~, mu_hat] = exactCI(linspace(min(Y), max(Y), 1024), Y, sgm, al, mu_null_diff);
+        [CI, ~, mu_hat] = exactCI(Y, sgm, al, mu_null_diff);
         fprintf('(song-desc) sim: %s (%3.4f-%3.4f-%3.4f, tau = %3.4f) - %d studies for beta = %3.4f (est. %3.4f) and alpha = %3.4f\n',...
             testsim{i}, CI(1), mu_hat, CI(2), sqrt(tausq_hat), n_max, be, power, al);
     end

@@ -1,4 +1,4 @@
-function analysis_durationeffect(datadir, outputdir)
+function analysis_durationeffect(datainfofile, datadir, outputdir)
     %%
     fileid = {'results_effectsize_acoustic_song-desc', 'results_effectsize_seg_song-desc'};
     T_ref = [readtable(strcat(datadir, fileid{1}, '_Infsec.csv')); readtable(strcat(datadir, fileid{2}, '_Infsec.csv'))];
@@ -23,11 +23,11 @@ function analysis_durationeffect(datadir, outputdir)
     
     %%
     idx_ed = zeros(numel(langlist), 1);
-    T_audio = readtable('./datainfo_Marsden-complete_song-desc.csv');
+    T_audio = readtable(datainfofile);
 
     for i=1:numel(langlist)
         idx = strcmp(T_audio.language, langlist{i});
-        audiofilepath = strcat(T_audio.audiofilepath(idx), T_audio.dataname(idx), '.wav');
+        audiofilepath = strcat(T_audio.audiodir(idx), T_audio.dataname(idx), '.wav');
         [x, fs_x] = audioread(audiofilepath{1});
         [y, fs_y] = audioread(audiofilepath{2});
         duration_i = max(size(x, 1)/fs_x, size(y, 1)/fs_y);
@@ -48,7 +48,12 @@ function analysis_durationeffect(datadir, outputdir)
         for j=1:numel(langlist)
             for k=1:numel(duration)
                 idx = strcmp(T{k}.feature, featurelist{i}) & strcmp(T{k}.lang, langlist{j});
-                es_d(k) = T{k}.diff(idx);
+                
+                if sum(idx) ~= 0
+                    es_d(k) = T{k}.diff(idx);
+                else
+                    es_d(k) = NaN;
+                end
             end
             
             idx_st = find(isnan(es_d), 1, 'last') + 1;
