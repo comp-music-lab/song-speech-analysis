@@ -18,6 +18,12 @@ function datainfovalidation
     datatypelist = {'desc', 'song'};
     onsetavailable = false;
     %}
+    %{
+    datainfofile = '../datainfo_Hilton-pyin-20sec.csv';
+    K = 2;
+    datatypelist = {'desc', 'song'};
+    onsetavailable = false;
+    %}
 
     T = readtable(datainfofile);
 
@@ -28,6 +34,10 @@ function datainfovalidation
 
     %%
     groupid = unique(T.groupid);
+
+    L = 30;
+    numbreak = zeros(numel(groupid), numel(datatypelist));
+
     for i=1:numel(groupid)
         idx = T.groupid == groupid(i);
         assert(sum(idx) == K, 'Check group id');
@@ -48,6 +58,13 @@ function datainfovalidation
     
             breakfilepath = strcat('.', T.annotationdir(idx), 'break_', dataname, '.csv');
             assert(all(isfile(breakfilepath)), 'Check break file path');
+
+            for j=1:numel(datatypelist)
+                idx_j = contains(breakfilepath, datatypelist{j});
+                breakinfo = readtable(breakfilepath{idx_j}, 'ReadVariableNames', false, 'Format', '%f%s');
+                t_break = breakinfo.Var1;
+                numbreak(i, j) = numel(t_break(t_break <= L));
+            end
         end
 
         audiofilepath = strcat(T.audiodir(idx), dataname, '.', T.audioext(idx));

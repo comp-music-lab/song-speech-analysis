@@ -1,43 +1,23 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
-%% Exploratory - Hilton et al. [20 seconds]
-typeflag_songdesc = 1;
-typeid = 'song-desc';
-exploratory = false;
-al = 0.05/6;
-blindedonly = false;
-continuitycorrection = false;
-onsetavailable = false;
-duration = 20;
-
-datainfofile = './datainfo_Hilton-pyin-20sec.csv';
-outputdir_analysis = './output/analysis/Stage2/Hilton (20sec)/';
-outputdir_fig = './output/figure/Stage2/Hilton (20sec)/';
-local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-%% Exploratory - normalized f0 contour
-datainfo = readtable('./datainfo.csv');
-duration = 30;
-outputdir_fig = './output/figure/Stage2/';
-analysis_normalizedcontour(datainfo, duration, outputdir_fig);
-
-%% Robustness check - hypothesis blinding
+%% Confirmatory + Exploratory analysis
 datainfofile = './datainfo.csv';
+outputdir_analysis = './output/analysis/Stage2/';
+outputdir_fig = './output/figure/Stage2/';
 duration = 20;
 typeflag_songdesc = 1;
 typeid = 'song-desc';
-exploratory = false;
 al = 0.05/6;
-outputdir_analysis = './output/analysis/Stage2/blinding/';
-outputdir_fig = './output/figure/Stage2/blinding/';
-blindedonly = true;
+exploratory = true;
+blindedonly = false;
 continuitycorrection = false;
 onsetavailable = true;
 
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+analysis_rawdatastat(datainfofile, outputdir_analysis, duration, exploratory);
 
-%% nPVI
+%% Exploratory - nPVI
 datainfofile = './datainfo.csv';
 outputdir_analysis = './output/analysis/Stage2/';
 duration = 20;
@@ -48,6 +28,12 @@ analysis_npvi(datainfofile, outputdir_analysis, duration, typeid_songdesc);
 typeid_songinst = 2;
 analysis_npvi(datainfofile, outputdir_analysis, duration, typeid_songinst);
 
+%% Exploratory - normalized f0 contour
+datainfo = readtable('./datainfo.csv');
+duration = 30;
+outputdir_fig = './output/figure/Stage2/';
+analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+
 %% Exploratory - Automated
 typeflag_songdesc = 1;
 typeid = 'song-desc';
@@ -57,17 +43,15 @@ blindedonly = false;
 continuitycorrection = false;
 
 duration = Inf;
+datainfofile = './datainfo_pyin-praat.csv';
+
 onsetavailable = false;
-datainfofile = './datainfo_pyin.csv';
 outputdir_analysis = './output/analysis/Stage2/pyin/';
 outputdir_fig = './output/figure/Stage2/pyin/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
 analysis_rawdatastat(datainfofile, outputdir_analysis, duration, exploratory);
 
-duration = Inf;
 onsetavailable = true;
-datainfofile = './datainfo_pyin-praat.csv';
 outputdir_analysis = './output/analysis/Stage2/pyin-praat/';
 outputdir_fig = './output/figure/Stage2/pyin-praat/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
@@ -85,22 +69,6 @@ datainfofile = './datainfo_pyin-subset.csv';
 outputdir_analysis = './output/analysis/Stage2/pyin-subset/';
 outputdir_fig = './output/figure/Stage2/pyin-subset/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-%% Confirmatory + Exploratory analysis
-datainfofile = './datainfo.csv';
-outputdir_analysis = './output/analysis/Stage2/';
-outputdir_fig = './output/figure/Stage2/';
-duration = 20;
-typeflag_songdesc = 1;
-typeid = 'song-desc';
-al = 0.05/6;
-exploratory = true;
-blindedonly = false;
-continuitycorrection = false;
-onsetavailable = true;
-
-local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-analysis_rawdatastat(datainfofile, outputdir_analysis, duration, exploratory);
 
 %% Exploratory - other combinations
 datainfofile = './datainfo.csv';
@@ -163,6 +131,21 @@ onsetavailable = true;
 
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
+%% Robustness check - hypothesis blinding
+datainfofile = './datainfo.csv';
+duration = 20;
+typeflag_songdesc = 1;
+typeid = 'song-desc';
+exploratory = false;
+al = 0.05/6;
+outputdir_analysis = './output/analysis/Stage2/blinding/';
+outputdir_fig = './output/figure/Stage2/blinding/';
+blindedonly = true;
+continuitycorrection = false;
+onsetavailable = true;
+
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
 %% Exploratory - Hilton's data
 typeflag_songdesc = 1;
 typeid = 'song-desc';
@@ -185,6 +168,21 @@ outputdir_analysis = './output/analysis/Stage2/Hilton-subset/';
 outputdir_fig = './output/figure/Stage2/Hilton-subset/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
+typeflag_songdesc = 1;
+typeid = 'song-desc';
+exploratory = false;
+al = 0.05/6;
+blindedonly = false;
+continuitycorrection = false;
+onsetavailable = false;
+duration = 20;
+
+datainfofile = './datainfo_Hilton-pyin-20sec.csv';
+outputdir_analysis = './output/analysis/Stage2/Hilton (20sec)/';
+outputdir_fig = './output/figure/Stage2/Hilton (20sec)/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+%% local functions
 function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable)
     if not(isfolder(outputdir_analysis))
         mkdir(outputdir_analysis)
