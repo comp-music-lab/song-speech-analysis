@@ -4,6 +4,11 @@ INPUTDIR <- './output/analysis/Stage2/PermutationImportance/'
 OUTPUTDIR <- "./output/figure/Stage2/PermutationImportance/"
 source("plot_PI.R")
 
+## Exploratory analysis - IRR
+rm(list = ls())
+OUTPUTDIR <-  "./output/figure/Stage2/"
+source("plot_irr.R")
+
 ## Exploratory analysis - nPVI
 rm(list = ls())
 INPUTDIR <- "./output/analysis/Stage2/"
@@ -15,11 +20,6 @@ source("plot_nPVI.R")
 
 typeid <- "song-inst"
 source("plot_nPVI.R")
-
-## Exploratory analysis - IRR
-rm(list = ls())
-OUTPUTDIR <-  "./output/figure/Stage2/"
-source("plot_irr.R")
 
 ## Exploratory - mean feature values [Ours]
 rm(list = ls())

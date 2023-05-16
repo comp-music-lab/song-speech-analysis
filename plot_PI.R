@@ -22,17 +22,14 @@ PLOTTITLE <- c("desc" = "Spoken description", "song" = "Song")
 
 ##
 inputfilepath <- paste(INPUTDIR, "PermutationImportance_", MODELNAME, ".csv", sep = "")
-#ACCURACY <- c("SVM" = "93.12%", "LRM" = "95.79%", "BNB" = "91.48%")
 
 PIinfo <- c()
 for (i in 1:length(inputfilepath)) {
   PIinfo_i <- read.csv(inputfilepath[i])
-  #PIinfo_i$Model <- paste(MODELNAME_PLOT[MODELNAME[i]], "\n(", ACCURACY[MODELNAME[i]], ")", sep = "")
   PIinfo_i$Model <- MODELNAME_PLOT[MODELNAME[i]]
   PIinfo <- rbind(PIinfo, PIinfo_i)
 }
 
-#PIinfo$Model <- factor(PIinfo$Model, levels = paste(MODELNAME_PLOT[MODELNAME[MODELORDER]], "\n(", ACCURACY[MODELNAME[MODELORDER]], ")", sep = ""))
 PIinfo$Model <- factor(PIinfo$Model, levels = MODELNAME_PLOT[MODELNAME[MODELORDER]])
 
 ##
@@ -40,6 +37,7 @@ idx_order <- order(FEATUREORDER[FEATURENAME_L], decreasing = TRUE)
 
 g <- ggplot(data = PIinfo, aes(x = feature, y = pmi, fill = Model)) + 
   geom_bar(stat = "identity", position = position_dodge(width = 0.7), width = 0.6) + 
+  theme_gray() +
   ylab("Permutation importance") + xlab("") + labs(fill = "") + ggtitle("Importance of features in song-speech classification task") +
   scale_x_discrete(breaks = FEATURENAME_L, labels = FEATURENAME_H, limits = FEATURENAME_L[idx_order]) + 
   coord_flip() + 

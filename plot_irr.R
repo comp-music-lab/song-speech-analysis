@@ -70,3 +70,7 @@ for (j in 1:length(TYPE)) {
   ggsave(file = paste(OUTPUTDIR, "onsetdiff_", TYPE[j], ".png", sep = ""),
          plot = g, width = 4, height = 3)
 }
+
+##
+print(paste("90% quantile of onset time diff (desc):", quantile(df_dlt$dlt[df_dlt$type == "desc"], prob = 0.9)))
+print(paste("90% quantile of onset time diff (song):", quantile(df_dlt$dlt[df_dlt$type == "song"], prob = 0.9)))

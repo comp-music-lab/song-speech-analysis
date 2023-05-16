@@ -1,0 +1,11 @@
+dataname,annotationdir,audiodir,audioext,performer,type,language,sex,groupid,blinding,melodic
+Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220320_song,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Parimal,song,Marathi,M,1,TRUE,n/a
+Parimal_Sadaphal_Marathi_Spiritual_Maajhe Maahera Pandhari_20220430_desc,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Parimal,desc,Marathi,M,1,TRUE,n/a
+Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Shafagh,song,Farsi,F,2,TRUE,n/a
+Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Shafagh,desc,Farsi,F,2,TRUE,n/a
+Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_desc,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Yuto,desc,Japanese,M,3,TRUE,n/a
+Yuto_Ozaki_Japanese_Japanese_Traditional_Asatoya-Yunta_20220209_song,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Yuto,song,Japanese,M,3,TRUE,n/a
+Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Florence,desc,Yoruba,F,4,TRUE,n/a
+Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,Florence,song,Yoruba,F,4,TRUE,n/a
+John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_desc,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,John,desc,English,M,5,TRUE,n/a
+John_McBride_English_Irish_Anthem_FieldsOfAthenry_20220219_song,./data/Stage 1 Automated F0/,./data/Stage 1 RR Audio/full-length/,wav,John,song,English,M,5,TRUE,n/a

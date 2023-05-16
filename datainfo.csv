@@ -35,6 +35,10 @@ Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_desc,./data/Stage 2 Anno
 Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_inst,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,wav,Daniel Fredriksson,inst,Swedish,M,7,TRUE,Y
 Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_recit,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,wav,Daniel Fredriksson,recit,Swedish,M,7,TRUE,n/a
 Daniel_Fredriksson_Swedish_Traditional_HoMaja_202210120_song,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,wav,Daniel Fredriksson,song,Swedish,M,7,TRUE,n/a
+Diana_Hereld_Cherokee_Traditional_We n'de ya ho_20230226_desc,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Diana Hereld,desc,Cherokee,F,75,FALSE,n/a
+Diana_Hereld_Cherokee_Traditional_We n'de ya ho_20230226_inst,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Diana Hereld,inst,Cherokee,F,75,FALSE,N
+Diana_Hereld_Cherokee_Traditional_Amazing Grace_20230513_recit,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Diana Hereld,recit,Cherokee,F,75,FALSE,n/a
+Diana_Hereld_Cherokee_Traditional_Amazing Grace_20230513_song,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,mp4,Diana Hereld,song,Cherokee,F,75,FALSE,n/a
 Dhwani_Sadaphal_Hindi_Traditional_Saraswatee maateshwaree_20221006_desc,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Dhwani Sadaphal,desc,Hindi,F,8,FALSE,n/a
 Dhwani_Sadaphal_Hindi_Traditional_Saraswatee maateshwaree_20221006_inst,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Dhwani Sadaphal,inst,Hindi,F,8,FALSE,Y
 Dhwani_Sadaphal_Hindi_Traditional_Saraswatee maateshwaree_20221006_recit,./data/Stage 2 Annotation/,G:\Datasets\Song-Speech\Audio recordings\,m4a,Dhwani Sadaphal,recit,Hindi,F,8,FALSE,n/a

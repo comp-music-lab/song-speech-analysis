@@ -77,6 +77,7 @@ end
 function [T_mu, T_null] = h_stat(mu, Y, sgm, V)
     sgm_musq = sgm.^2 + max(0, mean((Y - mu).^2 - sgm.^2));
     w = (Y - mu)./sgm_musq;
+    %w = sign(Y - mu)./sqrt(sgm_musq); %median-based test statistics: used in the pilot analysis
     T_mu = sum(w);
     T_null = abs(w)'*V;
 end

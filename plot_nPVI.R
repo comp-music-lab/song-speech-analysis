@@ -42,7 +42,6 @@ ggsave(file = paste(OUTPUTDIR, "nPVI_", durationID, '_', typeid, ".png", sep = "
 
 ##
 print(cor.test(npviinfo$npvi_song, npviinfo$npvi_desc))
-print(t.test(x = npviinfo$npvi_song, y = npviinfo$npvi_desc, paired = TRUE, mu = 0, conf.level = .95))
 
 ##
 npvi_tmp <- read.csv(paste(INPUTDIR, 'npvi_', durationID, '_song-desc.csv', sep = ""))
@@ -54,6 +53,7 @@ g <- ggplot(data = npviinfo, aes(x = type, y = npvi)) +
   geom_point(aes(color = lang), position = position_jitter(width = 0.1, height = 0)) + 
   geom_line(aes(group = groupid, color = lang), alpha = 0.2) +
   geom_violin(aes(group = type), alpha = 0, draw_quantiles = 0.5) +
+  theme_gray() +
   guides(color = "none") + 
   xlab("") + ylab("nPVI") +
   theme(axis.text = element_text(size = 14), axis.title = element_text(size = 14)) + 

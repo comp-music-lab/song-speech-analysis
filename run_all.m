@@ -1,6 +1,9 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
+%% Exploratory - permutation importance analysis
+pyrunfile("analysis_permi.py")
+
 %% Confirmatory + Exploratory analysis
 datainfofile = './datainfo.csv';
 outputdir_analysis = './output/analysis/Stage2/';
@@ -131,6 +134,21 @@ onsetavailable = true;
 
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
+%% Exploratory - Hilton's data [20sec]
+typeflag_songdesc = 1;
+typeid = 'song-desc';
+exploratory = false;
+al = 0.05/6;
+blindedonly = false;
+continuitycorrection = false;
+onsetavailable = false;
+duration = 20;
+
+datainfofile = './datainfo_Hilton-pyin-20sec.csv';
+outputdir_analysis = './output/analysis/Stage2/Hilton (20sec)/';
+outputdir_fig = './output/figure/Stage2/Hilton (20sec)/';
+local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
 %% Robustness check - hypothesis blinding
 datainfofile = './datainfo.csv';
 duration = 20;
@@ -168,20 +186,6 @@ outputdir_analysis = './output/analysis/Stage2/Hilton-subset/';
 outputdir_fig = './output/figure/Stage2/Hilton-subset/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
-typeflag_songdesc = 1;
-typeid = 'song-desc';
-exploratory = false;
-al = 0.05/6;
-blindedonly = false;
-continuitycorrection = false;
-onsetavailable = false;
-duration = 20;
-
-datainfofile = './datainfo_Hilton-pyin-20sec.csv';
-outputdir_analysis = './output/analysis/Stage2/Hilton (20sec)/';
-outputdir_fig = './output/figure/Stage2/Hilton (20sec)/';
-local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
 %% local functions
 function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable)
     if not(isfolder(outputdir_analysis))
@@ -195,6 +199,19 @@ function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, o
     analysis_featureES_1(datainfofile, duration, typeflag, exploratory, outputdir_analysis, blindedonly);
     
     esinfofile = strcat(outputdir_analysis, 'results_effectsize_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
+
+    % --------------------------
+    % Workaround until Rob and Diana's data get updated
+    T = readtable('./output/analysis/Stage2/results_effectsize_acoustic_song-desc_20sec.csv');
+    idx_rob = (T.groupid == 74 & strcmp(T.feature, 'f0')) ...
+        | (T.groupid == 74 & strcmp(T.feature, '-|Δf0|')) ...
+        | (T.groupid == 74 & strcmp(T.feature, 'Spectral centroid'));
+    idx_dna = (T.groupid == 75 & strcmp(T.feature, 'f0')) ...
+        | (T.groupid == 75 & strcmp(T.feature, '-|Δf0|')) ...
+        | (T.groupid == 75 & strcmp(T.feature, 'Spectral centroid'));
+    writetable(T(~(idx_rob | idx_dna), :), './output/analysis/Stage2/results_effectsize_acoustic_song-desc_20sec.csv');
+    % --------------------------
+
     outputfile = strcat(outputdir_analysis, 'ma_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
     analysis_metaCI(esinfofile, outputfile, al);
     outputfile = strcat(outputdir_analysis, 'equiv_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
@@ -204,6 +221,19 @@ function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, o
         analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir_analysis, blindedonly, continuitycorrection);
     
         esinfofile = strcat(outputdir_analysis, 'results_effectsize_seg_', typeid, '_', num2str(duration), 'sec.csv');
+
+        % --------------------------
+        % Workaround until Rob and Diana's data get updated
+        T = readtable('./output/analysis/Stage2/results_effectsize_seg_song-desc_20sec.csv');
+        idx_rob = (T.groupid == 74 & strcmp(T.feature, 'IOI rate')) ...
+            | (T.groupid == 74 & strcmp(T.feature, 'f0 ratio')) ...
+            | (T.groupid == 74 & strcmp(T.feature, 'Sign of f0 slope'));
+        idx_dna = (T.groupid == 75 & strcmp(T.feature, 'IOI rate')) ...
+            | (T.groupid == 75 & strcmp(T.feature, 'f0 ratio')) ...
+            | (T.groupid == 75 & strcmp(T.feature, 'Sign of f0 slope'));
+        writetable(T(~(idx_rob | idx_dna), :), './output/analysis/Stage2/results_effectsize_seg_song-desc_20sec.csv');
+        % --------------------------
+
         outputfile = strcat(outputdir_analysis, 'ma_seg_', typeid, '_', num2str(duration), 'sec.csv');
         analysis_metaCI(esinfofile, outputfile, al);
         outputfile = strcat(outputdir_analysis, 'equiv_seg_', typeid, '_', num2str(duration), 'sec.csv');

@@ -1,7 +1,7 @@
-function check_Hiltonduration
+function util_checkHiltonduration
     %%
     datainfo = readtable('../datainfo_Hilton-pyin.csv');
-    N = 73;
+    N = 75;
 
     %%
     gid = unique(datainfo.groupid);
@@ -26,5 +26,11 @@ function check_Hiltonduration
     rng(2);
     gid_20sec_samp = sort(gid_20sec(randperm(numel(gid_20sec), N)));
 
-    writetable(table(gid_20sec_samp, 'VariableNames', {'gid'}), '../output/analysis/Stage2/Hilton (20sec)/gid.csv');
+    %%
+    idx = false;
+    for i=1:numel(gid_20sec_samp)
+        idx = idx | datainfo.groupid == gid_20sec_samp(i);
+    end
+
+    writetable(datainfo(idx, :), '../datainfo_Hilton-pyin-20sec.csv');
 end

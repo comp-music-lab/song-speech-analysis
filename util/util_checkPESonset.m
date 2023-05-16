@@ -1,4 +1,4 @@
-function checkPESonset
+function util_checkPESonset
     dirinfo = dir('../data/Stage 2 Annotation (10second-onset-PES)/');
 
     for i=1:length(dirinfo)

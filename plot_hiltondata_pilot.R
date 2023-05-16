@@ -1,17 +1,15 @@
-rm(list = ls())
-
 ###
 library(ggplot2)
 DATANAME <- c('Hilton et al.\n(Automated)', 'Hilton et al.\n(Semi-automated)', 'Pilot data\n(Automated)', 'Pilot data\n(Semi-automated)')
 
 ###
-es_Hilton_pyin <- read.csv("./output/Hilton-pyin/results_effectsize_acoustic_song-desc_Infsec.csv")
+es_Hilton_pyin <- read.csv(paste(INPUTDIR, "Hilton-pyin/results_effectsize_acoustic_song-desc_Infsec.csv", sep = ""))
 es_Hilton_pyin$dataname <- DATANAME[1]
-es_Hilton_sa <- read.csv("./output/Hilton-sa/results_effectsize_acoustic_song-desc_Infsec.csv")
+es_Hilton_sa <- read.csv(paste(INPUTDIR, "Hilton-sa/results_effectsize_acoustic_song-desc_Infsec.csv", sep = ""))
 es_Hilton_sa$dataname <- DATANAME[2]
-es_Pilotdata_auto <- read.csv("./output/pilot-data-auto/results_effectsize_acoustic_song-desc_Infsec.csv")
+es_Pilotdata_auto <- read.csv(paste(INPUTDIR, "pilot-pyin/results_effectsize_acoustic_song-desc_Infsec.csv", sep = ""))
 es_Pilotdata_auto$dataname <- DATANAME[3]
-es_Pilotdata <- read.csv("./output/analysis/results_effectsize_acoustic_song-desc_Infsec.csv")
+es_Pilotdata <- read.csv(paste(INPUTDIR, "results_effectsize_acoustic_song-desc_Infsec.csv", sep = ""))
 es_Pilotdata$dataname <- DATANAME[4]
 
 es_table <- rbind(es_Hilton_pyin, es_Hilton_sa, es_Pilotdata_auto, es_Pilotdata)
@@ -19,13 +17,13 @@ es_table <- es_table[es_table$feature == 'f0', ]
 es_table$dummyID <- 1:dim(es_table)[1]
 
 ###
-ma_Hilton_pyin <- read.csv("./output/Hilton-pyin/ma_acoustic_song-desc_Infsec.csv")
+ma_Hilton_pyin <- read.csv(paste(INPUTDIR, "Hilton-pyin/ma_acoustic_song-desc_Infsec.csv", sep = ""))
 ma_Hilton_pyin$dataname <- DATANAME[1]
-ma_Hilton_sa <- read.csv("./output/Hilton-sa/ma_acoustic_song-desc_Infsec.csv")
+ma_Hilton_sa <- read.csv(paste(INPUTDIR, "Hilton-sa/ma_acoustic_song-desc_Infsec.csv", sep = ""))
 ma_Hilton_sa$dataname <- DATANAME[2]
-ma_Pilotdata_auto <- read.csv("./output/pilot-data-auto/ma_acoustic_song-desc_Infsec.csv")
+ma_Pilotdata_auto <- read.csv(paste(INPUTDIR, "pilot-pyin/ma_acoustic_song-desc_Infsec.csv", sep = ""))
 ma_Pilotdata_auto$dataname <- DATANAME[3]
-ma_Pilotdata <- read.csv("./output/analysis/ma_acoustic_song-desc_Infsec.csv")
+ma_Pilotdata <- read.csv(paste(INPUTDIR, "ma_acoustic_song-desc_Infsec.csv", sep = ""))
 ma_Pilotdata$dataname <- DATANAME[4]
 
 ma_table <- rbind(ma_Hilton_pyin, ma_Hilton_sa, ma_Pilotdata_auto, ma_Pilotdata)
@@ -56,24 +54,32 @@ g_list <- g_list +
   geom_segment(data = ma_table, aes(x = sqrt(2)*qnorm(CI_l, 0, 1), xend = sqrt(2)*qnorm(mean, 0, 1), yend = dataname), size = 1)
 
 ###
-ggsave(file = paste("./output/Hilton-sa/Hilton_merge.png", sep = ""), plot = g_list, width = 6, height = 4)
-
+ggsave(file = paste(OUTPUTDIR, "Hilton_merge.png", sep = ""), plot = g_list, width = 6, height = 4)
 
 ##
-INPUTDIR <- "./output/Hilton-pyin/"
-OUTPUTDIR <- "./output/Hilton-pyin/"
+INPUTDIR_base <- INPUTDIR
+OUTPUTDIR_base <- OUTPUTDIR
+
+INPUTDIR <- paste(INPUTDIR_base, "Hilton-pyin/", sep = "")
+OUTPUTDIR <- paste(OUTPUTDIR_base, "Hilton-pyin/", sep = "")
+if (!dir.exists(OUTPUTDIR)){
+  dir.create(OUTPUTDIR)
+}
 exploratory <- FALSE
-source("plot_featureES.R")
+source("plot_featureES_pilot.R")
 
 g_pyin <- g_list[[1]] +
   scale_x_continuous(breaks = c(-0.4, 0, 0.4, 1, 2))
 g_pyin$labels$title <- paste(g_pyin$labels$title, "\n(Automated f0 extraction)", sep = "")
 
 ##
-INPUTDIR <- "./output/Hilton-sa/"
-OUTPUTDIR <- "./output/Hilton-sa/"
+INPUTDIR <- paste(INPUTDIR_base, "Hilton-sa/", sep = "") 
+OUTPUTDIR <- paste(OUTPUTDIR_base,"Hilton-sa/", sep = "")
+if (!dir.exists(OUTPUTDIR)){
+  dir.create(OUTPUTDIR)
+}
 exploratory <- FALSE
-source("plot_featureES.R")
+source("plot_featureES_pilot.R")
 
 g_sa <- g_list[[1]] +
   scale_x_continuous(breaks = c(-0.4, 0, 0.4, 1, 2))
@@ -81,4 +87,4 @@ g_sa$labels$title <- paste(g_sa$labels$title, "\n(Semi-automated f0 extraction)"
 
 ##
 g <- ggarrange(g_pyin, g_sa, ncol = 2, nrow = 1, common.legend = TRUE, legend = "bottom")
-ggsave(file = paste(OUTPUTDIR, "Hilton_merge2.png", sep = ""), plot = g, width = 9, height = 4)
+ggsave(file = paste(OUTPUTDIR_base, "Hilton_merge2.png", sep = ""), plot = g, width = 9, height = 4)

@@ -1,4 +1,4 @@
-function onsetbreakmix
+function util_onsetbreakmix
     %%
     audiodir = 'G:\Datasets\Song-Speech\Audio recordings\';
     annotdir = 'G:\Datasets\Song-Speech\SV\';

@@ -17,6 +17,8 @@ npvi,type,lang,groupid
 40.729567479875,song,Ronga,6
 69.1592793723255,desc,Swedish,7
 65.7901474762843,song,Swedish,7
+71.6896543659568,desc,Cherokee,75
+71.293970678436,song,Cherokee,75
 40.059253861825,desc,Hindi,8
 38.7735162692715,song,Hindi,8
 55.7702008736644,desc,Bulgarian,9
@@ -101,6 +103,8 @@ npvi,type,lang,groupid
 62.4331906762004,song,Russian,42
 50.5858730952241,song,Cantonese,64
 33.0226184847777,desc,Cantonese,64
+18.9914413576371,song,Te Reo Māori,74
+53.1361284701525,desc,Te Reo Māori,74
 65.9704572627767,song,Rikbaktsa,66
 46.2705726808402,desc,Rikbaktsa,66
 32.4903879317631,desc,Urdu,43

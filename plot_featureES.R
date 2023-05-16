@@ -115,14 +115,14 @@ for (i in 1:length(g_list)) {
   data_i <- data[data$Comparison == LIST_COMPARISON[i], ]
   
   g_list[[i]] <- ggplot(data_i, aes(x = d, y = featureplotname, fill = lang, group = dummyID)) + 
-    geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(featureplotname)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
+    geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(featureplotname)) + 0.7), fill = "#FAA1B8", alpha = 0.1, show.legend = FALSE) + 
     geom_violin(data = data_i, aes(x = d, group = featureplotname), fill = "#FCAE1E", alpha = 0.2) + 
     geom_dotplot(binaxis = 'y', position = position_jitter(width = 0.00, height = 0.05), stackdir = 'center', alpha = 0.8, dotsize = 0.4) +
     geom_vline(xintercept = 0, linetype = 2) +
     geom_vline(xintercept = 0.4, linetype = 3) +
     geom_vline(xintercept = -0.4, linetype = 3) +
     theme(axis.title.y = element_blank()) +
-    xlab("Translated Cohen's D") + 
+    xlab("Translated Cohen's D") + ylab("") +
     scale_y_discrete(limits = ORDER_Y_AXIS) +
     ggtitle(LIST_COMPARISON[i]) +
     theme_gray() +
@@ -195,10 +195,10 @@ for (i in 1:length(g_list)) {
   g_list[[i]] <- g_list[[i]] + scale_x_continuous(breaks = XBREAK, limits = XL, expand = c(0.0, 0.0))
   
   # Save
-  g_list[[i]] <- g_list[[i]] + theme(legend.position = 'none')
-  ggsave(file = paste(OUTPUTDIR, "effectsize_", LIST_COMPARISON[i], FILEID, ".png", sep = ""), plot = g_list[[i]], width = G_WID, height = G_HEI)
-  
   g_list[[i]] <- g_list[[i]] + theme(legend.position = 'right')
   l <- as_ggplot(get_legend(g_list[[i]]))
   ggsave(file = paste(OUTPUTDIR, "effectsize_", LIST_COMPARISON[i], FILEID, "-legend.png", sep = ""), plot = l, width = G_WID, height = G_HEI)
+  
+  g_list[[i]] <- g_list[[i]] + theme(legend.position = 'none')
+  ggsave(file = paste(OUTPUTDIR, "effectsize_", LIST_COMPARISON[i], FILEID, ".png", sep = ""), plot = g_list[[i]], width = G_WID, height = G_HEI)
 }

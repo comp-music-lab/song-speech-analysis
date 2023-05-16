@@ -70,7 +70,7 @@ for (i in 1:length(FEATURESET)) {
   meaninfo_i <- meaninfo[meaninfo$feature == FEATURESET[i], ]
   
   g <- ggplot(data = esinfo_i, aes(x = d, y = analysis, fill = lang)) + 
-    geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(analysis)) + 0.7), fill = "#E46F80", alpha = 0.01, show.legend = FALSE) + 
+    geom_rect(aes(xmin = -0.4, xmax = 0.4, ymin = 0.3, ymax = length(unique(analysis)) + 0.7), fill = "#FAA1B8", alpha = 0.11, show.legend = FALSE) + 
     geom_violin(fill = "#FCAE1E", alpha = 0.2) + 
     geom_point(position = position_jitter(width = 0, height = 0.08), shape = 21, alpha = 0.8, size = 2, stroke = 0.5) +
     geom_vline(xintercept = 0, linetype = 2) +

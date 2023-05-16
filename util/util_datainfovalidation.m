@@ -1,22 +1,16 @@
 function util_datainfovalidation
     %%
-    %%{
+    %{
     datainfofile = '../datainfo.csv';
     K = 4;
     datatypelist = {'desc', 'inst', 'recit', 'song'};
     onsetavailable = true;
     %}
-    %{
+    %%{
     datainfofile = '../datainfo_pyin-Praat.csv';
     K = 2;
     datatypelist = {'desc', 'song'};
     onsetavailable = true;
-    %}
-    %{
-    datainfofile = '../datainfo_pyin.csv';
-    K = 2;
-    datatypelist = {'desc', 'song'};
-    onsetavailable = false;
     %}
     %{
     datainfofile = '../datainfo_Hilton-pyin-20sec.csv';
