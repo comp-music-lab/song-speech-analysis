@@ -7,7 +7,7 @@ library(gridExtra)
 library(grid)
 
 ##
-INTERVAL <- 6
+INTERVAL <- 5
 SUBGROUPING <- TRUE
 
 ##
