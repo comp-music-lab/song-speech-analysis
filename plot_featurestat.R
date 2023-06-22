@@ -5,9 +5,9 @@ library(clinfun)
 
 ## Config
 FEATURENAME <- c("-|Δf0|" = "Pitch stability", "90% f0 quantile length" = "Pitch range", "f0" = "Pitch height",
-            "f0 ratio" = "Pitch interval size", "f0 ratio deviation" = "Interval regularity", "IOI rate" = "Temporal rate",
-            "IOI ratio deviation" = "Rhythmic regularity", "Onset-break interval" = "Phrase length", "Pulse clarity" = "Pulse clarity",
-            "Short-term energy" = "Loudness", "Sign of f0 slope" = "Pitch declination", "Spectral centroid" = "Timbral brightness",    
+            "f0 ratio" = "Pitch interval size", "f0 ratio deviation" = "Pitch interval regularity", "IOI rate" = "Temporal rate",
+            "IOI ratio deviation" = "Rhythmic regularity", "Onset-break interval" = "Breath duration", "Pulse clarity" = "Pulse clarity",
+            "Short-term energy" = "Intensity", "Sign of f0 slope" = "Pitch declination", "Spectral centroid" = "Timbral brightness",    
             "Spectral flatness" = "Timbral noisiness")
 FEATUREUNIT <- c("-|Δf0|" = "Cent/sec.", "90% f0 quantile length" = "Cent", "f0" = "Cent",
                  "f0 ratio" = "Cent", "f0 ratio deviation" = "Cent", "IOI rate" = "Hz",

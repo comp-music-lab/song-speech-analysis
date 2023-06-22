@@ -4,7 +4,7 @@ library(ggpubr)
 
 ## Constants
 LIST_FEATURE <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', '-|Δf0|', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
-CONCEPT_NAME <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Loudness', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Phrase length', 'Interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
+CONCEPT_NAME <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Intensity', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Breath duration', 'Pitch interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
 FEATURE_DIFF <- c('f0', 'IOI rate', '-|Δf0|')
 FEATURE_SIM <- c('Spectral centroid', 'Sign of f0 slope', 'f0 ratio')
 FEATURE_OTHER <- c('Spectral flatness', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'Onset-break interval', 'f0 ratio deviation', 'Pulse clarity')
