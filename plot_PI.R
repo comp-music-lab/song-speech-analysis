@@ -11,7 +11,7 @@ MODELORDER <- c("SVM" = 2, "LRM" = 1, "BNB" = 3)
 MODELNAME_PLOT <- c("SVM" = "SVM", "LRM" = "Logistic regression", "BNB" = "Naive Bayes")
 
 FEATURENAME_L <- c('Spectral flatness', 'IOI rate', '90% f0 quantile length', 'Short-term energy', 'IOI ratio deviation', 'f0', 'Sign of f0 slope', 'Onset-break interval', 'f0 ratio deviation', '-|Δf0|', 'f0 ratio', 'Spectral centroid', 'Pulse clarity')
-FEATURENAME_H <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Intensity', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Breath duration', 'Pitch interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
+FEATURENAME_H <- c('Timbral noisiness', 'Temporal rate', 'Pitch range', 'Intensity', 'Rhythmic regularity', 'Pitch height', 'Pitch declination', 'Phrase length', 'Pitch interval regularity', 'Pitch stability', 'Pitch interval size', 'Timbral brightness', 'Pulse clarity')
 FEATUREORDER <- c("f0" = 1, "IOI rate" = 2, "-|Δf0|" = 3, "Spectral centroid" = 4,
                   "f0 ratio" = 5, "Sign of f0 slope" = 6, "Onset-break interval" = 7,
                   "Short-term energy" = 8, "Spectral flatness" = 9, "IOI ratio deviation" = 10,

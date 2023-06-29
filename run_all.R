@@ -26,8 +26,8 @@ rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'
 featurestatfilepath = paste(INPUTDIR, 'featurestat_20sec.csv', sep = '')
 OUTPUTDIR <- './output/figure/Stage2/'
-source("plot_featurestat_MF.R")
 source("plot_featurestat.R")
+source("plot_featurestat_MF.R")
 
 ## Exploratory - Meta-analysis [Hilton and ours]
 rm(list = ls())
