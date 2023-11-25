@@ -7,6 +7,9 @@ function analysis_npvi(datainfofile, outputdir, duration, typeid)
         case 2
             typelist = {'song', 'inst'};
             fileid = 'song-inst';
+        case 3
+            typelist = {'song', 'recit'};
+            fileid = 'song-recit';
     end
     
     %%

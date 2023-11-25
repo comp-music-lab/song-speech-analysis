@@ -21,11 +21,13 @@ npviinfo <- as.data.frame(do.call(rbind, npviinfo))
 xlabelstr <- switch(datatype[1],
                     "song" = "(song)",
                     "desc" = "(spoken description)",
-                    "inst" = "(instrumenal)")
+                    "inst" = "(instrumenal)",
+                    "recit" = "(lyrics recitation)")
 ylabelstr <- switch(datatype[2],
                     "song" = "(song)",
                     "desc" = "(spoken description)",
-                    "inst" = "(instrumenal)")
+                    "inst" = "(instrumenal)",
+                    "recit" = "(lyrics recitation)")
 
 g <- ggplot(data = npviinfo, aes(x = npvi_song, y = npvi_desc, fill = lang, group = 1)) +
   geom_point(shape = 21, alpha = 0.8, size = 2, stroke = 0.5) + 

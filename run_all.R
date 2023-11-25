@@ -21,6 +21,9 @@ source("plot_nPVI.R")
 typeid <- "song-inst"
 source("plot_nPVI.R")
 
+typeid <- "song-recit"
+source("plot_nPVI.R")
+
 ## Exploratory - mean feature values [Ours]
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/'

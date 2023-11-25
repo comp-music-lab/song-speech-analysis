@@ -1,6 +1,12 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
+%% Exploratory - normalized f0 contour
+datainfo = readtable('./datainfo.csv');
+duration = 30;
+outputdir_fig = './output/figure/Stage2/';
+analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+
 %% Exploratory - permutation importance analysis
 pyrunfile("analysis_permi.py")
 
@@ -31,11 +37,8 @@ analysis_npvi(datainfofile, outputdir_analysis, duration, typeid_songdesc);
 typeid_songinst = 2;
 analysis_npvi(datainfofile, outputdir_analysis, duration, typeid_songinst);
 
-%% Exploratory - normalized f0 contour
-datainfo = readtable('./datainfo.csv');
-duration = 30;
-outputdir_fig = './output/figure/Stage2/';
-analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+typeid_songrecit = 3;
+analysis_npvi(datainfofile, outputdir_analysis, duration, typeid_songrecit);
 
 %% Exploratory - Automated
 typeflag_songdesc = 1;
