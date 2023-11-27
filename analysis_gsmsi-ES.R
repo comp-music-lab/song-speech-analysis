@@ -1,5 +1,6 @@
 ### Import libraries
 library(ggplot2)
+library(ggridges)
 library(stringdist)
 library(rstan)
 library(brms)
@@ -138,6 +139,7 @@ for (i in 1:dim(FEATURE)[1]) {
     thin = 1
   )
   
+  ## Plot 1 
   pstr_i = posterior_summary(glmmo)
   df_pstr_CI = c()
   df_pstr_pe = c()
@@ -162,6 +164,33 @@ for (i in 1:dim(FEATURE)[1]) {
     theme(plot.title = element_text(hjust = 0.5)) + 
     scale_y_discrete(labels = c("Intercept", GSI_VAR$desc))
   
-  ggsave(filename = paste("./output/figure/Stage2/ES-gmsi_", FEATURE$featurename[i], ".png", sep = ""),
+  ggsave(filename = paste("./output/figure/Stage2/ES-gmsi_", FEATURE$featurename[i], "-interval.png", sep = ""),
          plot = g_list[[i]], width = 5, height = 4)
+  
+  ## Plot 2
+  pstrsample <- as.data.frame(glmmo)
+  pstrsample_df <- rbind(
+    data.frame(x = pstrsample[, 1], y = "Intercept"),
+    data.frame(x = pstrsample[, 2], y = GSI_VAR$desc[1]),
+    data.frame(x = pstrsample[, 3], y = GSI_VAR$desc[2]),
+    data.frame(x = pstrsample[, 4], y = GSI_VAR$desc[3]),
+    data.frame(x = pstrsample[, 5], y = GSI_VAR$desc[4]),
+    data.frame(x = pstrsample[, 6], y = GSI_VAR$desc[5]),
+    data.frame(x = pstrsample[, 7], y = GSI_VAR$desc[6]),
+    data.frame(x = pstrsample[, 8], y = GSI_VAR$desc[7]),
+    data.frame(x = pstrsample[, 9], y = GSI_VAR$desc[8])
+  )
+  
+  g <- ggplot(pstrsample_df, aes(x = x, y= y)) + 
+    geom_density_ridges_gradient(aes(fill = after_stat(x))) + 
+    geom_vline(xintercept = 0, linetype="dotdash") +
+    labs(x = "Posterior distributions of regression coefficients", y = "Gold-MSI musical training factors",
+         title = paste("Effect for ", FEATURE$featurename[i], " difference\n(Singing vs. Spoken description)", sep = "")) + 
+    theme(plot.title = element_text(hjust = 0.5)) +
+    scale_y_discrete(limits = c("Intercept", GSI_VAR$desc)) + 
+    scale_fill_gradient(low = "yellow", high = "red", na.value = NA) + 
+    guides(fill = "none")
+  
+  ggsave(filename = paste("./output/figure/Stage2/ES-gmsi_", FEATURE$featurename[i], "-ridge.png", sep = ""),
+         plot = g, width = 6, height = 4)
 }
