@@ -48,7 +48,8 @@ print(cor.test(npviinfo$npvi_song, npviinfo$npvi_desc))
 ##
 npvi_tmp <- read.csv(paste(INPUTDIR, 'npvi_', durationID, '_song-desc.csv', sep = ""))
 tmp <- read.csv(paste(INPUTDIR, 'npvi_', durationID, '_song-inst.csv', sep = ""))
-npviinfo <- rbind(npvi_tmp, tmp[tmp$type == "inst", ])
+tmp2 <- read.csv(paste(INPUTDIR, 'npvi_', durationID, '_song-recit.csv', sep = ""))
+npviinfo <- rbind(npvi_tmp, tmp[tmp$type == "inst", ], tmp2[tmp2$type == "recit", ])
 
 g <- ggplot(data = npviinfo, aes(x = type, y = npvi)) + 
   geom_violin(aes(group = type)) + 
@@ -60,6 +61,6 @@ g <- ggplot(data = npviinfo, aes(x = type, y = npvi)) +
   xlab("") + ylab("nPVI") +
   theme(axis.text = element_text(size = 14), axis.title = element_text(size = 14)) + 
   scale_color_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) + 
-  scale_x_discrete(limits = c("inst", "song", "desc"), labels = c("song" = "Song", "inst" = "Inst.", "desc" = "Desc."))
+  scale_x_discrete(limits = c("inst", "song", "recit", "desc"), labels = c("song" = "Song", "inst" = "Inst.", "recit" = "Recit.", "desc" = "Desc."))
 
 ggsave(file = paste(OUTPUTDIR, "nPVIdist.png", sep = ""), plot = g, width = WID, height = HEI)
