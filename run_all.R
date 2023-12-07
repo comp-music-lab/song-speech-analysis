@@ -1,8 +1,18 @@
-## plot permutation importance
+## Plot language color legend
+rm(list = ls())
+OUTPUTDIR <-  "./output/figure/Stage2/"
+source("plot_LanguageColorLegend.R")
+
+## Exploratory analysis - plot permutation importance
 rm(list = ls())
 INPUTDIR <- './output/analysis/Stage2/PermutationImportance/'
 OUTPUTDIR <- "./output/figure/Stage2/PermutationImportance/"
 source("plot_PI.R")
+
+## Exploratory analysis - Regression analysis for G-MSI and effect sizes
+rm(list = ls())
+OUTPUTDIR <-  "./output/figure/Stage2/"
+source("analysis_gmsi-ES.R")
 
 ## Exploratory analysis - IRR
 rm(list = ls())

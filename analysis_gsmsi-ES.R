@@ -191,6 +191,6 @@ for (i in 1:dim(FEATURE)[1]) {
     scale_fill_gradient(low = "yellow", high = "red", na.value = NA) + 
     guides(fill = "none")
   
-  ggsave(filename = paste("./output/figure/Stage2/ES-gmsi_", FEATURE$featurename[i], "-ridge.png", sep = ""),
+  ggsave(filename = paste(OUTPUTDIR, "ES-gmsi_", FEATURE$featurename[i], "-ridge.png", sep = ""),
          plot = g, width = 6, height = 4)
 }
