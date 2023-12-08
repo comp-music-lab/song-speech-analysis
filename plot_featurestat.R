@@ -23,7 +23,7 @@ ALTERNATIVE <- c("f0" = "decreasing", "IOI rate" = "increasing", "-|Δf0|" = "de
                  "Short-term energy" = "decreasing", "Spectral flatness" = "increasing", "IOI ratio deviation" = "increasing",
                  "f0 ratio deviation" = "increasing", "Pulse clarity" = "decreasing", "90% f0 quantile length" = "decreasing")
                  
-XLABEL <- c("desc" = "Desc.", "song" = "Song", "recit" = "Recit.", "inst" = "Inst.")
+XLABEL <- c("desc" = "Spoken\ndescription", "song" = "Song", "recit" = "Lyrics\nrecitation", "inst" = "Instrumenal")
 XLIMIT <- c("inst", "song", "recit", "desc")
 
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
@@ -65,7 +65,8 @@ for (i in 1:length(featureset)) {
     guides(color = "none", shape = "none") + 
     theme_gray() +
     theme(plot.title = element_text(size = 9, face = "bold", hjust = 0.5),
-          axis.text = element_text(size = 6),
+          axis.text.y = element_text(size = 6),
+          axis.text.x = element_text(size = 6, angle = -0),
           axis.title = element_text(size = 7)) + 
     scale_x_discrete(limits = XLIMIT, label = XLABEL) +
     scale_color_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) + 

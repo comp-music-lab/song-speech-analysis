@@ -59,8 +59,8 @@ g <- ggplot(data = npviinfo, aes(x = type, y = npvi)) +
   theme_gray() +
   guides(color = "none") + 
   xlab("") + ylab("nPVI") +
-  theme(axis.text = element_text(size = 14), axis.title = element_text(size = 14)) + 
+  theme(axis.text.y = element_text(size = 11), axis.text.x = element_text(size = 11), axis.title = element_text(size = 14)) + 
   scale_color_manual(values = LANGCOLORMAP$rgb, breaks = LANGCOLORMAP$lang_filename) + 
-  scale_x_discrete(limits = c("inst", "song", "recit", "desc"), labels = c("song" = "Song", "inst" = "Inst.", "recit" = "Recit.", "desc" = "Desc."))
+  scale_x_discrete(limits = c("inst", "song", "recit", "desc"), labels = c("song" = "Song", "inst" = "Instrumental", "recit" = "Lyrics\nrecitation", "desc" = "Spoken\ndescription"))
 
 ggsave(file = paste(OUTPUTDIR, "nPVIdist.png", sep = ""), plot = g, width = WID, height = HEI)
