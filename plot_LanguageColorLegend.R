@@ -6,7 +6,7 @@ library(ggpubr)
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
 LANGCOLORMAP$rgb <- paste("#", LANGCOLORMAP$rgb, sep = "")
 
-###
+### Language
 esinfo <- read.csv('./output/analysis/Stage2/results_effectsize_acoustic_song-desc_20sec.csv')
 df_dummy = data.frame(x = 0, y = 0, lang = unique(esinfo$lang))
 
@@ -23,3 +23,20 @@ g <- ggplot(data = df_dummy, aes(x = x, y = y)) +
 l <- as_ggplot(get_legend(g))
 
 ggsave(file = paste(OUTPUTDIR, "LanguageColors_legend.png", sep = ""), plot = l, width = 10, height = 5)
+
+### Language family
+df_dummy$langfamily <- ""
+for (i in 1:nrow(df_dummy)) {
+  df_dummy$langfamily[i] <- LANGCOLORMAP$family[LANGCOLORMAP$lang_filename == df_dummy$lang[i]]
+}
+
+LANGCOLORMAP_family <- unique(subset(LANGCOLORMAP, , c("family", "rgb")))
+
+g <- ggplot(data = df_dummy, aes(x = x, y = y)) +
+  geom_point(aes(fill = langfamily), position = position_jitter(width = 1, height = 1), pch = 21) +
+  scale_fill_manual(values = LANGCOLORMAP_family$rgb, breaks = LANGCOLORMAP_family$family) + 
+  guides(fill = guide_legend("Language family", ncol = 8))
+
+l <- as_ggplot(get_legend(g))
+
+ggsave(file = paste(OUTPUTDIR, "LanguageFamilyColors_legend.png", sep = ""), plot = l, width = 10, height = 5)
