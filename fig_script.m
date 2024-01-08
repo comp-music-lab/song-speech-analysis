@@ -1,6 +1,26 @@
 function fig_script(outputdir)
     %%
     addpath('./lib/two-sample/');
+
+    %%
+    f0_song = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song_f0.csv';
+    f0_speech = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc_f0.csv';
+    h_plotf0(f0_song, f0_speech);
+    
+    %%
+    f0_song = './data/Stage 1 RR Full/Shafagh/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song_f0.csv';
+    f0_speech = './data/Stage 1 RR Full/Shafagh/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc_f0.csv';
+    h_plotf0(f0_song, f0_speech);
+
+    %%
+    audio_song = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.wav';
+    audio_speech = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc.wav';
+    h_plotsoundwave(audio_song, audio_speech);
+
+    %%
+    audio_song = './data/Stage 1 RR Audio/full-length/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song.wav';
+    audio_speech = './data/Stage 1 RR Audio/full-length/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc.wav';
+    h_plotsoundwave(audio_song, audio_speech);
     
     %%
     audio_song = './data/Pilot data/Patrick Savage_Twinkle Twinkle_Song.wav';
@@ -28,26 +48,6 @@ function fig_script(outputdir)
     break_song = './data/Stage 1 RR Full/Florence/break_Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.csv';
 
     h_plotinterval(f0_song, onset_song, break_song);
-
-    %%
-    audio_song = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song.wav';
-    audio_speech = './data/Stage 1 RR Audio/full-length/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc.wav';
-    h_plotsoundwave(audio_song, audio_speech);
-
-    %%
-    audio_song = './data/Stage 1 RR Audio/full-length/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song.wav';
-    audio_speech = './data/Stage 1 RR Audio/full-length/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc.wav';
-    h_plotsoundwave(audio_song, audio_speech);
-    
-    %%
-    f0_song = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_song_f0.csv';
-    f0_speech = './data/Stage 1 RR Full/Florence/Florence_Nweke_Yoruba_Yoruba_Traditional_Ise-Agbe_20220504_desc_f0.csv';
-    h_plotf0(f0_song, f0_speech);
-    
-    %%
-    f0_song = './data/Stage 1 RR Full/Shafagh/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220430_song_f0.csv';
-    f0_speech = './data/Stage 1 RR Full/Shafagh/Shafagh_Hadavi_Farsi_Iran_Traditional_YekHamoomi_20220502_desc_f0.csv';
-    h_plotf0(f0_song, f0_speech);
 end
 
 function h_figure1(audio_desc, audio_song, audio_recit, audio_inst, f0_desc, f0_song, f0_recit, f0_inst, outputdir)
@@ -334,13 +334,17 @@ function h_plotsoundwave(audio_song, audio_speech)
 
     subplot(2, 1, 1);
     plot(t_s_song, s_song, 'Color', '#0072BD');
-    ax = gca(fobj);
-    ax.FontSize = 14;
+    %ax = gca(fobj);
+    %ax.FontSize = 14;
+    set(gca,'xtick',[]);
+    set(gca,'ytick',[]);
 
     subplot(2, 1, 2);
     plot(t_s_speech, s_speech, 'Color', '#D95319');
-    ax = gca(fobj);
-    ax.FontSize = 14;
+    %ax = gca(fobj);
+    %ax.FontSize = 14;
+    set(gca,'xtick',[]);
+    set(gca,'ytick',[]);
 end
 
 function h_plotf0(f0_song, f0_speech)
@@ -358,15 +362,18 @@ function h_plotf0(f0_song, f0_speech)
     subplot(2, 1, 1);
     scatter(t_f0_song, f0_song, 'Marker', '.', 'MarkerEdgeColor', '#0072BD');
     ylim([80, 450]);
-    ax = gca(fobj);
-    ax.FontSize = 14;
-    %title('Fundamental frequency (f0)', 'FontSize', 16);
+    %ax = gca(fobj);
+    %ax.FontSize = 14;
+    set(gca,'xtick',[]);
+    set(gca,'ytick',[]);
 
     subplot(2, 1, 2);
     scatter(t_f0_speech, f0_speech, 'Marker', '.', 'MarkerEdgeColor', '#D95319');
     ylim([80, 450]);
-    ax = gca(fobj);
-    ax.FontSize = 14;
+    %ax = gca(fobj);
+    %ax.FontSize = 14;
+    set(gca,'xtick',[]);
+    set(gca,'ytick',[]);
 
     h_histogram(f0_song(f0_song ~= 0), f0_speech(f0_speech ~= 0));
 end
@@ -383,8 +390,10 @@ function h_histogram(X, Y)
     histogram(Y, 40, 'EdgeColor', 'none', 'FaceColor', '#D95319', 'Normalization', 'pdf');
     hold off
 
-    ax = gca(fobj);
-    ax.FontSize = 14;
-
+    %ax = gca(fobj);
+    %ax.FontSize = 14;
+    set(gca,'xtick',[]);
+    set(gca,'ytick',[]);
+    
     fprintf('%3.3f (%3.6f) (%3.3f)\n', d, tau, d_Cohen);
 end

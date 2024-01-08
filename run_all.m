@@ -1,14 +1,36 @@
 %%
 helper.h_addpath_MIRtoolbox();
 
-%% Exploratory - normalized f0 contour
-datainfo = readtable('./datainfo.csv');
-duration = 30;
+%% Exploratory - other combinations
+datainfofile = './datainfo.csv';
+outputdir_analysis = './output/analysis/Stage2/';
 outputdir_fig = './output/figure/Stage2/';
-analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+duration = 20;
+al = 0.05/6;
+exploratory = false;
+blindedonly = false;
+continuitycorrection = false;
+onsetavailable = true;
 
-%% Exploratory - permutation importance analysis
-pyrunfile("analysis_permi.py")
+typeflag_songrect = 4;
+typeid = 'inst-song';
+local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+typeflag_instdesc = 2;
+typeid = 'inst-desc';
+local_main(datainfofile, duration, typeflag_instdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+typeflag_songrect = 6;
+typeid = 'inst-recit';
+local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+typeflag_songrect = 3;
+typeid = 'song-recit';
+local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
+
+typeflag_songrect = 5;
+typeid = 'recit-desc';
+local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
 %% Confirmatory + Exploratory analysis
 datainfofile = './datainfo.csv';
@@ -25,6 +47,15 @@ onsetavailable = true;
 
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 analysis_rawdatastat(datainfofile, outputdir_analysis, duration, exploratory);
+
+%% Exploratory - normalized f0 contour
+datainfo = readtable('./datainfo.csv');
+duration = 30;
+outputdir_fig = './output/figure/Stage2/';
+analysis_normalizedcontour(datainfo, duration, outputdir_fig);
+
+%% Exploratory - permutation importance analysis
+pyrunfile("analysis_permi.py")
 
 %% Exploratory - nPVI
 datainfofile = './datainfo.csv';
@@ -75,37 +106,6 @@ datainfofile = './datainfo_pyin-subset.csv';
 outputdir_analysis = './output/analysis/Stage2/pyin-subset/';
 outputdir_fig = './output/figure/Stage2/pyin-subset/';
 local_main(datainfofile, duration, typeflag_songdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-%% Exploratory - other combinations
-datainfofile = './datainfo.csv';
-outputdir_analysis = './output/analysis/Stage2/';
-outputdir_fig = './output/figure/Stage2/';
-duration = 20;
-al = 0.05/6;
-exploratory = false;
-blindedonly = false;
-continuitycorrection = false;
-onsetavailable = true;
-
-typeflag_instdesc = 2;
-typeid = 'inst-desc';
-local_main(datainfofile, duration, typeflag_instdesc, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-typeflag_songrect = 3;
-typeid = 'song-recit';
-local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-typeflag_songrect = 4;
-typeid = 'inst-song';
-local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-typeflag_songrect = 5;
-typeid = 'recit-desc';
-local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
-
-typeflag_songrect = 6;
-typeid = 'inst-recit';
-local_main(datainfofile, duration, typeflag_songrect, typeid, exploratory, al, outputdir_analysis, outputdir_fig, blindedonly, continuitycorrection, onsetavailable);
 
 %% Exploratory - zero cell correction
 datainfofile = './datainfo.csv';
@@ -198,7 +198,7 @@ function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, o
     if not(isfolder(outputdir_fig))
         mkdir(outputdir_fig)
     end
-
+    
     analysis_featureES_1(datainfofile, duration, typeflag, exploratory, outputdir_analysis, blindedonly);
     
     esinfofile = strcat(outputdir_analysis, 'results_effectsize_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
@@ -219,7 +219,7 @@ function local_main(datainfofile, duration, typeflag, typeid, exploratory, al, o
     analysis_metaCI(esinfofile, outputfile, al);
     outputfile = strcat(outputdir_analysis, 'equiv_acoustic_', typeid, '_', num2str(duration), 'sec.csv');
     analysis_equivtest(esinfofile, outputfile, al);
-    
+
     if onsetavailable
         analysis_featureES_2(datainfofile, duration, typeflag, exploratory, outputdir_analysis, blindedonly, continuitycorrection);
     

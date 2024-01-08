@@ -12,7 +12,7 @@ source("plot_PI.R")
 ## Exploratory analysis - Regression analysis for G-MSI and effect sizes
 rm(list = ls())
 OUTPUTDIR <-  "./output/figure/Stage2/"
-source("analysis_gmsi-ES.R")
+source("analysis_gsmsi-ES.R")
 
 ## Exploratory analysis - IRR
 rm(list = ls())

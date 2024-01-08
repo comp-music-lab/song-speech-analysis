@@ -1,14 +1,14 @@
 "feature","alternative","JT","pvalue"
 "-|Δf0|","decreasing",3569,0.0001220703125
-"90% f0 quantile length","decreasing",13114.5,0.193603515625
+"90% f0 quantile length","decreasing",13114.5,0.2021484375
 "f0","decreasing",6752,0.0001220703125
-"f0 ratio","decreasing",13340,0.29833984375
+"f0 ratio","decreasing",13340,0.2974853515625
 "f0 ratio deviation","increasing",20329,0.0001220703125
 "IOI rate","increasing",27672,0.0001220703125
 "IOI ratio deviation","increasing",23484,0.0001220703125
 "Onset-break interval","decreasing",10876,0.0001220703125
 "Pulse clarity","decreasing",9911,0.0001220703125
-"Short-term energy","decreasing",13787,0.0001220703125
+"Short-term energy","decreasing",13787,0.000244140625
 "Sign of f0 slope","decreasing",10288,0.0001220703125
 "Spectral centroid","increasing",16864,0.0001220703125
 "Spectral flatness","increasing",22998,0.0001220703125

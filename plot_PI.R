@@ -63,7 +63,7 @@ for (k in 1:length(DATATYPE)) {
   g <- ggplot(data = df_C, aes(x = feature_x, y = feature_y, fill = r)) + 
     geom_tile() + 
     geom_text(aes(label = sprintf("%2.2f", r)), size = 2) + 
-    xlab("") + ylab("") + ggtitle(paste("Correlation matrix of featurs (", PLOTTITLE[DATATYPE[k]], ")", sep = "")) +
+    xlab("") + ylab("") + ggtitle(paste("Correlation matrix of features (", PLOTTITLE[DATATYPE[k]], ")", sep = "")) +
     theme(plot.title = element_text(face = "bold", hjust = 0.5)) +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
     scale_fill_gradientn("r", colours = rev(brewer.pal(9, "Spectral")), na.value = "white", limits = c(-1, 1)) +

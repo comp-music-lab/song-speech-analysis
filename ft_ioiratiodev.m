@@ -95,7 +95,9 @@ function ioiratiodev = ft_ioiratiodev(t_onset, t_break)
     stem(h(idx_h + K_unq(idx_K, 3) - 1), yl(2), 'Marker', 'none', 'Linestyle', '-.', 'Color', 'm')
     hold off
     title('Change in the number of modes according to bandwidth', 'Fontsize', 10);
-    
+    xlabel('Bandwidth', 'FontSize', 10);
+    ylabel('Number of modes', 'FontSize', 10);
+
     subplot(3, 1, 2);
     scatter(support, f_X, 'Marker', '.');
     yl = ylim();
@@ -104,11 +106,15 @@ function ioiratiodev = ft_ioiratiodev(t_onset, t_break)
     scatter(X, zeros(numel(X), 1), 'Marker', '|');
     hold off
     title('KDE that bandwidth is based on the stable modes', 'Fontsize', 10);
-    
+    xlabel('IOI ratio', 'FontSize', 10);
+    ylabel('Probability density', 'FontSize', 10);
+
     subplot(3, 1, 3);
     histogram(ioiratiodev);
     xlim([0, 0.5]);
-    title('IOI ratio deviation', 'Fontsize', 10);
+    title('Histogram of IOI ratio deviation', 'Fontsize', 10);
+    xlabel('Distance between IOI ratio and the nearest mode', 'Fontsize', 10);
+    ylabel('Count', 'Fontsize', 10);
     %}
 end
 
