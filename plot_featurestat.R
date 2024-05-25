@@ -23,7 +23,7 @@ ALTERNATIVE <- c("f0" = "decreasing", "IOI rate" = "increasing", "-|Δf0|" = "de
                  "Short-term energy" = "decreasing", "Spectral flatness" = "increasing", "IOI ratio deviation" = "increasing",
                  "f0 ratio deviation" = "increasing", "Pulse clarity" = "decreasing", "90% f0 quantile length" = "decreasing")
                  
-XLABEL <- c("desc" = "Spoken\ndescription", "song" = "Song", "recit" = "Lyrics\nrecitation", "inst" = "Instrumenal")
+XLABEL <- c("desc" = "Spoken\ndescription", "song" = "Song", "recit" = "Lyrics\nrecitation", "inst" = "Instrumental")
 XLIMIT <- c("inst", "song", "recit", "desc")
 
 LANGCOLORMAP <- read.csv("./data/LangColorMap.csv")
